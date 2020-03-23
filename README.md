@@ -1,7 +1,7 @@
 # motif-based-clustering
 
 Source code for the paper
-*Motif-Based Spectral Clustering of Weighted Directed Networks**,
+*Motif-Based Spectral Clustering of Weighted Directed Networks*,
 with
 Andrew Elliott
 and
