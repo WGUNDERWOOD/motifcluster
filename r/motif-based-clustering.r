@@ -31,7 +31,6 @@ sampleBSBM = function(dest_block_sizes, targ_block_sizes, p1, p2){
   return(G)
 }
 
-
 # Motif adjacency matrices
 motifAdjacency = function(G, motif_name, type=c('func','struc')){
 
@@ -199,7 +198,6 @@ largestComponent = function(G){
   return(verts_to_keep)
 
 }
-
 
 # Spectral methods
 computeTopSpectrum = function(L, typeLap=c('comb','rw'), topk){

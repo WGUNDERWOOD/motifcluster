@@ -1,9 +1,9 @@
+# Functions relating to creating motif adjacency matrices on sparse networks
+
 import networkx as nx
 from scipy import sparse
 import numpy as np
 
-
-# Functions relating to creating motif adjacency matrices
 def build_motif_adjacency_from_graph(G, motif_name, motif_type='struc'):
     A = nx.to_scipy_sparse_matrix(G,nodelist=sorted(G))
     return build_motif_adjacency_matrix(A, motif_name, motif_type)
@@ -28,6 +28,7 @@ def build_motif_adjacency_matrix(adjacency_matrix, motif_name, motif_type='struc
       motif_adjacency_matrix = mac(G , IM['Gs'] , IM['Gd'] , IM['J'] , IM['Js'] , IM['Jd'] , motif_name , motif_type)
 #  motif_adjacency_matrix = sparse.csr_matrix(motif_adjacency_matrix)
   return motif_adjacency_matrix
+
 
 def build_indicator_matrices(adjacency_matrix):
   # Builds the indicator matrices required to build a motif adjacency matrix.
@@ -230,18 +231,15 @@ def motif_adjacency_calculations(G, Gs, Gd, J, Js, Jd, motif_name,motif_type=Non
 
   return(motif_adjacency_matrix)
 
+
 def matmultiplyBy1Left(X,A,oneVec=None):
     if oneVec is None:
         oneVec = np.ones(X.shape[0])
     return X.multiply(oneVec@A)
+
 
 def matmultiplyBy1Right(X,A,oneVec=None):
     if oneVec is None:
         oneVec = np.ones(X.shape[0])
     t1 = (X.T.multiply((A@oneVec))).T
     return t1
-
-
-
-
-

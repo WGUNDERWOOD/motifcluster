@@ -1,11 +1,11 @@
+# Functions relating to creating motif adjacency matrices
+
+import numpy as np
 import networkx as nx
 
-
-# Functions relating to creating motif adjacency matrices
 def build_motif_adjacency_from_graph(G, motif_name, motif_type='struc'):
     A = nx.to_scipy_sparse_matrix(G,nodelist=sorted(G))
     return build_motif_adjacency_matrix(A, motif_name, motif_type)
-
 
 
 def build_motif_adjacency_matrix(adjacency_matrix, motif_name, motif_type='struc'):
@@ -29,6 +29,7 @@ def build_motif_adjacency_matrix(adjacency_matrix, motif_name, motif_type='struc
       motif_adjacency_matrix = mac(G, IM['Gs'], IM['Gd'], IM['J'], IM['J0'], IM['Js'], IM['Jd'], motif_name)
 #  motif_adjacency_matrix = sparse.csr_matrix(motif_adjacency_matrix)
   return motif_adjacency_matrix
+
 
 def build_indicator_matrices(adjacency_matrix):
   # Builds the indicator matrices required to build a motif adjacency matrix.
@@ -146,10 +147,8 @@ def motif_adjacency_calculations(G, Gs, Gd, J, J0, Js, Jd, motif_name):
   return(motif_adjacency_matrix)
 
 
-import numpy as np
 def drop0_killdiag(some_matrix):
     M = some_matrix
     for i in range(M.shape[0]):
         M[i,i] = 0
     return M
-

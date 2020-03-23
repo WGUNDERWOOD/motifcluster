@@ -14,15 +14,15 @@ and requires the following R packages,
 available on
 CRAN:
 
-- `igraph`
-- `Matrix`
-- `RSpectra`
+- igraph
+- Matrix
+- RSpectra
 
 ## Python code
 
-The Python source code is in [python/](./python/).
+The Python source code is in [python/](./python/),
 and requires the following Python packages:
 
-- Networkx 
-- Numpy 
-- Scipy 
+- Networkx
+- Numpy
+- Scipy
