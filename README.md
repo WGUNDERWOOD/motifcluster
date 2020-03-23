@@ -21,3 +21,8 @@ CRAN:
 ## Python code
 
 The Python source code is in [python/](./python/).
+and requires the following Python packages:
+
+- Networkx 
+- Numpy 
+- Scipy 
