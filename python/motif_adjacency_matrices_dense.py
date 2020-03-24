@@ -4,36 +4,40 @@ import numpy as np
 import networkx as nx
 
 def build_motif_adjacency_from_graph(G, motif_name, motif_type='struc'):
+
     A = nx.to_scipy_sparse_matrix(G,nodelist=sorted(G))
+
     return build_motif_adjacency_matrix(A, motif_name, motif_type)
 
 
 def build_motif_adjacency_matrix(adjacency_matrix, motif_name, motif_type='struc'):
-  # Public function
+
   # Builds motif adjacency matrix for a simple graph and motif.
-  # motif names such as "M1" are documented in the dissertation.
-  # motif_type is either: 'func'  for finding all instances of S in G.
-  #                 'struc' for finding all induced instances of S in G
+  # motif names such as "M1" are documented in the paper.
+  # motif_type is either: 'func'  for finding all instances of S in G;
+  #   'struc' for finding all induced instances of S in G.
+
   if hasattr(adjacency_matrix,'todense'):
       G = adjacency_matrix.todense()
   else:
       G = adjacency_matrix
 
   IM = build_indicator_matrices(G)
-
-
   mac = motif_adjacency_calculations
+
   if(motif_type=='func'):
     motif_adjacency_matrix = mac(G, G, IM['Gd'], IM['J'], IM['Jn'], IM['J'], IM['Jd'], motif_name)
+
   elif(motif_type=='struc'):
       motif_adjacency_matrix = mac(G, IM['Gs'], IM['Gd'], IM['J'], IM['J0'], IM['Js'], IM['Jd'], motif_name)
-#  motif_adjacency_matrix = sparse.csr_matrix(motif_adjacency_matrix)
+
   return motif_adjacency_matrix
 
 
 def build_indicator_matrices(adjacency_matrix):
+
   # Builds the indicator matrices required to build a motif adjacency matrix.
-  # See Section 2.2 in the dissertation for details
+  # See the paper for details.
 
   G = adjacency_matrix
 
@@ -52,7 +56,7 @@ def motif_adjacency_calculations(G, Gs, Gd, J, J0, Js, Jd, motif_name):
 
   # Performs the matrix calculations which are the main part of
   # building a motif adjacency matrix.
-  # See Appendix B in the dissertation for details.
+  # See the paper for details.
 
   if(motif_name == 'Ms'):
     motif_adjacency_matrix = Gs + Gs.T
@@ -148,7 +152,11 @@ def motif_adjacency_calculations(G, Gs, Gd, J, J0, Js, Jd, motif_name):
 
 
 def drop0_killdiag(some_matrix):
+
+    # returns a matrix with its diagonal entries set to zero.
+
     M = some_matrix
     for i in range(M.shape[0]):
         M[i,i] = 0
+
     return M
