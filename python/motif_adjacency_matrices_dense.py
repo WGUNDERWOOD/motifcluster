@@ -5,6 +5,11 @@ import networkx as nx
 
 def build_motif_adjacency_from_graph(G, motif_name, motif_type='struc'):
 
+  # Builds motif adjacency matrix for a simple graph and motif.
+  # motif names such as "M1" are documented in the paper.
+  # motif_type is either: 'func'  for finding all instances of S in G;
+  #   'struc' for finding all induced instances of S in G.
+
     A = nx.to_scipy_sparse_matrix(G,nodelist=sorted(G))
 
     return build_motif_adjacency_matrix(A, motif_name, motif_type)

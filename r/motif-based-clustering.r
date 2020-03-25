@@ -1,6 +1,10 @@
 # Generative Models
 sampleDSBM = function(block_sizes, sparsity_matrix){
 
+  # Samples the adjacency matrix of an unweighted directed stochastic
+  # block model (DSBM) as defined in the paper.
+
+  # initialize variables
   n = sum(block_sizes)
   k = length(block_sizes)
   cumul_sizes = c(0,cumsum(block_sizes))
@@ -8,6 +12,8 @@ sampleDSBM = function(block_sizes, sparsity_matrix){
 
   for(i in 1:k){
     for(j in 1:k){
+
+      # fill the matrix block-by-block
       x_range = (cumul_sizes[i]+1):cumul_sizes[i+1]
       y_range = (cumul_sizes[j]+1):cumul_sizes[j+1]
       G[x_range, y_range] = rbinom(block_sizes[i]*block_sizes[j], 1, sparsity_matrix[i,j])
@@ -20,6 +26,9 @@ sampleDSBM = function(block_sizes, sparsity_matrix){
 }
 
 sampleBSBM = function(dest_block_sizes, targ_block_sizes, p1, p2){
+
+  # Samples the adjacency matrix of an unweighted bipartite stochastic
+  # block model (BSBM) as defined in the paper.
 
   sparsity_matrix = matrix(c(0,0,p1,p2,
                              0,0,p2,p1,
@@ -58,6 +67,9 @@ motifAdjacency = function(G, motif_name, type=c('func','struc')){
 
 buildIndMats = function(G){
 
+  # Builds the indicator and variants of
+  # adjacency matrices for a graph adjacency matrix G
+
   J  = drop0_killdiag( 1*(G > 0) )
   J0 = drop0_killdiag( 1*((G+t(G)) == 0 ) )
   Jn = drop0_killdiag( 1+0*G )
@@ -70,6 +82,9 @@ buildIndMats = function(G){
 }
 
 motifAdjCalcs = function(G, Gs, Gd, J, J0, Js, Jd, motif_name){
+
+  # Performs the matrix operations required to build
+  # a motif adjacency matrix.
 
   if(motif_name == 'Ms'){
     motifadj = Gs + t(Gs)
@@ -181,6 +196,9 @@ motifAdjCalcs = function(G, Gs, Gd, J, J0, Js, Jd, motif_name){
 
 drop0_killdiag = function(mat){
 
+  # Set the diagonal entries of a matrix to zero,
+  # and convert it to sparse form.
+
   ans = mat
   diag(ans) = 0
   ans = drop0(ans)
@@ -190,20 +208,21 @@ drop0_killdiag = function(mat){
 
 largestComponent = function(G){
 
+  # Return the vertices in the largest connected component
+  # associated with an adjacency matrix.
+
   n = nrow(G)
   Gr = graph_from_adjacency_matrix(G, weighted=TRUE)
   comps = components(Gr)
   verts_to_keep = (1:n)[comps$membership == which.max(comps$csize)]
 
   return(verts_to_keep)
-
 }
 
 # Spectral methods
 computeTopSpectrum = function(L, typeLap=c('comb','rw'), topk){
 
-  # Computes eigenvectors/values of lowest 'topk' eigenvalues of a Laplacian L.
-  # Returns a list of $vects and $vals
+  # Computes eigenvectors/values of lowest topk eigenvalues of a Laplacian L.
 
   if(typeLap == 'comb'){
     ansEigs = eigs_sym(L, topk, which = 'SM')
@@ -226,7 +245,8 @@ computeTopSpectrum = function(L, typeLap=c('comb','rw'), topk){
 
 buildLaplacian = function(G, typeLap=c('comb','rw')){
 
-  # Builds various types of Laplacian Matrix, given an adjacency matrix G and a type of Laplacian.
+  # Builds various types of Laplacian matrix,
+  # given an adjacency matrix G and a type of Laplacian.
 
   # typeLap
   # 'comb'      combinatorial Laplacian                           L = D - G
@@ -264,6 +284,8 @@ runLapEmb = function(G, topk, typeLap=c('comb','rw')){
 }
 
 runMotifEmb = function(G, motif_name, type, typeLap, numEigs){
+
+  # Runs motif-based embedding on a given adjacency matrix.
 
   M = motifAdjacency(G, motif_name, type)
   comps = largestComponent(M)
