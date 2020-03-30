@@ -1,24 +1,45 @@
-computeTopSpectrum = function(L, typeLap=c('comb','rw'), topk){
+#' Compute first few eigenvalues and eigenvectors.
+#'
+#' Compute the first few eigenvalues (by magnitude) and
+#' associated eigenvectors of a matrix.
+#' @param mat The symmetric matrix for which eigenvalues and eigenvectors are to be calculated.
+#' @param l The number of eigenvalues and eigenvectors to calculate.
+#' @return The first \code{l} eigenvalues (by magnitude) and associated eigenvectors of \code{mat}.
+#' @return A list with two entries: \code{vals} contains the a vector of the first few eigenvalues,
+#' and \code{vects} contains a matrix of the associated eigenvalues.
+#' @keywords eigenvalue eigenvector spectrum matrix
+#' @examples
+#' get_first_eigs(matrix(1:9, nrow=3), 2)
 
-  # Computes eigenvectors/values of lowest topk eigenvalues of a Laplacian L.
+get_first_eigs = function(mat, l){
 
-  if(typeLap == 'comb'){
-    ansEigs = eigs_sym(L, topk, which = 'SM')
+  # check args
+  if(!all.equal(l, as.integer(l))){
+    stop("l must be an integer.")
   }
-  else if(typeLap == 'rw'){
-    ansEigs = eigs(L, topk, which = 'SM')
+  if(!(l > 0)){
+    stop("l must be at least 1.")
+  }
+  if(!is.matrix(mat)){
+    stop("mat must be a matrix.")}
+  if(!isSymmetric(mat)){
+    stop("mat must be symmetric.")
   }
 
-  inds = seq(topk,1,-1)
+  # get spectrum
+  ans_eigs = eigs(mat, l, which = 'SM')
+
+  # order eigenvalues and eigenvectors
+  inds = seq(l, 1, -1)
   vects = Re(ansEigs[['vectors']])[,inds]
   vals = Re(ansEigs[['values']])[inds]
 
-  ansSpect = list()
-  ansSpect[['vects']] = vects
-  ansSpect[['vals']]  = vals
+  # return a list
+  ans_spect = list()
+  ans_spect[['vects']] = vects
+  ans_spect[['vals']]  = vals
 
-  return(ansSpect)
-
+  return(ans_spect)
 }
 
 buildLaplacian = function(G, typeLap=c('comb','rw')){
