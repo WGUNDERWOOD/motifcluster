@@ -4,7 +4,13 @@
 \alias{run_motif_embedding}
 \title{Run motif embedding}
 \usage{
-run_motif_embedding(adj_mat, motif_name, motif_type, num_eigs, type_lap)
+run_motif_embedding(
+  adj_mat,
+  motif_name,
+  motif_type = c("func", "struc"),
+  num_eigs,
+  type_lap
+)
 }
 \arguments{
 \item{adj_mat}{Symmetric adjacency matrix to be embedded.}

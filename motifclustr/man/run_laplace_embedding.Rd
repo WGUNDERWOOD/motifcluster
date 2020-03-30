@@ -14,9 +14,9 @@ run_laplace_embedding(adj_mat, num_eigs, type_lap = c("comb", "rw"))
 \item{type_lap}{Type of Laplacian for the embedding. One of \code{"comb"} or \code{"rw"}.}
 }
 \value{
-A list with two entries: \code{vals} contains the a length \code{l} vector
+A list with two entries: \code{vals} contains the a length \code{num_eigs} vector
 of the first few eigenvalues of the Laplacian,
-and \code{vects} contains a \code{nrow(mat)} by \code{l} matrix
+and \code{vects} contains a \code{nrow(mat)} by \code{num_eigs} matrix
 of the associated eigenvectors.
 }
 \description{

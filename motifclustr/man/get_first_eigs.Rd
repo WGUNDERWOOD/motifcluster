@@ -12,9 +12,9 @@ get_first_eigs(mat, num_eigs)
 \item{num_eigs}{Number of eigenvalues and eigenvectors to calculate.}
 }
 \value{
-A list with two entries: \code{vals} contains the a length \code{l} vector
+A list with two entries: \code{vals} contains the a length \code{num_eigs} vector
 of the first few eigenvalues,
-and \code{vects} contains a \code{nrow(mat)} by \code{l} matrix
+and \code{vects} contains a \code{nrow(mat)} by \code{num_eigs} matrix
 of the associated eigenvectors.
 }
 \description{

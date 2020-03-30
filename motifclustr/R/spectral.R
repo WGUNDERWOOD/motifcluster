@@ -17,7 +17,8 @@ get_first_eigs <- function(mat, num_eigs){
 
   # check args
   if(!is.matrix(mat)){
-    stop("mat must be a matrix.")}
+    stop("mat must be a matrix.")
+  }
   if(!isSymmetric(mat)){
     stop("mat must be symmetric.")
   }
@@ -56,11 +57,12 @@ get_first_eigs <- function(mat, num_eigs){
 #' @examples
 #' build_laplacian(matrix(rep(1,9), nrow=3), type_lap="rw")
 
-build_laplacian <- function(adj_mat, type_lap=c("comb","rw")){
+build_laplacian <- function(adj_mat, type_lap=c("comb", "rw")){
 
   # check args
   if(!is.matrix(adj_mat)){
-    stop("adj_mat must be a matrix.")}
+    stop("adj_mat must be a matrix.")
+  }
   if(!isSymmetric(adj_mat)){
     stop("adj_mat must be symmetric.")
   }
@@ -101,11 +103,12 @@ build_laplacian <- function(adj_mat, type_lap=c("comb","rw")){
 #' @examples
 #' run_laplace_embedding(matrix(rep(1,9), nrow=3), num_eigs=2, type_lap="rw")
 
-run_laplace_embedding <- function(adj_mat, num_eigs, type_lap=c("comb","rw")){
+run_laplace_embedding <- function(adj_mat, num_eigs, type_lap=c("comb", "rw")){
 
   # check args
   if(!is.matrix(adj_mat)){
-    stop("adj_mat must be a matrix.")}
+    stop("adj_mat must be a matrix.")
+  }
   if(!isSymmetric(adj_mat)){
     stop("adj_mat must be symmetric.")
   }
@@ -150,7 +153,27 @@ run_laplace_embedding <- function(adj_mat, num_eigs, type_lap=c("comb","rw")){
 #' of the motif adjacency matrix;
 #' @keywords motif adjacency matrix laplacian embedding
 
-run_motif_embedding <- function(adj_mat, motif_name, motif_type, num_eigs, type_lap){
+run_motif_embedding <- function(adj_mat, motif_name, motif_type = c("func", "struc"),
+                                num_eigs, type_lap){
+
+  # check args
+  if(!is.matrix(adj_mat)){
+    stop("adj_mat must be a matrix.")
+  }
+  if(!isSymmetric(adj_mat)){
+    stop("adj_mat must be symmetric.")
+  }
+  if(!(motif_name %in% get_motif_names())){
+    stop("Invalid motif name.")
+  }
+  motif_type <- match.arg(motif_type)
+  if(!all.equal(num_eigs, as.integer(num_eigs))){
+    stop("num_eigs must be an integer.")
+  }
+  if(!(num_eigs > 0)){
+    stop("num_eigs must be at least 1.")
+  }
+  type_lap <- match.arg(type_lap)
 
   # build motif adjacency matrix
   motif_adj_mat <- build_motif_adjacency_matrix(adj_mat, motif_name, motif_type)
