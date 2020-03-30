@@ -2,27 +2,27 @@
 % Please edit documentation in R/spectral.R
 \name{get_first_eigs}
 \alias{get_first_eigs}
-\title{Compute first few eigenvalues and eigenvectors.}
+\title{Compute first few eigenvalues and eigenvectors}
 \usage{
-get_first_eigs(mat, l)
+get_first_eigs(mat, num_eigs)
 }
 \arguments{
-\item{mat}{The symmetric matrix for which eigenvalues and eigenvectors are to be calculated.}
+\item{mat}{Symmetric matrix for which eigenvalues and eigenvectors are to be calculated.}
 
-\item{l}{The number of eigenvalues and eigenvectors to calculate.}
+\item{num_eigs}{Number of eigenvalues and eigenvectors to calculate.}
 }
 \value{
-The first \code{l} eigenvalues (by magnitude) and associated eigenvectors of \code{mat}.
-
-A list with two entries: \code{vals} contains the a vector of the first few eigenvalues,
-and \code{vects} contains a matrix of the associated eigenvectors.
+A list with two entries: \code{vals} contains the a length \code{l} vector
+of the first few eigenvalues,
+and \code{vects} contains a \code{nrow(mat)} by \code{l} matrix
+of the associated eigenvectors.
 }
 \description{
 Compute the first few eigenvalues (by magnitude) and
 associated eigenvectors of a matrix.
 }
 \examples{
-get_first_eigs(matrix(rep(1,9), nrow=3), 2)
+get_first_eigs(matrix(rep(1,9), nrow=3), num_eigs=2)
 }
 \keyword{eigenvalue}
 \keyword{eigenvector}
