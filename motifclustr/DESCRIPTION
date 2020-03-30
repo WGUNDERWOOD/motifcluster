@@ -2,18 +2,24 @@ Package: motifclustr
 Title: Motif-Based Clustering of Weighted Directed Networks
 Version: 0.0.0.9000
 Authors@R:
-  WGU(given = "William George",
-    family = "Underwood",
-    role = c("aut", "cre"),
-    email = "wgu2@princeton.edu",
-    comment = c(ORCID = "0000-0003-4604-1548")
-  )
-  AE(given = "Andrew",
-    family = "Elliott",
-    role = c("aut")
+  c(
+    person(given = "William George",
+      family = "Underwood",
+      role = c("aut", "cre"),
+      email = "wgu2@princeton.edu",
+      comment = c(ORCID = "0000-0003-4604-1548")
+    ),
+    person(given = "Andrew",
+      family = "Elliott",
+      role = c("aut")
+    )
   )
 Description: This package constructs motif adjacency matrices
   for (weighted directed) networks, and uses them for spectral clustering.
+Imports:
+  igraph,
+  Matrix,
+  RSpectra
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true

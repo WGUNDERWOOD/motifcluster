@@ -32,8 +32,8 @@ get_first_eigs <- function(mat, l){
 
   # order eigenvalues and eigenvectors
   inds <- seq(l, 1, -1)
-  vects <- Re(ansEigs[['vectors']])[,inds]
-  vals <- Re(ansEigs[['values']])[inds]
+  vects <- Re(ans_eigs[['vectors']])[,inds]
+  vals <- Re(ans_eigs[['values']])[inds]
 
   # return a list
   ans_spect <- list()
