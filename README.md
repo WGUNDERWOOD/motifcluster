@@ -7,9 +7,9 @@ Andrew Elliott
 and
 Mihai Cucuringu.
 
-## R package
+## R package `motifclustr`
 
-The R package is in [motifclust/](./motifclustr/),
+The R package is in [motifclustr/](./motifclustr/),
 and has the following dependencies,
 available on
 CRAN:
