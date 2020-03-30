@@ -1,4 +1,4 @@
-#' Run Laplace embedding
+#' Sample a DSBM
 #'
 #' Sample the (weighted) adjacency matrix of a (weighted) directed stochastic block
 #' model (DSBM) with specified parameters.
@@ -9,7 +9,7 @@
 #' @param weight_matrix A matrix containing the block-to-block weight parameters.
 #' Unused for \code{{weight_type="deterministic"}}.
 #' Defaults to \code{NULL}.
-#' @return A randomly sampled (weighted) adjacency matrix.
+#' @return A randomly sampled (weighted) adjacency matrix of a DSBM.
 #' @keywords sample DSBM model
 #' @export
 #' @examples
@@ -99,17 +99,74 @@ sample_dsbm <- function(block_sizes, connection_matrix,
   return(adj_mat)
 }
 
-sampleBSBM <- function(dest_block_sizes, targ_block_sizes, p1, p2){
+#' Sample a BSBM
+#'
+#' Sample the (weighted) adjacency matrix of a (weighted) bipartite stochastic block
+#' model (BSBM) with specified parameters.
+#' @param source_block_sizes A vector containing the size of each block of source vertices.
+#' @param dest_block_sizes A vector containing the size of each block of dest vertices.
+#' @param bipartite_connection_matrix A matrix containing the block-to-block
+#' connection probabilities.
+#' @param weight_type The type of weighting scheme.
+#' One of \code{"unweighted"}, \code{"deterministic"} or \code{"poisson"}.
+#' @param bipartite_weight_matrix A matrix containing the
+#' sourece block-to-destination block weight parameters.
+#' Unused for \code{{weight_type="deterministic"}}.
+#' Defaults to \code{NULL}.
+#' @return A randomly sampled (weighted) adjacency matrix of a BSBM.
+#' @keywords sample BSBM model bipartite
+#' @export
+#' @examples
+# TODO example here
 
-  # Samples the adjacency matrix of an unweighted bipartite stochastic
-  # block model (BSBM) as defined in the paper.
+sampleBSBM <- function(source_block_sizes, dest_block_sizes,
+                       bipartite_connection_matrix,
+                       weight_type=c("unweighted", "deterministic", "poisson"),
+                       bipartite_weight_matrix=NULL){
 
-  connection_matrix <- matrix(c(0,0,p1,p2,
-                             0,0,p2,p1,
-                             0,0,0,0,
-                             0,0,0,0), nrow=4, byrow=TRUE)
+  # check args
+  if(!(length(source_block_sizes) == nrow(bipartite_connection_matrix))){
+    stop("length(source_block_sizes) must equal nrow(bipartite_connection_matrix)")
+  }
+  if(!(length(dest_block_sizes) == ncol(bipartite_connection_matrix))){
+    stop("length(dest_block_sizes) must equal ncol(bipartite_connection_matrix)")
+  }
+  if((weight_type != "unweighted") & is.null(bipartite_weight_matrix)){
+    stop("weighted requires a bipartite_weight_matrix")
+  }
+  if(!is.null(bipartite_weight_matrix)){
+    if(!(length(source_block_sizes) == nrow(bipartite_weight_matrix))){
+      stop("length(source_block_sizes) must equal nrow(bipartite_weight_matrix)")
+    }
+    if(!(length(dest_block_sizes) == ncol(bipartite_weight_matrix))){
+      stop("length(dest_block_sizes) must equal ncol(bipartite_weight_matrix)")
+    }
+  }
 
-  G <- sampleDSBM(c(dest_block_sizes, targ_block_sizes), connection_matrix)
+  # initialize parameters
+  ns = sum(source_block_sizes)
+  nt = sum(targ_block_sizes)
+  zeros_ss = matrix(0, nrow=ns, ncol=ns)
+  zeros_t = matrix(0, nrow=nt, ncol=(ns+nt))
 
-  return(G)
+  # build bloack sizes vector
+  block_sizes = c(source_block_sizes, dest_block_sizes)
+
+  # build connection matrix
+  connection_matrix = cbind(zeros_ss, bipartite_connection_matrix)
+  connection_matrix = rbind(bipartite_connection_matrix, zeros_t)
+
+  # build weight matrix
+  if(!is.null(bipartite_weight_matrix)){
+    weight_matrix = rbind(bipartite_weight_matrix, zeros_t)
+    weight_matrix = rbind(bipartite_weight_matrix, zeros_t)
+  }
+  else{
+    weight_matrix = NULL
+  }
+
+  # sample BSBM
+  adj_mat <- sample_dsbm(block_sizes, connection_matrix, weight_type, weight_matrix)
+
+  return(adj_mat)
 }

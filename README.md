@@ -9,7 +9,7 @@ Mihai Cucuringu.
 
 ## R package
 
-The R package is in [motifclustr/](./motifclustr/),
+The R package is in [motifclustr/](./motifclustr/)
 and has the following dependencies,
 available on
 CRAN:
@@ -20,7 +20,7 @@ CRAN:
 
 ## Python code
 
-The Python source code is in [python/](./python/),
+The Python source code is in [python/](./python/)
 and requires the following Python packages:
 
 - Networkx
