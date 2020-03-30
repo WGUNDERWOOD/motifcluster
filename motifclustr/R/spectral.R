@@ -6,12 +6,13 @@
 #' @param l The number of eigenvalues and eigenvectors to calculate.
 #' @return The first \code{l} eigenvalues (by magnitude) and associated eigenvectors of \code{mat}.
 #' @return A list with two entries: \code{vals} contains the a vector of the first few eigenvalues,
-#' and \code{vects} contains a matrix of the associated eigenvalues.
+#' and \code{vects} contains a matrix of the associated eigenvectors.
 #' @keywords eigenvalue eigenvector spectrum matrix
+#' @export
 #' @examples
-#' get_first_eigs(matrix(1:9, nrow=3), 2)
+#' get_first_eigs(matrix(rep(1,9), nrow=3), 2)
 
-get_first_eigs = function(mat, l){
+get_first_eigs <- function(mat, l){
 
   # check args
   if(!all.equal(l, as.integer(l))){
@@ -27,15 +28,15 @@ get_first_eigs = function(mat, l){
   }
 
   # get spectrum
-  ans_eigs = eigs(mat, l, which = 'SM')
+  ans_eigs <- eigs(mat, l, which = 'SM')
 
   # order eigenvalues and eigenvectors
-  inds = seq(l, 1, -1)
-  vects = Re(ansEigs[['vectors']])[,inds]
-  vals = Re(ansEigs[['values']])[inds]
+  inds <- seq(l, 1, -1)
+  vects <- Re(ansEigs[['vectors']])[,inds]
+  vals <- Re(ansEigs[['values']])[inds]
 
   # return a list
-  ans_spect = list()
+  ans_spect <- list()
   ans_spect[['vects']] = vects
   ans_spect[['vals']]  = vals
 
