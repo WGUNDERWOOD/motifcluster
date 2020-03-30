@@ -7,10 +7,10 @@ Andrew Elliott
 and
 Mihai Cucuringu.
 
-## R code
+## R package
 
-The R source code is in [r/](./r/),
-and requires the following R packages,
+The R package is in [motifclust/](./motifclustr/),
+and has the following dependencies,
 available on
 CRAN:
 
