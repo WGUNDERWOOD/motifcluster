@@ -11,12 +11,12 @@ run_laplace_embedding(adj_mat, num_eigs, type_lap = c("comb", "rw"))
 
 \item{num_eigs}{Number of eigenvalues and eigenvectors for the embedding.}
 
-\item{type_lap}{Type of Laplacian for the embedding. One of \code{"comb"} or \code{"rw"}.}
+\item{type_lap}{Type of Laplacian for the embedding. One of "comb" or "rw".}
 }
 \value{
-A list with two entries: \code{vals} contains the a length \code{num_eigs} vector
+A list with two entries: vals contains the a length num_eigs vector
 of the first few eigenvalues of the Laplacian,
-and \code{vects} contains a \code{nrow(mat)} by \code{num_eigs} matrix
+and vects contains a nrow(mat) by num_eigs matrix
 of the associated eigenvectors.
 }
 \description{

@@ -3,4 +3,5 @@
 export(build_laplacian)
 export(get_first_eigs)
 export(run_laplace_embedding)
+export(sampleBSBM)
 export(sample_dsbm)

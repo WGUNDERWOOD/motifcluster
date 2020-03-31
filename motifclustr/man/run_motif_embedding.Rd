@@ -18,24 +18,24 @@ run_motif_embedding(
 \item{motif_name}{Motif used for the motif adjacency matrix.}
 
 \item{motif_type}{Type of motif adjacency matrix to use.
-One of \code{"func"} or \code{"struc"}.}
+One of "func" or "struc".}
 
 \item{num_eigs}{Number of eigenvalues and eigenvectors for the embedding.}
 
-\item{type_lap}{Type of Laplacian for the embedding. One of \code{"comb"} or \code{"rw"}.}
+\item{type_lap}{Type of Laplacian for the embedding. One of "comb" or "rw".}
 }
 \value{
 A list with 7 entries:
-\code{adj_mat}, the original adjacency matrix;
-\code{motif_adj_mat}, the motif adjacency matrix;
-\code{comps}, the indices of the largest connected component of the motif adjacency matrix;
-\code{adj_mat_comps}, the original adjacency matrix restricted to the largest connected
+adj_mat, the original adjacency matrix;
+motif_adj_mat, the motif adjacency matrix;
+comps, the indices of the largest connected component of the motif adjacency matrix;
+adj_mat_comps, the original adjacency matrix restricted to the largest connected
 component of the motif adjacency matrix;
-\code{motif_adj_mat_comps}, the motif adjacency matrix restricted to its
+motif_adj_mat_comps, the motif adjacency matrix restricted to its
 largest connected component;
-\code{vals}, the eigenvalues associated with the Laplace embedding
+vals, the eigenvalues associated with the Laplace embedding
 of the motif adjacency matrix;
-\code{vects}, the eigenvectors associated with the Laplace embedding
+vects, the eigenvectors associated with the Laplace embedding
 of the motif adjacency matrix;
 }
 \description{

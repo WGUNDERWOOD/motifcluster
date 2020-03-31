@@ -4,9 +4,9 @@
 #' associated eigenvectors of a matrix.
 #' @param mat Symmetric matrix for which eigenvalues and eigenvectors are to be calculated.
 #' @param num_eigs Number of eigenvalues and eigenvectors to calculate.
-#' @return A list with two entries: \code{vals} contains the a length \code{num_eigs} vector
+#' @return A list with two entries: vals contains a length num_eigs vector
 #' of the first few eigenvalues,
-#' and \code{vects} contains a \code{nrow(mat)} by \code{num_eigs} matrix
+#' and vects contains a nrow(mat) by num_eigs matrix
 #' of the associated eigenvectors.
 #' @keywords eigenvalue eigenvector spectrum matrix
 #' @export
@@ -50,7 +50,7 @@ get_first_eigs <- function(mat, num_eigs){
 #' Build a Laplacian matrix (combinatorial Laplacian or random-walk Laplacian)
 #' from a symmetric (weighted) graph adjacency matrix.
 #' @param adj_mat Symmetric adjacency matrix from which to build the Laplacian.
-#' @param type_lap Type of Laplacian to build. One of \code{"comb"} or \code{"rw"}.
+#' @param type_lap Type of Laplacian to build. One of "comb" or "rw".
 #' @return The specified Laplacian matrix.
 #' @keywords laplacian matrix
 #' @export
@@ -93,10 +93,10 @@ build_laplacian <- function(adj_mat, type_lap=c("comb", "rw")){
 #' with a specified number of eigenvalues and eigenvectors.
 #' @param adj_mat Symmetric adjacency matrix to be embedded.
 #' @param num_eigs Number of eigenvalues and eigenvectors for the embedding.
-#' @param type_lap Type of Laplacian for the embedding. One of \code{"comb"} or \code{"rw"}.
-#' @return A list with two entries: \code{vals} contains the a length \code{num_eigs} vector
+#' @param type_lap Type of Laplacian for the embedding. One of "comb" or "rw".
+#' @return A list with two entries: vals contains the a length num_eigs vector
 #' of the first few eigenvalues of the Laplacian,
-#' and \code{vects} contains a \code{nrow(mat)} by \code{num_eigs} matrix
+#' and vects contains a nrow(mat) by num_eigs matrix
 #' of the associated eigenvectors.
 #' @keywords laplacian embedding eigenvalue eigenvector matrix
 #' @export
@@ -122,7 +122,7 @@ run_laplace_embedding <- function(adj_mat, num_eigs, type_lap=c("comb", "rw")){
 
   # build Laplacian
   laplacian <- build_laplacian(adj_mat, type_lap)
-  ans_spect <- get_first_eigs(laplacian, type_lap, num_eigs)
+  ans_spect <- get_first_eigs(laplacian, num_eigs)
 
   return(ans_spect)
 }
@@ -136,20 +136,20 @@ run_laplace_embedding <- function(adj_mat, num_eigs, type_lap=c("comb", "rw")){
 #' @param adj_mat Symmetric adjacency matrix to be embedded.
 #' @param motif_name Motif used for the motif adjacency matrix.
 #' @param motif_type Type of motif adjacency matrix to use.
-#' One of \code{"func"} or \code{"struc"}.
-#' @param type_lap Type of Laplacian for the embedding. One of \code{"comb"} or \code{"rw"}.
+#' One of "func" or "struc".
+#' @param type_lap Type of Laplacian for the embedding. One of "comb" or "rw".
 #' @param num_eigs Number of eigenvalues and eigenvectors for the embedding.
 #' @return A list with 7 entries:
-#' \code{adj_mat}, the original adjacency matrix;
-#' \code{motif_adj_mat}, the motif adjacency matrix;
-#' \code{comps}, the indices of the largest connected component of the motif adjacency matrix;
-#' \code{adj_mat_comps}, the original adjacency matrix restricted to the largest connected
+#' adj_mat, the original adjacency matrix;
+#' motif_adj_mat, the motif adjacency matrix;
+#' comps, the indices of the largest connected component of the motif adjacency matrix;
+#' adj_mat_comps, the original adjacency matrix restricted to the largest connected
 #' component of the motif adjacency matrix;
-#' \code{motif_adj_mat_comps}, the motif adjacency matrix restricted to its
+#' motif_adj_mat_comps, the motif adjacency matrix restricted to its
 #' largest connected component;
-#' \code{vals}, the eigenvalues associated with the Laplace embedding
+#' vals, the eigenvalues associated with the Laplace embedding
 #' of the motif adjacency matrix;
-#' \code{vects}, the eigenvectors associated with the Laplace embedding
+#' vects, the eigenvectors associated with the Laplace embedding
 #' of the motif adjacency matrix;
 #' @keywords motif adjacency matrix laplacian embedding
 

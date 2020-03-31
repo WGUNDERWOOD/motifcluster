@@ -5,10 +5,10 @@
 #' @param block_sizes A vector containing the size of each block of vertices.
 #' @param connection_matrix A matrix containing the block-to-block connection probabilities.
 #' @param weight_type The type of weighting scheme.
-#' One of \code{"unweighted"}, \code{"deterministic"} or \code{"poisson"}.
+#' One of "unweighted", "deterministic" or "poisson".
 #' @param weight_matrix A matrix containing the block-to-block weight parameters.
-#' Unused for \code{{weight_type="deterministic"}}.
-#' Defaults to \code{NULL}.
+#' Unused for weight_type="deterministic".
+#' Defaults to NULL.
 #' @return A randomly sampled (weighted) adjacency matrix of a DSBM.
 #' @keywords sample DSBM model
 #' @export
@@ -108,11 +108,11 @@ sample_dsbm <- function(block_sizes, connection_matrix,
 #' @param bipartite_connection_matrix A matrix containing the block-to-block
 #' connection probabilities.
 #' @param weight_type The type of weighting scheme.
-#' One of \code{"unweighted"}, \code{"deterministic"} or \code{"poisson"}.
+#' One of "unweighted", "deterministic" or "poisson".
 #' @param bipartite_weight_matrix A matrix containing the
 #' sourece block-to-destination block weight parameters.
-#' Unused for \code{{weight_type="deterministic"}}.
-#' Defaults to \code{NULL}.
+#' Unused for weight_type="deterministic".
+#' Defaults to NULL.
 #' @return A randomly sampled (weighted) adjacency matrix of a BSBM.
 #' @keywords sample BSBM model bipartite
 #' @export
