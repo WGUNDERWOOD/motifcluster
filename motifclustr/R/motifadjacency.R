@@ -27,14 +27,12 @@ build_motif_adjacency_matrix <- function(adj_mat, motif_name, motif_type=c("func
 
   # build functional motif adjacency matrix
   if(motif_type=="func"){
-    # TODO redo the args below
-    #motif_adj_mat <- run_motif_adjacency_calcs(G, G, IM$Gd, IM$J, IM$Jn, IM$J, IM$Jd, motif_name)
+    motif_adj_mat <- run_motif_adjacency_calcs(IM$G, IM$J, IM$Jn, IM$Jd, IM$Gd, motif_name)
   }
 
   # build structural motif adjacency matrix
   else if(motif_type=="struc"){
-    # TODO redo the args below
-    #motif_adj_mat <- run_motif_adjacency_calcs(G, IM$Gs, IM$Gd, IM$J, IM$J0, IM$Js, IM$Jd, motif_name)
+    motif_adj_mat <- run_motif_adjacency_calcs(IM$Gs, IM$Js, IM$J0, IM$Jd, IM$Gd, motif_name)
   }
 
   motifadj <- unname(drop0(motifadj))
@@ -79,13 +77,19 @@ build_indicator_matrices <- function(adj_mat){
 #'
 #' Perform the matrix operations required to build a motif
 #' adjacency matrix from adjacency and indicator matrices.
+#' Parameter names default to building functional motif adjacency matrices.
 #' @param G The original adjacency matrix.
-(re)
+#' Replaced by the single-edge adjacency matrix Gs for structural motifs.
 #' @param J The directed indicator matrix.
+#' Replaced by the single-edge indicator matrix Js for structural motifs.
 #' @param Jn is the vertex-distinct indicator matrix.
+#' Replaced by the missing-edge indicator matrix J0 for structural motifs.
 #' @param Jd The double-edge indicator matrix.
-#' @param Gd The double-edge adjacency matri.
-# TODO finish these docs
+#' @param Gd The double-edge adjacency matrix.
+#' @return A motif adjacency matrix.
+#' @keywords motif adjacency matrix calculation operation
+#' @export
+#' @examples
 
 run_motif_adjacency_calcs <- function(G, J, Jn, Jd, Gd, motif_name){
 
@@ -195,10 +199,18 @@ run_motif_adjacency_calcs <- function(G, J, Jn, Jd, Gd, motif_name){
   return(motif_adj_mat)
 }
 
-drop0_killdiag <- function(mat){
+#' Set diagonal entries to zero and sparsify
+#'
+#' Set the diagonal entries of a matrix to zero
+#' and convert it to sparse matrix form.
+#' @param mat A matrix.
+#' @return A sparse-form copy of mat with its diagonal entries set to zero.
+#' @keywords matrix diagonal sparse
+#' @export
+#' @examples
+#' drop0_killdiag(matrix(c(-1,0,1,2), nrow=2))
 
-  # Set the diagonal entries of a matrix to zero,
-  # and convert it to sparse form.
+drop0_killdiag <- function(mat){
 
   ans <- mat
   diag(ans) <- 0
@@ -207,17 +219,41 @@ drop0_killdiag <- function(mat){
   return(ans)
 }
 
-largestComponent <- function(G){
+#' Get largest connected component
+#'
+#' Get the indices of the largest connected component of a graph
+#' from its adjacency matrix.
+#' @param adj_mat An adjacency matrix of a graph.
+#' @return A vector of indices corresponding to the vertices in the largest
+#' connected component.
+#' @export
+#' @examples
 
-  # Return the vertices in the largest connected component
-  # associated with an adjacency matrix.
+get_largest_component <- function(adj_mat){
 
-  n <- nrow(G)
-  Gr <- graph_from_adjacency_matrix(G, weighted=TRUE)
-  comps <- components(Gr)
+  n <- nrow(adj_mat)
+  gr <- graph_from_adjacency_matrix(adj_mat + t(adj_mat))
+  comps <- components(gr)
   verts_to_keep <- (1:n)[comps$membership == which.max(comps$csize)]
 
   return(verts_to_keep)
 }
 
-get_motif_names <- function()
+#' Get common motif names
+#'
+#' Get the names of some common motifs
+#' @return A vector of names of common motifs.
+
+get_motif_names <- function(){
+
+  motif_names = c("Ms", "Md")
+
+  for(i in 1:13){
+    motif_name = paste("M", i, sep="")
+    motif_names = c(motif_names, motif_name)
+  }
+
+  motif_names = c(motif_names, c("coll", "expa", "path"))
+
+  return(motif_names)
+}

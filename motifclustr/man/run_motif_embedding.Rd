@@ -13,7 +13,7 @@ run_motif_embedding(
 )
 }
 \arguments{
-\item{adj_mat}{Symmetric adjacency matrix to be embedded.}
+\item{adj_mat}{Adjacency matrix to be embedded.}
 
 \item{motif_name}{Motif used for the motif adjacency matrix.}
 
