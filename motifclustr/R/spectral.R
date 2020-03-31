@@ -120,7 +120,7 @@ run_laplace_embedding <- function(adj_mat, num_eigs, type_lap=c("comb", "rw")){
   }
   type_lap <- match.arg(type_lap)
 
-  # build Laplacian
+  # build and embed Laplacian
   laplacian <- build_laplacian(adj_mat, type_lap)
   ans_spect <- get_first_eigs(laplacian, num_eigs)
 
@@ -133,7 +133,7 @@ run_laplace_embedding <- function(adj_mat, num_eigs, type_lap=c("comb", "rw")){
 #' restrict it to its largest connected component,
 #' and then run Laplace embedding with specified Laplacian type and
 #' number of eigenvalues and eigenvectors.
-#' @param adj_mat Symmetric adjacency matrix to be embedded.
+#' @param adj_mat Adjacency matrix to be embedded.
 #' @param motif_name Motif used for the motif adjacency matrix.
 #' @param motif_type Type of motif adjacency matrix to use.
 #' One of "func" or "struc".
@@ -159,9 +159,6 @@ run_motif_embedding <- function(adj_mat, motif_name, motif_type = c("func", "str
   # check args
   if(!is.matrix(adj_mat)){
     stop("adj_mat must be a matrix.")
-  }
-  if(!isSymmetric(adj_mat)){
-    stop("adj_mat must be symmetric.")
   }
   if(!(motif_name %in% get_motif_names())){
     stop("Invalid motif name.")
