@@ -7,17 +7,29 @@
 run_motif_adjacency_calcs(G, J, Jn, Jd, Gd, motif_name)
 }
 \arguments{
-\item{G}{The original adjacency matrix.}
+\item{G}{The original adjacency matrix.
+Replaced by the single-edge adjacency matrix Gs for structural motifs.}
 
-\item{J}{The directed indicator matrix.}
+\item{J}{The directed indicator matrix.
+Replaced by the single-edge indicator matrix Js for structural motifs.}
 
-\item{Jn}{is the vertex-distinct indicator matrix.}
+\item{Jn}{is the vertex-distinct indicator matrix.
+Replaced by the missing-edge indicator matrix J0 for structural motifs.}
 
 \item{Jd}{The double-edge indicator matrix.}
 
-\item{Gd}{The double-edge adjacency matri.}
+\item{Gd}{The double-edge adjacency matrix.}
+}
+\value{
+A motif adjacency matrix.
 }
 \description{
 Perform the matrix operations required to build a motif
 adjacency matrix from adjacency and indicator matrices.
+Parameter names default to building functional motif adjacency matrices.
 }
+\keyword{adjacency}
+\keyword{calculation}
+\keyword{matrix}
+\keyword{motif}
+\keyword{operation}

@@ -29,9 +29,6 @@ sample_dsbm <- function(block_sizes, connection_matrix,
   if(!all(block_sizes > 0)){
     stop("block_sizes must be at least 1.")
   }
-  if(!(is.matrix(connection_matrix))){
-    stop("connection_matrix must be a matrix")
-  }
   if(!(length(block_sizes) == nrow(connection_matrix))){
     stop("connection_matrix must have length(block_sizes) rows.")
   }
@@ -46,9 +43,6 @@ sample_dsbm <- function(block_sizes, connection_matrix,
     stop("weighted requires a weight_matrix")
   }
   if(!is.null(weight_matrix)){
-    if(!(is.matrix(weight_matrix))){
-      stop("weight_matrix must be a matrix")
-    }
     if(!(length(block_sizes) == nrow(weight_matrix))){
       stop("weight_matrix must have length(block_sizes) rows.")
     }

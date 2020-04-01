@@ -16,12 +16,6 @@
 get_first_eigs <- function(mat, num_eigs){
 
   # check args
-  if(!is.matrix(mat)){
-    stop("mat must be a matrix.")
-  }
-  if(!isSymmetric(mat)){
-    stop("mat must be symmetric.")
-  }
   if(!all.equal(num_eigs, as.integer(num_eigs))){
     stop("num_eigs must be an integer.")
   }
@@ -60,12 +54,6 @@ get_first_eigs <- function(mat, num_eigs){
 build_laplacian <- function(adj_mat, type_lap=c("comb", "rw")){
 
   # check args
-  if(!is.matrix(adj_mat)){
-    stop("adj_mat must be a matrix.")
-  }
-  if(!isSymmetric(adj_mat)){
-    stop("adj_mat must be symmetric.")
-  }
   type_lap <- match.arg(type_lap)
 
   # initialize parameters
@@ -106,12 +94,6 @@ build_laplacian <- function(adj_mat, type_lap=c("comb", "rw")){
 run_laplace_embedding <- function(adj_mat, num_eigs, type_lap=c("comb", "rw")){
 
   # check args
-  if(!is.matrix(adj_mat)){
-    stop("adj_mat must be a matrix.")
-  }
-  if(!isSymmetric(adj_mat)){
-    stop("adj_mat must be symmetric.")
-  }
   if(!all.equal(num_eigs, as.integer(num_eigs))){
     stop("num_eigs must be an integer.")
   }
@@ -157,9 +139,6 @@ run_motif_embedding <- function(adj_mat, motif_name, motif_type = c("func", "str
                                 num_eigs, type_lap){
 
   # check args
-  if(!is.matrix(adj_mat)){
-    stop("adj_mat must be a matrix.")
-  }
   if(!(motif_name %in% get_motif_names())){
     stop("Invalid motif name.")
   }

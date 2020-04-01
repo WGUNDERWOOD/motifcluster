@@ -10,12 +10,13 @@
 #' @examples
 # TODO example
 
-build_motif_adjacency_matrix <- function(adj_mat, motif_name, motif_type=c("func","struc")){
+build_motif_adjacency_matrix <- function(adj_mat, motif_name, motif_type=c("func","struc"),
+                                         weight_type=c("unweighted", "mean", "product"),
+                                         method=c("dense", "sparse")){
+
+  # TODO add weight type and dense.sparse method
 
   # check args
-  if(!is.matrix(adj_mat)){
-    stop("adj_mat must be a matrix.")
-  }
   if(!(motif_name %in% get_motif_names())){
     stop("Invalid motif name.")
   }
