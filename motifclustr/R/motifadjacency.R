@@ -56,9 +56,6 @@ build_motif_adjacency_matrix <- function(adj_mat, motif_name, motif_type=c("func
 #' Js is the single-edge indicator matrix;
 #' Jd is the double-edge indicator matrix.
 #' @keywords indicator adjacency matrix
-#' @export
-#' @examples
-# TODO example
 
 build_indicator_matrices <- function(adj_mat){
 
@@ -89,8 +86,6 @@ build_indicator_matrices <- function(adj_mat){
 #' @param Gd The double-edge adjacency matrix.
 #' @return A motif adjacency matrix.
 #' @keywords motif adjacency matrix calculation operation
-#' @export
-#' @examples
 
 run_motif_adjacency_calcs <- function(G, J, Jn, Jd, Gd, motif_name){
 
@@ -207,9 +202,6 @@ run_motif_adjacency_calcs <- function(G, J, Jn, Jd, Gd, motif_name){
 #' @param mat A matrix.
 #' @return A sparse-form copy of mat with its diagonal entries set to zero.
 #' @keywords matrix diagonal sparse
-#' @export
-#' @examples
-#' drop0_killdiag(matrix(c(-1,0,1,2), nrow=2))
 
 drop0_killdiag <- function(mat){
 
@@ -227,8 +219,6 @@ drop0_killdiag <- function(mat){
 #' @param adj_mat An adjacency matrix of a graph.
 #' @return A vector of indices corresponding to the vertices in the largest
 #' connected component.
-#' @export
-#' @examples
 
 get_largest_component <- function(adj_mat){
 

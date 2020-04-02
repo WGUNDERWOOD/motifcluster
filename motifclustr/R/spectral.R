@@ -8,10 +8,6 @@
 #' of the first few eigenvalues,
 #' and vects contains a nrow(mat) by num_eigs matrix
 #' of the associated eigenvectors.
-#' @keywords eigenvalue eigenvector spectrum matrix
-#' @export
-#' @examples
-#' get_first_eigs(matrix(rep(1,9), nrow=3), num_eigs=2)
 
 get_first_eigs <- function(mat, num_eigs){
 
@@ -24,7 +20,7 @@ get_first_eigs <- function(mat, num_eigs){
   }
 
   # get spectrum
-  ans_eigs <- eigs(mat, num_eigs, which = "SM")
+  ans_eigs <- RSpectra::eigs(mat, num_eigs, which = "SM")
 
   # order eigenvalues and eigenvectors
   inds <- seq(num_eigs, 1, -1)
@@ -47,9 +43,6 @@ get_first_eigs <- function(mat, num_eigs){
 #' @param type_lap Type of Laplacian to build. One of "comb" or "rw".
 #' @return The specified Laplacian matrix.
 #' @keywords laplacian matrix
-#' @export
-#' @examples
-#' build_laplacian(matrix(rep(1,9), nrow=3), type_lap="rw")
 
 build_laplacian <- function(adj_mat, type_lap=c("comb", "rw")){
 
@@ -61,13 +54,18 @@ build_laplacian <- function(adj_mat, type_lap=c("comb", "rw")){
   n <- nrow(adj_mat)
 
   # combinatorial Laplacian
-  if (type_lap=='comb'){
-    degs_matrix <- diag(degsadj_mat)
+  if (type_lap=="comb"){
+    degs_matrix <- diag(degs_adj_mat)
     L <-  degs_matrix - adj_mat
   }
 
   # random-walk Laplacian
-  else if (type_lap == 'rw'){
+  else if (type_lap == "rw"){
+
+    if(!all(degs_adj_mat != 0)){
+      stop("row sums of adj_mat must be non-zero")
+    }
+
     inv_degs_matrix <- diag(degs_adj_mat^(-1))
     L <-  diag(n) - inv_degs_matrix %*% adj_mat
   }
@@ -87,9 +85,6 @@ build_laplacian <- function(adj_mat, type_lap=c("comb", "rw")){
 #' and vects contains a nrow(mat) by num_eigs matrix
 #' of the associated eigenvectors.
 #' @keywords laplacian embedding eigenvalue eigenvector matrix
-#' @export
-#' @examples
-#' run_laplace_embedding(matrix(rep(1,9), nrow=3), num_eigs=2, type_lap="rw")
 
 run_laplace_embedding <- function(adj_mat, num_eigs, type_lap=c("comb", "rw")){
 
@@ -134,6 +129,7 @@ run_laplace_embedding <- function(adj_mat, num_eigs, type_lap=c("comb", "rw")){
 #' vects, the eigenvectors associated with the Laplace embedding
 #' of the motif adjacency matrix;
 #' @keywords motif adjacency matrix laplacian embedding
+#' @export
 
 run_motif_embedding <- function(adj_mat, motif_name, motif_type = c("func", "struc"),
                                 num_eigs, type_lap){
