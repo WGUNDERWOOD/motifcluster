@@ -8,7 +8,7 @@ test_that("build_motif_adjacency_matrix returns correct unweighted functional ma
   G_dense = matrix(c(
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     2, 0, 3, 0, 6, 8, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,10, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     4, 5, 0, 0, 0,14, 0, 0,18,19, 0, 0,
     0, 7, 9, 0,13, 0, 0, 0, 0, 0,21, 0,
@@ -17,7 +17,7 @@ test_that("build_motif_adjacency_matrix returns correct unweighted functional ma
     0, 0, 0, 0, 0, 0, 0, 0, 0,24, 0, 0,
     0, 0, 0, 0, 0,20, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0,22, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0,23, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0,23, 0, 0, 0, 0, 0
   ), nrow=12, byrow=TRUE)
 
 })
