@@ -1,5 +1,7 @@
 # motif-based-clustering
 
+**This branch (`develop`) is unstable. See `master` for stable version.**
+
 Source code for the paper
 *Motif-Based Spectral Clustering of Weighted Directed Networks*,
 with
