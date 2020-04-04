@@ -36,7 +36,7 @@ build_motif_adjacency_matrix <- function(adj_mat, motif_name, motif_type=c("func
     motif_adj_mat <- run_motif_adjacency_calcs(IM$Gs, IM$Js, IM$J0, IM$Jd, IM$Gd, motif_name)
   }
 
-  motifadj <- unname(drop0(motifadj))
+  motifadj <- unname(Matrix::drop0(motifadj))
 
   return(motifadj)
 }
@@ -207,7 +207,7 @@ drop0_killdiag <- function(mat){
 
   ans <- mat
   diag(ans) <- 0
-  ans <- drop0(ans)
+  ans <- Matrix::drop0(ans)
 
   return(ans)
 }

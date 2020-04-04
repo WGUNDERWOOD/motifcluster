@@ -21,10 +21,3 @@ of the associated eigenvectors.
 Compute the first few eigenvalues (by magnitude) and
 associated eigenvectors of a matrix.
 }
-\examples{
-get_first_eigs(matrix(rep(1,9), nrow=3), num_eigs=2)
-}
-\keyword{eigenvalue}
-\keyword{eigenvector}
-\keyword{matrix}
-\keyword{spectrum}

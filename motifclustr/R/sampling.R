@@ -88,7 +88,7 @@ sample_dsbm <- function(block_sizes, connection_matrix,
   }
 
   # remove self-loops and make sparse
-  adj_mat <- drop0_killdiag(adj_mat)
+  adj_mat <- unname(drop0_killdiag(adj_mat))
 
   return(adj_mat)
 }

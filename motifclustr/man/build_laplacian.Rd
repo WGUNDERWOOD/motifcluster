@@ -18,8 +18,5 @@ The specified Laplacian matrix.
 Build a Laplacian matrix (combinatorial Laplacian or random-walk Laplacian)
 from a symmetric (weighted) graph adjacency matrix.
 }
-\examples{
-build_laplacian(matrix(rep(1,9), nrow=3), type_lap="rw")
-}
 \keyword{laplacian}
 \keyword{matrix}

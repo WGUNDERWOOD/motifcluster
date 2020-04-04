@@ -16,9 +16,6 @@ A sparse-form copy of mat with its diagonal entries set to zero.
 Set the diagonal entries of a matrix to zero
 and convert it to sparse matrix form.
 }
-\examples{
-drop0_killdiag(matrix(c(-1,0,1,2), nrow=2))
-}
 \keyword{diagonal}
 \keyword{matrix}
 \keyword{sparse}
