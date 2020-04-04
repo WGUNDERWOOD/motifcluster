@@ -113,7 +113,7 @@ sample_dsbm <- function(block_sizes, connection_matrix,
 #' @examples
 # TODO example here
 
-sampleBSBM <- function(source_block_sizes, dest_block_sizes,
+sample_bsbm <- function(source_block_sizes, dest_block_sizes,
                        bipartite_connection_matrix,
                        weight_type=c("unweighted", "deterministic", "poisson"),
                        bipartite_weight_matrix=NULL){
@@ -138,22 +138,22 @@ sampleBSBM <- function(source_block_sizes, dest_block_sizes,
   }
 
   # initialize parameters
-  ns = sum(source_block_sizes)
-  nt = sum(targ_block_sizes)
-  zeros_ss = matrix(0, nrow=ns, ncol=ns)
-  zeros_t = matrix(0, nrow=nt, ncol=(ns+nt))
+  ks = length(source_block_sizes)
+  kd = length(dest_block_sizes)
+  zeros_ss = matrix(0, nrow=ks, ncol=ks)
+  zeros_d = matrix(0, nrow=kd, ncol=(ks+kd))
 
-  # build bloack sizes vector
+  # build block sizes vector
   block_sizes = c(source_block_sizes, dest_block_sizes)
 
   # build connection matrix
   connection_matrix = cbind(zeros_ss, bipartite_connection_matrix)
-  connection_matrix = rbind(bipartite_connection_matrix, zeros_t)
+  connection_matrix = rbind(connection_matrix, zeros_d)
 
   # build weight matrix
   if(!is.null(bipartite_weight_matrix)){
-    weight_matrix = rbind(bipartite_weight_matrix, zeros_t)
-    weight_matrix = rbind(bipartite_weight_matrix, zeros_t)
+    weight_matrix = cbind(zeros_ss, bipartite_weight_matrix)
+    weight_matrix = rbind(weight_matrix, zeros_d)
   }
   else{
     weight_matrix = NULL
