@@ -10,10 +10,13 @@
 #' Unused for weight_type="deterministic".
 #' Defaults to NULL.
 #' @return A randomly sampled (weighted) adjacency matrix of a DSBM.
-#' @keywords sample DSBM model
 #' @export
 #' @examples
-# TODO example here
+#' block_sizes = c(10,10)
+#' connection_matrix = matrix(c(0.8,0.1,0.1,0.8), nrow=2, byrow=TRUE)
+#' weight_type = "poisson"
+#' weight_matrix = matrix(c(10,3,3,10), nrow=2, byrow=TRUE)
+#' sample_dsbm(block_sizes, connection_matrix, weight_type, weight_matrix)
 
 sample_dsbm <- function(block_sizes, connection_matrix,
                        weight_type=c("unweighted", "deterministic", "poisson"),
@@ -70,7 +73,7 @@ sample_dsbm <- function(block_sizes, connection_matrix,
       p <- connection_matrix[i,j]
 
       # fill the adjacency matrix block-by-block
-      adj_mat[x_range, y_range] <- rbinom(n_cells, 1, p)
+      adj_mat[x_range, y_range] <- stats::rbinom(n_cells, 1, p)
 
       # deterministic weights
       if(weight_type == "deterministic"){
@@ -81,7 +84,7 @@ sample_dsbm <- function(block_sizes, connection_matrix,
       # poisson weights
       else if(weight_type == "poisson"){
         w <- weight_matrix[i,j]
-        weights <- rpois(n_cells, w)
+        weights <- stats::rpois(n_cells, w)
         adj_mat[x_range, y_range] <- weights * adj_mat[x_range, y_range]
       }
     }
@@ -111,7 +114,13 @@ sample_dsbm <- function(block_sizes, connection_matrix,
 #' @keywords sample BSBM model bipartite
 #' @export
 #' @examples
-# TODO example here
+#' source_block_sizes = c(10,10)
+#' dest_block_sizes = c(10,10,10)
+#' bipartite_connection_matrix = matrix(c(0.8,0.5,0.1,0.1,0.5,0.8), nrow=2, byrow=TRUE)
+#' weight_type = "poisson"
+#' bipartite_weight_matrix = matrix(c(20,10,2,2,10,20), nrow=2, byrow=TRUE)
+#' sample_bsbm(source_block_sizes, dest_block_sizes, bipartite_connection_matrix,
+#'             weight_type, bipartite_weight_matrix)
 
 sample_bsbm <- function(source_block_sizes, dest_block_sizes,
                        bipartite_connection_matrix,

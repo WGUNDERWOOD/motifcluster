@@ -4,17 +4,18 @@
 #' @param adj_mat Adjacency matrix from which to build the motif adjacency matrix.
 #' @param motif_name Motif used for the motif adjacency matrix.
 #' @param motif_type Type of motif adjacency matrix to build.
+#' @param weight_type The weighting scheme to use. One of "unweighted", "mean" or "product".
+#' @param method Which formulation to use. One of "dense" or "sparse".
 #' @return A motif adjacency matrix.
 #' @keywords motif adjacency matrix
 #' @export
 #' @examples
-# TODO example
 
 build_motif_adjacency_matrix <- function(adj_mat, motif_name, motif_type=c("func","struc"),
                                          weight_type=c("unweighted", "mean", "product"),
                                          method=c("dense", "sparse")){
 
-  # TODO add weight type and dense.sparse method
+  # TODO add weight type and dense/sparse method
 
   # check args
   if(!(motif_name %in% get_motif_names())){
@@ -59,14 +60,14 @@ build_motif_adjacency_matrix <- function(adj_mat, motif_name, motif_type=c("func
 
 build_indicator_matrices <- function(adj_mat){
 
-  G  <- adj_mat
-  J  <- drop0_killdiag( 1*(G > 0) )
-  J0 <- drop0_killdiag( 1*((G+t(G)) == 0 ) )
-  Jn <- drop0_killdiag( 1+0*G )
-  Gs <- drop0_killdiag( G*(1 - t(J)) )
-  Gd <- drop0_killdiag( (G+t(G)) * J * t(J) )
-  Js <- drop0_killdiag( 1*(Gs > 0) )
-  Jd <- drop0_killdiag( 1*(Gd > 0) )
+  G  <- drop0_killdiag(adj_mat)
+  J  <- drop0_killdiag(1*(G > 0))
+  J0 <- drop0_killdiag(1*((G+Matrix::t(G)) == 0))
+  Jn <- drop0_killdiag(1+0*G)
+  Gs <- drop0_killdiag(G*(1 - Matrix::t(J)))
+  Gd <- drop0_killdiag((G+Matrix::t(G)) * J * Matrix::t(J))
+  Js <- drop0_killdiag(1*(Gs > 0))
+  Jd <- drop0_killdiag(1*(Gd > 0))
 
   return(list(G=G, J=J, J0=J0, Jn=Jn, Gs=Gs, Gd=Gd, Js=Js, Jd=Jd))
 }
@@ -84,6 +85,7 @@ build_indicator_matrices <- function(adj_mat){
 #' Replaced by the missing-edge indicator matrix J0 for structural motifs.
 #' @param Jd The double-edge indicator matrix.
 #' @param Gd The double-edge adjacency matrix.
+#' @param motif_name The motif to use for the motif adjacency matrix.
 #' @return A motif adjacency matrix.
 #' @keywords motif adjacency matrix calculation operation
 
@@ -207,7 +209,7 @@ drop0_killdiag <- function(mat){
 
   ans <- mat
   diag(ans) <- 0
-  ans <- Matrix::drop0(ans)
+  ans <- unname(Matrix::drop0(ans))
 
   return(ans)
 }
