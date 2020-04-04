@@ -223,8 +223,8 @@ drop0_killdiag <- function(mat){
 get_largest_component <- function(adj_mat){
 
   n <- nrow(adj_mat)
-  gr <- graph_from_adjacency_matrix(adj_mat + t(adj_mat))
-  comps <- components(gr)
+  gr <- igraph::graph_from_adjacency_matrix(adj_mat + Matrix::t(adj_mat))
+  comps <- igraph::components(gr)
   verts_to_keep <- (1:n)[comps$membership == which.max(comps$csize)]
 
   return(verts_to_keep)
