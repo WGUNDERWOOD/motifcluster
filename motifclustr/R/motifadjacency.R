@@ -35,6 +35,10 @@ build_motif_adjacency_matrix <- function(adj_mat, motif_name, motif_type=c("func
   if(motif_name == "M1"){
     return(mam_M1(adj_mat, motif_type, weight_type))
   }
+
+  if(motif_name == "M2"){
+    return(mam_M2(adj_mat, motif_type, weight_type))
+  }
 }
 
 #' Set diagonal entries to zero and sparsify

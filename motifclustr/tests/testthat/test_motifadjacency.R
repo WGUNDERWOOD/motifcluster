@@ -72,8 +72,23 @@ test_that("build_motif_adjacency_matrix returns correct unweighted functional ma
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
   ), nrow=12, byrow=TRUE)))
 
+  ans$M2 = unname(drop0(matrix(c(
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 2, 0, 6, 8, 0, 0, 0, 0, 0, 0,
+    0, 2, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 6, 0, 0, 0, 7, 0, 0, 0, 1, 0, 0,
+    0, 8, 2, 0, 7, 0, 0, 0, 0, 1, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+  ), nrow=12, byrow=TRUE)))
+
   # compare calculations with answers
-  motifs = get_motif_names()[1:3]
+  motifs = get_motif_names()[1:4]
   for(i in 1:length(motifs)){
 
     MAM_densematrix_densemethod = build_motif_adjacency_matrix(
@@ -85,8 +100,8 @@ test_that("build_motif_adjacency_matrix returns correct unweighted functional ma
     MAM_sparsematrix_sparsemethod = build_motif_adjacency_matrix(
       G_sparse, motifs[i], "func", "unweighted", "sparse")
 
-    print(MAM_densematrix_densemethod)
-    print(ans[[motifs[i]]])
+    #print(MAM_densematrix_densemethod)
+    #print(ans[[motifs[i]]])
 
     expect_equal(MAM_densematrix_densemethod, ans[[motifs[i]]])
     expect_equal(MAM_sparsematrix_densemethod, ans[[motifs[i]]])

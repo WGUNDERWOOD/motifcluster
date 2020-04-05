@@ -141,53 +141,6 @@ run_motif_adjacency_calcs <- function(ind_mats, motif_name, motif_type, weight_t
 }
 # TODO docs
 
-mam_M1 <- function(adj_mat, motif_type, weight_type){
-
-  if(weight_type == "unweighted"){
-    if(motif_type == "func"){
-      J = build_J(adj_mat)
-      C <- t(J)*(J%*%J)
-      return(C + t(C))
-    }
-
-    if(motif_type == "struc"){
-      Js = build_Js(adj_mat)
-      C <- t(Js)*(Js%*%Js)
-      return(C + t(C))
-    }
-  }
-
-  if(weight_type == "mean"){
-    if(motif_type == "func"){
-      J = build_J(adj_mat)
-      G = adj_mat
-      C <- t(J)*(J%*%G) + t(J)*(G%*%J) + t(G)*(J%*%J)
-      return((C + t(C)) / 3)
-    }
-
-    if(motif_type == "struc"){
-      Js = build_Js(adj_mat)
-      Gs = build_Gs(adj_mat)
-      C <- t(Js)*(Js%*%Gs) + t(Js)*(Gs%*%Js) + t(Gs)*(Js%*%Js)
-      return((C + t(C)) / 3)
-    }
-  }
-
-  if(weight_type == "product"){
-    if(motif_type == "func"){
-      G = adj_mat
-      C <- t(G)*(G%*%G)
-      return(C + t(C))
-    }
-
-    if(motif_type == "struc"){
-      Gs = build_Gs(adj_mat)
-      C <- t(Gs)*(Gs%*%Gs)
-      return(C + t(C))
-    }
-  }
-}
-
 mam_Ms <- function(adj_mat, motif_type, weight_type){
 
   if(weight_type == "unweighted"){
@@ -242,5 +195,109 @@ mam_Md <- function(adj_mat, weight_type){
   if(weight_type == "product"){
     G = adj_mat
     return(G * t(G))
+  }
+}
+
+mam_M1 <- function(adj_mat, motif_type, weight_type){
+
+  if(weight_type == "unweighted"){
+    if(motif_type == "func"){
+      J = build_J(adj_mat)
+      C <- t(J)*(J%*%J)
+      return(C + t(C))
+    }
+
+    if(motif_type == "struc"){
+      Js = build_Js(adj_mat)
+      C <- t(Js)*(Js%*%Js)
+      return(C + t(C))
+    }
+  }
+
+  if(weight_type == "mean"){
+    if(motif_type == "func"){
+      J = build_J(adj_mat)
+      G = adj_mat
+      C <- t(J)*(J%*%G) + t(J)*(G%*%J) + t(G)*(J%*%J)
+      return((C + t(C)) / 3)
+    }
+
+    if(motif_type == "struc"){
+      Js = build_Js(adj_mat)
+      Gs = build_Gs(adj_mat)
+      C <- t(Js)*(Js%*%Gs) + t(Js)*(Gs%*%Js) + t(Gs)*(Js%*%Js)
+      return((C + t(C)) / 3)
+    }
+  }
+
+  if(weight_type == "product"){
+    if(motif_type == "func"){
+      G = adj_mat
+      C <- t(G)*(G%*%G)
+      return(C + t(C))
+    }
+
+    if(motif_type == "struc"){
+      Gs = build_Gs(adj_mat)
+      C <- t(Gs)*(Gs%*%Gs)
+      return(C + t(C))
+    }
+  }
+}
+
+mam_M2 <- function(adj_mat, motif_type, weight_type){
+
+  if(weight_type == "unweighted"){
+    if(motif_type == "func"){
+      J = build_J(adj_mat)
+      Jd = build_Jd(adj_mat)
+      C <- t(J)*(Jd%*%J) + t(J)*(J%*%Jd) + Jd*(J%*%J)
+      return(C + t(C))
+    }
+
+    if(motif_type == "struc"){
+      Js = build_Js(adj_mat)
+      Jd = build_Jd(adj_mat)
+      C <- t(Js)*(Jd%*%Js) + t(Js)*(Js%*%Jd) + Jd*(Js%*%Js)
+      return(C + t(C))
+    }
+  }
+
+  if(weight_type == "mean"){
+    if(motif_type == "func"){
+      J = build_J(adj_mat)
+      Jd = build_Jd(adj_mat)
+      G = adj_mat
+      C <- t(J)*(Jd%*%G) + t(J)*(Gd%*%J) + t(G)*(Jd%*%J)
+      C <- C + t(J)*(J%*%Gd) + t(J)*(G%*%Jd) + t(G)*(J%*%Jd)
+      C <- C + Jd*(J%*%G) + Jd*(G%*%J) + Gd*(J%*%J)
+      return((C + t(C)) / 4)
+    }
+
+    if(motif_type == "struc"){
+      Js = build_Js(adj_mat)
+      Jd = build_Jd(adj_mat)
+      Gs = build_Gs(adj_mat)
+      C <- t(Js)*(Jd%*%Gs) + t(Js)*(Gd%*%Js) + t(Gs)*(Jd%*%Js)
+      C <- C + t(Js)*(Js%*%Gd) + t(Js)*(Gs%*%Jd) + t(Gs)*(Js%*%Jd)
+      C <- C + Jd*(Js%*%Gs) + Jd*(Gs%*%Js) + Gd*(Js%*%Js)
+      return((C + t(C)) / 4)
+    }
+  }
+
+  if(weight_type == "product"){
+    if(motif_type == "func"){
+      G = adj_mat
+      Gd = build_Gd(adj_mat)
+      C <- t(G)*(Gd%*%G) + t(G)*(G%*%Gd) + Gd*(G%*%G)
+      return(C + t(C))
+    }
+
+    if(motif_type == "struc"){
+      Gs = build_Gs(adj_mat)
+      Gd = build_Gd(adj_mat)
+      C <- t(Gs)*(Gd%*%Gs) + t(Gs)*(Gs%*%Gd) + Gd*(Gs%*%Gs)
+      return(C + t(C))
+    }
   }
 }
