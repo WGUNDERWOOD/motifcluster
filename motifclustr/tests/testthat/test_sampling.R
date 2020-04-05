@@ -9,7 +9,7 @@ test_that("sample_dsbm returns correct unweighted adjacency matrix", {
   weight_type = "unweighted"
   block_sizes = c(2,3)
   connection_matrix = matrix(c(0.4, 0.5, 0.6, 0.7), nrow=2, byrow=TRUE)
-  n_reps = 1000
+  n_reps = 200
   weight_matrix = NULL
 
   G = sample_dsbm(block_sizes, connection_matrix, weight_type, weight_matrix)
@@ -40,7 +40,7 @@ test_that("sample_dsbm returns correct deterministic weighted adjacency matrix",
   weight_type = "deterministic"
   block_sizes = c(2,3)
   connection_matrix = matrix(c(0.4, 0.5, 0.6, 0.7), nrow=2, byrow=TRUE)
-  n_reps = 1000
+  n_reps = 200
   weight_matrix = matrix(c(20, 30, 40, 50), nrow=2, byrow=TRUE)
 
   G = sample_dsbm(block_sizes, connection_matrix, weight_type, weight_matrix)
@@ -71,7 +71,7 @@ test_that("sample_dsbm returns correct poisson weighted adjacency matrix", {
   weight_type = "poisson"
   block_sizes = c(2,3)
   connection_matrix = matrix(c(0.4, 0.5, 0.6, 0.7), nrow=2, byrow=TRUE)
-  n_reps = 1000
+  n_reps = 200
   weight_matrix = matrix(c(20, 30, 40, 50), nrow=2, byrow=TRUE)
 
   G = sample_dsbm(block_sizes, connection_matrix, weight_type, weight_matrix)
@@ -105,7 +105,7 @@ test_that("sample_bsbm returns correct unweighted adjacency matrix", {
   source_block_sizes = c(1,2)
   dest_block_sizes = c(1,1,1)
   bipartite_connection_matrix = matrix(c(0.3, 0.4, 0.5, 0.6, 0.7, 0.8), nrow=2, byrow=TRUE)
-  n_reps = 1000
+  n_reps = 200
   bipartite_weight_matrix = NULL
 
   G = sample_bsbm(source_block_sizes, dest_block_sizes,
@@ -140,7 +140,7 @@ test_that("sample_bsbm returns correct deterministic weighted adjacency matrix",
   source_block_sizes = c(1,2)
   dest_block_sizes = c(1,1,1)
   bipartite_connection_matrix = matrix(c(0.3, 0.4, 0.5, 0.6, 0.7, 0.8), nrow=2, byrow=TRUE)
-  n_reps = 1000
+  n_reps = 200
   bipartite_weight_matrix = matrix(c(10, 20, 30, 40, 50, 60), nrow=2, byrow=TRUE)
 
   G = sample_bsbm(source_block_sizes, dest_block_sizes,
@@ -175,7 +175,7 @@ test_that("sample_bsbm returns correct poisson weighted adjacency matrix", {
   source_block_sizes = c(1,2)
   dest_block_sizes = c(1,1,1)
   bipartite_connection_matrix = matrix(c(0.3, 0.4, 0.5, 0.6, 0.7, 0.8), nrow=2, byrow=TRUE)
-  n_reps = 1000
+  n_reps = 200
   bipartite_weight_matrix = matrix(c(10, 20, 30, 40, 50, 60), nrow=2, byrow=TRUE)
 
   G = sample_bsbm(source_block_sizes, dest_block_sizes,
