@@ -54,3 +54,12 @@ build_Jn <- function(adj_mat){
   Jn = drop0_killdiag(1+0*adj_mat)
   return(Jn)
 }
+
+build_Id <- function(adj_mat){
+  Id <- Diagonal(nrow(adj_mat))
+  return(Id)
+}
+
+build_Je <- function(adj_mat){
+  Je = drop0(1*((adj_mat+t(adj_mat)) > 0))
+}
