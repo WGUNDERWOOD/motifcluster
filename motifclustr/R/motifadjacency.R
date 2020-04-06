@@ -39,6 +39,62 @@ build_motif_adjacency_matrix <- function(adj_mat, motif_name, motif_type=c("func
   if(motif_name == "M2"){
     return(mam_M2(adj_mat, motif_type, weight_type))
   }
+
+  if(motif_name == "M3"){
+    return(mam_M3(adj_mat, motif_type, weight_type))
+  }
+
+  if(motif_name == "M4"){
+    return(mam_M4(adj_mat, motif_type, weight_type))
+  }
+
+  if(motif_name == "M5"){
+    return(mam_M5(adj_mat, motif_type, weight_type))
+  }
+
+  if(motif_name == "M6"){
+    return(mam_M6(adj_mat, motif_type, weight_type))
+  }
+
+  if(motif_name == "M7"){
+    return(mam_M7(adj_mat, motif_type, weight_type))
+  }
+
+  if(motif_name == "M8"){
+    return(mam_M8(adj_mat, motif_type, weight_type))
+  }
+
+  if(motif_name == "M9"){
+    return(mam_M9(adj_mat, motif_type, weight_type))
+  }
+
+  if(motif_name == "M10"){
+    return(mam_M10(adj_mat, motif_type, weight_type))
+  }
+
+  if(motif_name == "M11"){
+    return(mam_M11(adj_mat, motif_type, weight_type))
+  }
+
+  if(motif_name == "M12"){
+    return(mam_M12(adj_mat, motif_type, weight_type))
+  }
+
+  if(motif_name == "M13"){
+    return(mam_M13(adj_mat, motif_type, weight_type))
+  }
+
+  if(motif_name == "Mcoll"){
+    return(mam_Mcoll(adj_mat, motif_type, weight_type))
+  }
+
+  if(motif_name == "Mexpa"){
+    return(mam_Mexpa(adj_mat, motif_type, weight_type))
+  }
+
+  if(motif_name == "Mpath"){
+    return(mam_Mpath(adj_mat, motif_type, weight_type))
+  }
 }
 
 #' Set diagonal entries to zero and sparsify
