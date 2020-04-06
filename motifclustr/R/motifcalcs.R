@@ -337,7 +337,7 @@ mam_M3 <- function(adj_mat, motif_type, weight_type){
   }
 }
 
-mam_M4 <- function(adj_mat, motif_type, weight_type){
+mam_M4 <- function(adj_mat, weight_type){
 
   if(weight_type == "unweighted"){
     Jd = build_Jd(adj_mat)
@@ -501,245 +501,464 @@ mam_M7 <- function(adj_mat, motif_type, weight_type){
   }
 }
 
-mam_M8 <- function(adj_mat, motif_type, weight_type){
+mam_M8 <- function(adj_mat, motif_type, weight_type, method){
 
-  if(weight_type == "unweighted"){
-    if(motif_type == "func"){
+  if(method == "dense"){
+    if(weight_type == "unweighted"){
+      if(motif_type == "func"){
+        J = build_J(adj_mat)
+        Jn = build_Jn(adj_mat)
+        C <- J*(J%*%Jn)
+        Cprime <- Jn*(t(J)%*%J)
+        return(C + t(C) + Cprime)
+      }
+
+      if(motif_type == "struc"){
+        Js = build_Js(adj_mat)
+        J0 = build_J0(adj_mat)
+        C <- Js*(Js%*%J0)
+        Cprime <- J0*(t(Js)%*%Js)
+        return(C + t(C) + Cprime)
+      }
     }
 
-    if(motif_type == "struc"){
-    }
-  }
+    if(weight_type == "mean"){
+      if(motif_type == "func"){
+        J = build_J(adj_mat)
+        Jn = build_Jn(adj_mat)
+        G = adj_mat
+        C <- J*(G%*%Jn) + G*(J%*%Jn)
+        Cprime <- Jn*(t(J)%*%G) + Jn*(t(G)%*%J)
+        return((C + t(C) + Cprime) / 2)
+      }
 
-  if(weight_type == "mean"){
-    if(motif_type == "func"){
-    }
-
-    if(motif_type == "struc"){
-    }
-  }
-
-  if(weight_type == "product"){
-    if(motif_type == "func"){
-    }
-
-    if(motif_type == "struc"){
-    }
-  }
-}
-
-mam_M9 <- function(adj_mat, motif_type, weight_type){
-
-  if(weight_type == "unweighted"){
-    if(motif_type == "func"){
+      if(motif_type == "struc"){
+        Js = build_Js(adj_mat)
+        Gs = build_Gs(adj_mat)
+        J0 = build_J0(adj_mat)
+        C <- Js*(Gs%*%J0) + Gs*(Js%*%J0)
+        Cprime <- J0*(t(Js)%*%Gs) + J0*(t(Gs)%*%Js)
+        return((C + t(C) + Cprime) / 2)
+      }
     }
 
-    if(motif_type == "struc"){
-    }
-  }
+    if(weight_type == "product"){
+      if(motif_type == "func"){
+      }
 
-  if(weight_type == "mean"){
-    if(motif_type == "func"){
-    }
-
-    if(motif_type == "struc"){
-    }
-  }
-
-  if(weight_type == "product"){
-    if(motif_type == "func"){
-    }
-
-    if(motif_type == "struc"){
-    }
-  }
-}
-
-mam_M10 <- function(adj_mat, motif_type, weight_type){
-
-  if(weight_type == "unweighted"){
-    if(motif_type == "func"){
-    }
-
-    if(motif_type == "struc"){
+      if(motif_type == "struc"){
+      }
     }
   }
 
-  if(weight_type == "mean"){
-    if(motif_type == "func"){
+  if(method == "sparse"){
+    if(weight_type == "unweighted"){
+      if(motif_type == "func"){
+      }
+
+      if(motif_type == "struc"){
+      }
     }
 
-    if(motif_type == "struc"){
-    }
-  }
+    if(weight_type == "mean"){
+      if(motif_type == "func"){
+      }
 
-  if(weight_type == "product"){
-    if(motif_type == "func"){
+      if(motif_type == "struc"){
+      }
     }
 
-    if(motif_type == "struc"){
+    if(weight_type == "product"){
+      if(motif_type == "func"){
+      }
+
+      if(motif_type == "struc"){
+      }
     }
   }
 }
 
-mam_M11 <- function(adj_mat, motif_type, weight_type){
+mam_M9 <- function(adj_mat, motif_type, weight_type, method){
 
-  if(weight_type == "unweighted"){
-    if(motif_type == "func"){
+  if(method == "dense"){
+    if(weight_type == "unweighted"){
+      if(motif_type == "func"){
+      }
+
+      if(motif_type == "struc"){
+      }
     }
 
-    if(motif_type == "struc"){
-    }
-  }
+    if(weight_type == "mean"){
+      if(motif_type == "func"){
+      }
 
-  if(weight_type == "mean"){
-    if(motif_type == "func"){
-    }
-
-    if(motif_type == "struc"){
-    }
-  }
-
-  if(weight_type == "product"){
-    if(motif_type == "func"){
+      if(motif_type == "struc"){
+      }
     }
 
-    if(motif_type == "struc"){
-    }
-  }
-}
+    if(weight_type == "product"){
+      if(motif_type == "func"){
+      }
 
-mam_M12 <- function(adj_mat, motif_type, weight_type){
-
-  if(weight_type == "unweighted"){
-    if(motif_type == "func"){
-    }
-
-    if(motif_type == "struc"){
+      if(motif_type == "struc"){
+      }
     }
   }
 
-  if(weight_type == "mean"){
-    if(motif_type == "func"){
+  if(method == "sparse"){
+    if(weight_type == "unweighted"){
+      if(motif_type == "func"){
+      }
+
+      if(motif_type == "struc"){
+      }
     }
 
-    if(motif_type == "struc"){
-    }
-  }
+    if(weight_type == "mean"){
+      if(motif_type == "func"){
+      }
 
-  if(weight_type == "product"){
-    if(motif_type == "func"){
-    }
-
-    if(motif_type == "struc"){
-    }
-  }
-}
-
-mam_M13 <- function(adj_mat, motif_type, weight_type){
-
-  if(weight_type == "unweighted"){
-    if(motif_type == "func"){
+      if(motif_type == "struc"){
+      }
     }
 
-    if(motif_type == "struc"){
-    }
-  }
+    if(weight_type == "product"){
+      if(motif_type == "func"){
+      }
 
-  if(weight_type == "mean"){
-    if(motif_type == "func"){
-    }
-
-    if(motif_type == "struc"){
-    }
-  }
-
-  if(weight_type == "product"){
-    if(motif_type == "func"){
-    }
-
-    if(motif_type == "struc"){
+      if(motif_type == "struc"){
+      }
     }
   }
 }
 
-mam_Mcoll <- function(adj_mat, motif_type, weight_type){
+mam_M10 <- function(adj_mat, motif_type, weight_type, method){
 
-  if(weight_type == "unweighted"){
-    if(motif_type == "func"){
+  if(method == "dense"){
+    if(weight_type == "unweighted"){
+      if(motif_type == "func"){
+      }
+
+      if(motif_type == "struc"){
+      }
     }
 
-    if(motif_type == "struc"){
+    if(weight_type == "mean"){
+      if(motif_type == "func"){
+      }
+
+      if(motif_type == "struc"){
+      }
+    }
+
+    if(weight_type == "product"){
+      if(motif_type == "func"){
+      }
+
+      if(motif_type == "struc"){
+      }
     }
   }
 
-  if(weight_type == "mean"){
-    if(motif_type == "func"){
+  if(method == "sparse"){
+    if(weight_type == "unweighted"){
+      if(motif_type == "func"){
+      }
+
+      if(motif_type == "struc"){
+      }
     }
 
-    if(motif_type == "struc"){
-    }
-  }
+    if(weight_type == "mean"){
+      if(motif_type == "func"){
+      }
 
-  if(weight_type == "product"){
-    if(motif_type == "func"){
+      if(motif_type == "struc"){
+      }
     }
 
-    if(motif_type == "struc"){
+    if(weight_type == "product"){
+      if(motif_type == "func"){
+      }
+
+      if(motif_type == "struc"){
+      }
     }
   }
 }
 
-mam_Mexpa <- function(adj_mat, motif_type, weight_type){
+mam_M11 <- function(adj_mat, motif_type, weight_type, method){
 
-  if(weight_type == "unweighted"){
-    if(motif_type == "func"){
+  if(method == "dense"){
+    if(weight_type == "unweighted"){
+      if(motif_type == "func"){
+      }
+
+      if(motif_type == "struc"){
+      }
     }
 
-    if(motif_type == "struc"){
+    if(weight_type == "mean"){
+      if(motif_type == "func"){
+      }
+
+      if(motif_type == "struc"){
+      }
+    }
+
+    if(weight_type == "product"){
+      if(motif_type == "func"){
+      }
+
+      if(motif_type == "struc"){
+      }
     }
   }
 
-  if(weight_type == "mean"){
-    if(motif_type == "func"){
+  if(method == "sparse"){
+    if(weight_type == "unweighted"){
+      if(motif_type == "func"){
+      }
+
+      if(motif_type == "struc"){
+      }
     }
 
-    if(motif_type == "struc"){
-    }
-  }
+    if(weight_type == "mean"){
+      if(motif_type == "func"){
+      }
 
-  if(weight_type == "product"){
-    if(motif_type == "func"){
+      if(motif_type == "struc"){
+      }
     }
 
-    if(motif_type == "struc"){
+    if(weight_type == "product"){
+      if(motif_type == "func"){
+      }
+
+      if(motif_type == "struc"){
+      }
     }
   }
 }
 
-mam_Mpath <- function(adj_mat, motif_type, weight_type){
+mam_M12 <- function(adj_mat, motif_type, weight_type, method){
 
-  if(weight_type == "unweighted"){
-    if(motif_type == "func"){
+  if(method == "dense"){
+    if(weight_type == "unweighted"){
+      if(motif_type == "func"){
+      }
+
+      if(motif_type == "struc"){
+      }
     }
 
-    if(motif_type == "struc"){
+    if(weight_type == "mean"){
+      if(motif_type == "func"){
+      }
+
+      if(motif_type == "struc"){
+      }
+    }
+
+    if(weight_type == "product"){
+      if(motif_type == "func"){
+      }
+
+      if(motif_type == "struc"){
+      }
     }
   }
 
-  if(weight_type == "mean"){
-    if(motif_type == "func"){
+  if(method == "sparse"){
+    if(weight_type == "unweighted"){
+      if(motif_type == "func"){
+      }
+
+      if(motif_type == "struc"){
+      }
     }
 
-    if(motif_type == "struc"){
+    if(weight_type == "mean"){
+      if(motif_type == "func"){
+      }
+
+      if(motif_type == "struc"){
+      }
+    }
+
+    if(weight_type == "product"){
+      if(motif_type == "func"){
+      }
+
+      if(motif_type == "struc"){
+      }
+    }
+  }
+}
+
+mam_M13 <- function(adj_mat, motif_type, weight_type, method){
+
+  if(method == "dense"){
+    if(weight_type == "unweighted"){
+      if(motif_type == "func"){
+      }
+
+      if(motif_type == "struc"){
+      }
+    }
+
+    if(weight_type == "mean"){
+      if(motif_type == "func"){
+      }
+
+      if(motif_type == "struc"){
+      }
+    }
+
+    if(weight_type == "product"){
+      if(motif_type == "func"){
+      }
+
+      if(motif_type == "struc"){
+      }
     }
   }
 
-  if(weight_type == "product"){
-    if(motif_type == "func"){
+  if(method == "sparse"){
+    if(weight_type == "unweighted"){
+      if(motif_type == "func"){
+      }
+
+      if(motif_type == "struc"){
+      }
     }
 
-    if(motif_type == "struc"){
+    if(weight_type == "mean"){
+      if(motif_type == "func"){
+      }
+
+      if(motif_type == "struc"){
+      }
+    }
+
+    if(weight_type == "product"){
+      if(motif_type == "func"){
+      }
+
+      if(motif_type == "struc"){
+      }
+    }
+  }
+}
+
+mam_Mcoll <- function(adj_mat, motif_type, weight_type, method){
+
+  if(method == "dense"){
+    if(weight_type == "unweighted"){
+      if(motif_type == "func"){
+      }
+
+      if(motif_type == "struc"){
+      }
+    }
+
+    if(weight_type == "mean"){
+      if(motif_type == "func"){
+      }
+
+      if(motif_type == "struc"){
+      }
+    }
+
+    if(weight_type == "product"){
+      if(motif_type == "func"){
+      }
+
+      if(motif_type == "struc"){
+      }
+    }
+  }
+
+  if(method == "sparse"){
+    if(weight_type == "unweighted"){
+      if(motif_type == "func"){
+      }
+
+      if(motif_type == "struc"){
+      }
+    }
+
+    if(weight_type == "mean"){
+      if(motif_type == "func"){
+      }
+
+      if(motif_type == "struc"){
+      }
+    }
+
+    if(weight_type == "product"){
+      if(motif_type == "func"){
+      }
+
+      if(motif_type == "struc"){
+      }
+    }
+  }
+}
+
+mam_Mexpa <- function(adj_mat, motif_type, weight_type, method){
+
+  if(method == "dense"){
+    if(weight_type == "unweighted"){
+      if(motif_type == "func"){
+      }
+
+      if(motif_type == "struc"){
+      }
+    }
+
+    if(weight_type == "mean"){
+      if(motif_type == "func"){
+      }
+
+      if(motif_type == "struc"){
+      }
+    }
+
+    if(weight_type == "product"){
+      if(motif_type == "func"){
+      }
+
+      if(motif_type == "struc"){
+      }
+    }
+  }
+
+  if(method == "sparse"){
+    if(weight_type == "unweighted"){
+      if(motif_type == "func"){
+      }
+
+      if(motif_type == "struc"){
+      }
+    }
+
+    if(weight_type == "mean"){
+      if(motif_type == "func"){
+      }
+
+      if(motif_type == "struc"){
+      }
+    }
+
+    if(weight_type == "product"){
+      if(motif_type == "func"){
+      }
+
+      if(motif_type == "struc"){
+      }
     }
   }
 }
