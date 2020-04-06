@@ -30,6 +30,10 @@ A randomly sampled (weighted) adjacency matrix of a DSBM.
 Sample the (weighted) adjacency matrix of a (weighted) directed stochastic block
 model (DSBM) with specified parameters.
 }
-\keyword{DSBM}
-\keyword{model}
-\keyword{sample}
+\examples{
+block_sizes = c(10,10)
+connection_matrix = matrix(c(0.8,0.1,0.1,0.8), nrow=2, byrow=TRUE)
+weight_type = "poisson"
+weight_matrix = matrix(c(10,3,3,10), nrow=2, byrow=TRUE)
+sample_dsbm(block_sizes, connection_matrix, weight_type, weight_matrix)
+}

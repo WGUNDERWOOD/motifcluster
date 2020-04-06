@@ -44,6 +44,9 @@ restrict it to its largest connected component,
 and then run Laplace embedding with specified Laplacian type and
 number of eigenvalues and eigenvectors.
 }
+\examples{
+TODO
+}
 \keyword{adjacency}
 \keyword{embedding}
 \keyword{laplacian}

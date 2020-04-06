@@ -18,6 +18,10 @@ build_motif_adjacency_matrix(
 \item{motif_name}{Motif used for the motif adjacency matrix.}
 
 \item{motif_type}{Type of motif adjacency matrix to build.}
+
+\item{weight_type}{The weighting scheme to use. One of "unweighted", "mean" or "product".}
+
+\item{method}{Which formulation to use. One of "dense" or "sparse".}
 }
 \value{
 A motif adjacency matrix.
