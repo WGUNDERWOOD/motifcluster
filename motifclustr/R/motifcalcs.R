@@ -668,6 +668,11 @@ mam_M10 <- function(adj_mat, motif_type, weight_type, method){
       }
 
       if(motif_type == "struc"){
+        Js = build_Js(adj_mat)
+        J0 = build_J0(adj_mat)
+        C <- Js*(J0%*%Js)
+        Cprime <- J0*(Js%*%t(Js))
+        return(C + t(C) + Cprime)
       }
     }
 
@@ -732,17 +737,45 @@ mam_M11 <- function(adj_mat, motif_type, weight_type, method){
   if(method == "dense"){
     if(weight_type == "unweighted"){
       if(motif_type == "func"){
+        Jd = build_Jd(adj_mat)
+        Jn = build_Jn(adj_mat)
+        J = build_J(adj_mat)
+        C <- Jd*(J%*%Jn) + Jn*(Jd%*%J) + J*(Jd%*%Jn)
+        return(C + t(C))
       }
 
       if(motif_type == "struc"){
+        Jd = build_Jd(adj_mat)
+        J0 = build_J0(adj_mat)
+        Js = build_Js(adj_mat)
+        C <- Jd*(Js%*%J0) + J0*(Jd%*%Js) + Js*(Jd%*%J0)
+        return(C + t(C))
       }
     }
 
     if(weight_type == "mean"){
       if(motif_type == "func"){
+        Jd = build_Jd(adj_mat)
+        Gd = build_Gd(adj_mat)
+        Jn = build_Jn(adj_mat)
+        J = build_J(adj_mat)
+        G = adj_mat
+        C <- Jd*(G%*%Jn) + Gd*(J%*%Jn)
+        C <- C + Jn*(Jd%*%G) + Jn*(Gd%*%J)
+        C <- C + J*(Gd%*%Jn) + G*(Jd%*%Jn)
+        return((C + t(C)) / 3)
       }
 
       if(motif_type == "struc"){
+        Jd = build_Jd(adj_mat)
+        Gd = build_Gd(adj_mat)
+        J0 = build_J0(adj_mat)
+        Js = build_Js(adj_mat)
+        Gs = build_Gs(adj_mat)
+        C <- Jd*(Gs%*%J0) + Gd*(Js%*%J0)
+        C <- C + J0*(Jd%*%Gs) + J0*(Gd%*%Js)
+        C <- C + Js*(Gd%*%J0) + Gs*(Jd%*%J0)
+        return((C + t(C)) / 3)
       }
     }
 
@@ -787,17 +820,45 @@ mam_M12 <- function(adj_mat, motif_type, weight_type, method){
   if(method == "dense"){
     if(weight_type == "unweighted"){
       if(motif_type == "func"){
+        Jd = build_Jd(adj_mat)
+        Jn = build_Jn(adj_mat)
+        J = build_J(adj_mat)
+        C <- Jd*(Jn%*%J) + Jn*(J%*%Jd) + J*(Jn%*%Jd)
+        return(C + t(C))
       }
 
       if(motif_type == "struc"){
+        Jd = build_Jd(adj_mat)
+        J0 = build_J0(adj_mat)
+        Js = build_Js(adj_mat)
+        C <- Jd*(J0%*%Js) + J0*(Js%*%Jd) + Js*(J0%*%Jd)
+        return(C + t(C))
       }
     }
 
     if(weight_type == "mean"){
       if(motif_type == "func"){
+        Jd = build_Jd(adj_mat)
+        Gd = build_Gd(adj_mat)
+        Jn = build_Jn(adj_mat)
+        G = adj_mat
+        J = build_J(adj_mat)
+        C <- Jd*(Jn%*%G) + Gd*(Jn%*%J)
+        C <- C + Jn*(J%*%Gd) + Jn*(G%*%Jd)
+        C <- C + J*(Jn%*%Gd) + G*(Jn%*%Jd)
+        return((C + t(C)) / 3)
       }
 
       if(motif_type == "struc"){
+        Jd = build_Jd(adj_mat)
+        Gd = build_Gd(adj_mat)
+        J0 = build_J0(adj_mat)
+        Js = build_Js(adj_mat)
+        Gs = build_Gs(adj_mat)
+        C <- Jd*(J0%*%Gs) + Gd*(J0%*%Js)
+        C <- C + J0*(Js%*%Gd) + J0*(Gs%*%Jd)
+        C <- C + Js*(J0%*%Gd) + Gs*(J0%*%Jd)
+        return((C + t(C)) / 3)
       }
     }
 
