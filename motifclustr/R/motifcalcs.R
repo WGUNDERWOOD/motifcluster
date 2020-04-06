@@ -971,22 +971,40 @@ mam_M13 <- function(adj_mat, motif_type, weight_type, method){
   }
 }
 
-mam_Mcoll <- function(adj_mat, motif_type, weight_type, method){
+mam_coll <- function(adj_mat, motif_type, weight_type, method){
 
   if(method == "dense"){
     if(weight_type == "unweighted"){
       if(motif_type == "func"){
+        J = build_J(adj_mat)
+        Jn = build_Jn(adj_mat)
+        C <- Jn*(J%*%t(J))
+        return(C)
       }
 
       if(motif_type == "struc"){
+        Js = build_Js(adj_mat)
+        J0 = build_J0(adj_mat)
+        C <- J0*(Js%*%t(Js))
+        return(C)
       }
     }
 
     if(weight_type == "mean"){
       if(motif_type == "func"){
+        G = adj_mat
+        J = build_J(adj_mat)
+        Jn = build_Jn(adj_mat)
+        C <- Jn*(J%*%t(G)) + Jn*(G%*%t(J))
+        return(C / 2)
       }
 
       if(motif_type == "struc"){
+        Js = build_Js(adj_mat)
+        Gs = build_Gs(adj_mat)
+        J0 = build_J0(adj_mat)
+        C <- J0*(Js%*%t(Gs)) + J0*(Gs%*%t(Js))
+        return(C / 2)
       }
     }
 
@@ -1026,22 +1044,40 @@ mam_Mcoll <- function(adj_mat, motif_type, weight_type, method){
   }
 }
 
-mam_Mexpa <- function(adj_mat, motif_type, weight_type, method){
+mam_expa <- function(adj_mat, motif_type, weight_type, method){
 
   if(method == "dense"){
     if(weight_type == "unweighted"){
       if(motif_type == "func"){
+        J = build_J(adj_mat)
+        Jn = build_Jn(adj_mat)
+        C <- Jn*(t(J)%*%J)
+        return(C)
       }
 
       if(motif_type == "struc"){
+        J = build_J(adj_mat)
+        J0 = build_J0(adj_mat)
+        C <- J0*(t(J)%*%J)
+        return(C)
       }
     }
 
     if(weight_type == "mean"){
       if(motif_type == "func"){
+        J = build_J(adj_mat)
+        Jn = build_Jn(adj_mat)
+        G = adj_mat
+        C <- Jn*(t(J)%*%G) + Jn*(t(G)%*%J)
+        return(C / 2)
       }
 
       if(motif_type == "struc"){
+        Js = build_Js(adj_mat)
+        Gs = build_Gs(adj_mat)
+        J0 = build_J0(adj_mat)
+        C <- J0*(t(Js)%*%Gs) + J0*(t(Gs)%*%Js)
+        return(C / 2)
       }
     }
 

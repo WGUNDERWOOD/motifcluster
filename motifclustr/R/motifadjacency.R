@@ -84,12 +84,12 @@ build_motif_adjacency_matrix <- function(adj_mat, motif_name, motif_type=c("func
     return(mam_M13(adj_mat, motif_type, weight_type, method))
   }
 
-  if(motif_name == "Mcoll"){
-    return(mam_Mcoll(adj_mat, motif_type, weight_type, method))
+  if(motif_name == "coll"){
+    return(mam_coll(adj_mat, motif_type, weight_type, method))
   }
 
-  if(motif_name == "Mexpa"){
-    return(mam_Mexpa(adj_mat, motif_type, weight_type, method))
+  if(motif_name == "expa"){
+    return(mam_expa(adj_mat, motif_type, weight_type, method))
   }
 }
 
