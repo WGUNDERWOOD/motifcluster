@@ -660,6 +660,11 @@ mam_M10 <- function(adj_mat, motif_type, weight_type, method){
   if(method == "dense"){
     if(weight_type == "unweighted"){
       if(motif_type == "func"){
+        J = build_J(adj_mat)
+        Jn = build_Jn(adj_mat)
+        C <- J*(Jn%*%J)
+        Cprime <- Jn*(J%*%t(J))
+        return(C + t(C) + Cprime)
       }
 
       if(motif_type == "struc"){
@@ -668,9 +673,21 @@ mam_M10 <- function(adj_mat, motif_type, weight_type, method){
 
     if(weight_type == "mean"){
       if(motif_type == "func"){
+        J = build_J(adj_mat)
+        Jn = build_Jn(adj_mat)
+        G = adj_mat
+        C <- J*(Jn%*%G) + G*(Jn%*%J)
+        Cprime <- Jn*(J%*%t(G)) + Jn*(G%*%t(J))
+        return((C + t(C) + Cprime) / 2)
       }
 
       if(motif_type == "struc"){
+        Js = build_Js(adj_mat)
+        Gs = build_Gs(adj_mat)
+        J0 = build_J0(adj_mat)
+        C <- Js*(J0%*%Gs) + Gs*(J0%*%Js)
+        Cprime <- J0*(Js%*%t(Gs)) + J0*(Gs%*%t(Js))
+        return((C + t(C) + Cprime) / 2)
       }
     }
 
