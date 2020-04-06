@@ -239,11 +239,11 @@ test_that("build_motif_adjacency_matrix returns correct unweighted functional ma
 
   ans$M13 = unname(drop0(matrix(c(
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 1, 0, 3, 4, 0, 0, 0, 0, 0, 0,
+    0, 1, 0, 0, 1, 2, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 3, 1, 0, 0, 4, 0, 0, 0, 0, 0, 0,
+    0, 4, 2, 0, 4, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -299,7 +299,7 @@ test_that("build_motif_adjacency_matrix returns correct unweighted functional ma
 
   # compare calculations with answers
   motifs = get_motif_names()
-  for(i in c(14)){
+  for(i in c(15)){
   #for(i in 1:length(motifs)){
 
     MAM_densematrix_densemethod = build_motif_adjacency_matrix(

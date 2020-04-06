@@ -903,17 +903,35 @@ mam_M13 <- function(adj_mat, motif_type, weight_type, method){
   if(method == "dense"){
     if(weight_type == "unweighted"){
       if(motif_type == "func"){
+        Jd = build_Jd(adj_mat)
+        Jn = build_Jn(adj_mat)
+        C <- Jd*(Jd%*%Jn) + Jd*(Jn%*%Jd) + Jn*(Jd%*%Jd)
+        return(C)
       }
 
       if(motif_type == "struc"){
+        Jd = build_Jd(adj_mat)
+        J0 = build_J0(adj_mat)
+        C <- Jd*(Jd%*%J0) + Jd*(J0%*%Jd) + J0*(Jd%*%Jd)
+        return(C)
       }
     }
 
     if(weight_type == "mean"){
       if(motif_type == "func"){
+        #Jd = build_Jd(adj_mat)
+        #Jn = build_Jn(adj_mat)
+        #Gd = build_Gd(adj_mat)
+        #C <- Jd*(Gd%*%Jn) + Gd*(Jd%*%Jn) + Jn*(Jd%*%Gd)
+        #return((C + t(C)) / 4)
       }
 
       if(motif_type == "struc"){
+        #Jd = build_Jd(adj_mat)
+        #J0 = build_J0(adj_mat)
+        #Gd = build_Gd(adj_mat)
+        #C <- Jd*(Gd%*%J0) + Gd*(Jd%*%J0) + J0*(Jd%*%Gd)
+        #return((C + t(C)) / 4)
       }
     }
 
