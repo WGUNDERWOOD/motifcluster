@@ -583,17 +583,39 @@ mam_M9 <- function(adj_mat, motif_type, weight_type, method){
   if(method == "dense"){
     if(weight_type == "unweighted"){
       if(motif_type == "func"){
+        J = build_J(adj_mat)
+        Jn = build_Jn(adj_mat)
+        C <- J*(Jn%*%t(J)) + Jn*(J%*%J) + J*(t(J)%*%Jn)
+        return(C + t(C))
       }
 
       if(motif_type == "struc"){
+        Js = build_Js(adj_mat)
+        J0 = build_J0(adj_mat)
+        C <- Js*(J0%*%t(Js)) + J0*(Js%*%Js) + Js*(t(Js)%*%J0)
+        return(C + t(C))
       }
     }
 
     if(weight_type == "mean"){
       if(motif_type == "func"){
+        J = build_J(adj_mat)
+        Jn = build_Jn(adj_mat)
+        G = adj_mat
+        C <- J*(Jn%*%t(G)) + G*(Jn%*%t(J))
+        C <- C + Jn*(J%*%G) + Jn*(G%*%J)
+        C <- C + J*(t(G)%*%Jn) + G*(t(J)%*%Jn)
+        return((C + t(C)) / 2)
       }
 
       if(motif_type == "struc"){
+        Js = build_Js(adj_mat)
+        Gs = build_Gs(adj_mat)
+        J0 = build_J0(adj_mat)
+        C <- Js*(J0%*%t(Gs)) + Gs*(J0%*%t(Js))
+        C <- C + J0*(Js%*%Gs) + J0*(Gs%*%Js)
+        C <- C + Js*(t(Gs)%*%J0) + Gs*(t(Js)%*%J0)
+        return((C + t(C)) / 2)
       }
     }
 

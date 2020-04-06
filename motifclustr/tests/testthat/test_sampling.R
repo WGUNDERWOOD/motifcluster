@@ -1,4 +1,5 @@
 context("Sampling")
+break
 
 # sample_dsbm
 
