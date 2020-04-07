@@ -644,33 +644,33 @@ test_that("build_motif_adjacency_matrix returns correct mean-weighted functional
 
   ans$M3 = drop0(matrix(c(
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
-    0,  0,  1,  0,  6,  7,  0,  0,  0,  0,  0,  0,
-    0,  1,  0,  0,  0,  1,  0,  0,  0,  0,  0,  0,
+    0,  0, 37,  0,265,302,  0,  0,  0,  0,  0,  0,
+    0, 37,  0,  0,  0, 37,  0,  0,  0,  0,  0,  0,
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
-    0,  6,  0,  0,  0,  6,  0,  0,  0,  0,  0,  0,
-    0,  7,  1,  0,  6,  0,  0,  0,  0,  0,  0,  0,
+    0,265,  0,  0,  0,265,  0,  0,  0,  0,  0,  0,
+    0,302, 37,  0,265,  0,  0,  0,  0,  0,  0,  0,
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0
-  ), nrow=12, byrow=TRUE))
+  ), nrow=12, byrow=TRUE)) / 5
 
   ans$M4 = drop0(matrix(c(
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
-    0,  0,  0,  0,  1,  1,  0,  0,  0,  0,  0,  0,
+    0,  0,  0,  0, 53, 53,  0,  0,  0,  0,  0,  0,
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
-    0,  1,  0,  0,  0,  1,  0,  0,  0,  0,  0,  0,
-    0,  1,  0,  0,  1,  0,  0,  0,  0,  0,  0,  0,
+    0, 53,  0,  0,  0, 53,  0,  0,  0,  0,  0,  0,
+    0, 53,  0,  0, 53,  0,  0,  0,  0,  0,  0,  0,
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0
-  ), nrow=12, byrow=TRUE))
+  ), nrow=12, byrow=TRUE)) / 6
 
   ans$M5 = drop0(matrix(c(
     0,  2,  0,  0,  2,  0,  0,  0,  0,  0,  0,  0,
@@ -840,7 +840,7 @@ test_that("build_motif_adjacency_matrix returns correct mean-weighted functional
   # compare calculations with answers
   motifs = get_motif_names()
   #for(i in 1:length(motifs)){
-  for(i in 4){
+  for(i in 6){
 
     MAM_densematrix_densemethod = build_motif_adjacency_matrix(
       adj_mat_dense, motifs[i], "func", "mean", "dense")
@@ -852,8 +852,8 @@ test_that("build_motif_adjacency_matrix returns correct mean-weighted functional
       #adj_mat_sparse, motifs[i], "func", "mean", "sparse")
 
     print(motifs[i])
-    print(4*MAM_densematrix_densemethod)
-    print(4*ans[[motifs[i]]])
+    print(6*MAM_densematrix_densemethod)
+    print(6*ans[[motifs[i]]])
 
     expect_equal(MAM_densematrix_densemethod, ans[[motifs[i]]])
     expect_equal(MAM_sparsematrix_densemethod, ans[[motifs[i]]])
