@@ -172,3 +172,35 @@ sample_bsbm <- function(source_block_sizes, dest_block_sizes,
 
   return(adj_mat)
 }
+
+#' Generate a small graph for demonstrations
+#'
+#' Generate the sparse and dense adjacency matrices of a small weighted directed graph,
+#' for demonstrating methods and runnign tests.
+#' @return A list with two entries:
+#' adj_mat_dense is the adjacency matrix in dense form.
+#' adj_mat_sparse is the adjacency matrix in sparse form.
+
+demonstration_graph<- function(){
+
+  adj_mat_dense = matrix(c(
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    2, 0, 3, 0, 6, 8, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,10, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    4, 5, 0, 0, 0,14, 0, 0,18,19, 0, 0,
+    0, 7, 9, 0,13, 0, 0, 0, 0, 0,21, 0,
+    0, 0,11,12, 0,15, 0,17, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0,16, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0,24, 0, 0,
+    0, 0, 0, 0, 0,20, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0,22, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0,23, 0, 0, 0, 0, 0
+  ), nrow=12, byrow=TRUE)
+
+  adj_mat_sparse = drop0(adj_mat_dense)
+
+  ans = list(adj_mat_dense = adj_mat_dense, adj_mat_sparse = adj_mat_sparse)
+
+  return(ans)
+}

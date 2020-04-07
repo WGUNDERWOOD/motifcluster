@@ -6,22 +6,8 @@ context("Motif adjacency")
 test_that("build_motif_adjacency_matrix returns correct unweighted functional matrix", {
 
   # test case
-  G_dense = matrix(c(
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    2, 0, 3, 0, 6, 8, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0,10, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    4, 5, 0, 0, 0,14, 0, 0,18,19, 0, 0,
-    0, 7, 9, 0,13, 0, 0, 0, 0, 0,21, 0,
-    0, 0,11,12, 0,15, 0,17, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0,16, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0,24, 0, 0,
-    0, 0, 0, 0, 0,20, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0,22, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0,23, 0, 0, 0, 0, 0
-  ), nrow=12, byrow=TRUE)
-
-  G_sparse = drop0(G_dense)
+  adj_mat_dense = demonstration_graph()$adj_mat_dense
+  adj_mat_sparse = demonstration_graph()$adj_mat_sparse
 
   # correct answers
   ans = list()
@@ -286,13 +272,13 @@ test_that("build_motif_adjacency_matrix returns correct unweighted functional ma
   for(i in 1:length(motifs)){
 
     MAM_densematrix_densemethod = build_motif_adjacency_matrix(
-      G_dense, motifs[i], "func", "unweighted", "dense")
+      adj_mat_dense, motifs[i], "func", "unweighted", "dense")
     MAM_sparsematrix_densemethod = build_motif_adjacency_matrix(
-      G_sparse, motifs[i], "func", "unweighted", "dense")
+      adj_mat_sparse, motifs[i], "func", "unweighted", "dense")
     MAM_densematrix_sparsemethod = build_motif_adjacency_matrix(
-      G_dense, motifs[i], "func", "unweighted", "sparse")
+      adj_mat_dense, motifs[i], "func", "unweighted", "sparse")
     MAM_sparsematrix_sparsemethod = build_motif_adjacency_matrix(
-      G_sparse, motifs[i], "func", "unweighted", "sparse")
+      adj_mat_sparse, motifs[i], "func", "unweighted", "sparse")
 
     expect_equal(MAM_densematrix_densemethod, ans[[motifs[i]]])
     expect_equal(MAM_sparsematrix_densemethod, ans[[motifs[i]]])
@@ -305,21 +291,8 @@ test_that("build_motif_adjacency_matrix returns correct unweighted functional ma
 test_that("build_motif_adjacency_matrix returns correct unweighted structural matrix", {
 
   # test case
-  G_dense = matrix(c(
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    2, 0, 3, 0, 6, 8, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0,10, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    4, 5, 0, 0, 0,14, 0, 0,18,19, 0, 0,
-    0, 7, 9, 0,13, 0, 0, 0, 0, 0,21, 0,
-    0, 0,11,12, 0,15, 0,17, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0,16, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0,24, 0, 0,
-    0, 0, 0, 0, 0,20, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0,22, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0,23, 0, 0, 0, 0, 0
-  ), nrow=12, byrow=TRUE)
-  G_sparse = drop0(G_dense)
+  adj_mat_dense = demonstration_graph()$adj_mat_dense
+  adj_mat_sparse = demonstration_graph()$adj_mat_sparse
 
   # correct answers
   ans = list()
@@ -584,13 +557,13 @@ test_that("build_motif_adjacency_matrix returns correct unweighted structural ma
   for(i in 1:length(motifs)){
 
     MAM_densematrix_densemethod = build_motif_adjacency_matrix(
-      G_dense, motifs[i], "struc", "unweighted", "dense")
+      adj_mat_dense, motifs[i], "struc", "unweighted", "dense")
     MAM_sparsematrix_densemethod = build_motif_adjacency_matrix(
-      G_sparse, motifs[i], "struc", "unweighted", "dense")
+      adj_mat_sparse, motifs[i], "struc", "unweighted", "dense")
     MAM_densematrix_sparsemethod = build_motif_adjacency_matrix(
-      G_dense, motifs[i], "struc", "unweighted", "sparse")
+      adj_mat_dense, motifs[i], "struc", "unweighted", "sparse")
     MAM_sparsematrix_sparsemethod = build_motif_adjacency_matrix(
-      G_sparse, motifs[i], "struc", "unweighted", "sparse")
+      adj_mat_sparse, motifs[i], "struc", "unweighted", "sparse")
 
     expect_equal(MAM_densematrix_densemethod, ans[[motifs[i]]], label=paste("MAM_densematrix_densemethod", motifs[i]))
     expect_equal(MAM_sparsematrix_densemethod, ans[[motifs[i]]], label=paste("MAM_sparsematrix_densemethod", motifs[i]))
@@ -603,22 +576,8 @@ test_that("build_motif_adjacency_matrix returns correct unweighted structural ma
 test_that("build_motif_adjacency_matrix returns correct mean-weighted functional matrix", {
 
   # test case
-  G_dense = matrix(c(
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    2, 0, 3, 0, 6, 8, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0,10, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    4, 5, 0, 0, 0,14, 0, 0,18,19, 0, 0,
-    0, 7, 9, 0,13, 0, 0, 0, 0, 0,21, 0,
-    0, 0,11,12, 0,15, 0,17, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0,16, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0,24, 0, 0,
-    0, 0, 0, 0, 0,20, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0,22, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0,23, 0, 0, 0, 0, 0
-  ), nrow=12, byrow=TRUE)
-
-  G_sparse = drop0(G_dense)
+  adj_mat_dense = demonstration_graph()$adj_mat_dense
+  adj_mat_sparse = demonstration_graph()$adj_mat_sparse
 
   # correct answers
   ans = list()
@@ -884,13 +843,13 @@ test_that("build_motif_adjacency_matrix returns correct mean-weighted functional
   for(i in 1){
 
     MAM_densematrix_densemethod = build_motif_adjacency_matrix(
-      G_dense, motifs[i], "func", "mean", "dense")
+      adj_mat_dense, motifs[i], "func", "mean", "dense")
     MAM_sparsematrix_densemethod = build_motif_adjacency_matrix(
-      G_sparse, motifs[i], "func", "mean", "dense")
+      adj_mat_sparse, motifs[i], "func", "mean", "dense")
     #MAM_densematrix_sparsemethod = build_motif_adjacency_matrix(
-      #G_dense, motifs[i], "func", "mean", "sparse")
+      #adj_mat_dense, motifs[i], "func", "mean", "sparse")
     #MAM_sparsematrix_sparsemethod = build_motif_adjacency_matrix(
-      #G_sparse, motifs[i], "func", "mean", "sparse")
+      #adj_mat_sparse, motifs[i], "func", "mean", "sparse")
 
     print(motifs[i])
     print(MAM_densematrix_densemethod)
@@ -909,30 +868,30 @@ test_that("build_motif_adjacency_matrix returns correct mean-weighted functional
 
 test_that("get_largest_component returns correct indices", {
 
-  G_dense = matrix(c(
+  adj_mat_dense = matrix(c(
     0,0,0,0,0,
     0,0,1,0,0,
     0,0,0,0,2,
     3,0,0,0,0,
     0,4,0,0,0
   ), nrow=5, byrow=TRUE)
-  G_sparse = drop0(G_dense)
+  adj_mat_sparse = drop0(adj_mat_dense)
 
   ans = c(2,3,5)
 
-  expect_equal(get_largest_component(G_dense), ans)
-  expect_equal(get_largest_component(G_sparse), ans)
+  expect_equal(get_largest_component(adj_mat_dense), ans)
+  expect_equal(get_largest_component(adj_mat_sparse), ans)
 })
 
 # drop0_killdiag
 
 test_that("drop0_killdiag returns correct matrix", {
 
-  G_dense = matrix(-1:7, nrow=3)
-  G_sparse = drop0(G_dense)
+  adj_mat_dense = matrix(-1:7, nrow=3)
+  adj_mat_sparse = drop0(adj_mat_dense)
 
   ans = drop0(matrix(c(0,0,1,2,0,4,5,6,0), nrow=3))
 
-  expect_equal(drop0_killdiag(G_dense), ans)
-  expect_equal(drop0_killdiag(G_sparse), ans)
+  expect_equal(drop0_killdiag(adj_mat_dense), ans)
+  expect_equal(drop0_killdiag(adj_mat_sparse), ans)
 })
