@@ -10,13 +10,10 @@
 #' @keywords motif adjacency matrix
 #' @importFrom Matrix drop0 t
 #' @export
-#' @examples
 
 build_motif_adjacency_matrix <- function(adj_mat, motif_name, motif_type=c("func","struc"),
                                          weight_type=c("unweighted", "mean", "product"),
                                          method=c("dense", "sparse")){
-
-  # TODO add weight type and dense/sparse method
 
   # check args
   if(!(motif_name %in% get_motif_names())){

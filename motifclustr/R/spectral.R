@@ -86,7 +86,6 @@ build_laplacian <- function(adj_mat, type_lap=c("comb", "rw")){
 #' of the associated eigenvectors.
 #' @keywords laplacian embedding eigenvalue eigenvector matrix
 #' @export
-#' @examples
 
 run_laplace_embedding <- function(adj_mat, num_eigs, type_lap=c("comb", "rw")){
 
@@ -132,8 +131,6 @@ run_laplace_embedding <- function(adj_mat, num_eigs, type_lap=c("comb", "rw")){
 #' of the motif adjacency matrix;
 #' @keywords motif adjacency matrix laplacian embedding
 #' @export
-#' @examples
-#' TODO
 
 run_motif_embedding <- function(adj_mat, motif_name, motif_type = c("func", "struc"),
                                 num_eigs, type_lap){
