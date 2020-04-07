@@ -1,7 +1,6 @@
 context("Sampling")
-break
 
-# sample_dsbm
+sample_dsbm
 
 test_that("sample_dsbm returns correct unweighted adjacency matrix", {
 

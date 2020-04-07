@@ -55,6 +55,8 @@ build_Jn <- function(adj_mat){
   return(Jn)
 }
 
+#' @importFrom Matrix Diagonal
+
 build_Id <- function(adj_mat){
   Id <- Diagonal(nrow(adj_mat))
   return(Id)

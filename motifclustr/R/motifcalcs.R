@@ -206,6 +206,7 @@ mam_M3 <- function(adj_mat, motif_type, weight_type){
       J = build_J(adj_mat)
       Jd = build_Jd(adj_mat)
       Gd = build_Gd(adj_mat)
+      G = adj_mat
       C <- J*(Jd%*%Gd) + J*(Gd%*%Jd) + G*(Jd%*%Jd)
       C <- C + Jd*(Jd%*%G) + Jd*(Gd%*%J) + Gd*(Jd%*%J)
       C <- C + Jd*(J%*%Gd) + Jd*(G%*%Jd) + Gd*(J%*%Jd)
@@ -624,6 +625,11 @@ mam_M10 <- function(adj_mat, motif_type, weight_type, method){
   if(method == "sparse"){
     if(weight_type == "unweighted"){
       if(motif_type == "func"){
+        J = build_J(adj_mat)
+        Id = build_Id(adj_mat)
+        C <- a_one_b(J, J) - J*J
+        Cprime <- J%*%t(J) - Id*(J%*%t(J))
+        return(drop0(C + t(C) + Cprime))
       }
 
       if(motif_type == "struc"){
