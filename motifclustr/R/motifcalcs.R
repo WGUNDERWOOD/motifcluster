@@ -1,27 +1,5 @@
 # TODO docs
 
-a_b_one = function(A, B){
-
-  # compute A circ (B 1)
-
-  n = nrow(A)
-  ones_vec = rep(1, n)
-  ans = Diagonal(n, as.numeric(B %*% ones_vec)) %*% A
-
-  return(drop0(ans))
-}
-
-a_one_b = function(A, B){
-
-  # compute A circ (1 B)
-
-  n = nrow(A)
-  ones_vec = rep(1, n)
-  ans = A %*% Diagonal(n, as.numeric(ones_vec %*% B))
-
-  return(drop0(ans))
-}
-
 mam_Ms <- function(adj_mat, motif_type, weight_type){
 
   if(weight_type == "unweighted"){
