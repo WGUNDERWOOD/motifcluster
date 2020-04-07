@@ -713,9 +713,24 @@ mam_M11 <- function(adj_mat, motif_type, weight_type, method){
   if(method == "sparse"){
     if(weight_type == "unweighted"){
       if(motif_type == "func"){
+        Jd = build_Jd(adj_mat)
+        Id = build_Id(adj_mat)
+        J = build_J(adj_mat)
+        C <- a_b_one(Jd,J) - Jd*J
+        C <- C + Jd%*%J - Id*(Jd%*%J)
+        C <- C + a_b_one(J,Jd) - J*Jd
+        return(drop0(C + t(C)))
       }
 
       if(motif_type == "struc"){
+        Jd = build_Jd(adj_mat)
+        Je = build_Je(adj_mat)
+        Js = build_Js(adj_mat)
+        C <- Jd*(Js%*%Jn) + Jn*(Jd%*%Js) + Js*(Jd%*%Jn)
+        C <- a_b_one(Jd,Js) - Jd*(Js%*%Je)
+        C <- C + Jd%*%Js - Je*(Jd%*%Js)
+        C <- C + a_b_one(Js,Jd) - Js*(Jd%*%Je)
+        return(drop0(C + t(C)))
       }
     }
 
@@ -796,9 +811,24 @@ mam_M12 <- function(adj_mat, motif_type, weight_type, method){
   if(method == "sparse"){
     if(weight_type == "unweighted"){
       if(motif_type == "func"){
+        Jd = build_Jd(adj_mat)
+        Id = build_Id(adj_mat)
+        J = build_J(adj_mat)
+        C <- a_one_b(Jd,J) - Jd*J
+        C <- C + J%*%Jd - Id*(J%*%Jd)
+        C <- C + a_one_b(J,Jd) - J*Jd
+        return(drop0(C + t(C)))
       }
 
       if(motif_type == "struc"){
+        Jd = build_Jd(adj_mat)
+        Je = build_Je(adj_mat)
+        Js = build_Js(adj_mat)
+        C <- Jd*(Jn%*%Js) + Jn*(Js%*%Jd) + Js*(Jn%*%Jd)
+        C <- a_one_b(Jd,Js) - Jd*(Je%*%Js)
+        C <- C + Js%*%Jd - Je*(Js%*%Jd)
+        C <- C + a_one_b(Js,Jd) - Js*(Je%*%Jd)
+        return(drop0(C + t(C)))
       }
     }
 
@@ -869,9 +899,20 @@ mam_M13 <- function(adj_mat, motif_type, weight_type, method){
   if(method == "sparse"){
     if(weight_type == "unweighted"){
       if(motif_type == "func"){
+        Jd = build_Jd(adj_mat)
+        Id = build_Id(adj_mat)
+        C <- a_b_one(Jd,Jd) - 2*Jd*Jd + a_one_b(Jd,Jd)
+        C <- C + Jd%*%Jd - Id*(Jd%*%Jd)
+        return(drop0(C))
       }
 
       if(motif_type == "struc"){
+        Jd = build_Jd(adj_mat)
+        Je = build_Je(adj_mat)
+        C <- a_b_one(Jd,Jd) - Jd*(Jd%*%Je)
+        C <- C + a_one_b(Jd,Jd) - Jd*(Je%*%Jd)
+        C <- C + Jd%*%Jd - Je*(Jd%*%Jd)
+        return(drop0(C))
       }
     }
 
@@ -942,9 +983,17 @@ mam_coll <- function(adj_mat, motif_type, weight_type, method){
   if(method == "sparse"){
     if(weight_type == "unweighted"){
       if(motif_type == "func"){
+        J = build_J(adj_mat)
+        Id = build_Id(adj_mat)
+        C <- J%*%t(J) - Id*(J%*%t(J))
+        return(drop0(C))
       }
 
       if(motif_type == "struc"){
+        Js = build_Js(adj_mat)
+        Id = build_Id(adj_mat)
+        C <- Js%*%t(Js) - Je*(Js%*%t(Js))
+        return(drop0(C))
       }
     }
 
@@ -1015,9 +1064,17 @@ mam_expa <- function(adj_mat, motif_type, weight_type, method){
   if(method == "sparse"){
     if(weight_type == "unweighted"){
       if(motif_type == "func"){
+        J = build_J(adj_mat)
+        Id = build_Id(adj_mat)
+        C <- t(J)%*%J - Id*(t(J)%*%J)
+        return(drop0(C))
       }
 
       if(motif_type == "struc"){
+        Js = build_Js(adj_mat)
+        Id = build_Id(adj_mat)
+        C <- t(Js)%*%Js - Je*(t(Js)%*%Js)
+        return(drop0(C))
       }
     }
 
