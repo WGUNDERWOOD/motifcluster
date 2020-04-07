@@ -103,7 +103,7 @@ drop0_killdiag <- function(mat){
 
   ans <- mat
   diag(ans) <- 0
-  ans <- unname(drop0(ans))
+  ans <- drop0(ans)
 
   return(ans)
 }

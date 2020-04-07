@@ -21,14 +21,14 @@ test_that("sample_dsbm returns correct unweighted adjacency matrix", {
     G = G + sample_dsbm(block_sizes, connection_matrix, weight_type, weight_matrix)/n_reps
   }
 
-  G = unname(Matrix::drop0(G))
-  ans = unname(Matrix::drop0(matrix(c(
+  G = Matrix::drop0(G)
+  ans = Matrix::drop0(matrix(c(
                          0,0.4,0.5,0.5,0.5,
                          0.4,0,0.5,0.5,0.5,
                          0.6,0.6,0,0.7,0.7,
                          0.6,0.6,0.7,0,0.7,
                          0.6,0.6,0.7,0.7,0
-                       ), nrow=5, byrow=TRUE)))
+                       ), nrow=5, byrow=TRUE))
 
   expect_equal(G, ans, tolerance=0.05)
 })
@@ -52,14 +52,14 @@ test_that("sample_dsbm returns correct deterministic weighted adjacency matrix",
     G = G + sample_dsbm(block_sizes, connection_matrix, weight_type, weight_matrix)/n_reps
   }
 
-  G = unname(Matrix::drop0(G))
-  ans = unname(Matrix::drop0(matrix(c(
+  G = Matrix::drop0(G)
+  ans = Matrix::drop0(matrix(c(
                          0,8,15,15,15,
                          8,0,15,15,15,
                          24,24,0,35,35,
                          24,24,35,0,35,
                          24,24,35,35,0
-                       ), nrow=5, byrow=TRUE)))
+                       ), nrow=5, byrow=TRUE))
 
   expect_equal(G, ans, tolerance=0.05)
 })
@@ -83,14 +83,14 @@ test_that("sample_dsbm returns correct poisson weighted adjacency matrix", {
     G = G + sample_dsbm(block_sizes, connection_matrix, weight_type, weight_matrix)/n_reps
   }
 
-  G = unname(Matrix::drop0(G))
-  ans = unname(Matrix::drop0(matrix(c(
+  G = Matrix::drop0(G)
+  ans = Matrix::drop0(matrix(c(
                          0,8,15,15,15,
                          8,0,15,15,15,
                          24,24,0,35,35,
                          24,24,35,0,35,
                          24,24,35,35,0
-                       ), nrow=5, byrow=TRUE)))
+                       ), nrow=5, byrow=TRUE))
 
   expect_equal(G, ans, tolerance=0.05)
 })
@@ -119,15 +119,15 @@ test_that("sample_bsbm returns correct unweighted adjacency matrix", {
                         bipartite_connection_matrix, weight_type, bipartite_weight_matrix)/n_reps
   }
 
-  G = unname(Matrix::drop0(G))
-  ans = unname(Matrix::drop0(matrix(c(
+  G = Matrix::drop0(G)
+  ans = Matrix::drop0(matrix(c(
                          0,0,0,0.3,0.4,0.5,
                          0,0,0,0.6,0.7,0.8,
                          0,0,0,0.6,0.7,0.8,
                          0,0,0,0,0,0,
                          0,0,0,0,0,0,
                          0,0,0,0,0,0
-                       ), nrow=6, byrow=TRUE)))
+                       ), nrow=6, byrow=TRUE))
 
   expect_equal(G, ans, tolerance=0.05)
 })
@@ -154,15 +154,15 @@ test_that("sample_bsbm returns correct deterministic weighted adjacency matrix",
                         bipartite_connection_matrix, weight_type, bipartite_weight_matrix)/n_reps
   }
 
-  G = unname(Matrix::drop0(G))
-  ans = unname(Matrix::drop0(matrix(c(
+  G = Matrix::drop0(G)
+  ans = Matrix::drop0(matrix(c(
                          0,0,0,3,8,15,
                          0,0,0,24,35,48,
                          0,0,0,24,35,48,
                          0,0,0,0,0,0,
                          0,0,0,0,0,0,
                          0,0,0,0,0,0
-                       ), nrow=6, byrow=TRUE)))
+                       ), nrow=6, byrow=TRUE))
 
   expect_equal(G, ans, tolerance=0.05)
 })
@@ -189,15 +189,15 @@ test_that("sample_bsbm returns correct poisson weighted adjacency matrix", {
                         bipartite_connection_matrix, weight_type, bipartite_weight_matrix)/n_reps
   }
 
-  G = unname(Matrix::drop0(G))
-  ans = unname(Matrix::drop0(matrix(c(
+  G = Matrix::drop0(G)
+  ans = Matrix::drop0(matrix(c(
                          0,0,0,3,8,15,
                          0,0,0,24,35,48,
                          0,0,0,24,35,48,
                          0,0,0,0,0,0,
                          0,0,0,0,0,0,
                          0,0,0,0,0,0
-                       ), nrow=6, byrow=TRUE)))
+                       ), nrow=6, byrow=TRUE))
 
   expect_equal(G, ans, tolerance=0.05)
 })

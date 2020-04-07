@@ -1,7 +1,5 @@
 context("Motif adjacency")
 
-library(Matrix)
-
 # build_motif_adjacency_matrix
 # test against igraph too?
 
@@ -22,12 +20,13 @@ test_that("build_motif_adjacency_matrix returns correct unweighted functional ma
     0, 0, 0, 0, 0, 0,22, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0,23, 0, 0, 0, 0, 0
   ), nrow=12, byrow=TRUE)
-  G_sparse = unname(drop0(G_dense))
+
+  G_sparse = drop0(G_dense)
 
   # correct answers
   ans = list()
 
-  ans$Ms = unname(drop0(matrix(c(
+  ans$Ms = drop0(matrix(c(
     0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0,
     1, 0, 1, 0, 2, 2, 0, 0, 0, 0, 0, 0,
     0, 1, 0, 0, 0, 2, 1, 0, 0, 0, 0, 0,
@@ -40,9 +39,9 @@ test_that("build_motif_adjacency_matrix returns correct unweighted functional ma
     0, 0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0,
     0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0
-  ), nrow=12, byrow=TRUE)))
+  ), nrow=12, byrow=TRUE))
 
-  ans$Md = unname(drop0(matrix(c(
+  ans$Md = drop0(matrix(c(
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0,
@@ -55,9 +54,9 @@ test_that("build_motif_adjacency_matrix returns correct unweighted functional ma
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-  ), nrow=12, byrow=TRUE)))
+  ), nrow=12, byrow=TRUE))
 
-  ans$M1 = unname(drop0(matrix(c(
+  ans$M1 = drop0(matrix(c(
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 1, 0, 2, 3, 0, 0, 0, 0, 0, 0,
     0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0,
@@ -70,9 +69,9 @@ test_that("build_motif_adjacency_matrix returns correct unweighted functional ma
     0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-  ), nrow=12, byrow=TRUE)))
+  ), nrow=12, byrow=TRUE))
 
-  ans$M2 = unname(drop0(matrix(c(
+  ans$M2 = drop0(matrix(c(
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 2, 0, 6, 8, 0, 0, 0, 0, 0, 0,
     0, 2, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0,
@@ -85,9 +84,9 @@ test_that("build_motif_adjacency_matrix returns correct unweighted functional ma
     0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-  ), nrow=12, byrow=TRUE)))
+  ), nrow=12, byrow=TRUE))
 
-  ans$M3 = unname(drop0(matrix(c(
+  ans$M3 = drop0(matrix(c(
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 1, 0, 6, 7, 0, 0, 0, 0, 0, 0,
     0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0,
@@ -100,9 +99,9 @@ test_that("build_motif_adjacency_matrix returns correct unweighted functional ma
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-  ), nrow=12, byrow=TRUE)))
+  ), nrow=12, byrow=TRUE))
 
-  ans$M4 = unname(drop0(matrix(c(
+  ans$M4 = drop0(matrix(c(
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -115,9 +114,9 @@ test_that("build_motif_adjacency_matrix returns correct unweighted functional ma
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-  ), nrow=12, byrow=TRUE)))
+  ), nrow=12, byrow=TRUE))
 
-  ans$M5 = unname(drop0(matrix(c(
+  ans$M5 = drop0(matrix(c(
     0, 2, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0,
     2, 0, 3, 0, 8, 9, 0, 0, 0, 0, 0, 0,
     0, 3, 0, 0, 0, 5, 2, 0, 0, 0, 0, 0,
@@ -130,9 +129,9 @@ test_that("build_motif_adjacency_matrix returns correct unweighted functional ma
     0, 0, 0, 0, 2, 1, 0, 0, 1, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-  ), nrow=12, byrow=TRUE)))
+  ), nrow=12, byrow=TRUE))
 
-  ans$M6 = unname(drop0(matrix(c(
+  ans$M6 = drop0(matrix(c(
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 1, 0, 3, 4, 0, 0, 0, 0, 0, 0,
     0, 1, 0, 0, 0, 2, 1, 0, 0, 0, 0, 0,
@@ -145,9 +144,9 @@ test_that("build_motif_adjacency_matrix returns correct unweighted functional ma
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-  ), nrow=12, byrow=TRUE)))
+  ), nrow=12, byrow=TRUE))
 
-  ans$M7 = unname(drop0(matrix(c(
+  ans$M7 = drop0(matrix(c(
     0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0,
     1, 0, 1, 0, 4, 4, 0, 0, 0, 0, 0, 0,
     0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0,
@@ -160,9 +159,9 @@ test_that("build_motif_adjacency_matrix returns correct unweighted functional ma
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-  ), nrow=12, byrow=TRUE)))
+  ), nrow=12, byrow=TRUE))
 
-  ans$M8 = unname(drop0(matrix(c(
+  ans$M8 = drop0(matrix(c(
     0, 4, 1, 0, 5, 2, 0, 0, 1, 1, 0, 0,
     4, 0, 4, 0, 8, 7, 0, 0, 1, 1, 1, 0,
     1, 4, 0, 1, 2, 5, 3, 1, 0, 0, 1, 0,
@@ -175,9 +174,9 @@ test_that("build_motif_adjacency_matrix returns correct unweighted functional ma
     1, 1, 0, 0, 4, 1, 0, 0, 1, 0, 0, 0,
     0, 1, 1, 0, 1, 3, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-  ), nrow=12, byrow=TRUE)))
+  ), nrow=12, byrow=TRUE))
 
-  ans$M9 = unname(drop0(matrix(c(
+  ans$M9 = drop0(matrix(c(
     0, 3, 0, 0, 3, 2, 0, 0, 0, 0, 0, 0,
     3, 0, 5, 0,11,14, 1, 0, 1, 2, 1, 0,
     0, 5, 0, 0, 3,10, 5, 1, 0, 1, 2, 1,
@@ -190,9 +189,9 @@ test_that("build_motif_adjacency_matrix returns correct unweighted functional ma
     0, 2, 1, 0, 5, 7, 0, 0, 2, 0, 1, 0,
     0, 1, 2, 1, 1, 7, 6, 1, 0, 1, 0, 0,
     0, 0, 1, 1, 0, 1, 4, 1, 0, 0, 0, 0
-  ), nrow=12, byrow=TRUE)))
+  ), nrow=12, byrow=TRUE))
 
-  ans$M10 = unname(drop0(matrix(c(
+  ans$M10 = drop0(matrix(c(
     0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0,
     1, 0, 3, 0, 4, 7, 2, 0, 0, 1, 0, 0,
     0, 3, 0, 0, 1, 6, 3, 0, 0, 1, 0, 0,
@@ -205,9 +204,9 @@ test_that("build_motif_adjacency_matrix returns correct unweighted functional ma
     0, 1, 1, 0, 2, 4, 1, 0, 1, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 2, 1, 0, 0, 0, 1,
     0, 0, 0, 0, 0, 0, 2, 1, 0, 0, 1, 0
-  ), nrow=12, byrow=TRUE)))
+  ), nrow=12, byrow=TRUE))
 
-  ans$M11 = unname(drop0(matrix(c(
+  ans$M11 = drop0(matrix(c(
     0, 3, 0, 0, 3, 2, 0, 0, 0, 0, 0, 0,
     3, 0, 4, 0,11,11, 0, 0, 1, 1, 1, 0,
     0, 4, 0, 0, 3, 6, 1, 1, 0, 0, 1, 0,
@@ -220,9 +219,9 @@ test_that("build_motif_adjacency_matrix returns correct unweighted functional ma
     0, 1, 0, 0, 2, 1, 0, 0, 0, 0, 0, 0,
     0, 1, 1, 0, 1, 3, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-  ), nrow=12, byrow=TRUE)))
+  ), nrow=12, byrow=TRUE))
 
-  ans$M12 = unname(drop0(matrix(c(
+  ans$M12 = drop0(matrix(c(
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 3, 0, 6,11, 1, 0, 0, 1, 0, 0,
     0, 3, 0, 0, 2, 8, 2, 0, 0, 1, 0, 0,
@@ -235,9 +234,9 @@ test_that("build_motif_adjacency_matrix returns correct unweighted functional ma
     0, 1, 1, 0, 1, 3, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0
-  ), nrow=12, byrow=TRUE)))
+  ), nrow=12, byrow=TRUE))
 
-  ans$M13 = unname(drop0(matrix(c(
+  ans$M13 = drop0(matrix(c(
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 1, 0, 3, 4, 0, 0, 0, 0, 0, 0,
     0, 1, 0, 0, 1, 2, 0, 0, 0, 0, 0, 0,
@@ -250,9 +249,9 @@ test_that("build_motif_adjacency_matrix returns correct unweighted functional ma
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-  ), nrow=12, byrow=TRUE)))
+  ), nrow=12, byrow=TRUE))
 
-  ans$coll = unname(drop0(matrix(c(
+  ans$coll = drop0(matrix(c(
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 1, 0, 2, 2, 2, 0, 0, 1, 0, 0,
     0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0,
@@ -265,9 +264,9 @@ test_that("build_motif_adjacency_matrix returns correct unweighted functional ma
     0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1,
     0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0
-  ), nrow=12, byrow=TRUE)))
+  ), nrow=12, byrow=TRUE))
 
-  ans$expa = unname(drop0(matrix(c(
+  ans$expa = drop0(matrix(c(
     0, 1, 1, 0, 1, 2, 0, 0, 1, 1, 0, 0,
     1, 0, 1, 0, 1, 1, 0, 0, 1, 1, 1, 0,
     1, 1, 0, 1, 2, 2, 0, 1, 0, 0, 1, 0,
@@ -280,7 +279,7 @@ test_that("build_motif_adjacency_matrix returns correct unweighted functional ma
     1, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0,
     0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-  ), nrow=12, byrow=TRUE)))
+  ), nrow=12, byrow=TRUE))
 
   # compare calculations with answers
   motifs = get_motif_names()
@@ -320,12 +319,12 @@ test_that("build_motif_adjacency_matrix returns correct unweighted structural ma
     0, 0, 0, 0, 0, 0,22, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0,23, 0, 0, 0, 0, 0
   ), nrow=12, byrow=TRUE)
-  G_sparse = unname(drop0(G_dense))
+  G_sparse = drop0(G_dense)
 
   # correct answers
   ans = list()
 
-  ans$Ms = unname(drop0(matrix(c(
+  ans$Ms = drop0(matrix(c(
     0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0,
     1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0,
@@ -338,9 +337,9 @@ test_that("build_motif_adjacency_matrix returns correct unweighted structural ma
     0, 0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0,
     0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0
-  ), nrow=12, byrow=TRUE)))
+  ), nrow=12, byrow=TRUE))
 
-  ans$Md = unname(drop0(matrix(c(
+  ans$Md = drop0(matrix(c(
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0,
@@ -353,9 +352,9 @@ test_that("build_motif_adjacency_matrix returns correct unweighted structural ma
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-  ), nrow=12, byrow=TRUE)))
+  ), nrow=12, byrow=TRUE))
 
-  ans$M1 = unname(drop0(matrix(c(
+  ans$M1 = drop0(matrix(c(
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -368,9 +367,9 @@ test_that("build_motif_adjacency_matrix returns correct unweighted structural ma
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-  ), nrow=12, byrow=TRUE)))
+  ), nrow=12, byrow=TRUE))
 
-  ans$M2 = unname(drop0(matrix(c(
+  ans$M2 = drop0(matrix(c(
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -383,9 +382,9 @@ test_that("build_motif_adjacency_matrix returns correct unweighted structural ma
     0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-  ), nrow=12, byrow=TRUE)))
+  ), nrow=12, byrow=TRUE))
 
-  ans$M3 = unname(drop0(matrix(c(
+  ans$M3 = drop0(matrix(c(
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0,
     0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0,
@@ -398,9 +397,9 @@ test_that("build_motif_adjacency_matrix returns correct unweighted structural ma
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-  ), nrow=12, byrow=TRUE)))
+  ), nrow=12, byrow=TRUE))
 
-  ans$M4 = unname(drop0(matrix(c(
+  ans$M4 = drop0(matrix(c(
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -413,9 +412,9 @@ test_that("build_motif_adjacency_matrix returns correct unweighted structural ma
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-  ), nrow=12, byrow=TRUE)))
+  ), nrow=12, byrow=TRUE))
 
-  ans$M5 = unname(drop0(matrix(c(
+  ans$M5 = drop0(matrix(c(
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -428,9 +427,9 @@ test_that("build_motif_adjacency_matrix returns correct unweighted structural ma
     0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-  ), nrow=12, byrow=TRUE)))
+  ), nrow=12, byrow=TRUE))
 
-  ans$M6 = unname(drop0(matrix(c(
+  ans$M6 = drop0(matrix(c(
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0,
@@ -443,9 +442,9 @@ test_that("build_motif_adjacency_matrix returns correct unweighted structural ma
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-  ), nrow=12, byrow=TRUE)))
+  ), nrow=12, byrow=TRUE))
 
-  ans$M7 = unname(drop0(matrix(c(
+  ans$M7 = drop0(matrix(c(
     0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0,
     1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -458,9 +457,9 @@ test_that("build_motif_adjacency_matrix returns correct unweighted structural ma
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-  ), nrow=12, byrow=TRUE)))
+  ), nrow=12, byrow=TRUE))
 
-  ans$M8 = unname(drop0(matrix(c(
+  ans$M8 = drop0(matrix(c(
     0, 1, 1, 0, 2, 0, 0, 0, 1, 1, 0, 0,
     1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     1, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0,
@@ -473,9 +472,9 @@ test_that("build_motif_adjacency_matrix returns correct unweighted structural ma
     1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-  ), nrow=12, byrow=TRUE)))
+  ), nrow=12, byrow=TRUE))
 
-  ans$M9 = unname(drop0(matrix(c(
+  ans$M9 = drop0(matrix(c(
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 1, 1,
@@ -488,9 +487,9 @@ test_that("build_motif_adjacency_matrix returns correct unweighted structural ma
     0, 0, 0, 0, 0, 2, 0, 0, 1, 0, 1, 0,
     0, 0, 1, 1, 0, 1, 2, 0, 0, 1, 0, 0,
     0, 0, 1, 1, 0, 1, 3, 0, 0, 0, 0, 0
-  ), nrow=12, byrow=TRUE)))
+  ), nrow=12, byrow=TRUE))
 
-  ans$M10 = unname(drop0(matrix(c(
+  ans$M10 = drop0(matrix(c(
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0,
     0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0,
@@ -503,9 +502,9 @@ test_that("build_motif_adjacency_matrix returns correct unweighted structural ma
     0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1,
     0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0
-  ), nrow=12, byrow=TRUE)))
+  ), nrow=12, byrow=TRUE))
 
-  ans$M11 = unname(drop0(matrix(c(
+  ans$M11 = drop0(matrix(c(
     0, 1, 0, 0, 1, 2, 0, 0, 0, 0, 0, 0,
     1, 0, 1, 0, 3, 2, 0, 0, 1, 1, 1, 0,
     0, 1, 0, 0, 1, 1, 1, 1, 0, 0, 1, 0,
@@ -518,9 +517,9 @@ test_that("build_motif_adjacency_matrix returns correct unweighted structural ma
     0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0,
     0, 1, 1, 0, 1, 3, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-  ), nrow=12, byrow=TRUE)))
+  ), nrow=12, byrow=TRUE))
 
-  ans$M12 = unname(drop0(matrix(c(
+  ans$M12 = drop0(matrix(c(
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 2, 1, 0, 0, 1, 0, 0,
     0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0,
@@ -533,9 +532,9 @@ test_that("build_motif_adjacency_matrix returns correct unweighted structural ma
     0, 1, 1, 0, 0, 2, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0
-  ), nrow=12, byrow=TRUE)))
+  ), nrow=12, byrow=TRUE))
 
-  ans$M13 = unname(drop0(matrix(c(
+  ans$M13 = drop0(matrix(c(
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0,
@@ -548,9 +547,9 @@ test_that("build_motif_adjacency_matrix returns correct unweighted structural ma
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-  ), nrow=12, byrow=TRUE)))
+  ), nrow=12, byrow=TRUE))
 
-  ans$coll = unname(drop0(matrix(c(
+  ans$coll = drop0(matrix(c(
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -563,9 +562,9 @@ test_that("build_motif_adjacency_matrix returns correct unweighted structural ma
     0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0
-  ), nrow=12, byrow=TRUE)))
+  ), nrow=12, byrow=TRUE))
 
-  ans$expa = unname(drop0(matrix(c(
+  ans$expa = drop0(matrix(c(
     0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -578,7 +577,7 @@ test_that("build_motif_adjacency_matrix returns correct unweighted structural ma
     1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-  ), nrow=12, byrow=TRUE)))
+  ), nrow=12, byrow=TRUE))
 
   # compare calculations with answers
   motifs = get_motif_names()
