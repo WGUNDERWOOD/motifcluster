@@ -80,11 +80,1230 @@ build_motif_adjacency_matrix <- function(adj_mat, motif_name, motif_type=c("func
     return(mam_M13(adj_mat, motif_type, weight_type, method))
   }
 
-  if(motif_name == "coll"){
-    return(mam_coll(adj_mat, motif_type, weight_type, method))
+  if(motif_name == "Mcoll"){
+    return(mam_Mcoll(adj_mat, motif_type, weight_type, method))
   }
 
-  if(motif_name == "expa"){
-    return(mam_expa(adj_mat, motif_type, weight_type, method))
+  if(motif_name == "Mexpa"){
+    return(mam_Mexpa(adj_mat, motif_type, weight_type, method))
+  }
+}
+
+#' Perform the motif adjacency matrix calculations for motif Ms
+#'
+#' @param adj_mat Adjacency matrix from which to build the motif adjacency matrix.
+#' @param motif_type Type of motif adjacency matrix to build.
+#' @param weight_type The weighting scheme to use. One of "unweighted", "mean" or "product".
+#' @return A motif adjacency matrix.
+#' @importFrom Matrix drop0 t
+
+mam_Ms <- function(adj_mat, motif_type, weight_type){
+
+  if(weight_type == "unweighted"){
+    if(motif_type == "func"){
+      J = build_J(adj_mat)
+      return(J + t(J))
+    }
+
+    if(motif_type == "struc"){
+      Js = build_Js(adj_mat)
+      return(Js + t(Js))
+    }
+  }
+
+  if(weight_type == "mean"){
+    if(motif_type == "func"){
+      G = build_G(adj_mat)
+      return(G + t(G))
+    }
+
+    if(motif_type == "struc"){
+      Gs = build_Gs(adj_mat)
+      return(Gs + t(Gs))
+    }
+  }
+
+  if(weight_type == "product"){
+    if(motif_type == "func"){
+      G = build_G(adj_mat)
+      return(G + t(G))
+    }
+
+    if(motif_type == "struc"){
+      Gs = build_Gs(adj_mat)
+      return(Gs + t(Gs))
+    }
+  }
+}
+
+#' Perform the motif adjacency matrix calculations for motif Md
+#'
+#' @param adj_mat Adjacency matrix from which to build the motif adjacency matrix.
+#' @param weight_type The weighting scheme to use. One of "unweighted", "mean" or "product".
+#' @return A motif adjacency matrix.
+#' @importFrom Matrix drop0 t
+
+mam_Md <- function(adj_mat, weight_type){
+
+  if(weight_type == "unweighted"){
+    Jd = build_Jd(adj_mat)
+    return(Jd)
+  }
+
+  if(weight_type == "mean"){
+    Gd = build_Gd(adj_mat)
+    return(Gd/2)
+  }
+
+  if(weight_type == "product"){
+    G = build_G(adj_mat)
+    return(G * t(G))
+  }
+}
+
+#' Perform the motif adjacency matrix calculations for motif M1
+#'
+#' @param adj_mat Adjacency matrix from which to build the motif adjacency matrix.
+#' @param motif_type Type of motif adjacency matrix to build.
+#' @param weight_type The weighting scheme to use. One of "unweighted", "mean" or "product".
+#' @return A motif adjacency matrix.
+#' @importFrom Matrix drop0 t
+
+mam_M1 <- function(adj_mat, motif_type, weight_type){
+
+  if(weight_type == "unweighted"){
+    if(motif_type == "func"){
+      J = build_J(adj_mat)
+      C <- t(J)*(J%*%J)
+      return(C + t(C))
+    }
+
+    if(motif_type == "struc"){
+      Js = build_Js(adj_mat)
+      C <- t(Js)*(Js%*%Js)
+      return(C + t(C))
+    }
+  }
+
+  if(weight_type == "mean"){
+    if(motif_type == "func"){
+      J = build_J(adj_mat)
+      G = build_G(adj_mat)
+      C <- t(J)*(J%*%G) + t(J)*(G%*%J) + t(G)*(J%*%J)
+      return((C + t(C)) / 3)
+    }
+
+    if(motif_type == "struc"){
+      Js = build_Js(adj_mat)
+      Gs = build_Gs(adj_mat)
+      C <- t(Js)*(Js%*%Gs) + t(Js)*(Gs%*%Js) + t(Gs)*(Js%*%Js)
+      return((C + t(C)) / 3)
+    }
+  }
+
+  if(weight_type == "product"){
+    if(motif_type == "func"){
+      G = build_G(adj_mat)
+      C <- t(G)*(G%*%G)
+      return(C + t(C))
+    }
+
+    if(motif_type == "struc"){
+      Gs = build_Gs(adj_mat)
+      C <- t(Gs)*(Gs%*%Gs)
+      return(C + t(C))
+    }
+  }
+}
+
+#' Perform the motif adjacency matrix calculations for motif M2
+#'
+#' @param adj_mat Adjacency matrix from which to build the motif adjacency matrix.
+#' @param motif_type Type of motif adjacency matrix to build.
+#' @param weight_type The weighting scheme to use. One of "unweighted", "mean" or "product".
+#' @return A motif adjacency matrix.
+#' @importFrom Matrix drop0 t
+
+mam_M2 <- function(adj_mat, motif_type, weight_type){
+
+  if(weight_type == "unweighted"){
+    if(motif_type == "func"){
+      J = build_J(adj_mat)
+      Jd = build_Jd(adj_mat)
+      C <- t(J)*(Jd%*%J) + t(J)*(J%*%Jd) + Jd*(J%*%J)
+      return(C + t(C))
+    }
+
+    if(motif_type == "struc"){
+      Js = build_Js(adj_mat)
+      Jd = build_Jd(adj_mat)
+      C <- t(Js)*(Jd%*%Js) + t(Js)*(Js%*%Jd) + Jd*(Js%*%Js)
+      return(C + t(C))
+    }
+  }
+
+  if(weight_type == "mean"){
+    if(motif_type == "func"){
+      J = build_J(adj_mat)
+      Jd = build_Jd(adj_mat)
+      G = build_G(adj_mat)
+      C <- t(J)*(Jd%*%G) + t(J)*(Gd%*%J) + t(G)*(Jd%*%J)
+      C <- C + t(J)*(J%*%Gd) + t(J)*(G%*%Jd) + t(G)*(J%*%Jd)
+      C <- C + Jd*(J%*%G) + Jd*(G%*%J) + Gd*(J%*%J)
+      return((C + t(C)) / 4)
+    }
+
+    if(motif_type == "struc"){
+      Js = build_Js(adj_mat)
+      Jd = build_Jd(adj_mat)
+      Gs = build_Gs(adj_mat)
+      C <- t(Js)*(Jd%*%Gs) + t(Js)*(Gd%*%Js) + t(Gs)*(Jd%*%Js)
+      C <- C + t(Js)*(Js%*%Gd) + t(Js)*(Gs%*%Jd) + t(Gs)*(Js%*%Jd)
+      C <- C + Jd*(Js%*%Gs) + Jd*(Gs%*%Js) + Gd*(Js%*%Js)
+      return((C + t(C)) / 4)
+    }
+  }
+
+  if(weight_type == "product"){
+    if(motif_type == "func"){
+      G = build_G(adj_mat)
+      Gd = build_Gd(adj_mat)
+      C <- t(G)*(Gd%*%G) + t(G)*(G%*%Gd) + Gd*(G%*%G)
+      return(C + t(C))
+    }
+
+    if(motif_type == "struc"){
+      Gs = build_Gs(adj_mat)
+      Gd = build_Gd(adj_mat)
+      C <- t(Gs)*(Gd%*%Gs) + t(Gs)*(Gs%*%Gd) + Gd*(Gs%*%Gs)
+      return(C + t(C))
+    }
+  }
+}
+
+#' Perform the motif adjacency matrix calculations for motif M3
+#'
+#' @param adj_mat Adjacency matrix from which to build the motif adjacency matrix.
+#' @param motif_type Type of motif adjacency matrix to build.
+#' @param weight_type The weighting scheme to use. One of "unweighted", "mean" or "product".
+#' @return A motif adjacency matrix.
+#' @importFrom Matrix drop0 t
+
+mam_M3 <- function(adj_mat, motif_type, weight_type){
+
+  if(weight_type == "unweighted"){
+    if(motif_type == "func"){
+      J = build_J(adj_mat)
+      Jd = build_Jd(adj_mat)
+      C <- J*(Jd%*%Jd) + Jd*(Jd%*%J) + Jd*(J%*%Jd)
+      return(C + t(C))
+    }
+
+    if(motif_type == "struc"){
+      Js = build_Js(adj_mat)
+      Jd = build_Jd(adj_mat)
+      C <- Js*(Jd%*%Jd) + Jd*(Jd%*%Js) + Jd*(Js%*%Jd)
+      return(C + t(C))
+    }
+  }
+
+  if(weight_type == "mean"){
+    if(motif_type == "func"){
+      J = build_J(adj_mat)
+      Jd = build_Jd(adj_mat)
+      Gd = build_Gd(adj_mat)
+      G = build_G(adj_mat)
+      C <- J*(Jd%*%Gd) + J*(Gd%*%Jd) + G*(Jd%*%Jd)
+      C <- C + Jd*(Jd%*%G) + Jd*(Gd%*%J) + Gd*(Jd%*%J)
+      C <- C + Jd*(J%*%Gd) + Jd*(G%*%Jd) + Gd*(J%*%Jd)
+      return((C + t(C)) / 5)
+    }
+
+    if(motif_type == "struc"){
+      Js = build_Js(adj_mat)
+      Jd = build_Jd(adj_mat)
+      Gs = build_Gs(adj_mat)
+      Gd = build_Gd(adj_mat)
+      C <- Js*(Jd%*%Gd) + Js*(Gd%*%Jd) + Gs*(Jd%*%Jd)
+      C <- C + Jd*(Jd%*%Gs) + Jd*(Gd%*%Js) + Gd*(Jd%*%Js)
+      C <- C + Jd*(Js%*%Gd) + Jd*(Gs%*%Jd) + Gd*(Js%*%Jd)
+      return((C + t(C)) / 5)
+    }
+  }
+
+  if(weight_type == "product"){
+    if(motif_type == "func"){
+    }
+
+    if(motif_type == "struc"){
+    }
+  }
+}
+
+#' Perform the motif adjacency matrix calculations for motif M4
+#'
+#' @param adj_mat Adjacency matrix from which to build the motif adjacency matrix.
+#' @param weight_type The weighting scheme to use. One of "unweighted", "mean" or "product".
+#' @return A motif adjacency matrix.
+#' @importFrom Matrix drop0 t
+
+mam_M4 <- function(adj_mat, weight_type){
+
+  if(weight_type == "unweighted"){
+    Jd = build_Jd(adj_mat)
+    return(Jd*(Jd%*%Jd))
+  }
+
+  if(weight_type == "mean"){
+    Jd = build_Jd(adj_mat)
+    Gd = build_Gd(adj_mat)
+    return((Jd*(Jd%*%Gd) + Jd*(Gd%*%Jd) + Gd*(Jd%*%Jd)) / 6)
+  }
+
+  if(weight_type == "product"){
+  }
+}
+
+#' Perform the motif adjacency matrix calculations for motif M5
+#'
+#' @param adj_mat Adjacency matrix from which to build the motif adjacency matrix.
+#' @param motif_type Type of motif adjacency matrix to build.
+#' @param weight_type The weighting scheme to use. One of "unweighted", "mean" or "product".
+#' @return A motif adjacency matrix.
+#' @importFrom Matrix drop0 t
+
+mam_M5 <- function(adj_mat, motif_type, weight_type){
+
+  if(weight_type == "unweighted"){
+    if(motif_type == "func"){
+      J = build_J(adj_mat)
+      C <- J*(J%*%J) + J*(J%*%t(J)) + J*(t(J)%*%J)
+      return(C + t(C))
+    }
+
+    if(motif_type == "struc"){
+      Js = build_Js(adj_mat)
+      C <- Js*(Js%*%Js) + Js*(Js%*%t(Js)) + Js*(t(Js)%*%Js)
+      return(C + t(C))
+    }
+  }
+
+  if(weight_type == "mean"){
+    if(motif_type == "func"){
+      J = build_J(adj_mat)
+      G = build_G(adj_mat)
+      C <- J*(J%*%G) + J*(G%*%J) + G*(J%*%J)
+      C <- C + J*(J%*%t(G)) + J*(G%*%t(J)) + G*(J%*%t(J))
+      C <- C + J*(t(J)%*%G) + J*(t(G)%*%J) + G*(t(J)%*%J)
+      motif_adj_mat <- (C + t(C)) / 3
+    }
+
+    if(motif_type == "struc"){
+      Js = build_Js(adj_mat)
+      Gs = build_Gs(adj_mat)
+      C <- Js*(Js%*%Gs) + Js*(Gs%*%Js) + Gs*(Js%*%Js)
+      C <- C + Js*(Js%*%t(Gs)) + Js*(Gs%*%t(Js)) + Gs*(Js%*%t(Js))
+      C <- C + Js*(t(Js)%*%Gs) + Js*(t(Gs)%*%Js) + Gs*(t(Js)%*%Js)
+      motif_adj_mat <- (C + t(C)) / 3
+    }
+  }
+
+  if(weight_type == "product"){
+    if(motif_type == "func"){
+    }
+
+    if(motif_type == "struc"){
+    }
+  }
+}
+
+#' Perform the motif adjacency matrix calculations for motif M6
+#'
+#' @param adj_mat Adjacency matrix from which to build the motif adjacency matrix.
+#' @param motif_type Type of motif adjacency matrix to build.
+#' @param weight_type The weighting scheme to use. One of "unweighted", "mean" or "product".
+#' @return A motif adjacency matrix.
+#' @importFrom Matrix drop0 t
+
+mam_M6 <- function(adj_mat, motif_type, weight_type){
+
+  if(weight_type == "unweighted"){
+    if(motif_type == "func"){
+      J = build_J(adj_mat)
+      Jd = build_Jd(adj_mat)
+      C <- J*(J%*%Jd)
+      Cprime <- Jd*(t(J)%*%J)
+      return(C + t(C) + Cprime)
+    }
+
+    if(motif_type == "struc"){
+      Js = build_Js(adj_mat)
+      Jd = build_Jd(adj_mat)
+      C <- Js*(Js%*%Jd)
+      Cprime <- Jd*(t(Js)%*%Js)
+      return(C + t(C) + Cprime)
+    }
+  }
+
+  if(weight_type == "mean"){
+    if(motif_type == "func"){
+      J = build_J(adj_mat)
+      Jd = build_Jd(adj_mat)
+      Gd = build_Gd(adj_mat)
+      G = build_G(adj_mat)
+      C <- J*(J%*%Gd) + J*(G%*%Jd) + G*(J%*%Jd)
+      Cprime <- Jd*(t(J)%*%G) + Jd*(t(G)%*%J) + Gd*(t(J)%*%J)
+      return((C + t(C) + Cprime) / 4)
+    }
+
+    if(motif_type == "struc"){
+      Js = build_Js(adj_mat)
+      Gs = build_Gs(adj_mat)
+      Jd = build_Jd(adj_mat)
+      Gd = build_Gd(adj_mat)
+      C <- Js*(Js%*%Gd) + Js*(Gs%*%Jd) + Gs*(Js%*%Jd)
+      Cprime <- Jd*(t(Js)%*%Gs) + Jd*(t(Gs)%*%Js) + Gd*(t(Js)%*%Js)
+      return((C + t(C) + Cprime) / 4)
+    }
+  }
+
+  if(weight_type == "product"){
+    if(motif_type == "func"){
+    }
+
+    if(motif_type == "struc"){
+    }
+  }
+}
+
+#' Perform the motif adjacency matrix calculations for motif M7
+#'
+#' @param adj_mat Adjacency matrix from which to build the motif adjacency matrix.
+#' @param motif_type Type of motif adjacency matrix to build.
+#' @param weight_type The weighting scheme to use. One of "unweighted", "mean" or "product".
+#' @return A motif adjacency matrix.
+#' @importFrom Matrix drop0 t
+
+mam_M7 <- function(adj_mat, motif_type, weight_type){
+
+  if(weight_type == "unweighted"){
+    if(motif_type == "func"){
+      J = build_J(adj_mat)
+      Jd = build_Jd(adj_mat)
+      C <- J*(Jd%*%J)
+      Cprime <- Jd*(J%*%t(J))
+      return(C + t(C) + Cprime)
+    }
+
+    if(motif_type == "struc"){
+      Js = build_Js(adj_mat)
+      Jd = build_Jd(adj_mat)
+      C <- Js*(Jd%*%Js)
+      Cprime <- Jd*(Js%*%t(Js))
+      return(C + t(C) + Cprime)
+    }
+  }
+
+  if(weight_type == "mean"){
+    if(motif_type == "func"){
+      J = build_J(adj_mat)
+      Jd = build_Jd(adj_mat)
+      Gd = build_Gd(adj_mat)
+      G = build_G(adj_mat)
+      C <- J*(Jd%*%G) + J*(Gd%*%J) + G*(Jd%*%J)
+      Cprime <- Jd*(J%*%t(G)) + Jd*(G%*%t(J)) + Gd*(J%*%t(J))
+      return((C + t(C) + Cprime) / 4)
+    }
+
+    if(motif_type == "struc"){
+      Js = build_Js(adj_mat)
+      Gs = build_Gs(adj_mat)
+      Jd = build_Jd(adj_mat)
+      Gd = build_Gd(adj_mat)
+      C <- Js*(Jd%*%Gs) + Js*(Gd%*%Js) + Gs*(Jd%*%Js)
+      Cprime <- Jd*(Js%*%t(Gs)) + Jd*(Gs%*%t(Js)) + Gd*(Js%*%t(Js))
+      return((C + t(C) + Cprime) / 4)
+    }
+  }
+
+  if(weight_type == "product"){
+    if(motif_type == "func"){
+    }
+
+    if(motif_type == "struc"){
+    }
+  }
+}
+
+#' Perform the motif adjacency matrix calculations for motif M8
+#'
+#' @param adj_mat Adjacency matrix from which to build the motif adjacency matrix.
+#' @param motif_type Type of motif adjacency matrix to build.
+#' @param weight_type The weighting scheme to use. One of "unweighted", "mean" or "product".
+#' @param method Which formulation to use. One of "dense" or "sparse".
+#' @return A motif adjacency matrix.
+#' @importFrom Matrix drop0 t
+
+mam_M8 <- function(adj_mat, motif_type, weight_type, method){
+
+  if(method == "dense"){
+    if(weight_type == "unweighted"){
+      if(motif_type == "func"){
+        J = build_J(adj_mat)
+        Jn = build_Jn(adj_mat)
+        C <- J*(J%*%Jn)
+        Cprime <- Jn*(t(J)%*%J)
+        return(C + t(C) + Cprime)
+      }
+
+      if(motif_type == "struc"){
+        Js = build_Js(adj_mat)
+        J0 = build_J0(adj_mat)
+        C <- Js*(Js%*%J0)
+        Cprime <- J0*(t(Js)%*%Js)
+        return(C + t(C) + Cprime)
+      }
+    }
+
+    if(weight_type == "mean"){
+      if(motif_type == "func"){
+        J = build_J(adj_mat)
+        Jn = build_Jn(adj_mat)
+        G = build_G(adj_mat)
+        C <- J*(G%*%Jn) + G*(J%*%Jn)
+        Cprime <- Jn*(t(J)%*%G) + Jn*(t(G)%*%J)
+        return((C + t(C) + Cprime) / 2)
+      }
+
+      if(motif_type == "struc"){
+        Js = build_Js(adj_mat)
+        Gs = build_Gs(adj_mat)
+        J0 = build_J0(adj_mat)
+        C <- Js*(Gs%*%J0) + Gs*(Js%*%J0)
+        Cprime <- J0*(t(Js)%*%Gs) + J0*(t(Gs)%*%Js)
+        return((C + t(C) + Cprime) / 2)
+      }
+    }
+
+    if(weight_type == "product"){
+      if(motif_type == "func"){
+      }
+
+      if(motif_type == "struc"){
+      }
+    }
+  }
+
+  if(method == "sparse"){
+    if(weight_type == "unweighted"){
+      if(motif_type == "func"){
+        J <- build_J(adj_mat)
+        Id <- build_Id(adj_mat)
+        C <- drop0(a_b_one(J,J) - J*J)
+        Cprime <- drop0(t(J)%*%J - Id*(t(J)%*%J))
+        return(C + t(C) + Cprime)
+      }
+
+      if(motif_type == "struc"){
+        Js <- build_Js(adj_mat)
+        Je <- build_Je(adj_mat)
+        C <- drop0(a_b_one(Js,Js) - Js*(Js%*%Je))
+        Cprime <- drop0(t(Js)%*%Js - Je*(t(Js)%*%Js))
+        return(C + t(C) + Cprime)
+      }
+    }
+
+    if(weight_type == "mean"){
+      if(motif_type == "func"){
+      }
+
+      if(motif_type == "struc"){
+      }
+    }
+
+    if(weight_type == "product"){
+      if(motif_type == "func"){
+      }
+
+      if(motif_type == "struc"){
+      }
+    }
+  }
+}
+
+#' Perform the motif adjacency matrix calculations for motif M9
+#'
+#' @param adj_mat Adjacency matrix from which to build the motif adjacency matrix.
+#' @param motif_type Type of motif adjacency matrix to build.
+#' @param weight_type The weighting scheme to use. One of "unweighted", "mean" or "product".
+#' @param method Which formulation to use. One of "dense" or "sparse".
+#' @return A motif adjacency matrix.
+#' @importFrom Matrix drop0 t
+
+mam_M9 <- function(adj_mat, motif_type, weight_type, method){
+
+  if(method == "dense"){
+    if(weight_type == "unweighted"){
+      if(motif_type == "func"){
+        J = build_J(adj_mat)
+        Jn = build_Jn(adj_mat)
+        C <- J*(Jn%*%t(J)) + Jn*(J%*%J) + J*(t(J)%*%Jn)
+        return(C + t(C))
+      }
+
+      if(motif_type == "struc"){
+        Js = build_Js(adj_mat)
+        J0 = build_J0(adj_mat)
+        C <- Js*(J0%*%t(Js)) + J0*(Js%*%Js) + Js*(t(Js)%*%J0)
+        return(C + t(C))
+      }
+    }
+
+    if(weight_type == "mean"){
+      if(motif_type == "func"){
+        J = build_J(adj_mat)
+        Jn = build_Jn(adj_mat)
+        G = build_G(adj_mat)
+        C <- J*(Jn%*%t(G)) + G*(Jn%*%t(J))
+        C <- C + Jn*(J%*%G) + Jn*(G%*%J)
+        C <- C + J*(t(G)%*%Jn) + G*(t(J)%*%Jn)
+        return((C + t(C)) / 2)
+      }
+
+      if(motif_type == "struc"){
+        Js = build_Js(adj_mat)
+        Gs = build_Gs(adj_mat)
+        J0 = build_J0(adj_mat)
+        C <- Js*(J0%*%t(Gs)) + Gs*(J0%*%t(Js))
+        C <- C + J0*(Js%*%Gs) + J0*(Gs%*%Js)
+        C <- C + Js*(t(Gs)%*%J0) + Gs*(t(Js)%*%J0)
+        return((C + t(C)) / 2)
+      }
+    }
+
+    if(weight_type == "product"){
+      if(motif_type == "func"){
+      }
+
+      if(motif_type == "struc"){
+      }
+    }
+  }
+
+  if(method == "sparse"){
+    if(weight_type == "unweighted"){
+      if(motif_type == "func"){
+        J = build_J(adj_mat)
+        Id <- build_Id(adj_mat)
+        C = a_one_b(J,t(J)) - 2*J*t(J) + J%*%J
+        C = C - Id*(J%*%J) + a_b_one(J,t(J))
+        return(drop0(C + t(C)))
+      }
+
+      if(motif_type == "struc"){
+        Js = build_Js(adj_mat)
+        Je = build_Je(adj_mat)
+        C = a_one_b(Js,t(Js)) - Js*(Je%*%t(Js))
+        C = C + Js%*%Js - Je*(Js%*%Js) + a_b_one(Js,t(Js)) - Js*(t(Js)%*%Je)
+        return(drop0(C + t(C)))
+      }
+    }
+
+    if(weight_type == "mean"){
+      if(motif_type == "func"){
+      }
+
+      if(motif_type == "struc"){
+      }
+    }
+
+    if(weight_type == "product"){
+      if(motif_type == "func"){
+      }
+
+      if(motif_type == "struc"){
+      }
+    }
+  }
+}
+
+#' Perform the motif adjacency matrix calculations for motif M10
+#'
+#' @param adj_mat Adjacency matrix from which to build the motif adjacency matrix.
+#' @param motif_type Type of motif adjacency matrix to build.
+#' @param weight_type The weighting scheme to use. One of "unweighted", "mean" or "product".
+#' @param method Which formulation to use. One of "dense" or "sparse".
+#' @return A motif adjacency matrix.
+#' @importFrom Matrix drop0 t
+
+mam_M10 <- function(adj_mat, motif_type, weight_type, method){
+
+  if(method == "dense"){
+    if(weight_type == "unweighted"){
+      if(motif_type == "func"){
+        J = build_J(adj_mat)
+        Jn = build_Jn(adj_mat)
+        C <- J*(Jn%*%J)
+        Cprime <- Jn*(J%*%t(J))
+        return(C + t(C) + Cprime)
+      }
+
+      if(motif_type == "struc"){
+        Js = build_Js(adj_mat)
+        J0 = build_J0(adj_mat)
+        C <- Js*(J0%*%Js)
+        Cprime <- J0*(Js%*%t(Js))
+        return(C + t(C) + Cprime)
+      }
+    }
+
+    if(weight_type == "mean"){
+      if(motif_type == "func"){
+        J = build_J(adj_mat)
+        Jn = build_Jn(adj_mat)
+        G = build_G(adj_mat)
+        C <- J*(Jn%*%G) + G*(Jn%*%J)
+        Cprime <- Jn*(J%*%t(G)) + Jn*(G%*%t(J))
+        return((C + t(C) + Cprime) / 2)
+      }
+
+      if(motif_type == "struc"){
+        Js = build_Js(adj_mat)
+        Gs = build_Gs(adj_mat)
+        J0 = build_J0(adj_mat)
+        C <- Js*(J0%*%Gs) + Gs*(J0%*%Js)
+        Cprime <- J0*(Js%*%t(Gs)) + J0*(Gs%*%t(Js))
+        return((C + t(C) + Cprime) / 2)
+      }
+    }
+
+    if(weight_type == "product"){
+      if(motif_type == "func"){
+      }
+
+      if(motif_type == "struc"){
+      }
+    }
+  }
+
+  if(method == "sparse"){
+    if(weight_type == "unweighted"){
+      if(motif_type == "func"){
+        J = build_J(adj_mat)
+        Id = build_Id(adj_mat)
+        C <- a_one_b(J, J) - J*J
+        Cprime <- J%*%t(J) - Id*(J%*%t(J))
+        return(drop0(C + t(C) + Cprime))
+      }
+
+      if(motif_type == "struc"){
+        Js = build_Js(adj_mat)
+        Je = build_Je(adj_mat)
+        C <- a_one_b(Js, Js) - Js*(Je%*%Js)
+        Cprime <- Js%*%t(Js) - Je*(Js%*%t(Js))
+        return(drop0(C + t(C) + Cprime))
+      }
+    }
+
+    if(weight_type == "mean"){
+      if(motif_type == "func"){
+      }
+
+      if(motif_type == "struc"){
+      }
+    }
+
+    if(weight_type == "product"){
+      if(motif_type == "func"){
+      }
+
+      if(motif_type == "struc"){
+      }
+    }
+  }
+}
+
+#' Perform the motif adjacency matrix calculations for motif M11
+#'
+#' @param adj_mat Adjacency matrix from which to build the motif adjacency matrix.
+#' @param motif_type Type of motif adjacency matrix to build.
+#' @param weight_type The weighting scheme to use. One of "unweighted", "mean" or "product".
+#' @param method Which formulation to use. One of "dense" or "sparse".
+#' @return A motif adjacency matrix.
+#' @importFrom Matrix drop0 t
+
+mam_M11 <- function(adj_mat, motif_type, weight_type, method){
+
+  if(method == "dense"){
+    if(weight_type == "unweighted"){
+      if(motif_type == "func"){
+        Jd = build_Jd(adj_mat)
+        Jn = build_Jn(adj_mat)
+        J = build_J(adj_mat)
+        C <- Jd*(J%*%Jn) + Jn*(Jd%*%J) + J*(Jd%*%Jn)
+        return(C + t(C))
+      }
+
+      if(motif_type == "struc"){
+        Jd = build_Jd(adj_mat)
+        J0 = build_J0(adj_mat)
+        Js = build_Js(adj_mat)
+        C <- Jd*(Js%*%J0) + J0*(Jd%*%Js) + Js*(Jd%*%J0)
+        return(C + t(C))
+      }
+    }
+
+    if(weight_type == "mean"){
+      if(motif_type == "func"){
+        Jd = build_Jd(adj_mat)
+        Gd = build_Gd(adj_mat)
+        Jn = build_Jn(adj_mat)
+        J = build_J(adj_mat)
+        G = build_G(adj_mat)
+        C <- Jd*(G%*%Jn) + Gd*(J%*%Jn)
+        C <- C + Jn*(Jd%*%G) + Jn*(Gd%*%J)
+        C <- C + J*(Gd%*%Jn) + G*(Jd%*%Jn)
+        return((C + t(C)) / 3)
+      }
+
+      if(motif_type == "struc"){
+        Jd = build_Jd(adj_mat)
+        Gd = build_Gd(adj_mat)
+        J0 = build_J0(adj_mat)
+        Js = build_Js(adj_mat)
+        Gs = build_Gs(adj_mat)
+        C <- Jd*(Gs%*%J0) + Gd*(Js%*%J0)
+        C <- C + J0*(Jd%*%Gs) + J0*(Gd%*%Js)
+        C <- C + Js*(Gd%*%J0) + Gs*(Jd%*%J0)
+        return((C + t(C)) / 3)
+      }
+    }
+
+    if(weight_type == "product"){
+      if(motif_type == "func"){
+      }
+
+      if(motif_type == "struc"){
+      }
+    }
+  }
+
+  if(method == "sparse"){
+    if(weight_type == "unweighted"){
+      if(motif_type == "func"){
+        Jd = build_Jd(adj_mat)
+        Id = build_Id(adj_mat)
+        J = build_J(adj_mat)
+        C <- a_b_one(Jd,J) - Jd*J
+        C <- C + Jd%*%J - Id*(Jd%*%J)
+        C <- C + a_b_one(J,Jd) - J*Jd
+        return(drop0(C + t(C)))
+      }
+
+      if(motif_type == "struc"){
+        Jd = build_Jd(adj_mat)
+        Je = build_Je(adj_mat)
+        Js = build_Js(adj_mat)
+        C <- a_b_one(Jd,Js) - Jd*(Js%*%Je)
+        C <- C + Jd%*%Js - Je*(Jd%*%Js)
+        C <- C + a_b_one(Js,Jd) - Js*(Jd%*%Je)
+        return(drop0(C + t(C)))
+      }
+    }
+
+    if(weight_type == "mean"){
+      if(motif_type == "func"){
+      }
+
+      if(motif_type == "struc"){
+      }
+    }
+
+    if(weight_type == "product"){
+      if(motif_type == "func"){
+      }
+
+      if(motif_type == "struc"){
+      }
+    }
+  }
+}
+
+#' Perform the motif adjacency matrix calculations for motif M12
+#'
+#' @param adj_mat Adjacency matrix from which to build the motif adjacency matrix.
+#' @param motif_type Type of motif adjacency matrix to build.
+#' @param weight_type The weighting scheme to use. One of "unweighted", "mean" or "product".
+#' @param method Which formulation to use. One of "dense" or "sparse".
+#' @return A motif adjacency matrix.
+#' @importFrom Matrix drop0 t
+
+mam_M12 <- function(adj_mat, motif_type, weight_type, method){
+
+  if(method == "dense"){
+    if(weight_type == "unweighted"){
+      if(motif_type == "func"){
+        Jd = build_Jd(adj_mat)
+        Jn = build_Jn(adj_mat)
+        J = build_J(adj_mat)
+        C <- Jd*(Jn%*%J) + Jn*(J%*%Jd) + J*(Jn%*%Jd)
+        return(C + t(C))
+      }
+
+      if(motif_type == "struc"){
+        Jd = build_Jd(adj_mat)
+        J0 = build_J0(adj_mat)
+        Js = build_Js(adj_mat)
+        C <- Jd*(J0%*%Js) + J0*(Js%*%Jd) + Js*(J0%*%Jd)
+        return(C + t(C))
+      }
+    }
+
+    if(weight_type == "mean"){
+      if(motif_type == "func"){
+        Jd = build_Jd(adj_mat)
+        Gd = build_Gd(adj_mat)
+        Jn = build_Jn(adj_mat)
+        G = build_G(adj_mat)
+        J = build_J(adj_mat)
+        C <- Jd*(Jn%*%G) + Gd*(Jn%*%J)
+        C <- C + Jn*(J%*%Gd) + Jn*(G%*%Jd)
+        C <- C + J*(Jn%*%Gd) + G*(Jn%*%Jd)
+        return((C + t(C)) / 3)
+      }
+
+      if(motif_type == "struc"){
+        Jd = build_Jd(adj_mat)
+        Gd = build_Gd(adj_mat)
+        J0 = build_J0(adj_mat)
+        Js = build_Js(adj_mat)
+        Gs = build_Gs(adj_mat)
+        C <- Jd*(J0%*%Gs) + Gd*(J0%*%Js)
+        C <- C + J0*(Js%*%Gd) + J0*(Gs%*%Jd)
+        C <- C + Js*(J0%*%Gd) + Gs*(J0%*%Jd)
+        return((C + t(C)) / 3)
+      }
+    }
+
+    if(weight_type == "product"){
+      if(motif_type == "func"){
+      }
+
+      if(motif_type == "struc"){
+      }
+    }
+  }
+
+  if(method == "sparse"){
+    if(weight_type == "unweighted"){
+      if(motif_type == "func"){
+        Jd = build_Jd(adj_mat)
+        Id = build_Id(adj_mat)
+        J = build_J(adj_mat)
+        C <- a_one_b(Jd,J) - Jd*J
+        C <- C + J%*%Jd - Id*(J%*%Jd)
+        C <- C + a_one_b(J,Jd) - J*Jd
+        return(drop0(C + t(C)))
+      }
+
+      if(motif_type == "struc"){
+        Jd = build_Jd(adj_mat)
+        Je = build_Je(adj_mat)
+        Js = build_Js(adj_mat)
+        C <- a_one_b(Jd,Js) - Jd*(Je%*%Js)
+        C <- C + Js%*%Jd - Je*(Js%*%Jd)
+        C <- C + a_one_b(Js,Jd) - Js*(Je%*%Jd)
+        return(drop0(C + t(C)))
+      }
+    }
+
+    if(weight_type == "mean"){
+      if(motif_type == "func"){
+      }
+
+      if(motif_type == "struc"){
+      }
+    }
+
+    if(weight_type == "product"){
+      if(motif_type == "func"){
+      }
+
+      if(motif_type == "struc"){
+      }
+    }
+  }
+}
+
+#' Perform the motif adjacency matrix calculations for motif M13
+#'
+#' @param adj_mat Adjacency matrix from which to build the motif adjacency matrix.
+#' @param motif_type Type of motif adjacency matrix to build.
+#' @param weight_type The weighting scheme to use. One of "unweighted", "mean" or "product".
+#' @param method Which formulation to use. One of "dense" or "sparse".
+#' @return A motif adjacency matrix.
+#' @importFrom Matrix drop0 t
+
+mam_M13 <- function(adj_mat, motif_type, weight_type, method){
+
+  if(method == "dense"){
+    if(weight_type == "unweighted"){
+      if(motif_type == "func"){
+        Jd = build_Jd(adj_mat)
+        Jn = build_Jn(adj_mat)
+        C <- Jd*(Jd%*%Jn) + Jd*(Jn%*%Jd) + Jn*(Jd%*%Jd)
+        return(C)
+      }
+
+      if(motif_type == "struc"){
+        Jd = build_Jd(adj_mat)
+        J0 = build_J0(adj_mat)
+        C <- Jd*(Jd%*%J0) + Jd*(J0%*%Jd) + J0*(Jd%*%Jd)
+        return(C)
+      }
+    }
+
+    if(weight_type == "mean"){
+      if(motif_type == "func"){
+        #Jd = build_Jd(adj_mat)
+        #Jn = build_Jn(adj_mat)
+        #Gd = build_Gd(adj_mat)
+        #C <- Jd*(Gd%*%Jn) + Gd*(Jd%*%Jn) + Jn*(Jd%*%Gd)
+        #return((C + t(C)) / 4)
+      }
+
+      if(motif_type == "struc"){
+        #Jd = build_Jd(adj_mat)
+        #J0 = build_J0(adj_mat)
+        #Gd = build_Gd(adj_mat)
+        #C <- Jd*(Gd%*%J0) + Gd*(Jd%*%J0) + J0*(Jd%*%Gd)
+        #return((C + t(C)) / 4)
+      }
+    }
+
+    if(weight_type == "product"){
+      if(motif_type == "func"){
+      }
+
+      if(motif_type == "struc"){
+      }
+    }
+  }
+
+  if(method == "sparse"){
+    if(weight_type == "unweighted"){
+      if(motif_type == "func"){
+        Jd = build_Jd(adj_mat)
+        Id = build_Id(adj_mat)
+        C <- a_b_one(Jd,Jd) - 2*Jd*Jd + a_one_b(Jd,Jd)
+        C <- C + Jd%*%Jd - Id*(Jd%*%Jd)
+        return(drop0(C))
+      }
+
+      if(motif_type == "struc"){
+        Jd = build_Jd(adj_mat)
+        Je = build_Je(adj_mat)
+        C <- a_b_one(Jd,Jd) - Jd*(Jd%*%Je)
+        C <- C + a_one_b(Jd,Jd) - Jd*(Je%*%Jd)
+        C <- C + Jd%*%Jd - Je*(Jd%*%Jd)
+        return(drop0(C))
+      }
+    }
+
+    if(weight_type == "mean"){
+      if(motif_type == "func"){
+      }
+
+      if(motif_type == "struc"){
+      }
+    }
+
+    if(weight_type == "product"){
+      if(motif_type == "func"){
+      }
+
+      if(motif_type == "struc"){
+      }
+    }
+  }
+}
+
+#' Perform the motif adjacency matrix calculations for motif Mcoll
+#'
+#' @param adj_mat Adjacency matrix from which to build the motif adjacency matrix.
+#' @param motif_type Type of motif adjacency matrix to build.
+#' @param weight_type The weighting scheme to use. One of "unweighted", "mean" or "product".
+#' @param method Which formulation to use. One of "dense" or "sparse".
+#' @return A motif adjacency matrix.
+#' @importFrom Matrix drop0 t
+
+mam_Mcoll <- function(adj_mat, motif_type, weight_type, method){
+
+  if(method == "dense"){
+    if(weight_type == "unweighted"){
+      if(motif_type == "func"){
+        J = build_J(adj_mat)
+        Jn = build_Jn(adj_mat)
+        C <- Jn*(J%*%t(J))
+        return(C)
+      }
+
+      if(motif_type == "struc"){
+        Js = build_Js(adj_mat)
+        J0 = build_J0(adj_mat)
+        C <- J0*(Js%*%t(Js))
+        return(C)
+      }
+    }
+
+    if(weight_type == "mean"){
+      if(motif_type == "func"){
+        G = build_G(adj_mat)
+        J = build_J(adj_mat)
+        Jn = build_Jn(adj_mat)
+        C <- Jn*(J%*%t(G)) + Jn*(G%*%t(J))
+        return(C / 2)
+      }
+
+      if(motif_type == "struc"){
+        Js = build_Js(adj_mat)
+        Gs = build_Gs(adj_mat)
+        J0 = build_J0(adj_mat)
+        C <- J0*(Js%*%t(Gs)) + J0*(Gs%*%t(Js))
+        return(C / 2)
+      }
+    }
+
+    if(weight_type == "product"){
+      if(motif_type == "func"){
+      }
+
+      if(motif_type == "struc"){
+      }
+    }
+  }
+
+  if(method == "sparse"){
+    if(weight_type == "unweighted"){
+      if(motif_type == "func"){
+        J = build_J(adj_mat)
+        Id = build_Id(adj_mat)
+        C <- J%*%t(J) - Id*(J%*%t(J))
+        return(drop0(C))
+      }
+
+      if(motif_type == "struc"){
+        Js = build_Js(adj_mat)
+        Je = build_Je(adj_mat)
+        C <- Js%*%t(Js) - Je*(Js%*%t(Js))
+        return(drop0(C))
+      }
+    }
+
+    if(weight_type == "mean"){
+      if(motif_type == "func"){
+      }
+
+      if(motif_type == "struc"){
+      }
+    }
+
+    if(weight_type == "product"){
+      if(motif_type == "func"){
+      }
+
+      if(motif_type == "struc"){
+      }
+    }
+  }
+}
+
+#' Perform the motif adjacency matrix calculations for motif Mexpa
+#'
+#' @param adj_mat Adjacency matrix from which to build the motif adjacency matrix.
+#' @param motif_type Type of motif adjacency matrix to build.
+#' @param weight_type The weighting scheme to use. One of "unweighted", "mean" or "product".
+#' @param method Which formulation to use. One of "dense" or "sparse".
+#' @return A motif adjacency matrix.
+#' @importFrom Matrix drop0 t
+
+mam_Mexpa <- function(adj_mat, motif_type, weight_type, method){
+
+  if(method == "dense"){
+    if(weight_type == "unweighted"){
+      if(motif_type == "func"){
+        J = build_J(adj_mat)
+        Jn = build_Jn(adj_mat)
+        C <- Jn*(t(J)%*%J)
+        return(C)
+      }
+
+      if(motif_type == "struc"){
+        Js = build_Js(adj_mat)
+        J0 = build_J0(adj_mat)
+        C <- J0*(t(Js)%*%Js)
+        return(C)
+      }
+    }
+
+    if(weight_type == "mean"){
+      if(motif_type == "func"){
+        J = build_J(adj_mat)
+        Jn = build_Jn(adj_mat)
+        G = build_G(adj_mat)
+        C <- Jn*(t(J)%*%G) + Jn*(t(G)%*%J)
+        return(C / 2)
+      }
+
+      if(motif_type == "struc"){
+        Js = build_Js(adj_mat)
+        Gs = build_Gs(adj_mat)
+        J0 = build_J0(adj_mat)
+        C <- J0*(t(Js)%*%Gs) + J0*(t(Gs)%*%Js)
+        return(C / 2)
+      }
+    }
+
+    if(weight_type == "product"){
+      if(motif_type == "func"){
+      }
+
+      if(motif_type == "struc"){
+      }
+    }
+  }
+
+  if(method == "sparse"){
+    if(weight_type == "unweighted"){
+      if(motif_type == "func"){
+        J = build_J(adj_mat)
+        Id = build_Id(adj_mat)
+        C <- t(J)%*%J - Id*(t(J)%*%J)
+        return(drop0(C))
+      }
+
+      if(motif_type == "struc"){
+        Js = build_Js(adj_mat)
+        Je = build_Je(adj_mat)
+        C <- t(Js)%*%Js - Je*(t(Js)%*%Js)
+        return(drop0(C))
+      }
+    }
+
+    if(weight_type == "mean"){
+      if(motif_type == "func"){
+      }
+
+      if(motif_type == "struc"){
+      }
+    }
+
+    if(weight_type == "product"){
+      if(motif_type == "func"){
+      }
+
+      if(motif_type == "struc"){
+      }
+    }
   }
 }

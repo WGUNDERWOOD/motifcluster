@@ -251,7 +251,7 @@ test_that("build_motif_adjacency_matrix returns correct unweighted functional ma
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
   ), nrow=12, byrow=TRUE))
 
-  ans$coll = drop0(matrix(c(
+  ans$Mcoll = drop0(matrix(c(
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 1, 0, 2, 2, 2, 0, 0, 1, 0, 0,
     0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0,
@@ -266,7 +266,7 @@ test_that("build_motif_adjacency_matrix returns correct unweighted functional ma
     0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0
   ), nrow=12, byrow=TRUE))
 
-  ans$expa = drop0(matrix(c(
+  ans$Mexpa = drop0(matrix(c(
     0, 1, 1, 0, 1, 2, 0, 0, 1, 1, 0, 0,
     1, 0, 1, 0, 1, 1, 0, 0, 1, 1, 1, 0,
     1, 1, 0, 1, 2, 2, 0, 1, 0, 0, 1, 0,
@@ -549,7 +549,7 @@ test_that("build_motif_adjacency_matrix returns correct unweighted structural ma
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
   ), nrow=12, byrow=TRUE))
 
-  ans$coll = drop0(matrix(c(
+  ans$Mcoll = drop0(matrix(c(
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -564,7 +564,7 @@ test_that("build_motif_adjacency_matrix returns correct unweighted structural ma
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0
   ), nrow=12, byrow=TRUE))
 
-  ans$expa = drop0(matrix(c(
+  ans$Mexpa = drop0(matrix(c(
     0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -848,7 +848,7 @@ test_that("build_motif_adjacency_matrix returns correct mean-weighted functional
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
   ), nrow=12, byrow=TRUE))
 
-  ans$coll = drop0(matrix(c(
+  ans$Mcoll = drop0(matrix(c(
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 1, 0, 2, 2, 2, 0, 0, 1, 0, 0,
     0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0,
@@ -863,7 +863,7 @@ test_that("build_motif_adjacency_matrix returns correct mean-weighted functional
     0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0
   ), nrow=12, byrow=TRUE))
 
-  ans$expa = drop0(matrix(c(
+  ans$Mexpa = drop0(matrix(c(
     0, 1, 1, 0, 1, 2, 0, 0, 1, 1, 0, 0,
     1, 0, 1, 0, 1, 1, 0, 0, 1, 1, 1, 0,
     1, 1, 0, 1, 2, 2, 0, 1, 0, 0, 1, 0,
