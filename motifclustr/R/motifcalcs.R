@@ -38,7 +38,7 @@ mam_Ms <- function(adj_mat, motif_type, weight_type){
 
   if(weight_type == "mean"){
     if(motif_type == "func"){
-      G = adj_mat
+      G = build_G(adj_mat)
       return(G + t(G))
     }
 
@@ -50,7 +50,7 @@ mam_Ms <- function(adj_mat, motif_type, weight_type){
 
   if(weight_type == "product"){
     if(motif_type == "func"){
-      G = adj_mat
+      G = build_G(adj_mat)
       return(G + t(G))
     }
 
@@ -74,7 +74,7 @@ mam_Md <- function(adj_mat, weight_type){
   }
 
   if(weight_type == "product"){
-    G = adj_mat
+    G = build_G(adj_mat)
     return(G * t(G))
   }
 }
@@ -98,7 +98,7 @@ mam_M1 <- function(adj_mat, motif_type, weight_type){
   if(weight_type == "mean"){
     if(motif_type == "func"){
       J = build_J(adj_mat)
-      G = adj_mat
+      G = build_G(adj_mat)
       C <- t(J)*(J%*%G) + t(J)*(G%*%J) + t(G)*(J%*%J)
       return((C + t(C)) / 3)
     }
@@ -113,7 +113,7 @@ mam_M1 <- function(adj_mat, motif_type, weight_type){
 
   if(weight_type == "product"){
     if(motif_type == "func"){
-      G = adj_mat
+      G = build_G(adj_mat)
       C <- t(G)*(G%*%G)
       return(C + t(C))
     }
@@ -148,7 +148,7 @@ mam_M2 <- function(adj_mat, motif_type, weight_type){
     if(motif_type == "func"){
       J = build_J(adj_mat)
       Jd = build_Jd(adj_mat)
-      G = adj_mat
+      G = build_G(adj_mat)
       C <- t(J)*(Jd%*%G) + t(J)*(Gd%*%J) + t(G)*(Jd%*%J)
       C <- C + t(J)*(J%*%Gd) + t(J)*(G%*%Jd) + t(G)*(J%*%Jd)
       C <- C + Jd*(J%*%G) + Jd*(G%*%J) + Gd*(J%*%J)
@@ -168,7 +168,7 @@ mam_M2 <- function(adj_mat, motif_type, weight_type){
 
   if(weight_type == "product"){
     if(motif_type == "func"){
-      G = adj_mat
+      G = build_G(adj_mat)
       Gd = build_Gd(adj_mat)
       C <- t(G)*(Gd%*%G) + t(G)*(G%*%Gd) + Gd*(G%*%G)
       return(C + t(C))
@@ -206,7 +206,7 @@ mam_M3 <- function(adj_mat, motif_type, weight_type){
       J = build_J(adj_mat)
       Jd = build_Jd(adj_mat)
       Gd = build_Gd(adj_mat)
-      G = adj_mat
+      G = build_G(adj_mat)
       C <- J*(Jd%*%Gd) + J*(Gd%*%Jd) + G*(Jd%*%Jd)
       C <- C + Jd*(Jd%*%G) + Jd*(Gd%*%J) + Gd*(Jd%*%J)
       C <- C + Jd*(J%*%Gd) + Jd*(G%*%Jd) + Gd*(J%*%Jd)
@@ -270,7 +270,7 @@ mam_M5 <- function(adj_mat, motif_type, weight_type){
   if(weight_type == "mean"){
     if(motif_type == "func"){
       J = build_J(adj_mat)
-      G = adj_mat
+      G = build_G(adj_mat)
       C <- J*(J%*%G) + J*(G%*%J) + G*(J%*%J)
       C <- C + J*(J%*%t(G)) + J*(G%*%t(J)) + G*(J%*%t(J))
       C <- C + J*(t(J)%*%G) + J*(t(G)%*%J) + G*(t(J)%*%J)
@@ -321,7 +321,7 @@ mam_M6 <- function(adj_mat, motif_type, weight_type){
       J = build_J(adj_mat)
       Jd = build_Jd(adj_mat)
       Gd = build_Gd(adj_mat)
-      G = adj_mat
+      G = build_G(adj_mat)
       C <- J*(J%*%Gd) + J*(G%*%Jd) + G*(J%*%Jd)
       Cprime <- Jd*(t(J)%*%G) + Jd*(t(G)%*%J) + Gd*(t(J)%*%J)
       return((C + t(C) + Cprime) / 4)
@@ -372,7 +372,7 @@ mam_M7 <- function(adj_mat, motif_type, weight_type){
       J = build_J(adj_mat)
       Jd = build_Jd(adj_mat)
       Gd = build_Gd(adj_mat)
-      G = adj_mat
+      G = build_G(adj_mat)
       C <- J*(Jd%*%G) + J*(Gd%*%J) + G*(Jd%*%J)
       Cprime <- Jd*(J%*%t(G)) + Jd*(G%*%t(J)) + Gd*(J%*%t(J))
       return((C + t(C) + Cprime) / 4)
@@ -423,7 +423,7 @@ mam_M8 <- function(adj_mat, motif_type, weight_type, method){
       if(motif_type == "func"){
         J = build_J(adj_mat)
         Jn = build_Jn(adj_mat)
-        G = adj_mat
+        G = build_G(adj_mat)
         C <- J*(G%*%Jn) + G*(J%*%Jn)
         Cprime <- Jn*(t(J)%*%G) + Jn*(t(G)%*%J)
         return((C + t(C) + Cprime) / 2)
@@ -508,7 +508,7 @@ mam_M9 <- function(adj_mat, motif_type, weight_type, method){
       if(motif_type == "func"){
         J = build_J(adj_mat)
         Jn = build_Jn(adj_mat)
-        G = adj_mat
+        G = build_G(adj_mat)
         C <- J*(Jn%*%t(G)) + G*(Jn%*%t(J))
         C <- C + Jn*(J%*%G) + Jn*(G%*%J)
         C <- C + J*(t(G)%*%Jn) + G*(t(J)%*%Jn)
@@ -597,7 +597,7 @@ mam_M10 <- function(adj_mat, motif_type, weight_type, method){
       if(motif_type == "func"){
         J = build_J(adj_mat)
         Jn = build_Jn(adj_mat)
-        G = adj_mat
+        G = build_G(adj_mat)
         C <- J*(Jn%*%G) + G*(Jn%*%J)
         Cprime <- Jn*(J%*%t(G)) + Jn*(G%*%t(J))
         return((C + t(C) + Cprime) / 2)
@@ -686,7 +686,7 @@ mam_M11 <- function(adj_mat, motif_type, weight_type, method){
         Gd = build_Gd(adj_mat)
         Jn = build_Jn(adj_mat)
         J = build_J(adj_mat)
-        G = adj_mat
+        G = build_G(adj_mat)
         C <- Jd*(G%*%Jn) + Gd*(J%*%Jn)
         C <- C + Jn*(Jd%*%G) + Jn*(Gd%*%J)
         C <- C + J*(Gd%*%Jn) + G*(Jd%*%Jn)
@@ -782,7 +782,7 @@ mam_M12 <- function(adj_mat, motif_type, weight_type, method){
         Jd = build_Jd(adj_mat)
         Gd = build_Gd(adj_mat)
         Jn = build_Jn(adj_mat)
-        G = adj_mat
+        G = build_G(adj_mat)
         J = build_J(adj_mat)
         C <- Jd*(Jn%*%G) + Gd*(Jn%*%J)
         C <- C + Jn*(J%*%Gd) + Jn*(G%*%Jd)
@@ -958,7 +958,7 @@ mam_coll <- function(adj_mat, motif_type, weight_type, method){
 
     if(weight_type == "mean"){
       if(motif_type == "func"){
-        G = adj_mat
+        G = build_G(adj_mat)
         J = build_J(adj_mat)
         Jn = build_Jn(adj_mat)
         C <- Jn*(J%*%t(G)) + Jn*(G%*%t(J))
@@ -1041,7 +1041,7 @@ mam_expa <- function(adj_mat, motif_type, weight_type, method){
       if(motif_type == "func"){
         J = build_J(adj_mat)
         Jn = build_Jn(adj_mat)
-        G = adj_mat
+        G = build_G(adj_mat)
         C <- Jn*(t(J)%*%G) + Jn*(t(G)%*%J)
         return(C / 2)
       }

@@ -14,7 +14,11 @@
 #' Gd is the double-edge adjacency matrix
 #' Js is the single-edge indicator matrix;
 #' Jd is the double-edge indicator matrix.
-#' @keywords indicator adjacency matrix
+
+build_G <- function(adj_mat){
+  G = drop0(adj_mat)
+  return(G)
+}
 
 build_J <- function(adj_mat){
   J = drop0_killdiag(1*(adj_mat > 0))

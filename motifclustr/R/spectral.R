@@ -42,7 +42,6 @@ get_first_eigs <- function(mat, num_eigs){
 #' @param adj_mat Symmetric adjacency matrix from which to build the Laplacian.
 #' @param type_lap Type of Laplacian to build. One of "comb" or "rw".
 #' @return The specified Laplacian matrix.
-#' @keywords laplacian matrix
 
 build_laplacian <- function(adj_mat, type_lap=c("comb", "rw")){
 
@@ -84,7 +83,6 @@ build_laplacian <- function(adj_mat, type_lap=c("comb", "rw")){
 #' of the first few eigenvalues of the Laplacian,
 #' and vects contains a nrow(mat) by num_eigs matrix
 #' of the associated eigenvectors.
-#' @keywords laplacian embedding eigenvalue eigenvector matrix
 #' @export
 
 run_laplace_embedding <- function(adj_mat, num_eigs, type_lap=c("comb", "rw")){
@@ -129,7 +127,6 @@ run_laplace_embedding <- function(adj_mat, num_eigs, type_lap=c("comb", "rw")){
 #' of the motif adjacency matrix;
 #' vects, the eigenvectors associated with the Laplace embedding
 #' of the motif adjacency matrix;
-#' @keywords motif adjacency matrix laplacian embedding
 #' @export
 
 run_motif_embedding <- function(adj_mat, motif_name, motif_type = c("func", "struc"),

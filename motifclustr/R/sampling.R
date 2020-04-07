@@ -111,7 +111,6 @@ sample_dsbm <- function(block_sizes, connection_matrix,
 #' Unused for weight_type="deterministic".
 #' Defaults to NULL.
 #' @return A randomly sampled (weighted) adjacency matrix of a BSBM.
-#' @keywords sample BSBM model bipartite
 #' @export
 #' @examples
 #' source_block_sizes = c(10,10)
