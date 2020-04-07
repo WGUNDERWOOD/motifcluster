@@ -863,7 +863,6 @@ test_that("build_motif_adjacency_matrix returns correct mean-weighted functional
 
 })
 
-
 # get_largest_component
 
 test_that("get_largest_component returns correct indices", {
