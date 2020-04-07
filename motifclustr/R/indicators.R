@@ -63,5 +63,6 @@ build_Id <- function(adj_mat){
 }
 
 build_Je <- function(adj_mat){
-  Je = drop0(1*((adj_mat+t(adj_mat)) > 0))
+  Id = build_Id(adj_mat)
+  Je = drop0(1*(Id + (adj_mat+t(adj_mat)) > 0))
 }

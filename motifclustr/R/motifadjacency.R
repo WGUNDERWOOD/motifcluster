@@ -143,7 +143,7 @@ get_motif_names <- function(){
     motif_names = c(motif_names, motif_name)
   }
 
-  motif_names = c(motif_names, c("coll", "expa", "path"))
+  motif_names = c(motif_names, c("coll", "expa"))
 
   return(motif_names)
 }

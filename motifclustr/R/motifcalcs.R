@@ -633,6 +633,11 @@ mam_M10 <- function(adj_mat, motif_type, weight_type, method){
       }
 
       if(motif_type == "struc"){
+        Js = build_Js(adj_mat)
+        Je = build_Je(adj_mat)
+        C <- a_one_b(Js, Js) - Js*(Je%*%Js)
+        Cprime <- Js%*%t(Js) - Je*(Js%*%t(Js))
+        return(drop0(C + t(C) + Cprime))
       }
     }
 
@@ -726,7 +731,6 @@ mam_M11 <- function(adj_mat, motif_type, weight_type, method){
         Jd = build_Jd(adj_mat)
         Je = build_Je(adj_mat)
         Js = build_Js(adj_mat)
-        C <- Jd*(Js%*%Jn) + Jn*(Jd%*%Js) + Js*(Jd%*%Jn)
         C <- a_b_one(Jd,Js) - Jd*(Js%*%Je)
         C <- C + Jd%*%Js - Je*(Jd%*%Js)
         C <- C + a_b_one(Js,Jd) - Js*(Jd%*%Je)
@@ -824,7 +828,6 @@ mam_M12 <- function(adj_mat, motif_type, weight_type, method){
         Jd = build_Jd(adj_mat)
         Je = build_Je(adj_mat)
         Js = build_Js(adj_mat)
-        C <- Jd*(Jn%*%Js) + Jn*(Js%*%Jd) + Js*(Jn%*%Jd)
         C <- a_one_b(Jd,Js) - Jd*(Je%*%Js)
         C <- C + Js%*%Jd - Je*(Js%*%Jd)
         C <- C + a_one_b(Js,Jd) - Js*(Je%*%Jd)
@@ -991,7 +994,7 @@ mam_coll <- function(adj_mat, motif_type, weight_type, method){
 
       if(motif_type == "struc"){
         Js = build_Js(adj_mat)
-        Id = build_Id(adj_mat)
+        Je = build_Je(adj_mat)
         C <- Js%*%t(Js) - Je*(Js%*%t(Js))
         return(drop0(C))
       }
@@ -1027,9 +1030,9 @@ mam_expa <- function(adj_mat, motif_type, weight_type, method){
       }
 
       if(motif_type == "struc"){
-        J = build_J(adj_mat)
+        Js = build_Js(adj_mat)
         J0 = build_J0(adj_mat)
-        C <- J0*(t(J)%*%J)
+        C <- J0*(t(Js)%*%Js)
         return(C)
       }
     }
@@ -1072,7 +1075,7 @@ mam_expa <- function(adj_mat, motif_type, weight_type, method){
 
       if(motif_type == "struc"){
         Js = build_Js(adj_mat)
-        Id = build_Id(adj_mat)
+        Je = build_Je(adj_mat)
         C <- t(Js)%*%Js - Je*(t(Js)%*%Js)
         return(drop0(C))
       }
