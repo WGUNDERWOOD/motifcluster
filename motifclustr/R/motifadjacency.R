@@ -246,6 +246,7 @@ mam_M2 <- function(adj_mat, motif_type, weight_type){
     if(motif_type == "func"){
       J = build_J(adj_mat)
       Jd = build_Jd(adj_mat)
+      Gd = build_Gd(adj_mat)
       G = build_G(adj_mat)
       C <- t(J)*(Jd%*%G) + t(J)*(Gd%*%J) + t(G)*(Jd%*%J)
       C <- C + t(J)*(J%*%Gd) + t(J)*(G%*%Jd) + t(G)*(J%*%Jd)
@@ -257,6 +258,7 @@ mam_M2 <- function(adj_mat, motif_type, weight_type){
       Js = build_Js(adj_mat)
       Jd = build_Jd(adj_mat)
       Gs = build_Gs(adj_mat)
+      Gd = build_Gd(adj_mat)
       C <- t(Js)*(Jd%*%Gs) + t(Js)*(Gd%*%Js) + t(Gs)*(Jd%*%Js)
       C <- C + t(Js)*(Js%*%Gd) + t(Js)*(Gs%*%Jd) + t(Gs)*(Js%*%Jd)
       C <- C + Jd*(Js%*%Gs) + Jd*(Gs%*%Js) + Gd*(Js%*%Js)
