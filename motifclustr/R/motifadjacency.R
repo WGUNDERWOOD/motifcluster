@@ -397,7 +397,7 @@ mam_M5 <- function(adj_mat, motif_type, weight_type){
       C <- J*(J%*%G) + J*(G%*%J) + G*(J%*%J)
       C <- C + J*(J%*%t(G)) + J*(G%*%t(J)) + G*(J%*%t(J))
       C <- C + J*(t(J)%*%G) + J*(t(G)%*%J) + G*(t(J)%*%J)
-      motif_adj_mat <- (C + t(C)) / 3
+      return((C + t(C)) / 3)
     }
 
     if(motif_type == "struc"){
@@ -406,7 +406,7 @@ mam_M5 <- function(adj_mat, motif_type, weight_type){
       C <- Js*(Js%*%Gs) + Js*(Gs%*%Js) + Gs*(Js%*%Js)
       C <- C + Js*(Js%*%t(Gs)) + Js*(Gs%*%t(Js)) + Gs*(Js%*%t(Js))
       C <- C + Js*(t(Js)%*%Gs) + Js*(t(Gs)%*%Js) + Gs*(t(Js)%*%Js)
-      motif_adj_mat <- (C + t(C)) / 3
+      return((C + t(C)) / 3)
     }
   }
 

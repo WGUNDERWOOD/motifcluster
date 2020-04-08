@@ -673,49 +673,49 @@ test_that("build_motif_adjacency_matrix returns correct mean-weighted functional
   ), nrow=12, byrow=TRUE)) / 6
 
   ans$M5 = drop0(matrix(c(
-    0,  2,  0,  0,  2,  0,  0,  0,  0,  0,  0,  0,
-    2,  0,  3,  0,  8,  9,  0,  0,  0,  0,  0,  0,
-    0,  3,  0,  0,  0,  5,  2,  0,  0,  0,  0,  0,
+    0, 23,  0,  0, 23,  0,  0,  0,  0,  0,  0,  0,
+   23,  0, 60,  0,182,219,  0,  0,  0,  0,  0,  0,
+    0, 60,  0,  0,  0,131, 71,  0,  0,  0,  0,  0,
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
-    2,  8,  0,  0,  0,  7,  0,  0,  1,  2,  0,  0,
-    0,  9,  5,  0,  7,  0,  2,  0,  0,  1,  0,  0,
-    0,  0,  2,  0,  0,  2,  0,  0,  0,  0,  0,  0,
+   23,182,  0,  0,  0,212,  0,  0, 61,114,  0,  0,
+    0,219,131,  0,212,  0, 71,  0,  0, 53,  0,  0,
+    0,  0, 71,  0,  0, 71,  0,  0,  0,  0,  0,  0,
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
-    0,  0,  0,  0,  1,  0,  0,  0,  0,  1,  0,  0,
-    0,  0,  0,  0,  2,  1,  0,  0,  1,  0,  0,  0,
+    0,  0,  0,  0, 61,  0,  0,  0,  0, 61,  0,  0,
+    0,  0,  0,  0,114, 53,  0,  0, 61,  0,  0,  0,
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0
-  ), nrow=12, byrow=TRUE))
+  ), nrow=12, byrow=TRUE)) / 3
 
   ans$M6 = drop0(matrix(c(
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
-    0,  0,  1,  0,  3,  4,  0,  0,  0,  0,  0,  0,
-    0,  1,  0,  0,  0,  2,  1,  0,  0,  0,  0,  0,
+    0,  0, 30,  0,106,136,  0,  0,  0,  0,  0,  0,
+    0, 30,  0,  0,  0, 75, 45,  0,  0,  0,  0,  0,
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
-    0,  3,  0,  0,  0,  3,  0,  0,  0,  0,  0,  0,
-    0,  4,  2,  0,  3,  0,  1,  0,  0,  0,  0,  0,
-    0,  0,  1,  0,  0,  1,  0,  0,  0,  0,  0,  0,
+    0,106,  0,  0,  0,106,  0,  0,  0,  0,  0,  0,
+    0,136, 75,  0,106,  0, 45,  0,  0,  0,  0,  0,
+    0,  0, 45,  0,  0, 45,  0,  0,  0,  0,  0,  0,
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0
-  ), nrow=12, byrow=TRUE))
+  ), nrow=12, byrow=TRUE)) / 4
 
   ans$M7 = drop0(matrix(c(
-    0,  1,  0,  0,  1,  0,  0,  0,  0,  0,  0,  0,
-    1,  0,  1,  0,  4,  4,  0,  0,  0,  0,  0,  0,
-    0,  1,  0,  0,  0,  1,  0,  0,  0,  0,  0,  0,
+    0, 17,  0,  0, 17,  0,  0,  0,  0,  0,  0,  0,
+   17,  0, 27,  0,123,133,  0,  0,  0,  0,  0,  0,
+    0, 27,  0,  0,  0, 27,  0,  0,  0,  0,  0,  0,
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
-    1,  4,  0,  0,  0,  3,  0,  0,  0,  0,  0,  0,
-    0,  4,  1,  0,  3,  0,  0,  0,  0,  0,  0,  0,
+   17,123,  0,  0,  0,106,  0,  0,  0,  0,  0,  0,
+    0,133, 27,  0,106,  0,  0,  0,  0,  0,  0,  0,
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0
-  ), nrow=12, byrow=TRUE))
+  ), nrow=12, byrow=TRUE)) / 4
 
   ans$M8 = drop0(matrix(c(
     0,  4,  1,  0,  5,  2,  0,  0,  1,  1,  0,  0,
@@ -840,7 +840,7 @@ test_that("build_motif_adjacency_matrix returns correct mean-weighted functional
   # compare calculations with answers
   motifs = get_motif_names()
   #for(i in 1:length(motifs)){
-  for(i in 6){
+  for(i in 9){
 
     MAM_densematrix_densemethod = build_motif_adjacency_matrix(
       adj_mat_dense, motifs[i], "func", "mean", "dense")
@@ -852,8 +852,8 @@ test_that("build_motif_adjacency_matrix returns correct mean-weighted functional
       #adj_mat_sparse, motifs[i], "func", "mean", "sparse")
 
     print(motifs[i])
-    print(6*MAM_densematrix_densemethod)
-    print(6*ans[[motifs[i]]])
+    print(4*MAM_densematrix_densemethod)
+    print(4*ans[[motifs[i]]])
 
     expect_equal(MAM_densematrix_densemethod, ans[[motifs[i]]])
     expect_equal(MAM_sparsematrix_densemethod, ans[[motifs[i]]])
