@@ -112,3 +112,14 @@ build_Je <- function(adj_mat){
   Id = build_Id(adj_mat)
   Je = drop0(1*(Id + (adj_mat+t(adj_mat)) > 0))
 }
+
+#' Build product adjacency matrix
+#'
+#' Build the sparse product adjacency matrix Jp from a graph adjacency matrix.
+#' @param adj_mat Original adjacency matrix.
+#' @return A product adjacency matrix Jp in sparse form.
+
+build_Jp <- function(adj_mat){
+  Gp = drop0_killdiag(adj_mat*t(adj_mat))
+  return(Gp)
+}
