@@ -156,8 +156,8 @@ mam_Md <- function(adj_mat, weight_type){
   }
 
   if(weight_type == "product"){
-    G = build_G(adj_mat)
-    return(G * t(G))
+    Gp = build_Gp(adj_mat)
+    return(Gp)
   }
 }
 
@@ -269,15 +269,15 @@ mam_M2 <- function(adj_mat, motif_type, weight_type){
   if(weight_type == "product"){
     if(motif_type == "func"){
       G = build_G(adj_mat)
-      Gd = build_Gd(adj_mat)
-      C <- t(G)*(Gd%*%G) + t(G)*(G%*%Gd) + Gd*(G%*%G)
+      Gp = build_Gp(adj_mat)
+      C <- t(G)*(Gp%*%G) + t(G)*(G%*%Gp) + Gp*(G%*%G)
       return(C + t(C))
     }
 
     if(motif_type == "struc"){
       Gs = build_Gs(adj_mat)
-      Gd = build_Gd(adj_mat)
-      C <- t(Gs)*(Gd%*%Gs) + t(Gs)*(Gs%*%Gd) + Gd*(Gs%*%Gs)
+      Gp = build_Gp(adj_mat)
+      C <- t(Gs)*(Gp%*%Gs) + t(Gs)*(Gs%*%Gp) + Gp*(Gs%*%Gs)
       return(C + t(C))
     }
   }
@@ -336,15 +336,15 @@ mam_M3 <- function(adj_mat, motif_type, weight_type){
   if(weight_type == "product"){
     if(motif_type == "func"){
       G = build_G(adj_mat)
-      Gd = build_Gd(adj_mat)
-      C <- G*(Gd%*%Gd) + Gd*(Gd%*%G) + Gd*(G%*%Gd)
+      Gp = build_Gp(adj_mat)
+      C <- G*(Gp%*%Gp) + Gp*(Gp%*%G) + Gp*(G%*%Gp)
       return(C + t(C))
     }
 
     if(motif_type == "struc"){
       Gs = build_Gs(adj_mat)
-      Gd = build_Gd(adj_mat)
-      C <- Gs*(Gd%*%Gd) + Gd*(Gd%*%Gs) + Gd*(Gs%*%Gd)
+      Gp = build_Gp(adj_mat)
+      C <- Gs*(Gp%*%Gp) + Gp*(Gp%*%Gs) + Gp*(Gs%*%Gp)
       return(C + t(C))
     }
   }
@@ -371,8 +371,8 @@ mam_M4 <- function(adj_mat, weight_type){
   }
 
   if(weight_type == "product"){
-    Gd = build_Gd(adj_mat)
-    return(Gd*(Gd%*%Gd))
+    Gp = build_Gp(adj_mat)
+    return(Gp*(Gp%*%Gp))
   }
 }
 
@@ -488,17 +488,17 @@ mam_M6 <- function(adj_mat, motif_type, weight_type){
   if(weight_type == "product"){
     if(motif_type == "func"){
       G = build_G(adj_mat)
-      Gd = build_Gd(adj_mat)
-      C <- G*(G%*%Gd)
-      Cprime <- Gd*(t(G)%*%G)
+      Gp = build_Gp(adj_mat)
+      C <- G*(G%*%Gp)
+      Cprime <- Gp*(t(G)%*%G)
       return(C + t(C) + Cprime)
     }
 
     if(motif_type == "struc"){
       Gs = build_Gs(adj_mat)
-      Gd = build_Gd(adj_mat)
-      C <- Gs*(Gs%*%Gd)
-      Cprime <- Gd*(t(Gs)%*%Gs)
+      Gp = build_Gp(adj_mat)
+      C <- Gs*(Gs%*%Gp)
+      Cprime <- Gp*(t(Gs)%*%Gs)
       return(C + t(C) + Cprime)
     }
   }
@@ -557,17 +557,17 @@ mam_M7 <- function(adj_mat, motif_type, weight_type){
   if(weight_type == "product"){
     if(motif_type == "func"){
       G = build_G(adj_mat)
-      Gd = build_Gd(adj_mat)
-      C <- G*(Gd%*%G)
-      Cprime <- Gd*(G%*%t(G))
+      Gp = build_Gp(adj_mat)
+      C <- G*(Gp%*%G)
+      Cprime <- Gp*(G%*%t(G))
       return(C + t(C) + Cprime)
     }
 
     if(motif_type == "struc"){
       Gs = build_Gs(adj_mat)
-      Gd = build_Gd(adj_mat)
-      C <- Gs*(Gd%*%Gs)
-      Cprime <- Gd*(Gs%*%t(Gs))
+      Gp = build_Gp(adj_mat)
+      C <- Gs*(Gp%*%Gs)
+      Cprime <- Gp*(Gs%*%t(Gs))
       return(C + t(C) + Cprime)
     }
   }
@@ -880,9 +880,19 @@ mam_M10 <- function(adj_mat, motif_type, weight_type, method){
 
     if(weight_type == "product"){
       if(motif_type == "func"){
+        G = build_G(adj_mat)
+        Jn = build_Jn(adj_mat)
+        C <- G*(Jn%*%G)
+        Cprime <- Jn*(G%*%t(G))
+        return(C + t(C) + Cprime)
       }
 
       if(motif_type == "struc"){
+        Gs = build_Gs(adj_mat)
+        J0 = build_J0(adj_mat)
+        C <- Gs*(J0%*%Gs)
+        Cprime <- J0*(Gs%*%t(Gs))
+        return(C + t(C) + Cprime)
       }
     }
   }
@@ -928,9 +938,19 @@ mam_M10 <- function(adj_mat, motif_type, weight_type, method){
 
     if(weight_type == "product"){
       if(motif_type == "func"){
+        G = build_G(adj_mat)
+        Id = build_Id(adj_mat)
+        C <- a_one_b(G, G) - G*G
+        Cprime <- G%*%t(G) - Id*(G%*%t(G))
+        return(drop0(C + t(C) + Cprime))
       }
 
       if(motif_type == "struc"){
+        Gs = build_Gs(adj_mat)
+        Je = build_Je(adj_mat)
+        C <- a_one_b(Gs, Gs) - Gs*(Je%*%Gs)
+        Cprime <- Gs%*%t(Gs) - Je*(Gs%*%t(Gs))
+        return(drop0(C + t(C) + Cprime))
       }
     }
   }
