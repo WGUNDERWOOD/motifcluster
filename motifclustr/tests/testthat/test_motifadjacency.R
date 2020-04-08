@@ -1288,33 +1288,33 @@ test_that("build_motif_adjacency_matrix returns correct product-weighted functio
   ), nrow=12, byrow=TRUE))
 
   ans$M8 = drop0(matrix(c(
-    0,  4,  1,  0,  5,  2,  0,  0,  1,  1,  0,  0,
-    4,  0,  4,  0,  8,  7,  0,  0,  1,  1,  1,  0,
-    1,  4,  0,  1,  2,  5,  3,  1,  0,  0,  1,  0,
-    0,  0,  1,  0,  0,  1,  3,  1,  0,  0,  0,  0,
-    5,  8,  2,  0,  0,  8,  0,  0,  4,  4,  1,  0,
-    2,  7,  5,  1,  8,  0,  3,  1,  1,  1,  3,  0,
-    0,  0,  3,  3,  0,  3,  0,  3,  0,  0,  0,  0,
-    0,  0,  1,  1,  0,  1,  3,  0,  0,  0,  0,  0,
-    1,  1,  0,  0,  4,  1,  0,  0,  0,  1,  0,  0,
-    1,  1,  0,  0,  4,  1,  0,  0,  1,  0,  0,  0,
-    0,  1,  1,  0,  1,  3,  0,  0,  0,  0,  0,  0,
-    0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0
+    0, 54,  6,  0, 236,  72,  0,  0, 72, 76,  0,  0,
+   54,  0,111,  0, 444, 459,  0,  0, 90, 95,147,  0,
+    6,111,  0,132, 135, 558,484,187,  0,  0,189,  0,
+    0,  0,132,  0,   0, 180,516,204,  0,  0,  0,  0,
+  236,444,135,  0,   0,1173,  0,  0,756,779,273,  0,
+   72,459,558,180,1173,   0,600,255,252,266,609,  0,
+    0,  0,484,516,   0, 600,  0,646,  0,  0,  0,  0,
+    0,  0,187,204,   0, 255,646,  0,  0,  0,  0,  0,
+   72, 90,  0,  0, 756, 252,  0,  0,  0,342,  0,  0,
+   76, 95,  0,  0, 779, 266,  0,  0,342,  0,  0,  0,
+    0,147,189,  0, 273, 609,  0,  0,  0,  0,  0,  0,
+    0,  0,  0,  0,   0,   0,  0,  0,  0,  0,  0,  0
   ), nrow=12, byrow=TRUE))
 
   ans$M9 = drop0(matrix(c(
-    0,  3,  0,  0,  3,  2,  0,  0,  0,  0,  0,  0,
-    3,  0,  5,  0, 11, 14,  1,  0,  1,  2,  1,  0,
-    0,  5,  0,  0,  3, 10,  5,  1,  0,  1,  2,  1,
-    0,  0,  0,  0,  0,  0,  3,  1,  0,  0,  1,  1,
-    3, 11,  3,  0,  0, 15,  1,  0,  3,  5,  1,  0,
-    2, 14, 10,  0, 15,  0,  9,  1,  2,  7,  7,  1,
-    0,  1,  5,  3,  1,  9,  0,  5,  0,  0,  6,  4,
-    0,  0,  1,  1,  0,  1,  5,  0,  0,  0,  1,  1,
-    0,  1,  0,  0,  3,  2,  0,  0,  0,  2,  0,  0,
-    0,  2,  1,  0,  5,  7,  0,  0,  2,  0,  1,  0,
-    0,  1,  2,  1,  1,  7,  6,  1,  0,  1,  0,  0,
-    0,  0,  1,  1,  0,  1,  4,  1,  0,  0,  0,  0
+    0,  48,   0,  0,  86,  66,   0,   0,  0,   0,   0,   0,
+   48,   0, 208,  0, 704,1053, 105,   0,108, 254, 168,   0,
+    0, 208,   0,  0, 271,1084, 916, 176,  0, 180, 452, 253,
+    0,   0,   0,  0,   0,   0, 732, 192,  0,   0, 264, 276,
+   86, 704, 271,  0,   0,2351, 195,   0,774,1433, 294,   0,
+   66,1053,1084,  0,2351,   0,2237, 240,714,2107,2199, 345,
+    0, 105, 916,732, 195,2237,   0,1373,  0,   0,1987,1265,
+    0,   0, 176,192,   0, 240,1373,   0,  0,   0, 374, 391,
+    0, 108,   0,  0, 774, 714,   0,   0,  0, 912,   0,   0,
+    0, 254, 180,  0,1433,2107,   0,   0,912,   0, 420,   0,
+    0, 168, 452,264, 294,2199,1987, 374,  0, 420,   0,   0,
+    0,   0, 253,276,   0, 345,1265, 391,  0,   0,   0,   0
   ), nrow=12, byrow=TRUE))
 
   ans$M10 = drop0(matrix(c(
@@ -1420,6 +1420,11 @@ test_that("build_motif_adjacency_matrix returns correct product-weighted functio
     #MAM_sparsematrix_sparsemethod = build_motif_adjacency_matrix(
       #adj_mat_sparse, motifs[i], "func", "product", "sparse")
 
+    expect_equal(MAM_densematrix_densemethod, ans[[motifs[i]]])
+    expect_equal(MAM_sparsematrix_densemethod, ans[[motifs[i]]])
+    #expect_equal(MAM_densematrix_sparsemethod, ans[[motifs[i]]])
+    #expect_equal(MAM_sparsematrix_sparsemethod, ans[[motifs[i]]])
+
     if(!all(ans[[motifs[i]]] == MAM_densematrix_densemethod)){
       print(motifs[i])
       print(MAM_densematrix_densemethod)
@@ -1427,10 +1432,6 @@ test_that("build_motif_adjacency_matrix returns correct product-weighted functio
       break
     }
 
-    expect_equal(MAM_densematrix_densemethod, ans[[motifs[i]]])
-    expect_equal(MAM_sparsematrix_densemethod, ans[[motifs[i]]])
-    #expect_equal(MAM_densematrix_sparsemethod, ans[[motifs[i]]])
-    #expect_equal(MAM_sparsematrix_sparsemethod, ans[[motifs[i]]])
   }
 
 })
