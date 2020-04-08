@@ -1,4 +1,4 @@
-# build_indicator_matrices
+context("Indicator matrices")
 
 test_that("build_indicator_matrices returns correct matrices", {
 

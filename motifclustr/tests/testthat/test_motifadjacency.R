@@ -1,7 +1,6 @@
-context("Motif adjacency")
+context("Motif adjacency matrices")
 
 # build_motif_adjacency_matrix
-# test against igraph too?
 
 test_that("build_motif_adjacency_matrix returns correct unweighted functional matrix", {
 
@@ -1713,36 +1712,4 @@ test_that("build_motif_adjacency_matrix returns correct product-weighted structu
 
   }
 
-})
-
-# get_largest_component
-
-test_that("get_largest_component returns correct indices", {
-
-  adj_mat_dense = matrix(c(
-    0,0,0,0,0,
-    0,0,1,0,0,
-    0,0,0,0,2,
-    3,0,0,0,0,
-    0,4,0,0,0
-  ), nrow=5, byrow=TRUE)
-  adj_mat_sparse = drop0(adj_mat_dense)
-
-  ans = c(2,3,5)
-
-  expect_equal(get_largest_component(adj_mat_dense), ans)
-  expect_equal(get_largest_component(adj_mat_sparse), ans)
-})
-
-# drop0_killdiag
-
-test_that("drop0_killdiag returns correct matrix", {
-
-  adj_mat_dense = matrix(-1:7, nrow=3)
-  adj_mat_sparse = drop0(adj_mat_dense)
-
-  ans = drop0(matrix(c(0,0,1,2,0,4,5,6,0), nrow=3))
-
-  expect_equal(drop0_killdiag(adj_mat_dense), ans)
-  expect_equal(drop0_killdiag(adj_mat_sparse), ans)
 })
