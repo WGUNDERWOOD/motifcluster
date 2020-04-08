@@ -110,7 +110,8 @@ build_Id <- function(adj_mat){
 
 build_Je <- function(adj_mat){
   Id = build_Id(adj_mat)
-  Je = drop0(1*(Id + (adj_mat+t(adj_mat)) > 0))
+  Je = drop0(1*(Id + ((adj_mat+t(adj_mat)) > 0)))
+  return(Je)
 }
 
 #' Build product adjacency matrix
