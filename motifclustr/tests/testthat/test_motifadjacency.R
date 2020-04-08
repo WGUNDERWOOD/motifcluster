@@ -779,86 +779,86 @@ test_that("build_motif_adjacency_matrix returns correct mean-weighted functional
 
   ans$M12 = drop0(matrix(c(
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
-    0,  0,  3,  0,  6, 11,  1,  0,  0,  1,  0,  0,
-    0,  3,  0,  0,  2,  8,  2,  0,  0,  1,  0,  0,
+    0,  0, 74,  0,159,298, 30,  0,  0, 35,  0,  0,
+    0, 74,  0,  0, 70,247, 64,  0,  0, 39,  0,  0,
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
-    0,  6,  2,  0,  0, 10,  1,  0,  0,  1,  0,  0,
-    0, 11,  8,  0, 10,  0,  4,  0,  0,  3,  0,  0,
-    0,  1,  2,  0,  1,  4,  0,  2,  0,  0,  1,  1,
-    0,  0,  0,  0,  0,  0,  2,  0,  0,  0,  1,  1,
+    0,159, 70,  0,  0,318, 42,  0,  0, 47,  0,  0,
+    0,298,247,  0,318,  0,136,  0,  0,121,  0,  0,
+    0, 30, 64,  0, 42,136,  0,111,  0,  0, 55, 56,
+    0,  0,  0,  0,  0,  0,111,  0,  0,  0, 55, 56,
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
-    0,  1,  1,  0,  1,  3,  0,  0,  0,  0,  0,  0,
-    0,  0,  0,  0,  0,  0,  1,  1,  0,  0,  0,  0,
-    0,  0,  0,  0,  0,  0,  1,  1,  0,  0,  0,  0
-  ), nrow=12, byrow=TRUE))
+    0, 35, 39,  0, 47,121,  0,  0,  0,  0,  0,  0,
+    0,  0,  0,  0,  0,  0, 55, 55,  0,  0,  0,  0,
+    0,  0,  0,  0,  0,  0, 56, 56,  0,  0,  0,  0
+  ), nrow=12, byrow=TRUE)) / 3
 
   ans$M13 = drop0(matrix(c(
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
-    0,  0,  1,  0,  3,  4,  0,  0,  0,  0,  0,  0,
-    0,  1,  0,  0,  1,  2,  0,  0,  0,  0,  0,  0,
+    0,  0, 34,  0,106,140,  0,  0,  0,  0,  0,  0,
+    0, 34,  0,  0, 46, 80,  0,  0,  0,  0,  0,  0,
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
-    0,  3,  1,  0,  0,  4,  0,  0,  0,  0,  0,  0,
-    0,  4,  2,  0,  4,  0,  0,  0,  0,  0,  0,  0,
+    0,106, 46,  0,  0,152,  0,  0,  0,  0,  0,  0,
+    0,140, 80,  0,152,  0,  0,  0,  0,  0,  0,  0,
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0
-  ), nrow=12, byrow=TRUE))
+  ), nrow=12, byrow=TRUE)) / 4
 
   ans$Mcoll = drop0(matrix(c(
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
-    0,  0,  1,  0,  2,  2,  2,  0,  0,  1,  0,  0,
-    0,  1,  0,  0,  1,  0,  1,  0,  0,  1,  0,  0,
+    0,  0, 18,  0, 28, 31, 37,  0,  0, 28,  0,  0,
+    0, 18,  0,  0, 24,  0, 25,  0,  0, 30,  0,  0,
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
-    0,  2,  1,  0,  0,  1,  1,  0,  1,  1,  0,  0,
-    0,  2,  0,  0,  1,  0,  1,  0,  0,  0,  0,  0,
-    0,  2,  1,  0,  1,  1,  0,  0,  0,  1,  0,  0,
-    0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  1,
-    0,  0,  0,  0,  1,  0,  0,  0,  0,  0,  0,  0,
-    0,  1,  1,  0,  1,  0,  1,  0,  0,  0,  0,  0,
-    0,  0,  0,  0,  0,  0,  0,  1,  0,  0,  0,  1,
-    0,  0,  0,  0,  0,  0,  0,  1,  0,  0,  1,  0
-  ), nrow=12, byrow=TRUE))
+    0, 28, 24,  0,  0, 12, 29,  0, 43, 34,  0,  0,
+    0, 31,  0,  0, 12,  0, 20,  0,  0,  0,  0,  0,
+    0, 37, 25,  0, 29, 20,  0,  0,  0, 35,  0,  0,
+    0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 38, 39,
+    0,  0,  0,  0, 43,  0,  0,  0,  0,  0,  0,  0,
+    0, 28, 30,  0, 34,  0, 35,  0,  0,  0,  0,  0,
+    0,  0,  0,  0,  0,  0,  0, 38,  0,  0,  0, 45,
+    0,  0,  0,  0,  0,  0,  0, 39,  0,  0, 45,  0
+  ), nrow=12, byrow=TRUE)) / 2
 
   ans$Mexpa = drop0(matrix(c(
-    0,  1,  1,  0,  1,  2,  0,  0,  1,  1,  0,  0,
-    1,  0,  1,  0,  1,  1,  0,  0,  1,  1,  1,  0,
-    1,  1,  0,  1,  2,  2,  0,  1,  0,  0,  1,  0,
-    0,  0,  1,  0,  0,  1,  0,  1,  0,  0,  0,  0,
-    1,  1,  2,  0,  0,  1,  0,  0,  0,  0,  1,  0,
-    2,  1,  2,  1,  1,  0,  0,  1,  1,  1,  0,  0,
+    0,  9,  5,  0,  8, 28,  0,  0, 22, 23,  0,  0,
+    9,  0, 16,  0, 20, 19,  0,  0, 23, 24, 28,  0,
+    5, 16,  0, 23, 31, 37,  0, 28,  0,  0, 30,  0,
+    0,  0, 23,  0,  0, 27,  0, 29,  0,  0,  0,  0,
+    8, 20, 31,  0,  0, 14,  0,  0,  0,  0, 34,  0,
+   28, 19, 37, 27, 14,  0,  0, 32, 32, 33,  0,  0,
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
-    0,  0,  1,  1,  0,  1,  0,  0,  0,  0,  0,  0,
-    1,  1,  0,  0,  0,  1,  0,  0,  0,  1,  0,  0,
-    1,  1,  0,  0,  0,  1,  0,  0,  1,  0,  0,  0,
-    0,  1,  1,  0,  1,  0,  0,  0,  0,  0,  0,  0,
+    0,  0, 28, 29,  0, 32,  0,  0,  0,  0,  0,  0,
+   22, 23,  0,  0,  0, 32,  0,  0,  0, 37,  0,  0,
+   23, 24,  0,  0,  0, 33,  0,  0, 37,  0,  0,  0,
+    0, 28, 30,  0, 34,  0,  0,  0,  0,  0,  0,  0,
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0
-  ), nrow=12, byrow=TRUE))
+  ), nrow=12, byrow=TRUE)) / 2
 
   # compare calculations with answers
   motifs = get_motif_names()
   #for(i in 1:length(motifs)){
-  for(i in 13){
+  for(i in 10){
 
     MAM_densematrix_densemethod = build_motif_adjacency_matrix(
       adj_mat_dense, motifs[i], "func", "mean", "dense")
     MAM_sparsematrix_densemethod = build_motif_adjacency_matrix(
       adj_mat_sparse, motifs[i], "func", "mean", "dense")
-    #MAM_densematrix_sparsemethod = build_motif_adjacency_matrix(
-      #adj_mat_dense, motifs[i], "func", "mean", "sparse")
-    #MAM_sparsematrix_sparsemethod = build_motif_adjacency_matrix(
-      #adj_mat_sparse, motifs[i], "func", "mean", "sparse")
+    MAM_densematrix_sparsemethod = build_motif_adjacency_matrix(
+      adj_mat_dense, motifs[i], "func", "mean", "sparse")
+    MAM_sparsematrix_sparsemethod = build_motif_adjacency_matrix(
+      adj_mat_sparse, motifs[i], "func", "mean", "sparse")
 
     print(motifs[i])
-    print(3*MAM_densematrix_densemethod)
-    print(3*ans[[motifs[i]]])
+    print(2*MAM_densematrix_densemethod)
+    print(2*ans[[motifs[i]]])
 
     expect_equal(MAM_densematrix_densemethod, ans[[motifs[i]]])
     expect_equal(MAM_sparsematrix_densemethod, ans[[motifs[i]]])
-    #expect_equal(MAM_densematrix_sparsemethod, ans[[motifs[i]]])
-    #expect_equal(MAM_sparsematrix_sparsemethod, ans[[motifs[i]]])
+    expect_equal(MAM_densematrix_sparsemethod, ans[[motifs[i]]])
+    expect_equal(MAM_sparsematrix_sparsemethod, ans[[motifs[i]]])
   }
 
 })
