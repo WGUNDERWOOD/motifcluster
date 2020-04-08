@@ -718,19 +718,19 @@ test_that("build_motif_adjacency_matrix returns correct mean-weighted functional
   ), nrow=12, byrow=TRUE)) / 4
 
   ans$M8 = drop0(matrix(c(
-    0,  4,  1,  0,  5,  2,  0,  0,  1,  1,  0,  0,
-    4,  0,  4,  0,  8,  7,  0,  0,  1,  1,  1,  0,
-    1,  4,  0,  1,  2,  5,  3,  1,  0,  0,  1,  0,
-    0,  0,  1,  0,  0,  1,  3,  1,  0,  0,  0,  0,
-    5,  8,  2,  0,  0,  8,  0,  0,  4,  4,  1,  0,
-    2,  7,  5,  1,  8,  0,  3,  1,  1,  1,  3,  0,
-    0,  0,  3,  3,  0,  3,  0,  3,  0,  0,  0,  0,
-    0,  0,  1,  1,  0,  1,  3,  0,  0,  0,  0,  0,
-    1,  1,  0,  0,  4,  1,  0,  0,  0,  1,  0,  0,
-    1,  1,  0,  0,  4,  1,  0,  0,  1,  0,  0,  0,
-    0,  1,  1,  0,  1,  3,  0,  0,  0,  0,  0,  0,
+    0, 32,  5,  0, 80, 28,  0,  0, 22, 23,  0,  0,
+   32,  0, 41,  0,126,118,  0,  0, 23, 24, 28,  0,
+    5, 41,  0, 23, 31,105, 77, 28,  0,  0, 30,  0,
+    0,  0, 23,  0,  0, 27, 79, 29,  0,  0,  0,  0,
+   80,126, 31,  0,  0,192,  0,  0,114,117, 34,  0,
+   28,118,105, 27,192,  0, 85, 32, 32, 33, 92,  0,
+    0,  0, 77, 79,  0, 85,  0, 89,  0,  0,  0,  0,
+    0,  0, 28, 29,  0, 32, 89,  0,  0,  0,  0,  0,
+   22, 23,  0,  0,114, 32,  0,  0,  0, 37,  0,  0,
+   23, 24,  0,  0,117, 33,  0,  0, 37,  0,  0,  0,
+    0, 28, 30,  0, 34, 92,  0,  0,  0,  0,  0,  0,
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0
-  ), nrow=12, byrow=TRUE))
+  ), nrow=12, byrow=TRUE)) / 2
 
   ans$M9 = drop0(matrix(c(
     0,  3,  0,  0,  3,  2,  0,  0,  0,  0,  0,  0,
@@ -840,7 +840,7 @@ test_that("build_motif_adjacency_matrix returns correct mean-weighted functional
   # compare calculations with answers
   motifs = get_motif_names()
   #for(i in 1:length(motifs)){
-  for(i in 9){
+  for(i in 10){
 
     MAM_densematrix_densemethod = build_motif_adjacency_matrix(
       adj_mat_dense, motifs[i], "func", "mean", "dense")
@@ -852,8 +852,8 @@ test_that("build_motif_adjacency_matrix returns correct mean-weighted functional
       #adj_mat_sparse, motifs[i], "func", "mean", "sparse")
 
     print(motifs[i])
-    print(4*MAM_densematrix_densemethod)
-    print(4*ans[[motifs[i]]])
+    print(2*MAM_densematrix_densemethod)
+    print(2*ans[[motifs[i]]])
 
     expect_equal(MAM_densematrix_densemethod, ans[[motifs[i]]])
     expect_equal(MAM_sparsematrix_densemethod, ans[[motifs[i]]])
