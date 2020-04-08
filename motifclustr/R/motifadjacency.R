@@ -601,25 +601,37 @@ mam_M8 <- function(adj_mat, motif_type, weight_type, method){
       if(motif_type == "func"){
         J <- build_J(adj_mat)
         Id <- build_Id(adj_mat)
-        C <- drop0(a_b_one(J,J) - J*J)
-        Cprime <- drop0(t(J)%*%J - Id*(t(J)%*%J))
-        return(C + t(C) + Cprime)
+        C <- a_b_one(J,J) - J*J
+        Cprime <- t(J)%*%J - Id*(t(J)%*%J)
+        return(drop0(C + t(C) + Cprime))
       }
 
       if(motif_type == "struc"){
         Js <- build_Js(adj_mat)
         Je <- build_Je(adj_mat)
-        C <- drop0(a_b_one(Js,Js) - Js*(Js%*%Je))
-        Cprime <- drop0(t(Js)%*%Js - Je*(t(Js)%*%Js))
-        return(C + t(C) + Cprime)
+        C <- a_b_one(Js,Js) - Js*(Js%*%Je)
+        Cprime <- t(Js)%*%Js - Je*(t(Js)%*%Js)
+        return(drop0(C + t(C) + Cprime))
       }
     }
 
     if(weight_type == "mean"){
       if(motif_type == "func"){
+        J <- build_J(adj_mat)
+        G <- build_G(adj_mat)
+        Id <- build_Id(adj_mat)
+        C <- a_b_one(J,G) - J*G + a_b_one(G,J) - G*J
+        Cprime <- t(J)%*%G - Id*(t(J)%*%G) + t(G)%*%J - Id*(t(G)%*%J)
+        return(drop0(C + t(C) + Cprime) / 2)
       }
 
       if(motif_type == "struc"){
+        Js <- build_Js(adj_mat)
+        Gs <- build_Gs(adj_mat)
+        Je <- build_Je(adj_mat)
+        C <- a_b_one(Js,Gs) - Js*(Gs%*%Je) + a_b_one(Gs,Js) - Gs*(Js%*%Je)
+        Cprime <- t(Js)%*%Gs - Je*(t(Js)%*%Gs) + t(Gs)%*%Js - Je*(t(Gs)%*%Js)
+        return(drop0(C + t(C) + Cprime) / 2)
       }
     }
 
@@ -713,9 +725,22 @@ mam_M9 <- function(adj_mat, motif_type, weight_type, method){
 
     if(weight_type == "mean"){
       if(motif_type == "func"){
+        J = build_J(adj_mat)
+        G = build_G(adj_mat)
+        Id <- build_Id(adj_mat)
+        C = a_one_b(J,t(G)) - 2*J*t(G) + J%*%G + a_one_b(G,t(J)) - 2*G*t(J) + G%*%J
+        C = C - Id*(J%*%G) + a_b_one(J,t(G)) - Id*(G%*%J) + a_b_one(G,t(J))
+        return(drop0(C + t(C)) / 2)
       }
 
       if(motif_type == "struc"){
+        Js = build_Js(adj_mat)
+        Gs = build_Gs(adj_mat)
+        Je = build_Je(adj_mat)
+        C = a_one_b(Js,t(Gs)) - Js*(Je%*%t(Gs)) + a_one_b(Gs,t(Js)) - Gs*(Je%*%t(Js))
+        C = C + Js%*%Gs - Je*(Js%*%Gs) + a_b_one(Js,t(Gs)) - Js*(t(Gs)%*%Je)
+        C = C + Gs%*%Js - Je*(Gs%*%Js) + a_b_one(Gs,t(Js)) - Gs*(t(Js)%*%Je)
+        return(drop0(C + t(C)) / 2)
       }
     }
 
@@ -809,9 +834,21 @@ mam_M10 <- function(adj_mat, motif_type, weight_type, method){
 
     if(weight_type == "mean"){
       if(motif_type == "func"){
+        J = build_J(adj_mat)
+        G = build_G(adj_mat)
+        Id = build_Id(adj_mat)
+        C <- a_one_b(J, G) - J*G + a_one_b(G, J) - G*J
+        Cprime <- J%*%t(G) - Id*(J%*%t(G)) + G%*%t(J) - Id*(G%*%t(J))
+        return(drop0(C + t(C) + Cprime) / 2)
       }
 
       if(motif_type == "struc"){
+        Js = build_Js(adj_mat)
+        Gs = build_Gs(adj_mat)
+        Je = build_Je(adj_mat)
+        C <- a_one_b(Js, Gs) - Js*(Je%*%Gs) + a_one_b(Gs, Js) - Gs*(Je%*%Js)
+        Cprime <- Js%*%t(Gs) - Je*(Js%*%t(Gs)) + Gs%*%t(Js) - Je*(Gs%*%t(Js))
+        return(drop0(C + t(C) + Cprime) / 2)
       }
     }
 
@@ -915,9 +952,27 @@ mam_M11 <- function(adj_mat, motif_type, weight_type, method){
 
     if(weight_type == "mean"){
       if(motif_type == "func"){
+        Jd = build_Jd(adj_mat)
+        Gd = build_Gd(adj_mat)
+        Id = build_Id(adj_mat)
+        J = build_J(adj_mat)
+        G = build_G(adj_mat)
+        C <- a_b_one(Jd,G) - Jd*G + a_b_one(Gd,J) - Gd*J
+        C <- C + Jd%*%G - Id*(Jd%*%G) + Gd%*%J - Id*(Gd%*%J)
+        C <- C + a_b_one(J,Gd) - J*Gd + a_b_one(G,Jd) - G*Jd
+        return(drop0(C + t(C)) / 3)
       }
 
       if(motif_type == "struc"){
+        Jd = build_Jd(adj_mat)
+        Gd = build_Gd(adj_mat)
+        Je = build_Je(adj_mat)
+        Js = build_Js(adj_mat)
+        Gs = build_Gs(adj_mat)
+        C <- a_b_one(Jd,Gs) - Jd*(Gs%*%Je) + a_b_one(Gd,Js) - Gd*(Js%*%Je)
+        C <- C + Jd%*%Gs - Je*(Jd%*%Gs) + Gd%*%Js - Je*(Gd%*%Js)
+        C <- C + a_b_one(Js,Gd) - Js*(Gd%*%Je) + a_b_one(Gs,Jd) - Gs*(Jd%*%Je)
+        return(drop0(C + t(C)) / 3)
       }
     }
 
