@@ -1263,22 +1263,22 @@ mam_M12 <- function(adj_mat, motif_type, weight_type, method){
 
 mam_M13 <- function(adj_mat, motif_type, weight_type, method){
 
-  # TODO exploit symmetries here and below and use t()
-
   if(method == "dense"){
     if(weight_type == "unweighted"){
       if(motif_type == "func"){
         Jd = build_Jd(adj_mat)
         Jn = build_Jn(adj_mat)
-        C <- Jd*(Jd%*%Jn) + Jd*(Jn%*%Jd) + Jn*(Jd%*%Jd)
-        return(C)
+        C <- Jd*(Jd%*%Jn)
+        Cprime <- Jn*(Jd%*%Jd)
+        return(C + t(C) + Cprime)
       }
 
       if(motif_type == "struc"){
         Jd = build_Jd(adj_mat)
         J0 = build_J0(adj_mat)
-        C <- Jd*(Jd%*%J0) + Jd*(J0%*%Jd) + J0*(Jd%*%Jd)
-        return(C)
+        C <- Jd*(Jd%*%J0)
+        Cprime <- J0*(Jd%*%Jd)
+        return(C + t(C) + Cprime)
       }
     }
 
@@ -1302,9 +1302,19 @@ mam_M13 <- function(adj_mat, motif_type, weight_type, method){
 
     if(weight_type == "product"){
       if(motif_type == "func"){
+        Gp = build_Gp(adj_mat)
+        Jn = build_Jn(adj_mat)
+        C <- Gp*(Gp%*%Jn)
+        Cprime <- Jn*(Gp%*%Gp)
+        return(C + t(C) + Cprime)
       }
 
       if(motif_type == "struc"){
+        Gp = build_Gp(adj_mat)
+        J0 = build_J0(adj_mat)
+        C <- Gp*(Gp%*%J0)
+        Cprime <- J0*(Gp%*%Gp)
+        return(C + t(C) + Cprime)
       }
     }
   }
@@ -1314,18 +1324,17 @@ mam_M13 <- function(adj_mat, motif_type, weight_type, method){
       if(motif_type == "func"){
         Jd = build_Jd(adj_mat)
         Id = build_Id(adj_mat)
-        C <- a_b_one(Jd,Jd) - 2*Jd*Jd + a_one_b(Jd,Jd)
-        C <- C + Jd%*%Jd - Id*(Jd%*%Jd)
-        return(drop0(C))
+        C <- a_b_one(Jd,Jd) - Jd*Jd
+        Cprime <- Jd%*%Jd - Id*(Jd%*%Jd)
+        return(drop0(C + t(C) + Cprime))
       }
 
       if(motif_type == "struc"){
         Jd = build_Jd(adj_mat)
         Je = build_Je(adj_mat)
         C <- a_b_one(Jd,Jd) - Jd*(Jd%*%Je)
-        C <- C + a_one_b(Jd,Jd) - Jd*(Je%*%Jd)
-        C <- C + Jd%*%Jd - Je*(Jd%*%Jd)
-        return(drop0(C))
+        Cprime = Jd%*%Jd - Je*(Jd%*%Jd)
+        return(drop0(C + t(C) + Cprime))
       }
     }
 
@@ -1334,11 +1343,9 @@ mam_M13 <- function(adj_mat, motif_type, weight_type, method){
         Jd = build_Jd(adj_mat)
         Gd = build_Gd(adj_mat)
         Id = build_Id(adj_mat)
-        C <- a_b_one(Jd,Gd) - 2*Jd*Gd + a_one_b(Jd,Gd)
-        C <- C + a_b_one(Gd,Jd) - 2*Gd*Jd + a_one_b(Gd,Jd)
+        C <- a_b_one(Jd,Gd) - Jd*Gd + a_b_one(Gd,Jd) - Gd*Jd
         C <- C + Jd%*%Gd - Id*(Jd%*%Gd)
-        C <- C + Gd%*%Jd - Id*(Gd%*%Jd)
-        return(drop0(C) / 4)
+        return(drop0(C + t(C)) / 4)
       }
 
       if(motif_type == "struc"){
@@ -1347,19 +1354,26 @@ mam_M13 <- function(adj_mat, motif_type, weight_type, method){
         Je = build_Je(adj_mat)
         C <- a_b_one(Jd,Gd) - Jd*(Gd%*%Je)
         C <- C + a_b_one(Gd,Jd) - Gd*(Jd%*%Je)
-        C <- C + a_one_b(Jd,Gd) - Jd*(Je%*%Gd)
-        C <- C + a_one_b(Gd,Jd) - Gd*(Je%*%Jd)
         C <- C + Jd%*%Gd - Je*(Jd%*%Gd)
-        C <- C + Gd%*%Jd - Je*(Gd%*%Jd)
-        return(drop0(C) / 4)
+        return(drop0(C + t(C)) / 4)
       }
     }
 
     if(weight_type == "product"){
       if(motif_type == "func"){
+        Gp = build_Gp(adj_mat)
+        Id = build_Id(adj_mat)
+        C <- a_b_one(Gp,Gp) - Gp*Gp
+        Cprime <- Gp%*%Gp - Id*(Gp%*%Gp)
+        return(drop0(C + t(C) + Cprime))
       }
 
       if(motif_type == "struc"){
+        Gp = build_Gp(adj_mat)
+        Je = build_Je(adj_mat)
+        C <- a_b_one(Gp,Gp) - Gp*(Gp%*%Je)
+        Cprime = Gp%*%Gp - Je*(Gp%*%Gp)
+        return(drop0(C + t(C) + Cprime))
       }
     }
   }
@@ -1413,9 +1427,17 @@ mam_Mcoll <- function(adj_mat, motif_type, weight_type, method){
 
     if(weight_type == "product"){
       if(motif_type == "func"){
+        G = build_G(adj_mat)
+        Jn = build_Jn(adj_mat)
+        C <- Jn*(G%*%t(G))
+        return(C)
       }
 
       if(motif_type == "struc"){
+        Gs = build_Gs(adj_mat)
+        J0 = build_J0(adj_mat)
+        C <- J0*(Gs%*%t(Gs))
+        return(C)
       }
     }
   }
@@ -1459,9 +1481,17 @@ mam_Mcoll <- function(adj_mat, motif_type, weight_type, method){
 
     if(weight_type == "product"){
       if(motif_type == "func"){
+        G = build_G(adj_mat)
+        Id = build_Id(adj_mat)
+        C <- G%*%t(G) - Id*(G%*%t(G))
+        return(drop0(C))
       }
 
       if(motif_type == "struc"){
+        Gs = build_Gs(adj_mat)
+        Je = build_Je(adj_mat)
+        C <- Gs%*%t(Gs) - Je*(Gs%*%t(Gs))
+        return(drop0(C))
       }
     }
   }
@@ -1515,9 +1545,17 @@ mam_Mexpa <- function(adj_mat, motif_type, weight_type, method){
 
     if(weight_type == "product"){
       if(motif_type == "func"){
+        G = build_G(adj_mat)
+        Jn = build_Jn(adj_mat)
+        C <- Jn*(t(G)%*%G)
+        return(C)
       }
 
       if(motif_type == "struc"){
+        Gs = build_Gs(adj_mat)
+        J0 = build_J0(adj_mat)
+        C <- J0*(t(Gs)%*%Gs)
+        return(C)
       }
     }
   }
@@ -1561,9 +1599,17 @@ mam_Mexpa <- function(adj_mat, motif_type, weight_type, method){
 
     if(weight_type == "product"){
       if(motif_type == "func"){
+        G = build_G(adj_mat)
+        Id = build_Id(adj_mat)
+        C <- t(G)%*%G - Id*(t(G)%*%G)
+        return(drop0(C))
       }
 
       if(motif_type == "struc"){
+        Gs = build_Gs(adj_mat)
+        Je = build_Je(adj_mat)
+        C <- t(Gs)%*%Gs - Je*(t(Gs)%*%Gs)
+        return(drop0(C))
       }
     }
   }
