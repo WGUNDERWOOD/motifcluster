@@ -335,9 +335,17 @@ mam_M3 <- function(adj_mat, motif_type, weight_type){
 
   if(weight_type == "product"){
     if(motif_type == "func"){
+      G = build_G(adj_mat)
+      Gd = build_Gd(adj_mat)
+      C <- G*(Gd%*%Gd) + Gd*(Gd%*%G) + Gd*(G%*%Gd)
+      return(C + t(C))
     }
 
     if(motif_type == "struc"){
+      Gs = build_Gs(adj_mat)
+      Gd = build_Gd(adj_mat)
+      C <- Gs*(Gd%*%Gd) + Gd*(Gd%*%Gs) + Gd*(Gs%*%Gd)
+      return(C + t(C))
     }
   }
 }
@@ -363,6 +371,8 @@ mam_M4 <- function(adj_mat, weight_type){
   }
 
   if(weight_type == "product"){
+    Gd = build_Gd(adj_mat)
+    return(Gd*(Gd%*%Gd))
   }
 }
 
@@ -412,9 +422,15 @@ mam_M5 <- function(adj_mat, motif_type, weight_type){
 
   if(weight_type == "product"){
     if(motif_type == "func"){
+      G = build_G(adj_mat)
+      C <- G*(G%*%G) + G*(G%*%t(G)) + G*(t(G)%*%G)
+      return(C + t(C))
     }
 
     if(motif_type == "struc"){
+      Gs = build_Gs(adj_mat)
+      C <- Gs*(Gs%*%Gs) + Gs*(Gs%*%t(Gs)) + Gs*(t(Gs)%*%Gs)
+      return(C + t(C))
     }
   }
 }
@@ -471,9 +487,19 @@ mam_M6 <- function(adj_mat, motif_type, weight_type){
 
   if(weight_type == "product"){
     if(motif_type == "func"){
+      G = build_G(adj_mat)
+      Gd = build_Gd(adj_mat)
+      C <- G*(G%*%Gd)
+      Cprime <- Gd*(t(G)%*%G)
+      return(C + t(C) + Cprime)
     }
 
     if(motif_type == "struc"){
+      Gs = build_Gs(adj_mat)
+      Gd = build_Gd(adj_mat)
+      C <- Gs*(Gs%*%Gd)
+      Cprime <- Gd*(t(Gs)%*%Gs)
+      return(C + t(C) + Cprime)
     }
   }
 }
@@ -530,9 +556,19 @@ mam_M7 <- function(adj_mat, motif_type, weight_type){
 
   if(weight_type == "product"){
     if(motif_type == "func"){
+      G = build_G(adj_mat)
+      Gd = build_Gd(adj_mat)
+      C <- G*(Gd%*%G)
+      Cprime <- Gd*(G%*%t(G))
+      return(C + t(C) + Cprime)
     }
 
     if(motif_type == "struc"){
+      Gs = build_Gs(adj_mat)
+      Gd = build_Gd(adj_mat)
+      C <- Gs*(Gd%*%Gs)
+      Cprime <- Gd*(Gs%*%t(Gs))
+      return(C + t(C) + Cprime)
     }
   }
 }
@@ -589,9 +625,19 @@ mam_M8 <- function(adj_mat, motif_type, weight_type, method){
 
     if(weight_type == "product"){
       if(motif_type == "func"){
+        G = build_G(adj_mat)
+        Jn = build_Jn(adj_mat)
+        C <- G*(G%*%Jn)
+        Cprime <- Jn*(t(G)%*%G)
+        return(C + t(C) + Cprime)
       }
 
       if(motif_type == "struc"){
+        Gs = build_Gs(adj_mat)
+        J0 = build_J0(adj_mat)
+        C <- Gs*(Gs%*%J0)
+        Cprime <- J0*(t(Gs)%*%Gs)
+        return(C + t(C) + Cprime)
       }
     }
   }
@@ -637,9 +683,19 @@ mam_M8 <- function(adj_mat, motif_type, weight_type, method){
 
     if(weight_type == "product"){
       if(motif_type == "func"){
+        G <- build_G(adj_mat)
+        Id <- build_Id(adj_mat)
+        C <- a_b_one(G,G) - G*G
+        Cprime <- t(G)%*%G - Id*(t(G)%*%G)
+        return(drop0(C + t(C) + Cprime))
       }
 
       if(motif_type == "struc"){
+        Gs <- build_Gs(adj_mat)
+        Je <- build_Je(adj_mat)
+        C <- a_b_one(Gs,Gs) - Gs*(Gs%*%Je)
+        Cprime <- t(Gs)%*%Gs - Je*(t(Gs)%*%Gs)
+        return(drop0(C + t(C) + Cprime))
       }
     }
   }
@@ -697,9 +753,17 @@ mam_M9 <- function(adj_mat, motif_type, weight_type, method){
 
     if(weight_type == "product"){
       if(motif_type == "func"){
+        G = build_G(adj_mat)
+        Jn = build_Jn(adj_mat)
+        C <- G*(Jn%*%t(G)) + Jn*(G%*%G) + G*(t(G)%*%Jn)
+        return(C + t(C))
       }
 
       if(motif_type == "struc"){
+        Gs = build_Gs(adj_mat)
+        J0 = build_J0(adj_mat)
+        C <- Gs*(J0%*%t(Gs)) + J0*(Gs%*%Gs) + Gs*(t(Gs)%*%J0)
+        return(C + t(C))
       }
     }
   }
@@ -746,9 +810,19 @@ mam_M9 <- function(adj_mat, motif_type, weight_type, method){
 
     if(weight_type == "product"){
       if(motif_type == "func"){
+        G = build_G(adj_mat)
+        Id <- build_Id(adj_mat)
+        C = a_one_b(G,t(G)) - 2*G*t(G) + G%*%G
+        C = C - Id*(G%*%G) + a_b_one(G,t(G))
+        return(drop0(C + t(C)))
       }
 
       if(motif_type == "struc"){
+        Gs = build_Gs(adj_mat)
+        Je = build_Je(adj_mat)
+        C = a_one_b(Gs,t(Gs)) - Gs*(Je%*%t(Gs))
+        C = C + Gs%*%Gs - Je*(Gs%*%Gs) + a_b_one(Gs,t(Gs)) - Gs*(t(Gs)%*%Je)
+        return(drop0(C + t(C)))
       }
     }
   }

@@ -1169,13 +1169,13 @@ test_that("build_motif_adjacency_matrix returns correct product-weighted functio
 
   ans$Md = drop0(matrix(c(
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
-    0,  0,  0,  0,  1,  1,  0,  0,  0,  0,  0,  0,
-    0,  0,  0,  0,  0,  1,  0,  0,  0,  0,  0,  0,
+    0,  0,  0,  0, 30, 56,  0,  0,  0,  0,  0,  0,
+    0,  0,  0,  0,  0, 90,  0,  0,  0,  0,  0,  0,
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
-    0,  1,  0,  0,  0,  1,  0,  0,  0,  0,  0,  0,
-    0,  1,  1,  0,  1,  0,  0,  0,  0,  0,  0,  0,
-    0,  0,  0,  0,  0,  0,  0,  1,  0,  0,  0,  0,
-    0,  0,  0,  0,  0,  0,  1,  0,  0,  0,  0,  0,
+    0, 30,  0,  0,  0,182,  0,  0,  0,  0,  0,  0,
+    0, 56, 90,  0,182,  0,  0,  0,  0,  0,  0,  0,
+    0,  0,  0,  0,  0,  0,  0,272,  0,  0,  0,  0,
+    0,  0,  0,  0,  0,  0,272,  0,  0,  0,  0,  0,
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
@@ -1410,7 +1410,7 @@ test_that("build_motif_adjacency_matrix returns correct product-weighted functio
   # compare calculations with answers
   motifs = get_motif_names()
   #for(i in 1:length(motifs)){
-  for(i in 1){
+  for(i in 1:10){
 
     MAM_densematrix_densemethod = build_motif_adjacency_matrix(
       adj_mat_dense, motifs[i], "func", "product", "dense")
