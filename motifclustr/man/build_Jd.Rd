@@ -13,5 +13,6 @@ build_Jd(adj_mat)
 A double-edge indicator matrix Jd in sparse form.
 }
 \description{
-Build the sparse double-edge indicator matrix Jd from a graph adjacency matrix.
+Build the sparse double-edge indicator matrix Jd from a
+graph adjacency matrix.
 }

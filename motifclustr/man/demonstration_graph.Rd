@@ -12,6 +12,6 @@ adj_mat_dense is the adjacency matrix in dense form.
 adj_mat_sparse is the adjacency matrix in sparse form.
 }
 \description{
-Generate the sparse and dense adjacency matrices of a small weighted directed graph,
-for demonstrating methods and runnign tests.
+Generate the sparse and dense adjacency matrices of a small weighted
+directed graph, for demonstrating methods and running tests.
 }

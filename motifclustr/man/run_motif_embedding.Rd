@@ -28,9 +28,10 @@ One of "func" or "struc".}
 A list with 7 entries:
 adj_mat, the original adjacency matrix;
 motif_adj_mat, the motif adjacency matrix;
-comps, the indices of the largest connected component of the motif adjacency matrix;
-adj_mat_comps, the original adjacency matrix restricted to the largest connected
-component of the motif adjacency matrix;
+comps, the indices of the largest connected component
+of the motif adjacency matrix;
+adj_mat_comps, the original adjacency matrix restricted to the
+largest connected component of the motif adjacency matrix;
 motif_adj_mat_comps, the motif adjacency matrix restricted to its
 largest connected component;
 vals, the eigenvalues associated with the Laplace embedding

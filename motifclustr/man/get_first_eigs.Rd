@@ -7,7 +7,8 @@
 get_first_eigs(mat, num_eigs)
 }
 \arguments{
-\item{mat}{Symmetric matrix for which eigenvalues and eigenvectors are to be calculated.}
+\item{mat}{Symmetric matrix for which eigenvalues and eigenvectors
+are to be calculated.}
 
 \item{num_eigs}{Number of eigenvalues and eigenvectors to calculate.}
 }

@@ -14,26 +14,28 @@ sample_dsbm(
 \arguments{
 \item{block_sizes}{A vector containing the size of each block of vertices.}
 
-\item{connection_matrix}{A matrix containing the block-to-block connection probabilities.}
+\item{connection_matrix}{A matrix containing the block-to-block connection
+probabilities.}
 
 \item{weight_type}{The type of weighting scheme.
 One of "unweighted", "deterministic" or "poisson".}
 
-\item{weight_matrix}{A matrix containing the block-to-block weight parameters.
-Unused for weight_type="deterministic".
+\item{weight_matrix}{A matrix containing the block-to-block weight
+parameters.
+Unused for weight_type = "deterministic".
 Defaults to NULL.}
 }
 \value{
 A randomly sampled (weighted) adjacency matrix of a DSBM.
 }
 \description{
-Sample the (weighted) adjacency matrix of a (weighted) directed stochastic block
-model (DSBM) with specified parameters.
+Sample the (weighted) adjacency matrix of a (weighted) directed stochastic
+block model (DSBM) with specified parameters.
 }
 \examples{
-block_sizes = c(10,10)
-connection_matrix = matrix(c(0.8,0.1,0.1,0.8), nrow=2, byrow=TRUE)
+block_sizes = c(10, 10)
+connection_matrix = matrix(c(0.8, 0.1, 0.1, 0.8), nrow = 2, byrow = TRUE)
 weight_type = "poisson"
-weight_matrix = matrix(c(10,3,3,10), nrow=2, byrow=TRUE)
+weight_matrix = matrix(c(10, 3, 3, 10), nrow = 2, byrow = TRUE)
 sample_dsbm(block_sizes, connection_matrix, weight_type, weight_matrix)
 }

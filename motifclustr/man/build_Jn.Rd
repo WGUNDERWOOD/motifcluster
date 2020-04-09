@@ -13,5 +13,6 @@ build_Jn(adj_mat)
 A vertex-distinct indicator matrix Jn.
 }
 \description{
-Build the vertex-distinct indicator matrix Jn from a graph adjacency matrix.
+Build the vertex-distinct indicator matrix Jn from a
+graph adjacency matrix.
 }

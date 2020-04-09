@@ -13,5 +13,6 @@ build_Gs(adj_mat)
 A single-edge adjacency matrix Gs in sparse form.
 }
 \description{
-Build the sparse single-edge adjacency matrix Gs from a graph adjacency matrix.
+Build the sparse single-edge adjacency matrix Gs from a
+graph adjacency matrix.
 }

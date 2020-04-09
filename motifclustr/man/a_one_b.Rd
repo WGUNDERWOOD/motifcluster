@@ -4,19 +4,21 @@
 \alias{a_one_b}
 \title{Compute a left-multiplication with the ones matrix}
 \usage{
-a_one_b(A, B)
+a_one_b(a, b)
 }
 \arguments{
-\item{A}{A square n by n matrix.}
+\item{a}{A square n by n matrix.}
 
-\item{B}{A square n by n matrix.}
+\item{b}{A square n by n matrix.}
 }
 \value{
-A * (one_mat %*% B)
+a * (one_mat %*% b)
 }
 \description{
-Compute A * (one_mat %*% B) where A, B, ones_mat are square matrices of the same size,
-and one_mat is a ones matrix. The product * is an entry-wise (Hadamard) product,
+Compute a * (one_mat %*% b) where a, b, ones_mat are
+square matrices of the same size, and one_mat is a ones matrix.
+The product * is an entry-wise (Hadamard) product,
 while %*% represents matrix multiplication.
-This method is more efficient than the naive approach when A or B are sparse.
+This method is more efficient than the naive approach
+when a or b are sparse.
 }

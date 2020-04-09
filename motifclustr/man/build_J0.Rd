@@ -13,5 +13,6 @@ build_J0(adj_mat)
 A missing-edge indicator matrix J0.
 }
 \description{
-Build the missing-edge indicator matrix J0 from a graph adjacency matrix.
+Build the missing-edge indicator matrix J0 from a
+graph adjacency matrix.
 }

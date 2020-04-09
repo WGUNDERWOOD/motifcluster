@@ -7,11 +7,13 @@
 mam_M11(adj_mat, motif_type, weight_type, method)
 }
 \arguments{
-\item{adj_mat}{Adjacency matrix from which to build the motif adjacency matrix.}
+\item{adj_mat}{Adjacency matrix from which to build the motif
+adjacency matrix.}
 
 \item{motif_type}{Type of motif adjacency matrix to build.}
 
-\item{weight_type}{The weighting scheme to use. One of "unweighted", "mean" or "product".}
+\item{weight_type}{The weighting scheme to use.
+One of "unweighted", "mean" or "product".}
 
 \item{method}{Which formulation to use. One of "dense" or "sparse".}
 }

@@ -22,13 +22,10 @@
 #' sample_dsbm(block_sizes, connection_matrix, weight_type, weight_matrix)
 
 sample_dsbm <- function(block_sizes, connection_matrix,
-                       weight_type = c("unweighted", "deterministic", "poisson"),
-                       weight_matrix = NULL) {
+                   weight_type = c("unweighted", "deterministic", "poisson"),
+                   weight_matrix = NULL) {
 
   # check args
-  if (!(is.vector(block_sizes))) {
-    stop("block_sizes must be a vector.")
-  }
   if (!all.equal(block_sizes, as.integer(block_sizes))) {
     stop("block_sizes must be integers.")
   }
@@ -46,7 +43,7 @@ sample_dsbm <- function(block_sizes, connection_matrix,
   }
   weight_type <- match.arg(weight_type)
   if ((weight_type != "unweighted") & is.null(weight_matrix)) {
-    stop("weighted requires a weight_matrix")
+    stop("weighted methods require a weight_matrix")
   }
   if (!is.null(weight_matrix)) {
     if (!(length(block_sizes) == nrow(weight_matrix))) {
@@ -72,21 +69,21 @@ sample_dsbm <- function(block_sizes, connection_matrix,
       # block parameters
       x_range <- (cumul_sizes[i] + 1):cumul_sizes[i + 1]
       y_range <- (cumul_sizes[j] + 1):cumul_sizes[j + 1]
-      n_cells <- block_sizes[i]*block_sizes[j]
-      p <- connection_matrix[i,j]
+      n_cells <- block_sizes[i] * block_sizes[j]
+      p <- connection_matrix[i, j]
 
       # fill the adjacency matrix block-by-block
       adj_mat[x_range, y_range] <- rbinom(n_cells, 1, p)
 
       # deterministic weights
       if (weight_type == "deterministic") {
-        w <- weight_matrix[i,j]
+        w <- weight_matrix[i, j]
         adj_mat[x_range, y_range] <- w * adj_mat[x_range, y_range]
       }
 
       # poisson weights
       else if (weight_type == "poisson") {
-        w <- weight_matrix[i,j]
+        w <- weight_matrix[i, j]
         weights <- rpois(n_cells, w)
         adj_mat[x_range, y_range] <- weights * adj_mat[x_range, y_range]
       }
@@ -123,14 +120,15 @@ sample_dsbm <- function(block_sizes, connection_matrix,
 #' bipartite_connection_matrix = matrix(c(0.8, 0.5, 0.1, 0.1, 0.5, 0.8),
 #' nrow = 2, byrow = TRUE)
 #' weight_type = "poisson"
-#' bipartite_weight_matrix = matrix(c(20, 10, 2, 2, 10, 20), nrow = 2, byrow = TRUE)
+#' bipartite_weight_matrix = matrix(c(20, 10, 2, 2, 10, 20),
+#'       nrow = 2, byrow = TRUE)
 #' sample_bsbm(source_block_sizes, dest_block_sizes,
 #'       bipartite_connection_matrix, weight_type, bipartite_weight_matrix)
 
 sample_bsbm <- function(source_block_sizes, dest_block_sizes,
-                       bipartite_connection_matrix,
-                       weight_type = c("unweighted", "deterministic", "poisson"),
-                       bipartite_weight_matrix = NULL) {
+                   bipartite_connection_matrix,
+                   weight_type = c("unweighted", "deterministic", "poisson"),
+                   bipartite_weight_matrix = NULL) {
 
   # check args
   if (!(length(source_block_sizes) == nrow(bipartite_connection_matrix))) {

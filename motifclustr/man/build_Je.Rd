@@ -13,5 +13,6 @@ build_Je(adj_mat)
 An edge-and-diagonal indicator matrix Je in sparse form.
 }
 \description{
-Build the sparse edge-and-diagonal indicator matrix Je from a graph adjacency matrix.
+Build the sparse edge-and-diagonal indicator matrix Je from a
+graph adjacency matrix.
 }

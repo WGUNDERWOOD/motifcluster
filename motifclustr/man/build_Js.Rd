@@ -13,5 +13,6 @@ build_Js(adj_mat)
 A single-edge indicator matrix Js in sparse form.
 }
 \description{
-Build the sparse single-edge indicator matrix Js from a graph adjacency matrix.
+Build the sparse single-edge indicator matrix Js from a
+graph adjacency matrix.
 }

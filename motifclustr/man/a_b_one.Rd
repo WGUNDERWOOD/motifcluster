@@ -4,19 +4,21 @@
 \alias{a_b_one}
 \title{Compute a right-multiplication with the ones matrix}
 \usage{
-a_b_one(A, B)
+a_b_one(a, b)
 }
 \arguments{
-\item{A}{A square n by n matrix.}
+\item{a}{A square n by n matrix.}
 
-\item{B}{A square n by n matrix.}
+\item{b}{A square n by n matrix.}
 }
 \value{
-A * (B %*% one_mat)
+a * (b %*% one_mat)
 }
 \description{
-Compute A * (B %*% one_mat) where A, B, ones_mat are square matrices of the same size,
-and one_mat is a ones matrix. The product * is an entry-wise (Hadamard) product,
+Compute a * (b %*% one_mat) where a, b, ones_mat are
+square matrices of the same size, and one_mat is a ones matrix.
+The product * is an entry-wise (Hadamard) product,
 while %*% represents matrix multiplication.
-This method is more efficient than the naive approach when A or B are sparse.
+This method is more efficient than the naive approach
+when a or b are sparse.
 }

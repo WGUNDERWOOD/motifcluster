@@ -10,7 +10,8 @@ drop0_killdiag(some_mat)
 \item{some_mat}{Some matrix.}
 }
 \value{
-A sparse-form copy of the matrix with its diagonal entries set to zero.
+A sparse-form copy of the matrix with its
+diagonal entries set to zero.
 }
 \description{
 Set the diagonal entries of a matrix to zero

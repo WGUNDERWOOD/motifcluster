@@ -13,5 +13,6 @@ build_Gd(adj_mat)
 A double-edge adjacency matrix Gd in sparse form.
 }
 \description{
-Build the sparse double-edge adjacency matrix Gd from a graph adjacency matrix.
+Build the sparse double-edge adjacency matrix Gd from a
+graph adjacency matrix.
 }

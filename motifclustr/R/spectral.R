@@ -88,7 +88,8 @@ build_laplacian <- function(adj_mat, type_lap = c("comb", "rw")) {
 #' of the associated eigenvectors.
 #' @export
 
-run_laplace_embedding <- function(adj_mat, num_eigs, type_lap = c("comb", "rw")) {
+run_laplace_embedding <- function(adj_mat, num_eigs,
+                                  type_lap = c("comb", "rw")) {
 
   # check args
   if (!all.equal(num_eigs, as.integer(num_eigs))) {

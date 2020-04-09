@@ -13,5 +13,6 @@ build_Gp(adj_mat)
 A product adjacency matrix Jp in sparse form.
 }
 \description{
-Build the sparse product adjacency matrix Jp from a graph adjacency matrix.
+Build the sparse product adjacency matrix Jp from a
+graph adjacency matrix.
 }
