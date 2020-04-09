@@ -2,7 +2,8 @@
 #'
 #' Compute the first few eigenvalues (by magnitude) and
 #' associated eigenvectors of a matrix.
-#' @param mat Symmetric matrix for which eigenvalues and eigenvectors are to be calculated.
+#' @param mat Symmetric matrix for which eigenvalues and eigenvectors
+#' are to be calculated.
 #' @param num_eigs Number of eigenvalues and eigenvectors to calculate.
 #' @return A list with two entries: vals contains a length num_eigs vector
 #' of the first few eigenvalues,
@@ -119,9 +120,10 @@ run_laplace_embedding <- function(adj_mat, num_eigs, type_lap=c("comb", "rw")){
 #' @return A list with 7 entries:
 #' adj_mat, the original adjacency matrix;
 #' motif_adj_mat, the motif adjacency matrix;
-#' comps, the indices of the largest connected component of the motif adjacency matrix;
-#' adj_mat_comps, the original adjacency matrix restricted to the largest connected
-#' component of the motif adjacency matrix;
+#' comps, the indices of the largest connected component
+#' of the motif adjacency matrix;
+#' adj_mat_comps, the original adjacency matrix restricted to the
+#' largest connected component of the motif adjacency matrix;
 #' motif_adj_mat_comps, the motif adjacency matrix restricted to its
 #' largest connected component;
 #' vals, the eigenvalues associated with the Laplace embedding
@@ -130,8 +132,8 @@ run_laplace_embedding <- function(adj_mat, num_eigs, type_lap=c("comb", "rw")){
 #' of the motif adjacency matrix;
 #' @export
 
-run_motif_embedding <- function(adj_mat, motif_name, motif_type=c("func", "struc"),
-                                num_eigs, type_lap){
+run_motif_embedding <- function(adj_mat, motif_name,
+                       motif_type=c("func", "struc"), num_eigs, type_lap){
 
   # check args
   if(!(motif_name %in% get_motif_names())){
@@ -147,7 +149,8 @@ run_motif_embedding <- function(adj_mat, motif_name, motif_type=c("func", "struc
   type_lap <- match.arg(type_lap)
 
   # build motif adjacency matrix
-  motif_adj_mat <- build_motif_adjacency_matrix(adj_mat, motif_name, motif_type)
+  motif_adj_mat <- build_motif_adjacency_matrix(adj_mat, motif_name,
+                                                motif_type)
 
   # restrict to largest connected component
   comps <- get_largest_component(motif_adj_mat)

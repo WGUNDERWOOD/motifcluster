@@ -1,12 +1,14 @@
 #' Sample a DSBM
 #'
-#' Sample the (weighted) adjacency matrix of a (weighted) directed stochastic block
-#' model (DSBM) with specified parameters.
+#' Sample the (weighted) adjacency matrix of a (weighted) directed stochastic
+#' block model (DSBM) with specified parameters.
 #' @param block_sizes A vector containing the size of each block of vertices.
-#' @param connection_matrix A matrix containing the block-to-block connection probabilities.
+#' @param connection_matrix A matrix containing the block-to-block connection
+#' probabilities.
 #' @param weight_type The type of weighting scheme.
 #' One of "unweighted", "deterministic" or "poisson".
-#' @param weight_matrix A matrix containing the block-to-block weight parameters.
+#' @param weight_matrix A matrix containing the block-to-block weight
+#' parameters.
 #' Unused for weight_type="deterministic".
 #' Defaults to NULL.
 #' @return A randomly sampled (weighted) adjacency matrix of a DSBM.
@@ -98,10 +100,12 @@ sample_dsbm <- function(block_sizes, connection_matrix,
 
 #' Sample a BSBM
 #'
-#' Sample the (weighted) adjacency matrix of a (weighted) bipartite stochastic block
-#' model (BSBM) with specified parameters.
-#' @param source_block_sizes A vector containing the size of each block of source vertices.
-#' @param dest_block_sizes A vector containing the size of each block of dest vertices.
+#' Sample the (weighted) adjacency matrix of a (weighted) bipartite stochastic
+#' block model (BSBM) with specified parameters.
+#' @param source_block_sizes A vector containing the size of each block
+#' of source vertices.
+#' @param dest_block_sizes A vector containing the size of each block
+#' of destination vertices.
 #' @param bipartite_connection_matrix A matrix containing the block-to-block
 #' connection probabilities.
 #' @param weight_type The type of weighting scheme.
@@ -115,11 +119,12 @@ sample_dsbm <- function(block_sizes, connection_matrix,
 #' @examples
 #' source_block_sizes = c(10,10)
 #' dest_block_sizes = c(10,10,10)
-#' bipartite_connection_matrix = matrix(c(0.8,0.5,0.1,0.1,0.5,0.8), nrow=2, byrow=TRUE)
+#' bipartite_connection_matrix = matrix(c(0.8,0.5,0.1,0.1,0.5,0.8),
+#' nrow=2, byrow=TRUE)
 #' weight_type = "poisson"
 #' bipartite_weight_matrix = matrix(c(20,10,2,2,10,20), nrow=2, byrow=TRUE)
-#' sample_bsbm(source_block_sizes, dest_block_sizes, bipartite_connection_matrix,
-#'             weight_type, bipartite_weight_matrix)
+#' sample_bsbm(source_block_sizes, dest_block_sizes,
+#'       bipartite_connection_matrix, weight_type, bipartite_weight_matrix)
 
 sample_bsbm <- function(source_block_sizes, dest_block_sizes,
                        bipartite_connection_matrix,
@@ -128,17 +133,20 @@ sample_bsbm <- function(source_block_sizes, dest_block_sizes,
 
   # check args
   if(!(length(source_block_sizes) == nrow(bipartite_connection_matrix))){
-    stop("length(source_block_sizes) must equal nrow(bipartite_connection_matrix)")
+    stop("length(source_block_sizes) must equal
+         nrow(bipartite_connection_matrix)")
   }
   if(!(length(dest_block_sizes) == ncol(bipartite_connection_matrix))){
-    stop("length(dest_block_sizes) must equal ncol(bipartite_connection_matrix)")
+    stop("length(dest_block_sizes) must equal
+         ncol(bipartite_connection_matrix)")
   }
   if((weight_type != "unweighted") & is.null(bipartite_weight_matrix)){
     stop("weighted requires a bipartite_weight_matrix")
   }
   if(!is.null(bipartite_weight_matrix)){
     if(!(length(source_block_sizes) == nrow(bipartite_weight_matrix))){
-      stop("length(source_block_sizes) must equal nrow(bipartite_weight_matrix)")
+      stop("length(source_block_sizes) must equal
+           nrow(bipartite_weight_matrix)")
     }
     if(!(length(dest_block_sizes) == ncol(bipartite_weight_matrix))){
       stop("length(dest_block_sizes) must equal ncol(bipartite_weight_matrix)")
@@ -168,15 +176,16 @@ sample_bsbm <- function(source_block_sizes, dest_block_sizes,
   }
 
   # sample BSBM
-  adj_mat <- sample_dsbm(block_sizes, connection_matrix, weight_type, weight_matrix)
+  adj_mat <- sample_dsbm(block_sizes, connection_matrix,
+                         weight_type, weight_matrix)
 
   return(adj_mat)
 }
 
 #' Generate a small graph for demonstrations
 #'
-#' Generate the sparse and dense adjacency matrices of a small weighted directed graph,
-#' for demonstrating methods and runnign tests.
+#' Generate the sparse and dense adjacency matrices of a small weighted
+#' directed graph, for demonstrating methods and running tests.
 #' @return A list with two entries:
 #' adj_mat_dense is the adjacency matrix in dense form.
 #' adj_mat_sparse is the adjacency matrix in sparse form.

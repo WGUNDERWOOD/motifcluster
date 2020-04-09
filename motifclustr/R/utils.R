@@ -1,9 +1,11 @@
 #' Compute a right-multiplication with the ones matrix
 #'
-#' Compute A * (B %*% one_mat) where A, B, ones_mat are square matrices of the same size,
-#' and one_mat is a ones matrix. The product * is an entry-wise (Hadamard) product,
+#' Compute A * (B %*% one_mat) where A, B, ones_mat are
+#' square matrices of the same size, and one_mat is a ones matrix.
+#' The product * is an entry-wise (Hadamard) product,
 #' while %*% represents matrix multiplication.
-#' This method is more efficient than the naive approach when A or B are sparse.
+#' This method is more efficient than the naive approach
+#' when A or B are sparse.
 #' @param A A square n by n matrix.
 #' @param B A square n by n matrix.
 #' @return A * (B %*% one_mat)
@@ -20,10 +22,12 @@ a_b_one <- function(a, b){
 
 #' Compute a left-multiplication with the ones matrix
 #'
-#' Compute A * (one_mat %*% B) where A, B, ones_mat are square matrices of the same size,
-#' and one_mat is a ones matrix. The product * is an entry-wise (Hadamard) product,
+#' Compute A * (one_mat %*% B) where A, B, ones_mat are
+#' square matrices of the same size, and one_mat is a ones matrix.
+#' The product * is an entry-wise (Hadamard) product,
 #' while %*% represents matrix multiplication.
-#' This method is more efficient than the naive approach when A or B are sparse.
+#' This method is more efficient than the naive approach
+#' when A or B are sparse.
 #' @param A A square n by n matrix.
 #' @param B A square n by n matrix.
 #' @return A * (one_mat %*% B)
@@ -43,7 +47,8 @@ a_one_b <- function(a, b){
 #' Set the diagonal entries of a matrix to zero
 #' and convert it to sparse form.
 #' @param some_mat Some matrix.
-#' @return A sparse-form copy of the matrix with its diagonal entries set to zero.
+#' @return A sparse-form copy of the matrix with its
+#' diagonal entries set to zero.
 #' @importFrom Matrix drop0
 
 drop0_killdiag <- function(some_mat){

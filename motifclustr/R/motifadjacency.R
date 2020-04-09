@@ -1,18 +1,21 @@
 #' Build a motif adjacency matrix
 #'
 #' Build a motif adjacency matrix from an adjacency matrix.
-#' @param adj_mat Adjacency matrix from which to build the motif adjacency matrix.
+#' @param adj_mat Adjacency matrix from which to build the motif
+#' adjacency matrix.
 #' @param motif_name Motif used for the motif adjacency matrix.
 #' @param motif_type Type of motif adjacency matrix to build.
-#' @param weight_type The weighting scheme to use. One of "unweighted", "mean" or "product".
+#' @param weight_type The weighting scheme to use.
+#' One of "unweighted", "mean" or "product".
 #' @param method Which formulation to use. One of "dense" or "sparse".
 #' @return A motif adjacency matrix.
 #' @importFrom Matrix drop0 t
 #' @export
 
-build_motif_adjacency_matrix <- function(adj_mat, motif_name, motif_type=c("func","struc"),
-                                         weight_type=c("unweighted", "mean", "product"),
-                                         method=c("dense", "sparse")){
+build_motif_adjacency_matrix <- function(adj_mat, motif_name,
+                                motif_type=c("func","struc"),
+                                weight_type=c("unweighted", "mean", "product"),
+                                method=c("dense", "sparse")){
 
   # check args
   if(!(motif_name %in% get_motif_names())){
@@ -91,9 +94,11 @@ build_motif_adjacency_matrix <- function(adj_mat, motif_name, motif_type=c("func
 
 #' Perform the motif adjacency matrix calculations for motif Ms
 #'
-#' @param adj_mat Adjacency matrix from which to build the motif adjacency matrix.
+#' @param adj_mat Adjacency matrix from which to build the motif
+#' adjacency matrix.
 #' @param motif_type Type of motif adjacency matrix to build.
-#' @param weight_type The weighting scheme to use. One of "unweighted", "mean" or "product".
+#' @param weight_type The weighting scheme to use.
+#' One of "unweighted", "mean" or "product".
 #' @return A motif adjacency matrix.
 #' @importFrom Matrix drop0 t
 
@@ -138,8 +143,10 @@ mam_Ms <- function(adj_mat, motif_type, weight_type){
 
 #' Perform the motif adjacency matrix calculations for motif Md
 #'
-#' @param adj_mat Adjacency matrix from which to build the motif adjacency matrix.
-#' @param weight_type The weighting scheme to use. One of "unweighted", "mean" or "product".
+#' @param adj_mat Adjacency matrix from which to build the motif
+#' adjacency matrix.
+#' @param weight_type The weighting scheme to use.
+#' One of "unweighted", "mean" or "product".
 #' @return A motif adjacency matrix.
 #' @importFrom Matrix drop0 t
 
@@ -163,9 +170,11 @@ mam_Md <- function(adj_mat, weight_type){
 
 #' Perform the motif adjacency matrix calculations for motif M1
 #'
-#' @param adj_mat Adjacency matrix from which to build the motif adjacency matrix.
+#' @param adj_mat Adjacency matrix from which to build the motif
+#' adjacency matrix.
 #' @param motif_type Type of motif adjacency matrix to build.
-#' @param weight_type The weighting scheme to use. One of "unweighted", "mean" or "product".
+#' @param weight_type The weighting scheme to use.
+#' One of "unweighted", "mean" or "product".
 #' @return A motif adjacency matrix.
 #' @importFrom Matrix drop0 t
 
@@ -218,9 +227,11 @@ mam_M1 <- function(adj_mat, motif_type, weight_type){
 
 #' Perform the motif adjacency matrix calculations for motif M2
 #'
-#' @param adj_mat Adjacency matrix from which to build the motif adjacency matrix.
+#' @param adj_mat Adjacency matrix from which to build the motif
+#' adjacency matrix.
 #' @param motif_type Type of motif adjacency matrix to build.
-#' @param weight_type The weighting scheme to use. One of "unweighted", "mean" or "product".
+#' @param weight_type The weighting scheme to use.
+#' One of "unweighted", "mean" or "product".
 #' @return A motif adjacency matrix.
 #' @importFrom Matrix drop0 t
 
@@ -285,9 +296,11 @@ mam_M2 <- function(adj_mat, motif_type, weight_type){
 
 #' Perform the motif adjacency matrix calculations for motif M3
 #'
-#' @param adj_mat Adjacency matrix from which to build the motif adjacency matrix.
+#' @param adj_mat Adjacency matrix from which to build the motif
+#' adjacency matrix.
 #' @param motif_type Type of motif adjacency matrix to build.
-#' @param weight_type The weighting scheme to use. One of "unweighted", "mean" or "product".
+#' @param weight_type The weighting scheme to use.
+#' One of "unweighted", "mean" or "product".
 #' @return A motif adjacency matrix.
 #' @importFrom Matrix drop0 t
 
@@ -352,8 +365,10 @@ mam_M3 <- function(adj_mat, motif_type, weight_type){
 
 #' Perform the motif adjacency matrix calculations for motif M4
 #'
-#' @param adj_mat Adjacency matrix from which to build the motif adjacency matrix.
-#' @param weight_type The weighting scheme to use. One of "unweighted", "mean" or "product".
+#' @param adj_mat Adjacency matrix from which to build the motif
+#' adjacency matrix.
+#' @param weight_type The weighting scheme to use.
+#' One of "unweighted", "mean" or "product".
 #' @return A motif adjacency matrix.
 #' @importFrom Matrix drop0 t
 
@@ -378,9 +393,11 @@ mam_M4 <- function(adj_mat, weight_type){
 
 #' Perform the motif adjacency matrix calculations for motif M5
 #'
-#' @param adj_mat Adjacency matrix from which to build the motif adjacency matrix.
+#' @param adj_mat Adjacency matrix from which to build the motif
+#' adjacency matrix.
 #' @param motif_type Type of motif adjacency matrix to build.
-#' @param weight_type The weighting scheme to use. One of "unweighted", "mean" or "product".
+#' @param weight_type The weighting scheme to use.
+#' One of "unweighted", "mean" or "product".
 #' @return A motif adjacency matrix.
 #' @importFrom Matrix drop0 t
 
@@ -437,9 +454,11 @@ mam_M5 <- function(adj_mat, motif_type, weight_type){
 
 #' Perform the motif adjacency matrix calculations for motif M6
 #'
-#' @param adj_mat Adjacency matrix from which to build the motif adjacency matrix.
+#' @param adj_mat Adjacency matrix from which to build the motif
+#' adjacency matrix.
 #' @param motif_type Type of motif adjacency matrix to build.
-#' @param weight_type The weighting scheme to use. One of "unweighted", "mean" or "product".
+#' @param weight_type The weighting scheme to use.
+#' One of "unweighted", "mean" or "product".
 #' @return A motif adjacency matrix.
 #' @importFrom Matrix drop0 t
 
@@ -506,9 +525,11 @@ mam_M6 <- function(adj_mat, motif_type, weight_type){
 
 #' Perform the motif adjacency matrix calculations for motif M7
 #'
-#' @param adj_mat Adjacency matrix from which to build the motif adjacency matrix.
+#' @param adj_mat Adjacency matrix from which to build the motif
+#' adjacency matrix.
 #' @param motif_type Type of motif adjacency matrix to build.
-#' @param weight_type The weighting scheme to use. One of "unweighted", "mean" or "product".
+#' @param weight_type The weighting scheme to use.
+#' One of "unweighted", "mean" or "product".
 #' @return A motif adjacency matrix.
 #' @importFrom Matrix drop0 t
 
@@ -575,9 +596,11 @@ mam_M7 <- function(adj_mat, motif_type, weight_type){
 
 #' Perform the motif adjacency matrix calculations for motif M8
 #'
-#' @param adj_mat Adjacency matrix from which to build the motif adjacency matrix.
+#' @param adj_mat Adjacency matrix from which to build the motif
+#' adjacency matrix.
 #' @param motif_type Type of motif adjacency matrix to build.
-#' @param weight_type The weighting scheme to use. One of "unweighted", "mean" or "product".
+#' @param weight_type The weighting scheme to use.
+#' One of "unweighted", "mean" or "product".
 #' @param method Which formulation to use. One of "dense" or "sparse".
 #' @return A motif adjacency matrix.
 #' @importFrom Matrix drop0 t
@@ -703,9 +726,11 @@ mam_M8 <- function(adj_mat, motif_type, weight_type, method){
 
 #' Perform the motif adjacency matrix calculations for motif M9
 #'
-#' @param adj_mat Adjacency matrix from which to build the motif adjacency matrix.
+#' @param adj_mat Adjacency matrix from which to build the motif
+#' adjacency matrix.
 #' @param motif_type Type of motif adjacency matrix to build.
-#' @param weight_type The weighting scheme to use. One of "unweighted", "mean" or "product".
+#' @param weight_type The weighting scheme to use.
+#' One of "unweighted", "mean" or "product".
 #' @param method Which formulation to use. One of "dense" or "sparse".
 #' @return A motif adjacency matrix.
 #' @importFrom Matrix drop0 t
@@ -792,7 +817,8 @@ mam_M9 <- function(adj_mat, motif_type, weight_type, method){
         J <- build_J(adj_mat)
         G <- build_G(adj_mat)
         Id <- build_Id(adj_mat)
-        C <- a_one_b(J,t(G)) - 2*J*t(G) + J%*%G + a_one_b(G,t(J)) - 2*G*t(J) + G%*%J
+        C <- a_one_b(J,t(G)) - 2*J*t(G) + J%*%G
+        C <- C + a_one_b(G,t(J)) - 2*G*t(J) + G%*%J
         C <- C - Id*(J%*%G) + a_b_one(J,t(G)) - Id*(G%*%J) + a_b_one(G,t(J))
         return(drop0(C + t(C)) / 2)
       }
@@ -801,7 +827,8 @@ mam_M9 <- function(adj_mat, motif_type, weight_type, method){
         Js <- build_Js(adj_mat)
         Gs <- build_Gs(adj_mat)
         Je <- build_Je(adj_mat)
-        C <- a_one_b(Js,t(Gs)) - Js*(Je%*%t(Gs)) + a_one_b(Gs,t(Js)) - Gs*(Je%*%t(Js))
+        C <- a_one_b(Js,t(Gs)) - Js*(Je%*%t(Gs))
+        C <- C + a_one_b(Gs,t(Js)) - Gs*(Je%*%t(Js))
         C <- C + Js%*%Gs - Je*(Js%*%Gs) + a_b_one(Js,t(Gs)) - Js*(t(Gs)%*%Je)
         C <- C + Gs%*%Js - Je*(Gs%*%Js) + a_b_one(Gs,t(Js)) - Gs*(t(Js)%*%Je)
         return(drop0(C + t(C)) / 2)
@@ -830,9 +857,11 @@ mam_M9 <- function(adj_mat, motif_type, weight_type, method){
 
 #' Perform the motif adjacency matrix calculations for motif M10
 #'
-#' @param adj_mat Adjacency matrix from which to build the motif adjacency matrix.
+#' @param adj_mat Adjacency matrix from which to build the motif
+#' adjacency matrix.
 #' @param motif_type Type of motif adjacency matrix to build.
-#' @param weight_type The weighting scheme to use. One of "unweighted", "mean" or "product".
+#' @param weight_type The weighting scheme to use.
+#' One of "unweighted", "mean" or "product".
 #' @param method Which formulation to use. One of "dense" or "sparse".
 #' @return A motif adjacency matrix.
 #' @importFrom Matrix drop0 t
@@ -958,9 +987,11 @@ mam_M10 <- function(adj_mat, motif_type, weight_type, method){
 
 #' Perform the motif adjacency matrix calculations for motif M11
 #'
-#' @param adj_mat Adjacency matrix from which to build the motif adjacency matrix.
+#' @param adj_mat Adjacency matrix from which to build the motif
+#' adjacency matrix.
 #' @param motif_type Type of motif adjacency matrix to build.
-#' @param weight_type The weighting scheme to use. One of "unweighted", "mean" or "product".
+#' @param weight_type The weighting scheme to use.
+#' One of "unweighted", "mean" or "product".
 #' @param method Which formulation to use. One of "dense" or "sparse".
 #' @return A motif adjacency matrix.
 #' @importFrom Matrix drop0 t
@@ -1106,9 +1137,11 @@ mam_M11 <- function(adj_mat, motif_type, weight_type, method){
 
 #' Perform the motif adjacency matrix calculations for motif M12
 #'
-#' @param adj_mat Adjacency matrix from which to build the motif adjacency matrix.
+#' @param adj_mat Adjacency matrix from which to build the motif
+#' adjacency matrix.
 #' @param motif_type Type of motif adjacency matrix to build.
-#' @param weight_type The weighting scheme to use. One of "unweighted", "mean" or "product".
+#' @param weight_type The weighting scheme to use.
+#' One of "unweighted", "mean" or "product".
 #' @param method Which formulation to use. One of "dense" or "sparse".
 #' @return A motif adjacency matrix.
 #' @importFrom Matrix drop0 t
@@ -1254,9 +1287,11 @@ mam_M12 <- function(adj_mat, motif_type, weight_type, method){
 
 #' Perform the motif adjacency matrix calculations for motif M13
 #'
-#' @param adj_mat Adjacency matrix from which to build the motif adjacency matrix.
+#' @param adj_mat Adjacency matrix from which to build the motif
+#' adjacency matrix.
 #' @param motif_type Type of motif adjacency matrix to build.
-#' @param weight_type The weighting scheme to use. One of "unweighted", "mean" or "product".
+#' @param weight_type The weighting scheme to use.
+#' One of "unweighted", "mean" or "product".
 #' @param method Which formulation to use. One of "dense" or "sparse".
 #' @return A motif adjacency matrix.
 #' @importFrom Matrix drop0 t
@@ -1381,9 +1416,11 @@ mam_M13 <- function(adj_mat, motif_type, weight_type, method){
 
 #' Perform the motif adjacency matrix calculations for motif Mcoll
 #'
-#' @param adj_mat Adjacency matrix from which to build the motif adjacency matrix.
+#' @param adj_mat Adjacency matrix from which to build the motif
+#' adjacency matrix.
 #' @param motif_type Type of motif adjacency matrix to build.
-#' @param weight_type The weighting scheme to use. One of "unweighted", "mean" or "product".
+#' @param weight_type The weighting scheme to use.
+#' One of "unweighted", "mean" or "product".
 #' @param method Which formulation to use. One of "dense" or "sparse".
 #' @return A motif adjacency matrix.
 #' @importFrom Matrix drop0 t
@@ -1499,9 +1536,11 @@ mam_Mcoll <- function(adj_mat, motif_type, weight_type, method){
 
 #' Perform the motif adjacency matrix calculations for motif Mexpa
 #'
-#' @param adj_mat Adjacency matrix from which to build the motif adjacency matrix.
+#' @param adj_mat Adjacency matrix from which to build the motif
+#' adjacency matrix.
 #' @param motif_type Type of motif adjacency matrix to build.
-#' @param weight_type The weighting scheme to use. One of "unweighted", "mean" or "product".
+#' @param weight_type The weighting scheme to use.
+#' One of "unweighted", "mean" or "product".
 #' @param method Which formulation to use. One of "dense" or "sparse".
 #' @return A motif adjacency matrix.
 #' @importFrom Matrix drop0 t

@@ -22,7 +22,8 @@ build_J <- function(adj_mat){
 
 #' Build single-edge adjacency matrix
 #'
-#' Build the sparse single-edge adjacency matrix Gs from a graph adjacency matrix.
+#' Build the sparse single-edge adjacency matrix Gs from a
+#' graph adjacency matrix.
 #' @param adj_mat Original adjacency matrix.
 #' @return A single-edge adjacency matrix Gs in sparse form.
 
@@ -34,7 +35,8 @@ build_Gs <- function(adj_mat){
 
 #' Build single-edge indicator matrix
 #'
-#' Build the sparse single-edge indicator matrix Js from a graph adjacency matrix.
+#' Build the sparse single-edge indicator matrix Js from a
+#' graph adjacency matrix.
 #' @param adj_mat Original adjacency matrix.
 #' @return A single-edge indicator matrix Js in sparse form.
 
@@ -46,7 +48,8 @@ build_Js <- function(adj_mat){
 
 #' Build double-edge adjacency matrix
 #'
-#' Build the sparse double-edge adjacency matrix Gd from a graph adjacency matrix.
+#' Build the sparse double-edge adjacency matrix Gd from a
+#' graph adjacency matrix.
 #' @param adj_mat Original adjacency matrix.
 #' @return A double-edge adjacency matrix Gd in sparse form.
 
@@ -58,7 +61,8 @@ build_Gd <- function(adj_mat){
 
 #' Build double-edge indicator matrix
 #'
-#' Build the sparse double-edge indicator matrix Jd from a graph adjacency matrix.
+#' Build the sparse double-edge indicator matrix Jd from a
+#' graph adjacency matrix.
 #' @param adj_mat Original adjacency matrix.
 #' @return A double-edge indicator matrix Jd in sparse form.
 
@@ -70,7 +74,8 @@ build_Jd <- function(adj_mat){
 
 #' Build missing-edge indicator matrix
 #'
-#' Build the missing-edge indicator matrix J0 from a graph adjacency matrix.
+#' Build the missing-edge indicator matrix J0 from a
+#' graph adjacency matrix.
 #' @param adj_mat Original adjacency matrix.
 #' @return A missing-edge indicator matrix J0.
 
@@ -81,7 +86,8 @@ build_J0 <- function(adj_mat){
 
 #' Build vertex-distinct indicator matrix
 #'
-#' Build the vertex-distinct indicator matrix Jn from a graph adjacency matrix.
+#' Build the vertex-distinct indicator matrix Jn from a
+#' graph adjacency matrix.
 #' @param adj_mat Original adjacency matrix.
 #' @return A vertex-distinct indicator matrix Jn.
 
@@ -104,7 +110,8 @@ build_Id <- function(adj_mat){
 
 #' Build edge-and-diagonal indicator matrix
 #'
-#' Build the sparse edge-and-diagonal indicator matrix Je from a graph adjacency matrix.
+#' Build the sparse edge-and-diagonal indicator matrix Je from a
+#' graph adjacency matrix.
 #' @param adj_mat Original adjacency matrix.
 #' @return An edge-and-diagonal indicator matrix Je in sparse form.
 
@@ -116,7 +123,8 @@ build_Je <- function(adj_mat){
 
 #' Build product adjacency matrix
 #'
-#' Build the sparse product adjacency matrix Jp from a graph adjacency matrix.
+#' Build the sparse product adjacency matrix Jp from a
+#' graph adjacency matrix.
 #' @param adj_mat Original adjacency matrix.
 #' @return A product adjacency matrix Jp in sparse form.
 
