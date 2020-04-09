@@ -12,7 +12,8 @@ build_G <- function(adj_mat) {
 
 #' Build directed indicator matrix
 #'
-#' Build the sparse directed indicator matrix \code{J} from a graph adjacency matrix.
+#' Build the sparse directed indicator matrix \code{J}
+#' from a graph adjacency matrix.
 #' @param adj_mat Original adjacency matrix.
 #' @return A directed indicator matrix \code{J} in sparse form.
 #' @keywords internal

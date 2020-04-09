@@ -13,6 +13,7 @@ build_J(adj_mat)
 A directed indicator matrix \code{J} in sparse form.
 }
 \description{
-Build the sparse directed indicator matrix \code{J} from a graph adjacency matrix.
+Build the sparse directed indicator matrix \code{J}
+from a graph adjacency matrix.
 }
 \keyword{internal}

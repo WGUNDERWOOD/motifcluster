@@ -22,7 +22,8 @@ One of \code{"func"} or \code{"struc"}.}
 
 \item{num_eigs}{Number of eigenvalues and eigenvectors for the embedding.}
 
-\item{type_lap}{Type of Laplacian for the embedding. One of \code{"comb"} or \code{"rw"}.}
+\item{type_lap}{Type of Laplacian for the embedding.
+One of \code{"comb"} or \code{"rw"}.}
 }
 \value{
 A list with 7 entries:
@@ -31,10 +32,10 @@ A list with 7 entries:
   \item \code{motif_adj_mat}: the motif adjacency matrix.
   \item \code{comps}: the indices of the largest connected component
     of the motif adjacency matrix.
-  \item \code{adj_mat_comps}: the original adjacency matrix restricted to the
-    largest connected component of the motif adjacency matrix.
-  \item \code{motif_adj_mat_comps}: the motif adjacency matrix restricted to its
-    largest connected component.
+  \item \code{adj_mat_comps}: the original adjacency matrix restricted
+    to the largest connected component of the motif adjacency matrix.
+  \item \code{motif_adj_mat_comps}: the motif adjacency matrix restricted
+    to its largest connected component.
   \item \code{vals}: the eigenvalues associated with the Laplace embedding
     of the motif adjacency matrix.
   \item \code{vects}: the eigenvectors associated with the Laplace embedding

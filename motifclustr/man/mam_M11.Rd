@@ -15,7 +15,8 @@ adjacency matrix.}
 \item{weight_type}{The weighting scheme to use.
 One of \code{"unweighted"}, \code{"mean"} or \code{"product"}.}
 
-\item{method}{Which formulation to use. One of \code{"dense"} or \code{"sparse"}.}
+\item{method}{Which formulation to use.
+One of \code{"dense"} or \code{"sparse"}.}
 }
 \value{
 A motif adjacency matrix.

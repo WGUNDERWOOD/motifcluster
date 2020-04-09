@@ -1,7 +1,8 @@
 #' Compute a right-multiplication with the ones matrix
 #'
-#' Compute \code{a * (b \%*\% one_mat)} where \code{a}, \code{b}, \code{ones_mat} are
-#' square matrices of the same size, and \code{ones_mat} contains all entries equal to one.
+#' Compute \code{a * (b \%*\% one_mat)} where \code{a}, \code{b},
+#' \code{ones_mat} are square matrices of the same size,
+#' and \code{ones_mat} contains all entries equal to one.
 #' The product \code{*} is an entry-wise (Hadamard) product,
 #' while \code{\%*\%} represents matrix multiplication.
 #' This method is more efficient than the naive approach
@@ -22,8 +23,9 @@ a_b_one <- function(a, b) {
 
 #' Compute a left-multiplication with the ones matrix
 #'
-#' Compute \code{a * (one_mat \%*\% b)} where \code{a}, \code{b}, \code{ones_mat} are
-#' square matrices of the same size, and \code{ones_mat} contains all entries equal to one.
+#' Compute \code{a * (one_mat \%*\% b)} where \code{a}, \code{b},
+#' \code{ones_mat} are square matrices of the same size,
+#' and \code{ones_mat} contains all entries equal to one.
 #' The product \code{*} is an entry-wise (Hadamard) product,
 #' while \code{\%*\%} represents matrix multiplication.
 #' This method is more efficient than the naive approach

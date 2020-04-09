@@ -13,8 +13,9 @@ are to be calculated.}
 \item{num_eigs}{Number of eigenvalues and eigenvectors to calculate.}
 }
 \value{
-A list with two entries: \code{vals} contains a length-\code{num_eigs} vector
-of the first few eigenvalues,
+A list with two entries:
+\code{vals} contains a length-\code{num_eigs} vector of the first few
+eigenvalues,
 and vects contains an \code{nrow(mat)} by \code{num_eigs} matrix
 of the associated eigenvectors.
 }

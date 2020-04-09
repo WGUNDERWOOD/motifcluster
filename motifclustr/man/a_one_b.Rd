@@ -13,8 +13,9 @@ a_one_b(a, b)
 The square matrix \code{a * (one_mat \%*\% b)}.
 }
 \description{
-Compute \code{a * (one_mat \%*\% b)} where \code{a}, \code{b}, \code{ones_mat} are
-square matrices of the same size, and \code{ones_mat} contains all entries equal to one.
+Compute \code{a * (one_mat \%*\% b)} where \code{a}, \code{b},
+\code{ones_mat} are square matrices of the same size,
+and \code{ones_mat} contains all entries equal to one.
 The product \code{*} is an entry-wise (Hadamard) product,
 while \code{\%*\%} represents matrix multiplication.
 This method is more efficient than the naive approach

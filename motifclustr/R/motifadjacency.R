@@ -2,7 +2,8 @@
 #'
 #' Build a motif adjacency matrix from an adjacency matrix.
 #' Entry (\emph{i}, \emph{j}) of a motif adjacency matrix is the
-#' sum of the weights of all motifs containing both nodes \emph{i} and \emph{j}.
+#' sum of the weights of all motifs containing both
+#' nodes \emph{i} and \emph{j}.
 #' The motif is specified by name and the type of motif instance can be one of:
 #' \itemize{
 #'   \item Functional: motifs should appear as subgraphs.
@@ -11,8 +12,10 @@
 #' The weighting scheme can be one of:
 #' \itemize{
 #'   \item Unweighted: the weight of any motif instance is one.
-#'   \item Mean: the weight of any motif instance is the mean of its edge weights.
-#'   \item Product: the weight of any motif instance is the product of its edge weights.
+#'   \item Mean: the weight of any motif instance
+#'     is the mean of its edge weights.
+#'   \item Product: the weight of any motif instance
+#'     is the product of its edge weights.
 #' }
 #' @param adj_mat Adjacency matrix from which to build the motif
 #' adjacency matrix.
@@ -20,9 +23,10 @@
 #' @param motif_type Type of motif adjacency matrix to build.
 #' @param weight_type The weighting scheme to use.
 #' One of \code{"unweighted"}, \code{"mean"} or \code{"product"}.
-#' @param method Which formulation to use. One of \code{"dense"} or \code{"sparse"}.
-#' The sparse formulation avoids generating large dense matrices so tends to be faster
-#' for large sparse graphs.
+#' @param method Which formulation to use.
+#' One of \code{"dense"} or \code{"sparse"}.
+#' The sparse formulation avoids generating large dense matrices
+#' so tends to be faster for large sparse graphs.
 #' @return A motif adjacency matrix.
 #' @importFrom Matrix drop0 t
 #' @export
@@ -625,7 +629,8 @@ mam_M7 <- function(adj_mat, motif_type, weight_type) {
 #' @param motif_type Type of motif adjacency matrix to build.
 #' @param weight_type The weighting scheme to use.
 #' One of \code{"unweighted"}, \code{"mean"} or \code{"product"}.
-#' @param method Which formulation to use. One of \code{"dense"} or \code{"sparse"}.
+#' @param method Which formulation to use.
+#' One of \code{"dense"} or \code{"sparse"}.
 #' @return A motif adjacency matrix.
 #' @keywords internal
 #' @importFrom Matrix drop0 t
@@ -759,7 +764,8 @@ mam_M8 <- function(adj_mat, motif_type, weight_type, method) {
 #' @param motif_type Type of motif adjacency matrix to build.
 #' @param weight_type The weighting scheme to use.
 #' One of \code{"unweighted"}, \code{"mean"} or \code{"product"}.
-#' @param method Which formulation to use. One of \code{"dense"} or \code{"sparse"}.
+#' @param method Which formulation to use.
+#' One of \code{"dense"} or \code{"sparse"}.
 #' @return A motif adjacency matrix.
 #' @keywords internal
 #' @importFrom Matrix drop0 t
@@ -896,7 +902,8 @@ mam_M9 <- function(adj_mat, motif_type, weight_type, method) {
 #' @param motif_type Type of motif adjacency matrix to build.
 #' @param weight_type The weighting scheme to use.
 #' One of \code{"unweighted"}, \code{"mean"} or \code{"product"}.
-#' @param method Which formulation to use. One of \code{"dense"} or \code{"sparse"}.
+#' @param method Which formulation to use.
+#' One of \code{"dense"} or \code{"sparse"}.
 #' @return A motif adjacency matrix.
 #' @keywords internal
 #' @importFrom Matrix drop0 t
@@ -1030,7 +1037,8 @@ mam_M10 <- function(adj_mat, motif_type, weight_type, method) {
 #' @param motif_type Type of motif adjacency matrix to build.
 #' @param weight_type The weighting scheme to use.
 #' One of \code{"unweighted"}, \code{"mean"} or \code{"product"}.
-#' @param method Which formulation to use. One of \code{"dense"} or \code{"sparse"}.
+#' @param method Which formulation to use.
+#' One of \code{"dense"} or \code{"sparse"}.
 #' @return A motif adjacency matrix.
 #' @keywords internal
 #' @importFrom Matrix drop0 t
@@ -1183,7 +1191,8 @@ mam_M11 <- function(adj_mat, motif_type, weight_type, method) {
 #' @param motif_type Type of motif adjacency matrix to build.
 #' @param weight_type The weighting scheme to use.
 #' One of \code{"unweighted"}, \code{"mean"} or \code{"product"}.
-#' @param method Which formulation to use. One of \code{"dense"} or \code{"sparse"}.
+#' @param method Which formulation to use.
+#' One of \code{"dense"} or \code{"sparse"}.
 #' @return A motif adjacency matrix.
 #' @keywords internal
 #' @importFrom Matrix drop0 t
@@ -1336,7 +1345,8 @@ mam_M12 <- function(adj_mat, motif_type, weight_type, method) {
 #' @param motif_type Type of motif adjacency matrix to build.
 #' @param weight_type The weighting scheme to use.
 #' One of \code{"unweighted"}, \code{"mean"} or \code{"product"}.
-#' @param method Which formulation to use. One of \code{"dense"} or \code{"sparse"}.
+#' @param method Which formulation to use.
+#' One of \code{"dense"} or \code{"sparse"}.
 #' @return A motif adjacency matrix.
 #' @keywords internal
 #' @importFrom Matrix drop0 t
@@ -1466,7 +1476,8 @@ mam_M13 <- function(adj_mat, motif_type, weight_type, method) {
 #' @param motif_type Type of motif adjacency matrix to build.
 #' @param weight_type The weighting scheme to use.
 #' One of \code{"unweighted"}, \code{"mean"} or \code{"product"}.
-#' @param method Which formulation to use. One of \code{"dense"} or \code{"sparse"}.
+#' @param method Which formulation to use.
+#' One of \code{"dense"} or \code{"sparse"}.
 #' @return A motif adjacency matrix.
 #' @keywords internal
 #' @importFrom Matrix drop0 t
@@ -1587,7 +1598,8 @@ mam_Mcoll <- function(adj_mat, motif_type, weight_type, method) {
 #' @param motif_type Type of motif adjacency matrix to build.
 #' @param weight_type The weighting scheme to use.
 #' One of \code{"unweighted"}, \code{"mean"} or \code{"product"}.
-#' @param method Which formulation to use. One of \code{"dense"} or \code{"sparse"}.
+#' @param method Which formulation to use.
+#' One of \code{"dense"} or \code{"sparse"}.
 #' @return A motif adjacency matrix.
 #' @keywords internal
 #' @importFrom Matrix drop0 t

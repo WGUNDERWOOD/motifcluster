@@ -23,9 +23,10 @@ adjacency matrix.}
 \item{weight_type}{The weighting scheme to use.
 One of \code{"unweighted"}, \code{"mean"} or \code{"product"}.}
 
-\item{method}{Which formulation to use. One of \code{"dense"} or \code{"sparse"}.
-The sparse formulation avoids generating large dense matrices so tends to be faster
-for large sparse graphs.}
+\item{method}{Which formulation to use.
+One of \code{"dense"} or \code{"sparse"}.
+The sparse formulation avoids generating large dense matrices
+so tends to be faster for large sparse graphs.}
 }
 \value{
 A motif adjacency matrix.
@@ -33,7 +34,8 @@ A motif adjacency matrix.
 \description{
 Build a motif adjacency matrix from an adjacency matrix.
 Entry (\emph{i}, \emph{j}) of a motif adjacency matrix is the
-sum of the weights of all motifs containing both nodes \emph{i} and \emph{j}.
+sum of the weights of all motifs containing both
+nodes \emph{i} and \emph{j}.
 The motif is specified by name and the type of motif instance can be one of:
 \itemize{
   \item Functional: motifs should appear as subgraphs.
@@ -42,7 +44,9 @@ The motif is specified by name and the type of motif instance can be one of:
 The weighting scheme can be one of:
 \itemize{
   \item Unweighted: the weight of any motif instance is one.
-  \item Mean: the weight of any motif instance is the mean of its edge weights.
-  \item Product: the weight of any motif instance is the product of its edge weights.
+  \item Mean: the weight of any motif instance
+    is the mean of its edge weights.
+  \item Product: the weight of any motif instance
+    is the product of its edge weights.
 }
 }

@@ -5,8 +5,9 @@
 #' @param mat Symmetric matrix for which eigenvalues and eigenvectors
 #' are to be calculated.
 #' @param num_eigs Number of eigenvalues and eigenvectors to calculate.
-#' @return A list with two entries: \code{vals} contains a length-\code{num_eigs} vector
-#' of the first few eigenvalues,
+#' @return A list with two entries:
+#' \code{vals} contains a length-\code{num_eigs} vector of the first few
+#' eigenvalues,
 #' and vects contains an \code{nrow(mat)} by \code{num_eigs} matrix
 #' of the associated eigenvectors.
 #' @importFrom RSpectra eigs
@@ -90,7 +91,8 @@ build_laplacian <- function(adj_mat, type_lap = c("comb", "rw")) {
 #' @param num_eigs Number of eigenvalues and eigenvectors for the embedding.
 #' @param type_lap Type of Laplacian for the embedding.
 #' One of \code{"comb"} (combinatorial) or \code{"rw"} (random-walk).
-#' @return A list with two entries: \code{vals} contains the length-\code{num_eigs} vector
+#' @return A list with two entries:
+#' \code{vals} contains the length-\code{num_eigs} vector
 #' of the first few eigenvalues of the Laplacian,
 #' and \code{vects} contains an \code{nrow(adj_mat)} by \code{num_eigs} matrix
 #' of the associated eigenvectors.
@@ -125,7 +127,8 @@ run_laplace_embedding <- function(adj_mat, num_eigs,
 #' @param motif_name Motif used for the motif adjacency matrix.
 #' @param motif_type Type of motif adjacency matrix to use.
 #' One of \code{"func"} or \code{"struc"}.
-#' @param type_lap Type of Laplacian for the embedding. One of \code{"comb"} or \code{"rw"}.
+#' @param type_lap Type of Laplacian for the embedding.
+#' One of \code{"comb"} or \code{"rw"}.
 #' @param num_eigs Number of eigenvalues and eigenvectors for the embedding.
 #' @return A list with 7 entries:
 #' \itemize{
@@ -133,10 +136,10 @@ run_laplace_embedding <- function(adj_mat, num_eigs,
 #'   \item \code{motif_adj_mat}: the motif adjacency matrix.
 #'   \item \code{comps}: the indices of the largest connected component
 #'     of the motif adjacency matrix.
-#'   \item \code{adj_mat_comps}: the original adjacency matrix restricted to the
-#'     largest connected component of the motif adjacency matrix.
-#'   \item \code{motif_adj_mat_comps}: the motif adjacency matrix restricted to its
-#'     largest connected component.
+#'   \item \code{adj_mat_comps}: the original adjacency matrix restricted
+#'     to the largest connected component of the motif adjacency matrix.
+#'   \item \code{motif_adj_mat_comps}: the motif adjacency matrix restricted
+#'     to its largest connected component.
 #'   \item \code{vals}: the eigenvalues associated with the Laplace embedding
 #'     of the motif adjacency matrix.
 #'   \item \code{vects}: the eigenvectors associated with the Laplace embedding
