@@ -1,11 +1,13 @@
 # motif-based-clustering
 
-Source code for the paper
+Source code for my paper
 *Motif-Based Spectral Clustering of Weighted Directed Networks*,
 with
 Andrew Elliott
 and
 Mihai Cucuringu.
+A preprint of the paper is avaliable on the
+[arXiv](https://arxiv.org/abs/2004.01293).
 
 ## R package
 
