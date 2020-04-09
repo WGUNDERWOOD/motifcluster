@@ -78,7 +78,7 @@ test_that("sample_dsbm returns correct poisson weighted adjacency matrix", {
   weight_matrix <- matrix(c(20, 30, 40, 50), nrow = 2, byrow = TRUE)
 
   G <- sample_dsbm(block_sizes, connection_matrix, weight_type, weight_matrix)
-  expect_true(all((G == floor(G)) & (G>=0)))
+  expect_true(all((G == floor(G)) & (G >= 0)))
 
   G <- matrix(0, nrow = 5, ncol = 5)
 
@@ -196,7 +196,7 @@ test_that("sample_bsbm returns correct poisson weighted adjacency matrix", {
   G <- sample_bsbm(source_block_sizes, dest_block_sizes,
                   bipartite_connection_matrix, weight_type,
                   bipartite_weight_matrix)
-  expect_true(all((G == floor(G)) & (G>=0)))
+  expect_true(all((G == floor(G)) & (G >= 0)))
 
   G <- matrix(0, nrow = 6, ncol = 6)
 

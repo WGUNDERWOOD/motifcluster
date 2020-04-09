@@ -11,7 +11,7 @@
 #' @return a * (b %*% one_mat)
 #' @importFrom Matrix Diagonal drop0
 
-a_b_one <- function(a, b){
+a_b_one <- function(a, b) {
 
   n <- nrow(a)
   ones_vec <- rep(1, n)
@@ -33,7 +33,7 @@ a_b_one <- function(a, b){
 #' @return a * (one_mat %*% b)
 #' @importFrom Matrix Diagonal drop0
 
-a_one_b <- function(a, b){
+a_one_b <- function(a, b) {
 
   n <- nrow(a)
   ones_vec <- rep(1, n)
@@ -51,7 +51,7 @@ a_one_b <- function(a, b){
 #' diagonal entries set to zero.
 #' @importFrom Matrix drop0
 
-drop0_killdiag <- function(some_mat){
+drop0_killdiag <- function(some_mat) {
 
   ans <- some_mat
   diag(ans) <- 0
@@ -70,7 +70,7 @@ drop0_killdiag <- function(some_mat){
 #' @importFrom igraph components graph_from_adjacency_matrix
 #' @export
 
-get_largest_component <- function(adj_mat){
+get_largest_component <- function(adj_mat) {
 
   n <- nrow(adj_mat)
   gr <- graph_from_adjacency_matrix(adj_mat + t(adj_mat))
@@ -86,12 +86,12 @@ get_largest_component <- function(adj_mat){
 #' @return A vector of names of common motifs.
 #' @export
 
-get_motif_names <- function(){
+get_motif_names <- function() {
 
   motif_names <- c("Ms", "Md")
 
   for (i in 1:13) {
-    motif_name <- paste("M", i, sep="")
+    motif_name <- paste("M", i, sep = "")
     motif_names <- c(motif_names, motif_name)
   }
 

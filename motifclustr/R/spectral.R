@@ -11,22 +11,22 @@
 #' of the associated eigenvectors.
 #' @importFrom RSpectra eigs
 
-get_first_eigs <- function(mat, num_eigs){
+get_first_eigs <- function(mat, num_eigs) {
 
   # check args
-  if(!all.equal(num_eigs, as.integer(num_eigs))){
+  if (!all.equal(num_eigs, as.integer(num_eigs))) {
     stop("num_eigs must be an integer.")
   }
-  if(!(num_eigs > 0)){
+  if (!(num_eigs > 0)) {
     stop("num_eigs must be at least 1.")
   }
 
   # get spectrum
-  ans_eigs <- eigs(mat, num_eigs, which="SM")
+  ans_eigs <- eigs(mat, num_eigs, which = "SM")
 
   # order eigenvalues and eigenvectors
   inds <- seq(num_eigs, 1, -1)
-  vects <- Re(ans_eigs[["vectors"]])[,inds]
+  vects <- Re(ans_eigs[["vectors"]])[, inds]
   vals <- Re(ans_eigs[["values"]])[inds]
 
   # return a list
@@ -46,7 +46,7 @@ get_first_eigs <- function(mat, num_eigs){
 #' @return The specified Laplacian matrix.
 #' @export
 
-build_laplacian <- function(adj_mat, type_lap=c("comb", "rw")){
+build_laplacian <- function(adj_mat, type_lap = c("comb", "rw")) {
 
   # check args
   type_lap <- match.arg(type_lap)
@@ -56,19 +56,19 @@ build_laplacian <- function(adj_mat, type_lap=c("comb", "rw")){
   n <- nrow(adj_mat)
 
   # combinatorial Laplacian
-  if (type_lap=="comb"){
+  if (type_lap == "comb") {
     degs_matrix <- diag(degs_adj_mat)
     L <-  degs_matrix - adj_mat
   }
 
   # random-walk Laplacian
-  else if (type_lap == "rw"){
+  else if (type_lap == "rw") {
 
-    if(!all(degs_adj_mat != 0)){
+    if (!all(degs_adj_mat != 0)) {
       stop("row sums of adj_mat must be non-zero")
     }
 
-    inv_degs_matrix <- diag(degs_adj_mat^(-1))
+    inv_degs_matrix <- diag(degs_adj_mat ^ (-1))
     L <-  diag(n) - inv_degs_matrix %*% adj_mat
   }
 
@@ -88,13 +88,13 @@ build_laplacian <- function(adj_mat, type_lap=c("comb", "rw")){
 #' of the associated eigenvectors.
 #' @export
 
-run_laplace_embedding <- function(adj_mat, num_eigs, type_lap=c("comb", "rw")){
+run_laplace_embedding <- function(adj_mat, num_eigs, type_lap = c("comb", "rw")) {
 
   # check args
-  if(!all.equal(num_eigs, as.integer(num_eigs))){
+  if (!all.equal(num_eigs, as.integer(num_eigs))) {
     stop("num_eigs must be an integer.")
   }
-  if(!(num_eigs > 0)){
+  if (!(num_eigs > 0)) {
     stop("num_eigs must be at least 1.")
   }
   type_lap <- match.arg(type_lap)
@@ -134,17 +134,17 @@ run_laplace_embedding <- function(adj_mat, num_eigs, type_lap=c("comb", "rw")){
 #' @export
 
 run_motif_embedding <- function(adj_mat, motif_name,
-                       motif_type=c("func", "struc"), num_eigs, type_lap){
+                       motif_type = c("func", "struc"), num_eigs, type_lap) {
 
   # check args
-  if(!(motif_name %in% get_motif_names())){
+  if (!(motif_name %in% get_motif_names())) {
     stop("Invalid motif name.")
   }
   motif_type <- match.arg(motif_type)
-  if(!all.equal(num_eigs, as.integer(num_eigs))){
+  if (!all.equal(num_eigs, as.integer(num_eigs))) {
     stop("num_eigs must be an integer.")
   }
-  if(!(num_eigs > 0)){
+  if (!(num_eigs > 0)) {
     stop("num_eigs must be at least 1.")
   }
   type_lap <- match.arg(type_lap)
@@ -155,8 +155,8 @@ run_motif_embedding <- function(adj_mat, motif_name,
 
   # restrict to largest connected component
   comps <- get_largest_component(motif_adj_mat)
-  adj_mat_comps <- adj_mat[comps, comps, drop=FALSE]
-  motif_adj_mat_comps <- motif_adj_mat[comps, comps, drop=FALSE]
+  adj_mat_comps <- adj_mat[comps, comps, drop = FALSE]
+  motif_adj_mat_comps <- motif_adj_mat[comps, comps, drop = FALSE]
 
   # Laplace embedding
   spect <- run_laplace_embedding(motif_adj_mat, num_eigs, type_lap)
