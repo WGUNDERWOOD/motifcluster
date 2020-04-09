@@ -10,9 +10,10 @@ build_Js(adj_mat)
 \item{adj_mat}{Original adjacency matrix.}
 }
 \value{
-A single-edge indicator matrix Js in sparse form.
+A single-edge indicator matrix \code{Js} in sparse form.
 }
 \description{
-Build the sparse single-edge indicator matrix Js from a
+Build the sparse single-edge indicator matrix \code{Js} from a
 graph adjacency matrix.
 }
+\keyword{internal}

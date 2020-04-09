@@ -9,7 +9,8 @@ build_laplacian(adj_mat, type_lap = c("comb", "rw"))
 \arguments{
 \item{adj_mat}{Symmetric adjacency matrix from which to build the Laplacian.}
 
-\item{type_lap}{Type of Laplacian to build. One of "comb" or "rw".}
+\item{type_lap}{Type of Laplacian to build.
+One of \code{"comb"} (combinatorial) or \code{"rw"} (random-walk).}
 }
 \value{
 The specified Laplacian matrix.

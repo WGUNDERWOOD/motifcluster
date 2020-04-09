@@ -7,7 +7,7 @@
 get_motif_names()
 }
 \value{
-A vector of names of common motifs.
+A vector of names (strings) of common motifs.
 }
 \description{
 Get the names of some common motifs as strings.

@@ -13,7 +13,7 @@ adjacency matrix.}
 \item{motif_type}{Type of motif adjacency matrix to build.}
 
 \item{weight_type}{The weighting scheme to use.
-One of "unweighted", "mean" or "product".}
+One of \code{"unweighted"}, \code{"mean"} or \code{"product"}.}
 }
 \value{
 A motif adjacency matrix.
@@ -21,3 +21,4 @@ A motif adjacency matrix.
 \description{
 Perform the motif adjacency matrix calculations for motif M1
 }
+\keyword{internal}

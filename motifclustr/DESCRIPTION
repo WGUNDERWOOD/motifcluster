@@ -2,17 +2,20 @@ Package: motifclustr
 Title: Motif-Based Spectral Clustering of Weighted Directed Networks
 Version: 0.0.0.9000
 Authors@R:
-  person(given = "William George",
-    family = "Underwood",
-    role = c("aut", "cre"),
-    email = "wgu2@princeton.edu")
+    person(given = "William George",
+        family = "Underwood",
+        role = c("aut", "cre"),
+        email = "wgu2@princeton.edu")
 Description: Construct motif adjacency matrices for (weighted directed)
-  networks, and use them for spectral clustering.
+    networks, and use them for spectral clustering.
+URL: https://github.com/wgunderwood/motif-based-clustering
+BugReports: https://github.com/wgunderwood/motif-based-clustering/issues
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.0.2
+Depends: R (>= 3.6.0)
 Imports:
-  igraph, Matrix, RSpectra
+    igraph, Matrix, RSpectra
 Suggests:
     testthat

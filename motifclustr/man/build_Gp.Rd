@@ -10,9 +10,10 @@ build_Gp(adj_mat)
 \item{adj_mat}{Original adjacency matrix.}
 }
 \value{
-A product adjacency matrix Jp in sparse form.
+A product adjacency matrix \code{Jp} in sparse form.
 }
 \description{
-Build the sparse product adjacency matrix Jp from a
+Build the sparse product adjacency matrix \code{Jp} from a
 graph adjacency matrix.
 }
+\keyword{internal}

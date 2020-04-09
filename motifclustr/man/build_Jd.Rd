@@ -10,9 +10,10 @@ build_Jd(adj_mat)
 \item{adj_mat}{Original adjacency matrix.}
 }
 \value{
-A double-edge indicator matrix Jd in sparse form.
+A double-edge indicator matrix \code{Jd} in sparse form.
 }
 \description{
-Build the sparse double-edge indicator matrix Jd from a
+Build the sparse double-edge indicator matrix \code{Jd} from a
 graph adjacency matrix.
 }
+\keyword{internal}

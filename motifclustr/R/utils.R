@@ -1,15 +1,15 @@
 #' Compute a right-multiplication with the ones matrix
 #'
-#' Compute a * (b %*% one_mat) where a, b, ones_mat are
-#' square matrices of the same size, and one_mat is a ones matrix.
-#' The product * is an entry-wise (Hadamard) product,
-#' while %*% represents matrix multiplication.
+#' Compute \code{a * (b \%*\% one_mat)} where \code{a}, \code{b}, \code{ones_mat} are
+#' square matrices of the same size, and \code{ones_mat} contains all entries equal to one.
+#' The product \code{*} is an entry-wise (Hadamard) product,
+#' while \code{\%*\%} represents matrix multiplication.
 #' This method is more efficient than the naive approach
-#' when a or b are sparse.
-#' @param a A square n by n matrix.
-#' @param b A square n by n matrix.
-#' @return a * (b %*% one_mat)
+#' when \code{a} or \code{b} are sparse.
+#' @param a,b Square matrices.
+#' @return The square matrix \code{a * (b \%*\% one_mat)}.
 #' @importFrom Matrix Diagonal drop0
+#' @keywords internal
 
 a_b_one <- function(a, b) {
 
@@ -22,16 +22,16 @@ a_b_one <- function(a, b) {
 
 #' Compute a left-multiplication with the ones matrix
 #'
-#' Compute a * (one_mat %*% b) where a, b, ones_mat are
-#' square matrices of the same size, and one_mat is a ones matrix.
-#' The product * is an entry-wise (Hadamard) product,
-#' while %*% represents matrix multiplication.
+#' Compute \code{a * (one_mat \%*\% b)} where \code{a}, \code{b}, \code{ones_mat} are
+#' square matrices of the same size, and \code{ones_mat} contains all entries equal to one.
+#' The product \code{*} is an entry-wise (Hadamard) product,
+#' while \code{\%*\%} represents matrix multiplication.
 #' This method is more efficient than the naive approach
-#' when a or b are sparse.
-#' @param a A square n by n matrix.
-#' @param b A square n by n matrix.
-#' @return a * (one_mat %*% b)
+#' when \code{a} or \code{b} are sparse.
+#' @param a,b Square matrices.
+#' @return The square matrix \code{a * (one_mat \%*\% b)}.
 #' @importFrom Matrix Diagonal drop0
+#' @keywords internal
 
 a_one_b <- function(a, b) {
 
@@ -46,10 +46,11 @@ a_one_b <- function(a, b) {
 #'
 #' Set the diagonal entries of a matrix to zero
 #' and convert it to sparse form.
-#' @param some_mat Some matrix.
+#' @param some_mat A square matrix.
 #' @return A sparse-form copy of the matrix with its
 #' diagonal entries set to zero.
 #' @importFrom Matrix drop0
+#' @keywords internal
 
 drop0_killdiag <- function(some_mat) {
 
@@ -72,6 +73,8 @@ drop0_killdiag <- function(some_mat) {
 
 get_largest_component <- function(adj_mat) {
 
+  # TODO remove igraph dependency
+
   n <- nrow(adj_mat)
   gr <- graph_from_adjacency_matrix(adj_mat + t(adj_mat))
   comps <- components(gr)
@@ -83,7 +86,7 @@ get_largest_component <- function(adj_mat) {
 #' Get common motif names
 #'
 #' Get the names of some common motifs as strings.
-#' @return A vector of names of common motifs.
+#' @return A vector of names (strings) of common motifs.
 #' @export
 
 get_motif_names <- function() {

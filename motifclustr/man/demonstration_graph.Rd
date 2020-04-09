@@ -8,10 +8,11 @@ demonstration_graph()
 }
 \value{
 A list with two entries:
-adj_mat_dense is the adjacency matrix in dense form.
-adj_mat_sparse is the adjacency matrix in sparse form.
+\code{adj_mat_dense} is the adjacency matrix in dense form, and
+\code{adj_mat_sparse} is the adjacency matrix in sparse form.
 }
 \description{
 Generate the sparse and dense adjacency matrices of a small weighted
 directed graph, for demonstrating methods and running tests.
 }
+\keyword{internal}

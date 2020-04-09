@@ -13,9 +13,9 @@ adjacency matrix.}
 \item{motif_type}{Type of motif adjacency matrix to build.}
 
 \item{weight_type}{The weighting scheme to use.
-One of "unweighted", "mean" or "product".}
+One of \code{"unweighted"}, \code{"mean"} or \code{"product"}.}
 
-\item{method}{Which formulation to use. One of "dense" or "sparse".}
+\item{method}{Which formulation to use. One of \code{"dense"} or \code{"sparse"}.}
 }
 \value{
 A motif adjacency matrix.
@@ -23,3 +23,4 @@ A motif adjacency matrix.
 \description{
 Perform the motif adjacency matrix calculations for motif Mexpa
 }
+\keyword{internal}

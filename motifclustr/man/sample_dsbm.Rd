@@ -2,7 +2,7 @@
 % Please edit documentation in R/sampling.R
 \name{sample_dsbm}
 \alias{sample_dsbm}
-\title{Sample a DSBM}
+\title{Sample a directed stochastic block model (DSBM)}
 \usage{
 sample_dsbm(
   block_sizes,
@@ -18,12 +18,12 @@ sample_dsbm(
 probabilities.}
 
 \item{weight_type}{The type of weighting scheme.
-One of "unweighted", "deterministic" or "poisson".}
+One of \code{"unweighted"}, \code{"deterministic"} or \code{"poisson"}.}
 
 \item{weight_matrix}{A matrix containing the block-to-block weight
 parameters.
-Unused for weight_type = "deterministic".
-Defaults to NULL.}
+Unused for \code{weight_type = "deterministic"}.
+Defaults to \code{NULL}.}
 }
 \value{
 A randomly sampled (weighted) adjacency matrix of a DSBM.

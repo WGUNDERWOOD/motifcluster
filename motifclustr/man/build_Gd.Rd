@@ -10,9 +10,10 @@ build_Gd(adj_mat)
 \item{adj_mat}{Original adjacency matrix.}
 }
 \value{
-A double-edge adjacency matrix Gd in sparse form.
+A double-edge adjacency matrix \code{Gd} in sparse form.
 }
 \description{
-Build the sparse double-edge adjacency matrix Gd from a
+Build the sparse double-edge adjacency matrix \code{Gd} from a
 graph adjacency matrix.
 }
+\keyword{internal}

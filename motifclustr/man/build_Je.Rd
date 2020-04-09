@@ -10,9 +10,10 @@ build_Je(adj_mat)
 \item{adj_mat}{Original adjacency matrix.}
 }
 \value{
-An edge-and-diagonal indicator matrix Je in sparse form.
+An edge-and-diagonal indicator matrix \code{Je} in sparse form.
 }
 \description{
-Build the sparse edge-and-diagonal indicator matrix Je from a
+Build the sparse edge-and-diagonal indicator matrix \code{Je} from a
 graph adjacency matrix.
 }
+\keyword{internal}

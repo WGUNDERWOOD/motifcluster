@@ -2,7 +2,7 @@
 % Please edit documentation in R/sampling.R
 \name{sample_bsbm}
 \alias{sample_bsbm}
-\title{Sample a BSBM}
+\title{Sample a bipartite stochastic block model (BSBM)}
 \usage{
 sample_bsbm(
   source_block_sizes,
@@ -19,16 +19,17 @@ of source vertices.}
 \item{dest_block_sizes}{A vector containing the size of each block
 of destination vertices.}
 
-\item{bipartite_connection_matrix}{A matrix containing the block-to-block
+\item{bipartite_connection_matrix}{A matrix containing the
+source block to destination block
 connection probabilities.}
 
 \item{weight_type}{The type of weighting scheme.
-One of "unweighted", "deterministic" or "poisson".}
+One of \code{"unweighted"}, \code{"deterministic"} or \code{"poisson"}.}
 
 \item{bipartite_weight_matrix}{A matrix containing the
-sourece block-to-destination block weight parameters.
-Unused for weight_type = "deterministic".
-Defaults to NULL.}
+sourece block to destination block weight parameters.
+Unused for \code{weight_type = "deterministic"}.
+Defaults to \code{NULL}.}
 }
 \value{
 A randomly sampled (weighted) adjacency matrix of a BSBM.
@@ -41,7 +42,7 @@ block model (BSBM) with specified parameters.
 source_block_sizes = c(10, 10)
 dest_block_sizes = c(10, 10, 10)
 bipartite_connection_matrix = matrix(c(0.8, 0.5, 0.1, 0.1, 0.5, 0.8),
-nrow = 2, byrow = TRUE)
+      nrow = 2, byrow = TRUE)
 weight_type = "poisson"
 bipartite_weight_matrix = matrix(c(20, 10, 2, 2, 10, 20),
       nrow = 2, byrow = TRUE)

@@ -15,3 +15,4 @@ An identity matrix Id in sparse form.
 \description{
 Build the sparse identity matrix Id from a graph adjacency matrix.
 }
+\keyword{internal}

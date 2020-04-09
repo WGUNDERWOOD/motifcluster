@@ -7,7 +7,7 @@
 drop0_killdiag(some_mat)
 }
 \arguments{
-\item{some_mat}{Some matrix.}
+\item{some_mat}{A square matrix.}
 }
 \value{
 A sparse-form copy of the matrix with its
@@ -17,3 +17,4 @@ diagonal entries set to zero.
 Set the diagonal entries of a matrix to zero
 and convert it to sparse form.
 }
+\keyword{internal}

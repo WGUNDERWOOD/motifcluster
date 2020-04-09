@@ -11,7 +11,7 @@ mam_Md(adj_mat, weight_type)
 adjacency matrix.}
 
 \item{weight_type}{The weighting scheme to use.
-One of "unweighted", "mean" or "product".}
+One of \code{"unweighted"}, \code{"mean"} or \code{"product"}.}
 }
 \value{
 A motif adjacency matrix.
@@ -19,3 +19,4 @@ A motif adjacency matrix.
 \description{
 Perform the motif adjacency matrix calculations for motif Md
 }
+\keyword{internal}

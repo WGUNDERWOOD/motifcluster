@@ -10,9 +10,10 @@ build_Jn(adj_mat)
 \item{adj_mat}{Original adjacency matrix.}
 }
 \value{
-A vertex-distinct indicator matrix Jn.
+A vertex-distinct indicator matrix \code{Jn}.
 }
 \description{
-Build the vertex-distinct indicator matrix Jn from a
+Build the vertex-distinct indicator matrix \code{Jn} from a
 graph adjacency matrix.
 }
+\keyword{internal}

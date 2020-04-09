@@ -10,9 +10,10 @@ build_J0(adj_mat)
 \item{adj_mat}{Original adjacency matrix.}
 }
 \value{
-A missing-edge indicator matrix J0.
+A missing-edge indicator matrix \code{J0}.
 }
 \description{
-Build the missing-edge indicator matrix J0 from a
+Build the missing-edge indicator matrix \code{J0} from a
 graph adjacency matrix.
 }
+\keyword{internal}

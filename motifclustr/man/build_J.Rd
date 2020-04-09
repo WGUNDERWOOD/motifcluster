@@ -10,8 +10,9 @@ build_J(adj_mat)
 \item{adj_mat}{Original adjacency matrix.}
 }
 \value{
-A directed indicator matrix J in sparse form.
+A directed indicator matrix \code{J} in sparse form.
 }
 \description{
-Build the sparse directed indicator matrix J from a graph adjacency matrix.
+Build the sparse directed indicator matrix \code{J} from a graph adjacency matrix.
 }
+\keyword{internal}

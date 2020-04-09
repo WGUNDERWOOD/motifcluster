@@ -7,18 +7,17 @@
 a_b_one(a, b)
 }
 \arguments{
-\item{a}{A square n by n matrix.}
-
-\item{b}{A square n by n matrix.}
+\item{a, b}{Square matrices.}
 }
 \value{
-a * (b %*% one_mat)
+The square matrix \code{a * (b \%*\% one_mat)}.
 }
 \description{
-Compute a * (b %*% one_mat) where a, b, ones_mat are
-square matrices of the same size, and one_mat is a ones matrix.
-The product * is an entry-wise (Hadamard) product,
-while %*% represents matrix multiplication.
+Compute \code{a * (b \%*\% one_mat)} where \code{a}, \code{b}, \code{ones_mat} are
+square matrices of the same size, and \code{ones_mat} contains all entries equal to one.
+The product \code{*} is an entry-wise (Hadamard) product,
+while \code{\%*\%} represents matrix multiplication.
 This method is more efficient than the naive approach
-when a or b are sparse.
+when \code{a} or \code{b} are sparse.
 }
+\keyword{internal}
