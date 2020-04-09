@@ -1,5 +1,7 @@
 # motif-based-clustering
 
+[![Build Status](https://travis-ci.com/WGUNDERWOOD/motif-based-clustering.svg?branch=master)](https://travis-ci.com/github/WGUNDERWOOD/motif-based-clustering)
+
 Source code for the paper
 *Motif-Based Spectral Clustering of Weighted Directed Networks*,
 with
