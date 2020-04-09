@@ -1,7 +1,5 @@
 # motif-based-clustering
 
-[![Build Status](https://travis-ci.com/WGUNDERWOOD/motif-based-clustering.svg?branch=master)](https://travis-ci.com/github/WGUNDERWOOD/motif-based-clustering)
-
 Source code for the paper
 *Motif-Based Spectral Clustering of Weighted Directed Networks*,
 with
@@ -10,6 +8,8 @@ and
 Mihai Cucuringu.
 
 ## R package
+
+[![Build Status](https://travis-ci.com/WGUNDERWOOD/motif-based-clustering.svg?branch=master)](https://travis-ci.com/github/WGUNDERWOOD/motif-based-clustering)
 
 The R package is in [motifclustr/](./motifclustr/)
 and has the following dependencies,
