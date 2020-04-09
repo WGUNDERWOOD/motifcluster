@@ -13,6 +13,7 @@
 #' Defaults to NULL.
 #' @return A randomly sampled (weighted) adjacency matrix of a DSBM.
 #' @export
+#' @importFrom stats rpois rbinom
 #' @examples
 #' block_sizes = c(10,10)
 #' connection_matrix = matrix(c(0.8,0.1,0.1,0.8), nrow=2, byrow=TRUE)
@@ -65,8 +66,8 @@ sample_dsbm <- function(block_sizes, connection_matrix,
   cumul_sizes <- c(0, cumsum(block_sizes))
   adj_mat <- matrix(0, nrow=n, ncol=n)
 
-  for(i in 1:k){
-    for(j in 1:k){
+  for (i in 1:k) {
+    for (j in 1:k) {
 
       # block parameters
       x_range <- (cumul_sizes[i]+1):cumul_sizes[i+1]

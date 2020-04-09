@@ -9,6 +9,7 @@
 #' of the first few eigenvalues,
 #' and vects contains a nrow(mat) by num_eigs matrix
 #' of the associated eigenvectors.
+#' @importFrom RSpectra eigs
 
 get_first_eigs <- function(mat, num_eigs){
 

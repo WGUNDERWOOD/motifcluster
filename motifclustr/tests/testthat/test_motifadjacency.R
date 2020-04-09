@@ -2,7 +2,8 @@ context("Motif adjacency matrices")
 
 # build_motif_adjacency_matrix
 
-test_that("build_motif_adjacency_matrix returns correct unweighted functional matrix", {
+test_that("build_motif_adjacency_matrix returns correct
+           unweighted functional matrix", {
 
   # test case
   adj_mat_dense <- demonstration_graph()$adj_mat_dense
@@ -268,7 +269,7 @@ test_that("build_motif_adjacency_matrix returns correct unweighted functional ma
 
   # compare calculations with answers
   motifs <- get_motif_names()
-  for(i in 1:length(motifs)){
+  for (i in 1:length(motifs)) {
 
     MAM_densematrix_densemethod <- build_motif_adjacency_matrix(
       adj_mat_dense, motifs[i], "func", "unweighted", "dense")
@@ -287,7 +288,8 @@ test_that("build_motif_adjacency_matrix returns correct unweighted functional ma
 
 })
 
-test_that("build_motif_adjacency_matrix returns correct unweighted structural matrix", {
+test_that("build_motif_adjacency_matrix returns correct
+           unweighted structural matrix", {
 
   # test case
   adj_mat_dense <- demonstration_graph()$adj_mat_dense
@@ -553,7 +555,7 @@ test_that("build_motif_adjacency_matrix returns correct unweighted structural ma
 
   # compare calculations with answers
   motifs <- get_motif_names()
-  for(i in 1:length(motifs)){
+  for (i in 1:length(motifs)) {
 
     MAM_densematrix_densemethod <- build_motif_adjacency_matrix(
       adj_mat_dense, motifs[i], "struc", "unweighted", "dense")
@@ -564,15 +566,16 @@ test_that("build_motif_adjacency_matrix returns correct unweighted structural ma
     MAM_sparsematrix_sparsemethod <- build_motif_adjacency_matrix(
       adj_mat_sparse, motifs[i], "struc", "unweighted", "sparse")
 
-    expect_equal(MAM_densematrix_densemethod, ans[[motifs[i]]], label=paste("MAM_densematrix_densemethod", motifs[i]))
-    expect_equal(MAM_sparsematrix_densemethod, ans[[motifs[i]]], label=paste("MAM_sparsematrix_densemethod", motifs[i]))
-    expect_equal(MAM_densematrix_sparsemethod, ans[[motifs[i]]], label=paste("MAM_densematrix_sparsemethod", motifs[i]))
-    expect_equal(MAM_sparsematrix_sparsemethod, ans[[motifs[i]]], label=paste("MAM_sparsematrix_sparsemethod", motifs[i]))
+    expect_equal(MAM_densematrix_densemethod, ans[[motifs[i]]])
+    expect_equal(MAM_sparsematrix_densemethod, ans[[motifs[i]]])
+    expect_equal(MAM_densematrix_sparsemethod, ans[[motifs[i]]])
+    expect_equal(MAM_sparsematrix_sparsemethod, ans[[motifs[i]]])
   }
 
 })
 
-test_that("build_motif_adjacency_matrix returns correct mean-weighted functional matrix", {
+test_that("build_motif_adjacency_matrix returns correct
+           mean-weighted functional matrix", {
 
   # test case
   adj_mat_dense <- demonstration_graph()$adj_mat_dense
@@ -838,7 +841,7 @@ test_that("build_motif_adjacency_matrix returns correct mean-weighted functional
 
   # compare calculations with answers
   motifs <- get_motif_names()
-  for(i in 1:length(motifs)){
+  for (i in 1:length(motifs)) {
 
     MAM_densematrix_densemethod <- build_motif_adjacency_matrix(
       adj_mat_dense, motifs[i], "func", "mean", "dense")
@@ -857,7 +860,8 @@ test_that("build_motif_adjacency_matrix returns correct mean-weighted functional
 
 })
 
-test_that("build_motif_adjacency_matrix returns correct mean-weighted structural matrix", {
+test_that("build_motif_adjacency_matrix returns correct
+           mean-weighted structural matrix", {
 
   # test case
   adj_mat_dense <- demonstration_graph()$adj_mat_dense
@@ -1123,7 +1127,7 @@ test_that("build_motif_adjacency_matrix returns correct mean-weighted structural
 
   # compare calculations with answers
   motifs <- get_motif_names()
-  for(i in 1:length(motifs)){
+  for (i in 1:length(motifs)) {
 
     MAM_densematrix_densemethod <- build_motif_adjacency_matrix(
       adj_mat_dense, motifs[i], "struc", "mean", "dense")
@@ -1134,15 +1138,16 @@ test_that("build_motif_adjacency_matrix returns correct mean-weighted structural
     MAM_sparsematrix_sparsemethod <- build_motif_adjacency_matrix(
       adj_mat_sparse, motifs[i], "struc", "mean", "sparse")
 
-    expect_equal(MAM_densematrix_densemethod, ans[[motifs[i]]], label=paste("MAM_densematrix_densemethod", motifs[i]))
-    expect_equal(MAM_sparsematrix_densemethod, ans[[motifs[i]]], label=paste("MAM_sparsematrix_densemethod", motifs[i]))
-    expect_equal(MAM_densematrix_sparsemethod, ans[[motifs[i]]], label=paste("MAM_densematrix_sparsemethod", motifs[i]))
-    expect_equal(MAM_sparsematrix_sparsemethod, ans[[motifs[i]]], label=paste("MAM_sparsematrix_sparsemethod", motifs[i]))
+    expect_equal(MAM_densematrix_densemethod, ans[[motifs[i]]])
+    expect_equal(MAM_sparsematrix_densemethod, ans[[motifs[i]]])
+    expect_equal(MAM_densematrix_sparsemethod, ans[[motifs[i]]])
+    expect_equal(MAM_sparsematrix_sparsemethod, ans[[motifs[i]]])
   }
 
 })
 
-test_that("build_motif_adjacency_matrix returns correct product-weighted functional matrix", {
+test_that("build_motif_adjacency_matrix returns correct
+           product-weighted functional matrix", {
 
   # test case
   adj_mat_dense <- demonstration_graph()$adj_mat_dense
@@ -1408,7 +1413,7 @@ test_that("build_motif_adjacency_matrix returns correct product-weighted functio
 
   # compare calculations with answers
   motifs <- get_motif_names()
-  for(i in 1:length(motifs)){
+  for (i in 1:length(motifs)) {
 
     MAM_densematrix_densemethod <- build_motif_adjacency_matrix(
       adj_mat_dense, motifs[i], "func", "product", "dense")
@@ -1428,7 +1433,8 @@ test_that("build_motif_adjacency_matrix returns correct product-weighted functio
 
 })
 
-test_that("build_motif_adjacency_matrix returns correct product-weighted structural matrix", {
+test_that("build_motif_adjacency_matrix returns correct
+           product-weighted structural matrix", {
 
   # test case
   adj_mat_dense <- demonstration_graph()$adj_mat_dense
@@ -1694,7 +1700,7 @@ test_that("build_motif_adjacency_matrix returns correct product-weighted structu
 
   # compare calculations with answers
   motifs <- get_motif_names()
-  for(i in 1:length(motifs)){
+  for (i in 1:length(motifs)) {
 
     MAM_densematrix_densemethod <- build_motif_adjacency_matrix(
       adj_mat_dense, motifs[i], "struc", "product", "dense")
@@ -1705,10 +1711,10 @@ test_that("build_motif_adjacency_matrix returns correct product-weighted structu
     MAM_sparsematrix_sparsemethod <- build_motif_adjacency_matrix(
       adj_mat_sparse, motifs[i], "struc", "product", "sparse")
 
-    expect_equal(MAM_densematrix_densemethod, ans[[motifs[i]]], label=paste("MAM_densematrix_densemethod", motifs[i]))
-    expect_equal(MAM_sparsematrix_densemethod, ans[[motifs[i]]], label=paste("MAM_sparsematrix_densemethod", motifs[i]))
-    expect_equal(MAM_densematrix_sparsemethod, ans[[motifs[i]]], label=paste("MAM_densematrix_sparsemethod", motifs[i]))
-    expect_equal(MAM_sparsematrix_sparsemethod, ans[[motifs[i]]], label=paste("MAM_sparsematrix_sparsemethod", motifs[i]))
+    expect_equal(MAM_densematrix_densemethod, ans[[motifs[i]]])
+    expect_equal(MAM_sparsematrix_densemethod, ans[[motifs[i]]])
+    expect_equal(MAM_densematrix_sparsemethod, ans[[motifs[i]]])
+    expect_equal(MAM_sparsematrix_sparsemethod, ans[[motifs[i]]])
 
   }
 

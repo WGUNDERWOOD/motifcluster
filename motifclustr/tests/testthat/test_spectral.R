@@ -4,9 +4,10 @@ context("Spectral methods")
 
 test_that("get_first_eigs returns correct values on dense matrix", {
 
-  G <- matrix(c(7, -4, 14, 0, -4, 19, 10, 0, 14, 10, 10, 0, 0, 0, 0, 100), nrow = 4)
+  G <- matrix(c(7, -4, 14, 0, -4, 19, 10, 0,
+                14, 10, 10, 0, 0, 0, 0, 100), nrow = 4)
   vals <- c(-9, 18, 27)
-  vects <- matrix(c(-2, -1, 2, 0, -2, 2, -1, 0, -1, -2, -2, 0)/3, nrow = 4)
+  vects <- matrix(c(-2, -1, 2, 0, -2, 2, -1, 0, -1, -2, -2, 0) / 3, nrow = 4)
 
   spect <- get_first_eigs(G, 3)
 
@@ -16,9 +17,10 @@ test_that("get_first_eigs returns correct values on dense matrix", {
 
 test_that("get_first_eigs returns correct values on sparse matrix", {
 
-  G <- drop0(matrix(c(7, -4, 14, 0, -4, 19, 10, 0, 14, 10, 10, 0, 0, 0, 0, 100), nrow = 4))
+  G <- drop0(matrix(c(7, -4, 14, 0, -4, 19, 10, 0,
+                      14, 10, 10, 0, 0, 0, 0, 100), nrow = 4))
   vals <- c(-9, 18, 27)
-  vects <- matrix(c(-2, -1, 2, 0, -2, 2, -1, 0, -1, -2, -2, 0)/3, nrow = 4)
+  vects <- matrix(c(-2, -1, 2, 0, -2, 2, -1, 0, -1, -2, -2, 0) / 3, nrow = 4)
 
   spect <- get_first_eigs(G, 3)
 
@@ -57,7 +59,8 @@ test_that("build_laplacian returns correct matrices on sparse matrix", {
 test_that("build_laplacian gives correct error if row sums are zero", {
 
   G <- matrix(c(0, 1, 0, 2))
-  expect_error(build_laplacian(G, type_lap = "rw"), "row sums of adj_mat must be non-zero")
+  expect_error(build_laplacian(G, type_lap = "rw"),
+               "row sums of adj_mat must be non-zero")
 })
 
 # TODO test laplace embedding

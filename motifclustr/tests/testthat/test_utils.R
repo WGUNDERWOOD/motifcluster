@@ -2,14 +2,15 @@ context("Utilities")
 
 # a_b_one
 
-test_that("a_b_one returns correct matrix",{
+test_that("a_b_one returns correct matrix", {
 
   a_dense <- matrix(-4:4, nrow = 3, byrow = TRUE)
   b_dense <- matrix(-1:7, nrow = 3, byrow = TRUE)
   a_sparse <- drop0(a_dense)
   b_sparse <- drop0(b_dense)
 
-  ans <- drop0(matrix(c(0, 0, 0, -9, 0, 9, 36, 54, 72), nrow = 3, byrow = TRUE))
+  ans <- drop0(matrix(c(0, 0, 0, -9, 0, 9, 36, 54, 72),
+                      nrow = 3, byrow = TRUE))
 
   expect_equal(a_b_one(a_dense, b_dense), ans)
   expect_equal(a_b_one(a_sparse, b_sparse), ans)
@@ -18,14 +19,15 @@ test_that("a_b_one returns correct matrix",{
 
 # a_one_b
 
-test_that("a_one_b returns correct matrix",{
+test_that("a_one_b returns correct matrix", {
 
   a_dense <- matrix(-4:4, nrow = 3, byrow = TRUE)
   b_dense <- matrix(-1:7, nrow = 3, byrow = TRUE)
   a_sparse <- drop0(a_dense)
   b_sparse <- drop0(b_dense)
 
-  ans <- drop0(matrix(c(-24, -27, -24, -6, 0, 12, 12, 27, 48), nrow = 3, byrow = TRUE))
+  ans <- drop0(matrix(c(-24, -27, -24, -6, 0, 12, 12, 27, 48),
+                      nrow = 3, byrow = TRUE))
 
   expect_equal(a_one_b(a_dense, b_dense), ans)
   expect_equal(a_one_b(a_sparse, b_sparse), ans)

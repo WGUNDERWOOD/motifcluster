@@ -1,14 +1,14 @@
 #' Compute a right-multiplication with the ones matrix
 #'
-#' Compute A * (B %*% one_mat) where A, B, ones_mat are
+#' Compute a * (b %*% one_mat) where a, b, ones_mat are
 #' square matrices of the same size, and one_mat is a ones matrix.
 #' The product * is an entry-wise (Hadamard) product,
 #' while %*% represents matrix multiplication.
 #' This method is more efficient than the naive approach
-#' when A or B are sparse.
-#' @param A A square n by n matrix.
-#' @param B A square n by n matrix.
-#' @return A * (B %*% one_mat)
+#' when a or b are sparse.
+#' @param a A square n by n matrix.
+#' @param b A square n by n matrix.
+#' @return a * (b %*% one_mat)
 #' @importFrom Matrix Diagonal drop0
 
 a_b_one <- function(a, b){
@@ -22,15 +22,15 @@ a_b_one <- function(a, b){
 
 #' Compute a left-multiplication with the ones matrix
 #'
-#' Compute A * (one_mat %*% B) where A, B, ones_mat are
+#' Compute a * (one_mat %*% b) where a, b, ones_mat are
 #' square matrices of the same size, and one_mat is a ones matrix.
 #' The product * is an entry-wise (Hadamard) product,
 #' while %*% represents matrix multiplication.
 #' This method is more efficient than the naive approach
-#' when A or B are sparse.
-#' @param A A square n by n matrix.
-#' @param B A square n by n matrix.
-#' @return A * (one_mat %*% B)
+#' when a or b are sparse.
+#' @param a A square n by n matrix.
+#' @param b A square n by n matrix.
+#' @return a * (one_mat %*% b)
 #' @importFrom Matrix Diagonal drop0
 
 a_one_b <- function(a, b){
@@ -90,7 +90,7 @@ get_motif_names <- function(){
 
   motif_names <- c("Ms", "Md")
 
-  for(i in 1:13){
+  for (i in 1:13) {
     motif_name <- paste("M", i, sep="")
     motif_names <- c(motif_names, motif_name)
   }
