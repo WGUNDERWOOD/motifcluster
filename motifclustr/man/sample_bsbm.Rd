@@ -44,7 +44,3 @@ bipartite_weight_matrix = matrix(c(20,10,2,2,10,20), nrow=2, byrow=TRUE)
 sample_bsbm(source_block_sizes, dest_block_sizes, bipartite_connection_matrix,
             weight_type, bipartite_weight_matrix)
 }
-\keyword{BSBM}
-\keyword{bipartite}
-\keyword{model}
-\keyword{sample}

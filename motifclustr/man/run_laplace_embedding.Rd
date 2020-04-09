@@ -23,8 +23,3 @@ of the associated eigenvectors.
 Run Laplace embedding on a symmetric (weighted) adjacency matrix
 with a specified number of eigenvalues and eigenvectors.
 }
-\keyword{eigenvalue}
-\keyword{eigenvector}
-\keyword{embedding}
-\keyword{laplacian}
-\keyword{matrix}

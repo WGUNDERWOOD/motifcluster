@@ -5,8 +5,7 @@ Authors@R:
   person(given = "William George",
     family = "Underwood",
     role = c("aut", "cre"),
-    email = "wgu2@princeton.edu",
-    comment = c(ORCID = "0000-0003-4604-1548"))
+    email = "wgu2@princeton.edu")
 Description: Construct motif adjacency matrices for (weighted directed)
   networks, and use them for spectral clustering.
 License: GPL-3
