@@ -9,11 +9,11 @@
 #' @return A * (B %*% one_mat)
 #' @importFrom Matrix Diagonal drop0
 
-a_b_one <- function(A, B){
+a_b_one <- function(a, b){
 
-  n <- nrow(A)
+  n <- nrow(a)
   ones_vec <- rep(1, n)
-  ans <- Diagonal(n, as.numeric(B %*% ones_vec)) %*% A
+  ans <- Diagonal(n, as.numeric(b %*% ones_vec)) %*% a
 
   return(drop0(ans))
 }
@@ -29,11 +29,11 @@ a_b_one <- function(A, B){
 #' @return A * (one_mat %*% B)
 #' @importFrom Matrix Diagonal drop0
 
-a_one_b <- function(A, B){
+a_one_b <- function(a, b){
 
-  n <- nrow(A)
+  n <- nrow(a)
   ones_vec <- rep(1, n)
-  ans <- A %*% Diagonal(n, as.numeric(ones_vec %*% B))
+  ans <- a %*% Diagonal(n, as.numeric(ones_vec %*% b))
 
   return(drop0(ans))
 }
