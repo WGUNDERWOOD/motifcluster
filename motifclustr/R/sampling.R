@@ -41,7 +41,7 @@ sample_dsbm <- function(block_sizes, connection_matrix,
   if(!(all(connection_matrix >= 0) & all(connection_matrix <= 1))){
     stop("connection_matrix entries must be in [0,1].")
   }
-  weight_type = match.arg(weight_type)
+  weight_type <- match.arg(weight_type)
   if((weight_type != "unweighted") & is.null(weight_matrix)){
     stop("weighted requires a weight_matrix")
   }
@@ -73,7 +73,7 @@ sample_dsbm <- function(block_sizes, connection_matrix,
       p <- connection_matrix[i,j]
 
       # fill the adjacency matrix block-by-block
-      adj_mat[x_range, y_range] <- stats::rbinom(n_cells, 1, p)
+      adj_mat[x_range, y_range] <- rbinom(n_cells, 1, p)
 
       # deterministic weights
       if(weight_type == "deterministic"){
@@ -84,7 +84,7 @@ sample_dsbm <- function(block_sizes, connection_matrix,
       # poisson weights
       else if(weight_type == "poisson"){
         w <- weight_matrix[i,j]
-        weights <- stats::rpois(n_cells, w)
+        weights <- rpois(n_cells, w)
         adj_mat[x_range, y_range] <- weights * adj_mat[x_range, y_range]
       }
     }
@@ -146,25 +146,25 @@ sample_bsbm <- function(source_block_sizes, dest_block_sizes,
   }
 
   # initialize parameters
-  ks = length(source_block_sizes)
-  kd = length(dest_block_sizes)
-  zeros_ss = matrix(0, nrow=ks, ncol=ks)
-  zeros_d = matrix(0, nrow=kd, ncol=(ks+kd))
+  ks <- length(source_block_sizes)
+  kd <- length(dest_block_sizes)
+  zeros_ss <- matrix(0, nrow=ks, ncol=ks)
+  zeros_d <- matrix(0, nrow=kd, ncol=(ks+kd))
 
   # build block sizes vector
-  block_sizes = c(source_block_sizes, dest_block_sizes)
+  block_sizes <- c(source_block_sizes, dest_block_sizes)
 
   # build connection matrix
-  connection_matrix = cbind(zeros_ss, bipartite_connection_matrix)
-  connection_matrix = rbind(connection_matrix, zeros_d)
+  connection_matrix <- cbind(zeros_ss, bipartite_connection_matrix)
+  connection_matrix <- rbind(connection_matrix, zeros_d)
 
   # build weight matrix
   if(!is.null(bipartite_weight_matrix)){
-    weight_matrix = cbind(zeros_ss, bipartite_weight_matrix)
-    weight_matrix = rbind(weight_matrix, zeros_d)
+    weight_matrix <- cbind(zeros_ss, bipartite_weight_matrix)
+    weight_matrix <- rbind(weight_matrix, zeros_d)
   }
   else{
-    weight_matrix = NULL
+    weight_matrix <- NULL
   }
 
   # sample BSBM
@@ -183,7 +183,7 @@ sample_bsbm <- function(source_block_sizes, dest_block_sizes,
 
 demonstration_graph<- function(){
 
-  adj_mat_dense = matrix(c(
+  adj_mat_dense <- matrix(c(
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     2, 0, 3, 0, 6, 8, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0,10, 0, 0, 0, 0, 0, 0,
@@ -198,9 +198,9 @@ demonstration_graph<- function(){
     0, 0, 0, 0, 0, 0,23, 0, 0, 0, 0, 0
   ), nrow=12, byrow=TRUE)
 
-  adj_mat_sparse = drop0(adj_mat_dense)
+  adj_mat_sparse <- drop0(adj_mat_dense)
 
-  ans = list(adj_mat_dense = adj_mat_dense, adj_mat_sparse = adj_mat_sparse)
+  ans <- list(adj_mat_dense = adj_mat_dense, adj_mat_sparse = adj_mat_sparse)
 
   return(ans)
 }

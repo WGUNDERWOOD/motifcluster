@@ -11,9 +11,9 @@
 
 a_b_one <- function(A, B){
 
-  n = nrow(A)
-  ones_vec = rep(1, n)
-  ans = Diagonal(n, as.numeric(B %*% ones_vec)) %*% A
+  n <- nrow(A)
+  ones_vec <- rep(1, n)
+  ans <- Diagonal(n, as.numeric(B %*% ones_vec)) %*% A
 
   return(drop0(ans))
 }
@@ -31,9 +31,9 @@ a_b_one <- function(A, B){
 
 a_one_b <- function(A, B){
 
-  n = nrow(A)
-  ones_vec = rep(1, n)
-  ans = A %*% Diagonal(n, as.numeric(ones_vec %*% B))
+  n <- nrow(A)
+  ones_vec <- rep(1, n)
+  ans <- A %*% Diagonal(n, as.numeric(ones_vec %*% B))
 
   return(drop0(ans))
 }
@@ -63,6 +63,7 @@ drop0_killdiag <- function(some_mat){
 #' @return A vector of indices corresponding to the vertices in the largest
 #' connected component.
 #' @importFrom igraph components graph_from_adjacency_matrix
+#' @export
 
 get_largest_component <- function(adj_mat){
 
@@ -78,17 +79,18 @@ get_largest_component <- function(adj_mat){
 #'
 #' Get the names of some common motifs as strings.
 #' @return A vector of names of common motifs.
+#' @export
 
 get_motif_names <- function(){
 
-  motif_names = c("Ms", "Md")
+  motif_names <- c("Ms", "Md")
 
   for(i in 1:13){
-    motif_name = paste("M", i, sep="")
-    motif_names = c(motif_names, motif_name)
+    motif_name <- paste("M", i, sep="")
+    motif_names <- c(motif_names, motif_name)
   }
 
-  motif_names = c(motif_names, c("Mcoll", "Mexpa"))
+  motif_names <- c(motif_names, c("Mcoll", "Mexpa"))
 
   return(motif_names)
 }

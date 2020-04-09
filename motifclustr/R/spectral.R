@@ -20,7 +20,7 @@ get_first_eigs <- function(mat, num_eigs){
   }
 
   # get spectrum
-  ans_eigs <- RSpectra::eigs(mat, num_eigs, which = "SM")
+  ans_eigs <- eigs(mat, num_eigs, which="SM")
 
   # order eigenvalues and eigenvectors
   inds <- seq(num_eigs, 1, -1)
@@ -29,8 +29,8 @@ get_first_eigs <- function(mat, num_eigs){
 
   # return a list
   ans_spect <- list()
-  ans_spect[["vects"]] = vects
-  ans_spect[["vals"]]  = vals
+  ans_spect[["vects"]] <- vects
+  ans_spect[["vals"]] <- vals
 
   return(ans_spect)
 }
@@ -42,6 +42,7 @@ get_first_eigs <- function(mat, num_eigs){
 #' @param adj_mat Symmetric adjacency matrix from which to build the Laplacian.
 #' @param type_lap Type of Laplacian to build. One of "comb" or "rw".
 #' @return The specified Laplacian matrix.
+#' @export
 
 build_laplacian <- function(adj_mat, type_lap=c("comb", "rw")){
 
@@ -129,7 +130,7 @@ run_laplace_embedding <- function(adj_mat, num_eigs, type_lap=c("comb", "rw")){
 #' of the motif adjacency matrix;
 #' @export
 
-run_motif_embedding <- function(adj_mat, motif_name, motif_type = c("func", "struc"),
+run_motif_embedding <- function(adj_mat, motif_name, motif_type=c("func", "struc"),
                                 num_eigs, type_lap){
 
   # check args

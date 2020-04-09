@@ -21,8 +21,8 @@ test_that("sample_dsbm returns correct unweighted adjacency matrix", {
     G = G + sample_dsbm(block_sizes, connection_matrix, weight_type, weight_matrix)/n_reps
   }
 
-  G = Matrix::drop0(G)
-  ans = Matrix::drop0(matrix(c(
+  G = drop0(G)
+  ans = drop0(matrix(c(
                          0,0.4,0.5,0.5,0.5,
                          0.4,0,0.5,0.5,0.5,
                          0.6,0.6,0,0.7,0.7,
@@ -52,8 +52,8 @@ test_that("sample_dsbm returns correct deterministic weighted adjacency matrix",
     G = G + sample_dsbm(block_sizes, connection_matrix, weight_type, weight_matrix)/n_reps
   }
 
-  G = Matrix::drop0(G)
-  ans = Matrix::drop0(matrix(c(
+  G = drop0(G)
+  ans = drop0(matrix(c(
                          0,8,15,15,15,
                          8,0,15,15,15,
                          24,24,0,35,35,
@@ -83,8 +83,8 @@ test_that("sample_dsbm returns correct poisson weighted adjacency matrix", {
     G = G + sample_dsbm(block_sizes, connection_matrix, weight_type, weight_matrix)/n_reps
   }
 
-  G = Matrix::drop0(G)
-  ans = Matrix::drop0(matrix(c(
+  G = drop0(G)
+  ans = drop0(matrix(c(
                          0,8,15,15,15,
                          8,0,15,15,15,
                          24,24,0,35,35,
@@ -119,8 +119,8 @@ test_that("sample_bsbm returns correct unweighted adjacency matrix", {
                         bipartite_connection_matrix, weight_type, bipartite_weight_matrix)/n_reps
   }
 
-  G = Matrix::drop0(G)
-  ans = Matrix::drop0(matrix(c(
+  G = drop0(G)
+  ans = drop0(matrix(c(
                          0,0,0,0.3,0.4,0.5,
                          0,0,0,0.6,0.7,0.8,
                          0,0,0,0.6,0.7,0.8,
@@ -154,8 +154,8 @@ test_that("sample_bsbm returns correct deterministic weighted adjacency matrix",
                         bipartite_connection_matrix, weight_type, bipartite_weight_matrix)/n_reps
   }
 
-  G = Matrix::drop0(G)
-  ans = Matrix::drop0(matrix(c(
+  G = drop0(G)
+  ans = drop0(matrix(c(
                          0,0,0,3,8,15,
                          0,0,0,24,35,48,
                          0,0,0,24,35,48,
@@ -189,8 +189,8 @@ test_that("sample_bsbm returns correct poisson weighted adjacency matrix", {
                         bipartite_connection_matrix, weight_type, bipartite_weight_matrix)/n_reps
   }
 
-  G = Matrix::drop0(G)
-  ans = Matrix::drop0(matrix(c(
+  G = drop0(G)
+  ans = drop0(matrix(c(
                          0,0,0,3,8,15,
                          0,0,0,24,35,48,
                          0,0,0,24,35,48,
