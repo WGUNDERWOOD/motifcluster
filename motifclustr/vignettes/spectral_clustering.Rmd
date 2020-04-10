@@ -29,3 +29,7 @@ library(motifclustr)
 ```
 
 ## Sampling a weighted directed network
+
+We will start by randomly sampling some weighted directed networks which
+exhibit some latent structure.
+For this we use directed stochastic block models (DSBMs).
