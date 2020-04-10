@@ -18,7 +18,5 @@ Depends: R (>= 3.6.0)
 Imports:
     igraph, Matrix, RSpectra
 Suggests:
-    testthat,
-    knitr,
-    rmarkdown
+    testthat, knitr, rmarkdown
 VignetteBuilder: knitr
