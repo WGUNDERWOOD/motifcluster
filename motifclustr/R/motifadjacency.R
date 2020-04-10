@@ -30,6 +30,7 @@
 #' @return A motif adjacency matrix.
 #' @importFrom Matrix drop0 t
 #' @export
+# TODO example with demo graph
 
 build_motif_adjacency_matrix <- function(adj_mat, motif_name,
                                 motif_type=c("func", "struc"),

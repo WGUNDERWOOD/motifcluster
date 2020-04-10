@@ -1,1 +1,9 @@
+# private
 todo.org
+motifclustr/scratch.R
+
+# r package
+motifclustr/inst
+motifclustr/doc
+motifclustr.Rcheck/
+motifclustr/Meta/

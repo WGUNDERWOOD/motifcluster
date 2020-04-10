@@ -1,3 +1,5 @@
 ^scratch\.R$
 ^motifclustr.*\.pdf$
 ^\.travis\.yml$
+^doc$
+^Meta$

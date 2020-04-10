@@ -53,6 +53,7 @@ get_first_eigs <- function(mat, num_eigs) {
 #' One of \code{"comb"} (combinatorial) or \code{"rw"} (random-walk).
 #' @return The specified Laplacian matrix.
 #' @export
+# TODO examples
 
 build_laplacian <- function(adj_mat, type_lap = c("comb", "rw")) {
 
@@ -97,6 +98,7 @@ build_laplacian <- function(adj_mat, type_lap = c("comb", "rw")) {
 #' and \code{vects} contains an \code{nrow(adj_mat)} by \code{num_eigs} matrix
 #' of the associated eigenvectors.
 #' @export
+# TODO examples
 
 run_laplace_embedding <- function(adj_mat, num_eigs,
                                   type_lap = c("comb", "rw")) {
@@ -146,6 +148,7 @@ run_laplace_embedding <- function(adj_mat, num_eigs,
 #'     of the motif adjacency matrix.
 #' }
 #' @export
+# TODO examples
 
 # TODO data types in vals and vects
 
