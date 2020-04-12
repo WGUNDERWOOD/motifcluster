@@ -20,7 +20,7 @@ knitr::opts_chunk$set(
 
 This vignette demonstrates how to use the
 `motifclustr` package for motif-based spectral
-clustering of networks.
+clustering of weighted directed networks.
 
 First we load the package.
 
