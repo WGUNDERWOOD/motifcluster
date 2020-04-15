@@ -1,0 +1,77 @@
+---
+title: "Using the `motifclustr` package"
+author: "William George Underwood"
+date: "`r Sys.Date()`"
+output: pdf_document
+vignette: >
+  %\VignetteIndexEntry{Using the `motifclustr` package}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+header-includes:
+  - \usepackage{tikz}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+set.seed(0)
+```
+
+## Introduction
+
+This vignette demonstrates how to use the `motifclustr` package for motif-based
+spectral clustering of weighted directed networks.
+The functionality of the `motifclustr` package falls into two main categories:
+
+- Building motif adjacency matrices (MAMs)
+- Using MAMs for spectral clustering
+
+This vignette comprehensibly demonstrates both of these functionalities,
+showcasing the full capability of the `motifclustr` package.
+
+### Loading the package
+
+The package can be loaded with
+```{r}
+library(motifclustr)
+```
+
+TODO are these really necessary
+A few other packages are also required for this vignette.
+```{r}
+#library(igraph)
+```
+
+## Building motif adjacency matrices
+
+The main novelty in the `motifclustr` package is its ability to
+build a wide variety of MAMs, and to do so quickly.
+There are several options to consider when building a MAM, and these are covered in this section.
+
+### An example network
+
+In order to demonstrate the construction of MAMs,
+we first need a small weighted directed network to use as an example.
+Note that throughout this package we represent networks by their
+weighted directed adjacency matrices (possibly in sparse form).
+
+```{r}
+adj_mat = matrix(c(
+  0, 1, 0, 0,
+  0, 0, 2, 3,
+  0, 4, 0, 0,
+  5, 0, 6, 0
+), byrow=TRUE, nrow=4)
+```
+
+TODO plot network
+\begin{tikzpicture}
+\end{tikzpicture}
+
+```{r}
+motif_name = "M1"
+mam = build_motif_adjacency_matrix(adj_mat, motif_name, "func")
+print.matrix(mam)
+```

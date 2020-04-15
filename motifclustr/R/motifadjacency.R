@@ -33,9 +33,9 @@
 # TODO example with demo graph
 
 build_motif_adjacency_matrix <- function(adj_mat, motif_name,
-                                motif_type=c("func", "struc"),
-                                weight_type=c("unweighted", "mean", "product"),
-                                method=c("dense", "sparse")) {
+                                motif_type="func",
+                                weight_type="unweighted",
+                                method="sparse") {
 
   # check args
   if (!(motif_name %in% get_motif_names())) {
