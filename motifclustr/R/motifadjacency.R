@@ -33,7 +33,7 @@
 # TODO example with demo graph
 
 build_motif_adjacency_matrix <- function(adj_mat, motif_name,
-                                motif_type="func",
+                                motif_type="struc",
                                 weight_type="unweighted",
                                 method="sparse") {
 

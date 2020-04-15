@@ -48,14 +48,18 @@ A few other packages are also required for this vignette.
 
 The main novelty in the `motifclustr` package is its ability to
 build a wide variety of MAMs, and to do so quickly.
-There are several options to consider when building a MAM, and these are covered in this section.
+There are several options to consider when building a MAM,
+and these options are covered in this section.
 
 ### An example network
 
 In order to demonstrate the construction of MAMs,
-we first need a small weighted directed network to use as an example.
+we first need a small weighted directed network $\mathcal{G}$ to use as an example.
 Note that throughout this package we represent networks by their
 weighted directed adjacency matrices (possibly in sparse form).
+This means that for use alongside packages such as `igraph`,
+one must manually convert between adjacency matrices and
+`igraph` objects.
 
 ```{r}
 adj_mat = matrix(c(
@@ -70,8 +74,32 @@ TODO plot network
 \begin{tikzpicture}
 \end{tikzpicture}
 
+The `build_motif_adjacency_matrix` function is the main workhorse
+for building MAMs with `motifclustr`.
+Let's use it to build a MAM for our example network $\mathcal{G}$.
+First we must choose a motif to look for; let's use the
+3-cycle motif $\mathcal{M}_1$.
+
+### Basic motif adjacency matrix construction
+
 ```{r}
-motif_name = "M1"
-mam = build_motif_adjacency_matrix(adj_mat, motif_name, "func")
-print.matrix(mam)
+mam = build_motif_adjacency_matrix(adj_mat, "M1")
+prmatrix(mam)
 ```
+
+Note that all the entries are zero except for entries
+$(1,2)$,
+$(1,4)$,
+$(4,1)$,
+and
+$(4,2)$.
+This is because vertices 1,2 and 4 form an exact copy of
+the motif $\mathcal{M}_1$ in the network $\mathcal{G}$.
+
+### Functional and structural motif adjacency matrices
+
+Looking at our example network again,
+you might notice that there is seemingly another instance
+of the motif $\mathcal{M}_1$
+in our network $\mathcal{G}$,
+on the vertices 2,3 and 4.
