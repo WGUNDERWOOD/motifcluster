@@ -6,10 +6,10 @@
 #' @param connection_matrix A matrix containing the block-to-block connection
 #' probabilities.
 #' @param weight_type The type of weighting scheme.
-#' One of \code{"unweighted"}, \code{"deterministic"} or \code{"poisson"}.
+#' One of \code{"unweighted"}, \code{"constant"} or \code{"poisson"}.
 #' @param weight_matrix A matrix containing the block-to-block weight
 #' parameters.
-#' Unused for \code{weight_type = "deterministic"}.
+#' Unused for \code{weight_type = "constant"}.
 #' Defaults to \code{NULL}.
 #' @return A randomly sampled (weighted) adjacency matrix of a DSBM.
 #' @export
@@ -23,7 +23,7 @@
 
 sample_dsbm <- function(block_sizes, connection_matrix,
                    weight_matrix = NULL,
-                   weight_type = c("unweighted", "deterministic", "poisson")) {
+                   weight_type = c("unweighted", "constant", "poisson")) {
 
   # check args
   if (!all.equal(block_sizes, as.integer(block_sizes))) {
@@ -75,8 +75,8 @@ sample_dsbm <- function(block_sizes, connection_matrix,
       # fill the adjacency matrix block-by-block
       adj_mat[x_range, y_range] <- rbinom(n_cells, 1, p)
 
-      # deterministic weights
-      if (weight_type == "deterministic") {
+      # constant weights
+      if (weight_type == "constant") {
         w <- weight_matrix[i, j]
         adj_mat[x_range, y_range] <- w * adj_mat[x_range, y_range]
       }
@@ -108,10 +108,10 @@ sample_dsbm <- function(block_sizes, connection_matrix,
 #' source block to destination block
 #' connection probabilities.
 #' @param weight_type The type of weighting scheme.
-#' One of \code{"unweighted"}, \code{"deterministic"} or \code{"poisson"}.
+#' One of \code{"unweighted"}, \code{"constant"} or \code{"poisson"}.
 #' @param bipartite_weight_matrix A matrix containing the
 #' sourece block to destination block weight parameters.
-#' Unused for \code{weight_type = "deterministic"}.
+#' Unused for \code{weight_type = "constant"}.
 #' Defaults to \code{NULL}.
 #' @return A randomly sampled (weighted) adjacency matrix of a BSBM.
 #' @export
@@ -129,7 +129,7 @@ sample_dsbm <- function(block_sizes, connection_matrix,
 sample_bsbm <- function(source_block_sizes, dest_block_sizes,
                    bipartite_connection_matrix,
                    bipartite_weight_matrix = NULL,
-                   weight_type = c("unweighted", "deterministic", "poisson")) {
+                   weight_type = c("unweighted", "constant", "poisson")) {
 
   # check args
   if (!(length(source_block_sizes) == nrow(bipartite_connection_matrix))) {

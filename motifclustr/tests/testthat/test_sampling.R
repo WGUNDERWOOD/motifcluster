@@ -34,12 +34,12 @@ test_that("sample_dsbm returns correct unweighted adjacency matrix", {
   expect_equal(G, ans, tolerance = 0.05)
 })
 
-test_that("sample_dsbm returns correct deterministic
+test_that("sample_dsbm returns correct constant
            weighted adjacency matrix", {
 
   set.seed(2239)
 
-  weight_type <- "deterministic"
+  weight_type <- "constant"
   block_sizes <- c(2, 3)
   connection_matrix <- matrix(c(0.4, 0.5, 0.6, 0.7), nrow = 2, byrow = TRUE)
   n_reps <- 200
@@ -139,12 +139,12 @@ test_that("sample_bsbm returns correct unweighted adjacency matrix", {
   expect_equal(G, ans, tolerance = 0.05)
 })
 
-test_that("sample_bsbm returns correct deterministic weighted
+test_that("sample_bsbm returns correct constant weighted
            adjacency matrix", {
 
   set.seed(7482)
 
-  weight_type <- "deterministic"
+  weight_type <- "constant"
   source_block_sizes <- c(1, 2)
   dest_block_sizes <- c(1, 1, 1)
   bipartite_connection_matrix <- matrix(c(0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
