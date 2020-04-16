@@ -116,6 +116,17 @@ build_motif_adjacency_matrix <- function(adj_mat, motif_name,
   }
 }
 
+#' Perform the motif adjacency matrix calculations for motif Ms
+#'
+#' @param adj_mat Adjacency matrix from which to build the motif
+#' adjacency matrix.
+#' @param motif_type Type of motif adjacency matrix to build.
+#' @param weight_type The weighting scheme to use.
+#' One of \code{"unweighted"}, \code{"mean"} or \code{"product"}.
+#' @return A motif adjacency matrix.
+#' @keywords internal
+#' @importFrom Matrix drop0 t
+
 mam_Ms <- function(adj_mat, motif_type, weight_type) {
 
   if (weight_type == "unweighted") {

@@ -7,9 +7,9 @@
 build_motif_adjacency_matrix(
   adj_mat,
   motif_name,
-  motif_type = c("func", "struc"),
-  weight_type = c("unweighted", "mean", "product"),
-  method = c("dense", "sparse")
+  motif_type = "struc",
+  weight_type = "unweighted",
+  method = "dense"
 )
 }
 \arguments{
