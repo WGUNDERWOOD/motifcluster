@@ -30,15 +30,15 @@
 #' so tends to be faster for large sparse graphs.
 #' @return A motif adjacency matrix.
 #' @importFrom Matrix drop0 t
+#' @examples
+#' adj_mat = matrix(c(1:9), nrow = 3)
+#' build_motif_adjacency_matrix(adj_mat, "M1", "func", "mean")
 #' @export
-# TODO example with demo graph
 
 build_motif_adjacency_matrix <- function(adj_mat, motif_name,
                                 motif_type = c("struc", "func"),
                                 weight_type = c("unweighted", "mean", "poisson"),
                                 method = c("sparse", "dense")) {
-
-  # TODO multiple args. check defaults
 
   # check args
   if (!(motif_name %in% get_motif_names())) {

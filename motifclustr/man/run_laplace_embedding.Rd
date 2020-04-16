@@ -25,3 +25,7 @@ of the associated eigenvectors.
 Run Laplace embedding on a symmetric (weighted) adjacency matrix
 with a specified number of eigenvalues and eigenvectors.
 }
+\examples{
+adj_mat = matrix(c(1:9), nrow = 3)
+run_laplace_embedding(adj_mat, 2, "rw")
+}

@@ -44,9 +44,11 @@ A list with 7 entries:
     to the largest connected component of the motif adjacency matrix.
   \item \code{motif_adj_mat_comps}: the motif adjacency matrix restricted
     to its largest connected component.
-  \item \code{vals}: the eigenvalues associated with the Laplace embedding
+  \item \code{vals}: a length-\code{num_eigs} vector containing the
+    eigenvalues associated with the Laplace embedding
     of the restricted motif adjacency matrix.
-  \item \code{vects}: the eigenvectors associated with the Laplace embedding
+  \item \code{vects}: an \code{nrow(adj_mat)} by \code{num_eigs} matrix
+    containing the eigenvectors associated with the Laplace embedding
     of the restricted motif adjacency matrix.
 }
 }
@@ -55,4 +57,8 @@ Calculate a motif adjacency matrix for a given motif and motif type,
 restrict it to its largest connected component,
 and then run Laplace embedding with specified Laplacian type and
 number of eigenvalues and eigenvectors.
+}
+\examples{
+adj_mat = matrix(c(1:9), nrow = 3)
+run_motif_embedding(adj_mat, "M1", "func", "mean", "sparse", 2, "rw")
 }

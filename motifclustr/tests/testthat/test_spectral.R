@@ -62,6 +62,3 @@ test_that("build_laplacian gives correct error if row sums are zero", {
   expect_error(build_laplacian(G, type_lap = "rw"),
                "row sums of adj_mat must be non-zero")
 })
-
-# TODO test laplace embedding
-# TODO test motif embedding

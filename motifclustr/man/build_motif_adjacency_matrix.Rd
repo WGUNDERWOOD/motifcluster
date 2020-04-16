@@ -51,3 +51,7 @@ The weighting scheme can be one of:
     is the product of its edge weights.
 }
 }
+\examples{
+adj_mat = matrix(c(1:9), nrow = 3)
+build_motif_adjacency_matrix(adj_mat, "M1", "func", "mean")
+}

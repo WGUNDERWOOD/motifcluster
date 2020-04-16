@@ -15,8 +15,6 @@
 
 get_first_eigs <- function(mat, num_eigs) {
 
-  # TODO check returned data types.
-
   # check args
   if (!all.equal(num_eigs, as.integer(num_eigs))) {
     stop("num_eigs must be an integer.")
@@ -49,8 +47,10 @@ get_first_eigs <- function(mat, num_eigs) {
 #' @param type_lap Type of Laplacian to build.
 #' One of \code{"comb"} (combinatorial) or \code{"rw"} (random-walk).
 #' @return The specified Laplacian matrix.
+#' @examples
+#' adj_mat = matrix(c(1:9), nrow = 3)
+#' build_laplacian(adj_mat, "rw")
 #' @export
-# TODO examples
 
 build_laplacian <- function(adj_mat, type_lap = c("comb", "rw")) {
 
@@ -94,8 +94,10 @@ build_laplacian <- function(adj_mat, type_lap = c("comb", "rw")) {
 #' of the first few eigenvalues of the Laplacian,
 #' and \code{vects} contains an \code{nrow(adj_mat)} by \code{num_eigs} matrix
 #' of the associated eigenvectors.
+#' @examples
+#' adj_mat = matrix(c(1:9), nrow = 3)
+#' run_laplace_embedding(adj_mat, 2, "rw")
 #' @export
-# TODO examples
 
 run_laplace_embedding <- function(adj_mat, num_eigs,
                                   type_lap = c("comb", "rw")) {
@@ -143,15 +145,17 @@ run_laplace_embedding <- function(adj_mat, num_eigs,
 #'     to the largest connected component of the motif adjacency matrix.
 #'   \item \code{motif_adj_mat_comps}: the motif adjacency matrix restricted
 #'     to its largest connected component.
-#'   \item \code{vals}: the eigenvalues associated with the Laplace embedding
+#'   \item \code{vals}: a length-\code{num_eigs} vector containing the
+#'     eigenvalues associated with the Laplace embedding
 #'     of the restricted motif adjacency matrix.
-#'   \item \code{vects}: the eigenvectors associated with the Laplace embedding
+#'   \item \code{vects}: an \code{nrow(adj_mat)} by \code{num_eigs} matrix
+#'     containing the eigenvectors associated with the Laplace embedding
 #'     of the restricted motif adjacency matrix.
 #' }
+#' @examples
+#' adj_mat = matrix(c(1:9), nrow = 3)
+#' run_motif_embedding(adj_mat, "M1", "func", "mean", "sparse", 2, "rw")
 #' @export
-# TODO examples
-
-# TODO data types in vals and vects
 
 run_motif_embedding <- function(adj_mat, motif_name,
                        motif_type = c("struc", "func"),
@@ -169,6 +173,8 @@ run_motif_embedding <- function(adj_mat, motif_name,
   if (!all.equal(num_eigs, as.integer(num_eigs))) {
     stop("num_eigs must be an integer.")
   }
+  weight_type <- match.arg(weight_type)
+  method <- match.arg(method)
   if (!(num_eigs > 0)) {
     stop("num_eigs must be at least 1.")
   }
