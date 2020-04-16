@@ -4,7 +4,8 @@ motifclustr/scratch.R
 
 # r package
 motifclustr/inst
-motifclustr/doc
+motifclustr/doc/*.R
+motifclustr/doc/*.Rmd
 motifclustr.Rcheck/
 motifclustr/Meta/
 motifclustr/.gitignore
