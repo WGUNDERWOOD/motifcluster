@@ -2,7 +2,9 @@
 title: "Using the `motifclustr` package"
 author: "William George Underwood"
 date: "`r Sys.Date()`"
-output: pdf_document
+output:
+  pdf_document:
+    number_sections: true
 vignette: >
   %\VignetteIndexEntry{Using the `motifclustr` package}
   %\VignetteEngine{knitr::rmarkdown}
@@ -14,9 +16,12 @@ header-includes:
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#"
+  comment = "#",
+  set.seed(200401293)
 )
 ```
+
+\tableofcontents
 
 # Introduction
 
@@ -30,7 +35,7 @@ The functionality of the `motifclustr` package falls into two main categories:
 
 - Sampling random weighted directed networks
 - Building motif adjacency matrices (MAMs)
-- Using MAMs for spectral clustering
+- Spectral clustering with MAMs
 
 This vignette comprehensibly demonstrates all of these functionalities,
 showcasing the full capability of the `motifclustr` package.
@@ -188,8 +193,6 @@ mam_2 <- build_motif_adjacency_matrix(adj_mat, "M1", method = "dense")
 print(all(mam_1 == mam_2))
 ```
 
-\pagebreak
-
 # Sampling random weighted directed networks
 
 Building adjacency matrices by hand is tedious,
@@ -226,7 +229,6 @@ connection_matrix = matrix(c(
   0.9, 0.2,
   0.2, 0.9
 ), nrow = 2, byrow = TRUE)
-set.seed(0)
 adj_mat = sample_dsbm(block_sizes, connection_matrix)
 prmatrix(adj_mat)
 ```
@@ -236,27 +238,36 @@ prmatrix(adj_mat)
 The adjacency matrix above has binary entries,
 indicating that it is the adjacency matrix of an unweighted
 directed network.
-The `motifclustr` also allows sampling of weighted directed networks.
+The `motifclustr` package also allows sampling of weighted directed networks.
 The simplest example of this is "constant" weighting,
 where we simply multiply each block of the adjacency matrix by a constant.
 
-
 ```{r}
-block_sizes = c(5, 3)
-connection_matrix = matrix(c(
-  0.9, 0.2,
-  0.2, 0.9
-), nrow = 2, byrow = TRUE)
 weight_matrix = matrix(c(
   5, 2,
   2, 5
 ), nrow = 2, byrow = TRUE)
-set.seed(0)
 adj_mat = sample_dsbm(block_sizes, connection_matrix, weight_matrix,
                       weight_type = "constant")
 prmatrix(adj_mat)
 ```
 
+### Poisson-weighted directed stochastic block models
+
+We can also use weights drawn randomly from a Poisson distribution,
+where each block in the adjacency matrix has its own mean parameter.
+This returns an adjacency matrix with weights which could be any natural
+number, but is equal in expectation to the constant version.
+Note that in this scheme it is possible for the weight to be zero,
+removing an edge which might have otherwise been present.
+
+```{r}
+adj_mat = sample_dsbm(block_sizes, connection_matrix, weight_matrix,
+                      weight_type = "poisson")
+prmatrix(adj_mat)
+```
+
+# Spectral clustering with motif adjacency matrices
 
 
 
