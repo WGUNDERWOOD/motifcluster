@@ -22,6 +22,11 @@ CRAN:
 - Matrix
 - RSpectra
 
+The package's manual and an instructional vignette are in the
+[doc/](./motifclustr/doc/)
+directory.
+
+
 ## Python code
 
 The Python source code is in [python/](./python/)
