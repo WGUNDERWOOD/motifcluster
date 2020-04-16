@@ -71,15 +71,16 @@ drop0_killdiag <- function(some_mat) {
 #' @return A vector of indices corresponding to the vertices in the largest
 #' connected component.
 #' @importFrom igraph components graph_from_adjacency_matrix
+#' @examples
+#' adj_mat = matrix(c(0, 1, 0, 0, 0, 0, 0, 0, 0), nrow = 3)
+#' get_largest_component(adj_mat)
 #' @export
-# TODO examples
 
 get_largest_component <- function(adj_mat) {
 
-  # TODO remove igraph dependency
-
   n <- nrow(adj_mat)
-  gr <- graph_from_adjacency_matrix(adj_mat + t(adj_mat))
+  gr <- graph_from_adjacency_matrix(adj_mat + t(adj_mat),
+          mode = "undirected", weighted = "1", diag = FALSE)
   comps <- components(gr)
   verts_to_keep <- (1:n)[comps$membership == which.max(comps$csize)]
 

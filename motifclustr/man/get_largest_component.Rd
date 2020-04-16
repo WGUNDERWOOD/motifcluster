@@ -17,3 +17,7 @@ connected component.
 Get the indices of the vertices in the largest connected
 component of a graph from its adjacency matrix.
 }
+\examples{
+adj_mat = matrix(c(0, 1, 0, 0, 0, 0, 0, 0, 0), nrow = 3)
+get_largest_component(adj_mat)
+}

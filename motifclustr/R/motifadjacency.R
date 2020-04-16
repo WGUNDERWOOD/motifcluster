@@ -36,9 +36,9 @@
 #' @export
 
 build_motif_adjacency_matrix <- function(adj_mat, motif_name,
-                                motif_type = c("struc", "func"),
-                                weight_type = c("unweighted", "mean", "poisson"),
-                                method = c("sparse", "dense")) {
+  motif_type = c("struc", "func"),
+  weight_type = c("unweighted", "mean", "poisson"),
+  method = c("sparse", "dense")) {
 
   # check args
   if (!(motif_name %in% get_motif_names())) {

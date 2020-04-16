@@ -163,8 +163,6 @@ run_motif_embedding <- function(adj_mat, motif_name,
                        method = c("sparse", "dense"),
                        num_eigs, type_lap = c("comb", "rw")) {
 
-  # TODO check args
-
   # check args
   if (!(motif_name %in% get_motif_names())) {
     stop("Invalid motif name.")
