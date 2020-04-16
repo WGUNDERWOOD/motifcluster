@@ -21,7 +21,7 @@
 #' adjacency matrix.
 #' @param motif_name Motif used for the motif adjacency matrix.
 #' @param motif_type Type of motif adjacency matrix to build.
-# TODO should be one of func
+#' One of \code{"func"} or \code{"struc"}.
 #' @param weight_type The weighting scheme to use.
 #' One of \code{"unweighted"}, \code{"mean"} or \code{"product"}.
 #' @param method Which formulation to use.
@@ -34,7 +34,7 @@
 # TODO example with demo graph
 
 build_motif_adjacency_matrix <- function(adj_mat, motif_name,
-                                motif_type="struc",
+                                motif_type = c("struc", "func"),
                                 weight_type = c("unweighted", "mean", "poisson"),
                                 method = c("sparse", "dense")) {
 

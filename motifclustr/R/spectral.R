@@ -154,7 +154,7 @@ run_laplace_embedding <- function(adj_mat, num_eigs,
 # TODO data types in vals and vects
 
 run_motif_embedding <- function(adj_mat, motif_name,
-                       motif_type = c("func", "struc"),
+                       motif_type = c("struc", "func"),
                        weight_type = c("unweighted", "mean", "poisson"),
                        method = c("sparse", "dense"),
                        num_eigs, type_lap = c("comb", "rw")) {

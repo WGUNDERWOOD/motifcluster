@@ -7,7 +7,7 @@
 run_motif_embedding(
   adj_mat,
   motif_name,
-  motif_type = c("func", "struc"),
+  motif_type = c("struc", "func"),
   weight_type = c("unweighted", "mean", "poisson"),
   method = c("sparse", "dense"),
   num_eigs,

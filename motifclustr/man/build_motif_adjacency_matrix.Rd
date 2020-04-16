@@ -7,7 +7,7 @@
 build_motif_adjacency_matrix(
   adj_mat,
   motif_name,
-  motif_type = "struc",
+  motif_type = c("struc", "func"),
   weight_type = c("unweighted", "mean", "poisson"),
   method = c("sparse", "dense")
 )
@@ -18,7 +18,8 @@ adjacency matrix.}
 
 \item{motif_name}{Motif used for the motif adjacency matrix.}
 
-\item{motif_type}{Type of motif adjacency matrix to build.}
+\item{motif_type}{Type of motif adjacency matrix to build.
+One of \code{"func"} or \code{"struc"}.}
 
 \item{weight_type}{The weighting scheme to use.
 One of \code{"unweighted"}, \code{"mean"} or \code{"product"}.}
