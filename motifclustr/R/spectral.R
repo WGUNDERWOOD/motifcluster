@@ -126,9 +126,13 @@ run_laplace_embedding <- function(adj_mat, num_eigs,
 #' @param motif_name Motif used for the motif adjacency matrix.
 #' @param motif_type Type of motif adjacency matrix to use.
 #' One of \code{"func"} or \code{"struc"}.
+#' @param weight_type Weighting scheme for the motif adjacency matrix.
+#' One of \code{"unweighted"}, \code{"mean"} or \code{"product"}.
+#' @param method The method to use for building the motif adjacency matrix.
+#' One of \code{"sparse"} or \code{"dense"}.
+#' @param num_eigs Number of eigenvalues and eigenvectors for the embedding.
 #' @param type_lap Type of Laplacian for the embedding.
 #' One of \code{"comb"} or \code{"rw"}.
-#' @param num_eigs Number of eigenvalues and eigenvectors for the embedding.
 #' @return A list with 7 entries:
 #' \itemize{
 #'   \item \code{adj_mat}: the original adjacency matrix.
@@ -140,9 +144,9 @@ run_laplace_embedding <- function(adj_mat, num_eigs,
 #'   \item \code{motif_adj_mat_comps}: the motif adjacency matrix restricted
 #'     to its largest connected component.
 #'   \item \code{vals}: the eigenvalues associated with the Laplace embedding
-#'     of the motif adjacency matrix.
+#'     of the restricted motif adjacency matrix.
 #'   \item \code{vects}: the eigenvectors associated with the Laplace embedding
-#'     of the motif adjacency matrix.
+#'     of the restricted motif adjacency matrix.
 #' }
 #' @export
 # TODO examples
@@ -150,7 +154,12 @@ run_laplace_embedding <- function(adj_mat, num_eigs,
 # TODO data types in vals and vects
 
 run_motif_embedding <- function(adj_mat, motif_name,
-                       motif_type = c("func", "struc"), num_eigs, type_lap) {
+                       motif_type = c("func", "struc"),
+                       weight_type = c("unweighted", "mean", "poisson"),
+                       method = c("sparse", "dense"),
+                       num_eigs, type_lap = c("comb", "rw")) {
+
+  # TODO check args
 
   # check args
   if (!(motif_name %in% get_motif_names())) {
@@ -167,7 +176,7 @@ run_motif_embedding <- function(adj_mat, motif_name,
 
   # build motif adjacency matrix
   motif_adj_mat <- build_motif_adjacency_matrix(adj_mat, motif_name,
-                                                motif_type)
+                     motif_type, weight_type, method)
 
   # restrict to largest connected component
   comps <- get_largest_component(motif_adj_mat)
@@ -175,7 +184,7 @@ run_motif_embedding <- function(adj_mat, motif_name,
   motif_adj_mat_comps <- motif_adj_mat[comps, comps, drop = FALSE]
 
   # Laplace embedding
-  spect <- run_laplace_embedding(motif_adj_mat, num_eigs, type_lap)
+  spect <- run_laplace_embedding(motif_adj_mat_comps, num_eigs, type_lap)
 
   # return list
   ans <- list()

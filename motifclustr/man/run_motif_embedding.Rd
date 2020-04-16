@@ -8,8 +8,10 @@ run_motif_embedding(
   adj_mat,
   motif_name,
   motif_type = c("func", "struc"),
+  weight_type = c("unweighted", "mean", "poisson"),
+  method = c("sparse", "dense"),
   num_eigs,
-  type_lap
+  type_lap = c("comb", "rw")
 )
 }
 \arguments{
@@ -19,6 +21,12 @@ run_motif_embedding(
 
 \item{motif_type}{Type of motif adjacency matrix to use.
 One of \code{"func"} or \code{"struc"}.}
+
+\item{weight_type}{Weighting scheme for the motif adjacency matrix.
+One of \code{"unweighted"}, \code{"mean"} or \code{"product"}.}
+
+\item{method}{The method to use for building the motif adjacency matrix.
+One of \code{"sparse"} or \code{"dense"}.}
 
 \item{num_eigs}{Number of eigenvalues and eigenvectors for the embedding.}
 
@@ -37,9 +45,9 @@ A list with 7 entries:
   \item \code{motif_adj_mat_comps}: the motif adjacency matrix restricted
     to its largest connected component.
   \item \code{vals}: the eigenvalues associated with the Laplace embedding
-    of the motif adjacency matrix.
+    of the restricted motif adjacency matrix.
   \item \code{vects}: the eigenvectors associated with the Laplace embedding
-    of the motif adjacency matrix.
+    of the restricted motif adjacency matrix.
 }
 }
 \description{
