@@ -22,8 +22,8 @@
 #' sample_dsbm(block_sizes, connection_matrix, weight_type, weight_matrix)
 
 sample_dsbm <- function(block_sizes, connection_matrix,
-                   weight_type = c("unweighted", "deterministic", "poisson"),
-                   weight_matrix = NULL) {
+                   weight_matrix = NULL,
+                   weight_type = c("unweighted", "deterministic", "poisson")) {
 
   # check args
   if (!all.equal(block_sizes, as.integer(block_sizes))) {
@@ -128,8 +128,8 @@ sample_dsbm <- function(block_sizes, connection_matrix,
 
 sample_bsbm <- function(source_block_sizes, dest_block_sizes,
                    bipartite_connection_matrix,
-                   weight_type = c("unweighted", "deterministic", "poisson"),
-                   bipartite_weight_matrix = NULL) {
+                   bipartite_weight_matrix = NULL,
+                   weight_type = c("unweighted", "deterministic", "poisson")) {
 
   # check args
   if (!(length(source_block_sizes) == nrow(bipartite_connection_matrix))) {
@@ -177,7 +177,7 @@ sample_bsbm <- function(source_block_sizes, dest_block_sizes,
 
   # sample BSBM
   adj_mat <- sample_dsbm(block_sizes, connection_matrix,
-                         weight_type, weight_matrix)
+                         weight_matrix, weight_type)
 
   return(adj_mat)
 }
