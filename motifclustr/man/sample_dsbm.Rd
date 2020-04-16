@@ -7,8 +7,8 @@
 sample_dsbm(
   block_sizes,
   connection_matrix,
-  weight_type = c("unweighted", "deterministic", "poisson"),
-  weight_matrix = NULL
+  weight_matrix = NULL,
+  weight_type = c("unweighted", "constant", "poisson")
 )
 }
 \arguments{
@@ -17,13 +17,13 @@ sample_dsbm(
 \item{connection_matrix}{A matrix containing the block-to-block connection
 probabilities.}
 
-\item{weight_type}{The type of weighting scheme.
-One of \code{"unweighted"}, \code{"deterministic"} or \code{"poisson"}.}
-
 \item{weight_matrix}{A matrix containing the block-to-block weight
 parameters.
-Unused for \code{weight_type = "deterministic"}.
+Unused for \code{weight_type = "constant"}.
 Defaults to \code{NULL}.}
+
+\item{weight_type}{The type of weighting scheme.
+One of \code{"unweighted"}, \code{"constant"} or \code{"poisson"}.}
 }
 \value{
 A randomly sampled (weighted) adjacency matrix of a DSBM.
@@ -37,5 +37,5 @@ block_sizes = c(10, 10)
 connection_matrix = matrix(c(0.8, 0.1, 0.1, 0.8), nrow = 2, byrow = TRUE)
 weight_type = "poisson"
 weight_matrix = matrix(c(10, 3, 3, 10), nrow = 2, byrow = TRUE)
-sample_dsbm(block_sizes, connection_matrix, weight_type, weight_matrix)
+sample_dsbm(block_sizes, connection_matrix, weight_matrix, weight_type)
 }

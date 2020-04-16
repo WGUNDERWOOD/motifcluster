@@ -38,6 +38,8 @@ build_motif_adjacency_matrix <- function(adj_mat, motif_name,
                                 weight_type="unweighted",
                                 method="dense") {
 
+  # TODO multiple args. check defaults
+
   # check args
   if (!(motif_name %in% get_motif_names())) {
     stop("Invalid motif name.")

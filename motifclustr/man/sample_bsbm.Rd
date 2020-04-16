@@ -8,8 +8,8 @@ sample_bsbm(
   source_block_sizes,
   dest_block_sizes,
   bipartite_connection_matrix,
-  weight_type = c("unweighted", "deterministic", "poisson"),
-  bipartite_weight_matrix = NULL
+  bipartite_weight_matrix = NULL,
+  weight_type = c("unweighted", "constant", "poisson")
 )
 }
 \arguments{
@@ -23,13 +23,13 @@ of destination vertices.}
 source block to destination block
 connection probabilities.}
 
-\item{weight_type}{The type of weighting scheme.
-One of \code{"unweighted"}, \code{"deterministic"} or \code{"poisson"}.}
-
 \item{bipartite_weight_matrix}{A matrix containing the
 sourece block to destination block weight parameters.
-Unused for \code{weight_type = "deterministic"}.
+Unused for \code{weight_type = "constant"}.
 Defaults to \code{NULL}.}
+
+\item{weight_type}{The type of weighting scheme.
+One of \code{"unweighted"}, \code{"constant"} or \code{"poisson"}.}
 }
 \value{
 A randomly sampled (weighted) adjacency matrix of a BSBM.
@@ -47,5 +47,5 @@ weight_type = "poisson"
 bipartite_weight_matrix = matrix(c(20, 10, 2, 2, 10, 20),
       nrow = 2, byrow = TRUE)
 sample_bsbm(source_block_sizes, dest_block_sizes,
-      bipartite_connection_matrix, weight_type, bipartite_weight_matrix)
+      bipartite_connection_matrix, bipartite_weight_matrix, weight_type)
 }

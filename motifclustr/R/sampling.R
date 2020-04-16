@@ -19,7 +19,7 @@
 #' connection_matrix = matrix(c(0.8, 0.1, 0.1, 0.8), nrow = 2, byrow = TRUE)
 #' weight_type = "poisson"
 #' weight_matrix = matrix(c(10, 3, 3, 10), nrow = 2, byrow = TRUE)
-#' sample_dsbm(block_sizes, connection_matrix, weight_type, weight_matrix)
+#' sample_dsbm(block_sizes, connection_matrix, weight_matrix, weight_type)
 
 sample_dsbm <- function(block_sizes, connection_matrix,
                    weight_matrix = NULL,
@@ -124,7 +124,7 @@ sample_dsbm <- function(block_sizes, connection_matrix,
 #' bipartite_weight_matrix = matrix(c(20, 10, 2, 2, 10, 20),
 #'       nrow = 2, byrow = TRUE)
 #' sample_bsbm(source_block_sizes, dest_block_sizes,
-#'       bipartite_connection_matrix, weight_type, bipartite_weight_matrix)
+#'       bipartite_connection_matrix, bipartite_weight_matrix, weight_type)
 
 sample_bsbm <- function(source_block_sizes, dest_block_sizes,
                    bipartite_connection_matrix,

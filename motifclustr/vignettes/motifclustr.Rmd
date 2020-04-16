@@ -16,22 +16,25 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#"
 )
-set.seed(0)
 ```
 
 # Introduction
 
 This vignette demonstrates how to use the `motifclustr` package for motif-based
 spectral clustering of weighted directed networks.
+These methods are detailed in the paper
+*Motif-Based Spectral Clustering of Weighted Directed Networks*,
+available on the [arXiv](arxivpaper).
+TODO format arxiv link
 The functionality of the `motifclustr` package falls into two main categories:
 
+- Sampling random weighted directed networks
 - Building motif adjacency matrices (MAMs)
 - Using MAMs for spectral clustering
 
-This vignette comprehensibly demonstrates both of these functionalities,
+This vignette comprehensibly demonstrates all of these functionalities,
 showcasing the full capability of the `motifclustr` package.
-
-## Loading the package
+The package is loaded with
 
 ```{r}
 library(motifclustr)
@@ -55,12 +58,12 @@ one must manually convert between adjacency matrices and
 `igraph` objects.
 
 ```{r}
-adj_mat = matrix(c(
+adj_mat <- matrix(c(
   0, 2, 0, 0,
   0, 0, 2, 3,
   0, 4, 0, 0,
   4, 0, 5, 0
-), byrow=TRUE, nrow=4)
+), byrow = TRUE, nrow = 4)
 ```
 
 TODO plot network
@@ -76,7 +79,7 @@ First we must choose a motif to look for; let's use the
 ## Basic motif adjacency matrix construction
 
 ```{r}
-mam = build_motif_adjacency_matrix(adj_mat, "M1")
+mam <- build_motif_adjacency_matrix(adj_mat, "M1")
 prmatrix(mam)
 ```
 
@@ -107,7 +110,7 @@ If we want to also include instances which may have extra edges present,
 we can instead use functional motif instances:
 
 ```{r}
-mam = build_motif_adjacency_matrix(adj_mat, "M1", motif_type = "func")
+mam <- build_motif_adjacency_matrix(adj_mat, "M1", motif_type = "func")
 prmatrix(mam)
 ```
 
@@ -132,11 +135,10 @@ where every instance is assigned a weight equal to its
 mean edge weight.
 The $(i,j)$th MAM entry is then defined as the sum of these
 instance weights across all instances containing
-vertices $i$ and $j$:
-
+both vertices $i$ and $j$:
 
 ```{r}
-mam = build_motif_adjacency_matrix(adj_mat, "M1", motif_type = "func",
+mam <- build_motif_adjacency_matrix(adj_mat, "M1", motif_type = "func",
   weight_type = "mean")
 prmatrix(mam)
 ```
@@ -149,4 +151,114 @@ sum of these two mean weights, which is 7.
 
 ### Product-weighted instances
 
-TODO
+We can also use the "product" weighting scheme,
+where every instance is assigned a weight equal to the
+product of its edge weights.
+The $(i,j)$th MAM entry is then defined as the sum of these
+instance weights across all instances containing
+both vertices $i$ and $j$:
+
+```{r}
+mam <- build_motif_adjacency_matrix(adj_mat, "M1", motif_type = "func",
+  weight_type = "product")
+prmatrix(mam)
+```
+
+The 3-cycle on vertices 1, 2 and 4
+has edge weights of 2, 3 and 4, so the product of its edge weights is 24.
+Similarly the 3-cycle on vertices 2, 3 and 4 has mean edge weight of 60.
+Vertices 2 and 4 appear in both, so their shared MAM entries are the
+sum of these two product weights, which is 84.
+
+### Computation method
+
+The final argument to `build_motif_adjacency_matrix`
+is the "method" argument.
+This does not affect the value returned but may impact the
+amount of time taken to return the MAM.
+In general the "sparse" method (the default)
+is faster on large sparse networks.
+The "dense" method, which uses fewer operations but on
+denser matrices, tends to be faster for small dense networks.
+
+
+```{r}
+mam_1 <- build_motif_adjacency_matrix(adj_mat, "M1", method = "sparse")
+mam_2 <- build_motif_adjacency_matrix(adj_mat, "M1", method = "dense")
+print(all(mam_1 == mam_2))
+```
+
+\pagebreak
+
+# Sampling random weighted directed networks
+
+Building adjacency matrices by hand is tedious,
+so it is useful to have a method for generating
+the adjacency matrices of networks drawn from some probabilistic model.
+We use (weighted) directed stochastic block models (DSBMs) and
+(weighted) bipartite stochastic block models (BSBMs).
+
+## Directed stochastic block models
+
+First let's sample a the adjacency matrix of a DSBM
+which has two blocks of vertices;
+the first containing 5 vertices and the second containing 3.
+We use strong within-block connections,
+with the diagonal entries of the connection matrix set to 0.9.
+The between-block connections are much weaker, with the off-diagonal
+connection matrix entries set to 0.1.
+Note how the resulting adjacency matrix is dense
+on its diagonal blocks
+$\{1, \dots, 5\} \times \{1, \dots, 5\}$
+and
+$\{6, \dots, 8\} \times \{6, \dots, 8\}$,
+and is sparse on its off-diagonal blocks
+$\{1, \dots, 5\} \times \{6, \dots, 8\}$
+and
+$\{6, \dots, 8\} \times \{1, \dots, 5\}$.
+All the entries which lie exactly on the diagonal will
+always be zero,
+since we consider networks without self-loops.
+
+```{r}
+block_sizes = c(5, 3)
+connection_matrix = matrix(c(
+  0.9, 0.2,
+  0.2, 0.9
+), nrow = 2, byrow = TRUE)
+set.seed(0)
+adj_mat = sample_dsbm(block_sizes, connection_matrix)
+prmatrix(adj_mat)
+```
+
+### Constant-weighted directed stochastic block models
+
+The adjacency matrix above has binary entries,
+indicating that it is the adjacency matrix of an unweighted
+directed network.
+The `motifclustr` also allows sampling of weighted directed networks.
+The simplest example of this is "constant" weighting,
+where we simply multiply each block of the adjacency matrix by a constant.
+
+
+```{r}
+block_sizes = c(5, 3)
+connection_matrix = matrix(c(
+  0.9, 0.2,
+  0.2, 0.9
+), nrow = 2, byrow = TRUE)
+weight_matrix = matrix(c(
+  5, 2,
+  2, 5
+), nrow = 2, byrow = TRUE)
+set.seed(0)
+adj_mat = sample_dsbm(block_sizes, connection_matrix, weight_matrix,
+                      weight_type = "constant")
+prmatrix(adj_mat)
+```
+
+
+
+
+
+[arxivpaper]: https://arxiv.org/abs/2004.01293
