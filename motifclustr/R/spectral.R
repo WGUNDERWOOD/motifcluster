@@ -33,9 +33,6 @@ get_first_eigs <- function(mat, num_eigs) {
   vects <- Re(ans_eigs[["vectors"]])[, inds]
   vals <- Re(ans_eigs[["values"]])[inds]
 
-  print(vects)
-  print(vals)
-
   # return a list
   ans_spect <- list()
   ans_spect[["vects"]] <- vects
