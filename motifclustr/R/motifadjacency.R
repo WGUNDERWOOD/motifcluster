@@ -21,6 +21,7 @@
 #' adjacency matrix.
 #' @param motif_name Motif used for the motif adjacency matrix.
 #' @param motif_type Type of motif adjacency matrix to build.
+# TODO should be one of func
 #' @param weight_type The weighting scheme to use.
 #' One of \code{"unweighted"}, \code{"mean"} or \code{"product"}.
 #' @param method Which formulation to use.
@@ -35,13 +36,16 @@
 build_motif_adjacency_matrix <- function(adj_mat, motif_name,
                                 motif_type="struc",
                                 weight_type="unweighted",
-                                method="sparse") {
+                                method="dense") {
 
   # check args
   if (!(motif_name %in% get_motif_names())) {
     stop("Invalid motif name.")
   }
-  motif_type <- match.arg(motif_type)
+
+  if (!(motif_type %in% c("func", "struc"))) {
+    stop("motif_type must be one of 'func' or 'struc'.")
+  }
 
   if (motif_name == "Ms") {
     return(mam_Ms(adj_mat, motif_type, weight_type))
@@ -111,17 +115,6 @@ build_motif_adjacency_matrix <- function(adj_mat, motif_name,
     return(mam_Mexpa(adj_mat, motif_type, weight_type, method))
   }
 }
-
-#' Perform the motif adjacency matrix calculations for motif Ms
-#'
-#' @param adj_mat Adjacency matrix from which to build the motif
-#' adjacency matrix.
-#' @param motif_type Type of motif adjacency matrix to build.
-#' @param weight_type The weighting scheme to use.
-#' One of \code{"unweighted"}, \code{"mean"} or \code{"product"}.
-#' @return A motif adjacency matrix.
-#' @keywords internal
-#' @importFrom Matrix drop0 t
 
 mam_Ms <- function(adj_mat, motif_type, weight_type) {
 

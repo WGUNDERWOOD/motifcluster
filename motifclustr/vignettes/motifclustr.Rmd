@@ -93,7 +93,7 @@ $(1,4)$,
 $(4,1)$,
 and
 $(4,2)$.
-This is because vertices 1,2 and 4 form an exact copy of
+This is because vertices 1, 2 and 4 form an exact copy of
 the motif $\mathcal{M}_1$ in the network $\mathcal{G}$.
 
 ### Functional and structural motif adjacency matrices
@@ -102,4 +102,20 @@ Looking at our example network again,
 you might notice that there is seemingly another instance
 of the motif $\mathcal{M}_1$
 in our network $\mathcal{G}$,
-on the vertices 2,3 and 4.
+on the vertices 2, 3 and 4,
+albeit with an extra edge from 2 to 3.
+The reason for this is that we instructed
+`build_motif_adjacency_matrix`
+to look for *structural* motif instances (this is the default).
+Structural instances require an exact match, with no extra edges.
+If we want to also include instances which may have extra edges present,
+we can instead use functional motif instances:
+
+```{r}
+mam = build_motif_adjacency_matrix(adj_mat, "M1", motif_type = "func")
+prmatrix(mam)
+```
+This time we also pick up the 3-cycle vertices 2, 3 and 4.
+Vertices 2 and 4 therefore occur in two different instances
+of the motif, and so their motif adjacency matrix entries are equal
+to two.
