@@ -1,7 +1,7 @@
 ---
 title: "Using the `motifclustr` package"
-author: "William George Underwood"
-date: "`r Sys.Date()`"
+author: "William G Underwood"
+date: "`r format(Sys.Date(), '%d %B %Y')`"
 output:
   pdf_document:
     number_sections: true
@@ -16,9 +16,9 @@ header-includes:
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#",
-  set.seed(200401293)
+  comment = "#> "
 )
+set.seed(200401293)
 ```
 
 \tableofcontents
@@ -28,21 +28,20 @@ knitr::opts_chunk$set(
 TODO consistent variable names
 TODO name args
 
-This vignette demonstrates how to use the `motifclustr` package for motif-based
-spectral clustering of weighted directed networks.
+This vignette demonstrates how to use the R package `motifclustr`.
 These methods are detailed in the paper
 *Motif-Based Spectral Clustering of Weighted Directed Networks*,
-available on the [arXiv](arxivpaper).
-TODO format arxiv link
-The functionality of the `motifclustr` package falls into two main categories:
+which is available at [`arXiv:2004.01293`](arxivpaper).
+The functionality of the `motifclustr` package falls into a few main categories:
 
+- Building motif adjacency matrices
 - Sampling random weighted directed networks
-- Building motif adjacency matrices (MAMs)
-- Spectral clustering with MAMs
+- Spectral embedding with motif adjacency matrices
+- Motif-based spectral clustering
 
 This vignette comprehensibly demonstrates all of these functionalities,
 showcasing the full capability of the `motifclustr` package.
-The package is loaded with
+The package can be loaded with
 
 ```{r}
 library(motifclustr)
@@ -51,22 +50,23 @@ library(motifclustr)
 # Building motif adjacency matrices
 
 The main novelty in the `motifclustr` package is its ability to
-build a wide variety of MAMs, and to do so quickly.
+build a wide variety of motif adjacency matrices (MAMs), and to do so quickly.
 There are several options to consider when building an MAM,
-and these options are covered in this section.
+which are covered in this section.
 
 ## An example network
 
 In order to demonstrate the construction of MAMs,
-we first need a small weighted directed network $\mathcal{G}$ to use as an example.
+we first need a small weighted directed network
+$\mathcal{G}_1$ to use as an example.
 Note that throughout this package we represent networks by their
 weighted directed adjacency matrices (possibly in sparse form).
-This means that for use alongside packages such as `igraph`,
+This means that for use alongside R packages such as `igraph`,
 one must manually convert between adjacency matrices and
 `igraph` objects.
 
 ```{r}
-toy_adj_mat <- matrix(c(
+G1 <- matrix(c(
   0, 2, 0, 0,
   0, 0, 2, 3,
   0, 4, 0, 0,
@@ -82,7 +82,7 @@ TODO plot network
 
 The `build_motif_adjacency_matrix` function is the main workhorse
 for building MAMs with `motifclustr`.
-Let's use it to build an MAM for our example network $\mathcal{G}$.
+Let's use it to build an MAM for the network $\mathcal{G}_1$.
 First we must choose a motif to look for;
 a full list can be obtained with:
 
@@ -90,12 +90,10 @@ a full list can be obtained with:
 get_motif_names()
 ```
 
-Let's use the
-3-cycle motif $\mathcal{M}_1$.
+Let's use the 3-cycle motif $\mathcal{M}_1$.
 
 ```{r}
-mam <- build_motif_adjacency_matrix(toy_adj_mat, "M1")
-prmatrix(mam)
+build_motif_adjacency_matrix(G1, "M1")
 ```
 
 Note that all the entries are zero except for entries
@@ -105,16 +103,16 @@ $(4,1)$,
 and
 $(4,2)$.
 This is because vertices 1, 2 and 4 form an exact copy of
-the motif $\mathcal{M}_1$ in the network $\mathcal{G}$,
+the motif $\mathcal{M}_1$ in the network $\mathcal{G}_1$,
 and the  $(i,j)$th MAM entry simply counts the number of instances
 containing both vertices $i$ and $j$.
 
 ## Functional and structural motif adjacency matrices
 
-Looking at our example network $\mathcal{G}$ again,
+Looking at our example network $\mathcal{G}_1$ again,
 you might notice that there is seemingly another instance
 of the motif $\mathcal{M}_1$
-in our network $\mathcal{G}$,
+in our network $\mathcal{G}_1$,
 on the vertices 2, 3 and 4,
 albeit with an extra edge from 2 to 3.
 The reason for this is that we instructed
@@ -125,8 +123,7 @@ If we want to also include instances which may have extra edges present,
 we can instead use functional motif instances:
 
 ```{r}
-mam <- build_motif_adjacency_matrix(toy_adj_mat, "M1", motif_type = "func")
-prmatrix(mam)
+build_motif_adjacency_matrix(G1, "M1", motif_type = "func")
 ```
 
 This time we also pick up the 3-cycle on vertices 2, 3 and 4.
@@ -153,7 +150,7 @@ instance weights across all instances containing
 both vertices $i$ and $j$:
 
 ```{r}
-mam <- build_motif_adjacency_matrix(toy_adj_mat, "M1", motif_type = "func",
+mam <- build_motif_adjacency_matrix(G1, "M1", motif_type = "func",
   weight_type = "mean")
 prmatrix(mam)
 ```
@@ -174,7 +171,7 @@ instance weights across all instances containing
 both vertices $i$ and $j$:
 
 ```{r}
-mam <- build_motif_adjacency_matrix(toy_adj_mat, "M1", motif_type = "func",
+mam <- build_motif_adjacency_matrix(G1, "M1", motif_type = "func",
   weight_type = "product")
 prmatrix(mam)
 ```
@@ -198,8 +195,8 @@ denser matrices, tends to be faster for small dense networks.
 
 
 ```{r}
-mam_1 <- build_motif_adjacency_matrix(toy_adj_mat, "M1", method = "sparse")
-mam_2 <- build_motif_adjacency_matrix(toy_adj_mat, "M1", method = "dense")
+mam_1 <- build_motif_adjacency_matrix(G1, "M1", method = "sparse")
+mam_2 <- build_motif_adjacency_matrix(G1, "M1", method = "dense")
 print(all(mam_1 == mam_2))
 ```
 
@@ -350,7 +347,7 @@ As an example we go back to the first toy network,
 which is weighted and directed.
 
 ```{r}
-spectrum = run_motif_embedding(toy_adj_mat, "M1", "func", "unweighted", "sparse", 2, "rw")
+spectrum = run_motif_embedding(G1, "M1", "func", "unweighted", "sparse", 2, "rw")
 round(spectrum$vals, 4)
 round(spectrum$vects, 2)
 prmatrix(spectrum$motif_adj_mat)

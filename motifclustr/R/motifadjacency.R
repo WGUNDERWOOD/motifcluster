@@ -45,9 +45,11 @@ build_motif_adjacency_matrix <- function(adj_mat, motif_name,
     stop("Invalid motif name.")
   }
 
-  if (!(motif_type %in% c("func", "struc"))) {
-    stop("motif_type must be one of 'func' or 'struc'.")
-  }
+  motif_type = match.arg(motif_type)
+
+  weight_type = match.arg(weight_type, weight_type)
+
+  method = match.arg(method)
 
   if (motif_name == "Ms") {
     return(mam_Ms(adj_mat, motif_type, weight_type))
