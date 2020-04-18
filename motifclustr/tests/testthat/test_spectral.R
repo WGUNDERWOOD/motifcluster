@@ -33,7 +33,7 @@ test_that("get_first_eigs returns correct values on sparse matrix", {
 test_that("build_laplacian returns correct matrices on dense matrix", {
 
   G <- matrix(c(0:8), nrow = 3)
-  G <- G + t(G)
+  G <- drop0(G + t(G))
 
   degs_mat <- diag(c(12, 24, 36))
   comb_lap <- degs_mat - G
@@ -58,7 +58,7 @@ test_that("build_laplacian returns correct matrices on sparse matrix", {
 
 test_that("build_laplacian gives correct error if row sums are zero", {
 
-  G <- matrix(c(0, 1, 0, 2))
+  G <- drop0(matrix(c(0, 1, 0, 2)))
   expect_error(build_laplacian(G, type_lap = "rw"),
                "row sums of adj_mat must be non-zero")
 })

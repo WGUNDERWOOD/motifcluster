@@ -56,6 +56,7 @@ build_laplacian <- function(adj_mat, type_lap = c("comb", "rw")) {
 
   # check args
   type_lap <- match.arg(type_lap)
+  adj_mat = drop0(adj_mat)
 
   # initialize parameters
   degs_adj_mat <- apply(adj_mat, 1, sum)
@@ -164,6 +165,7 @@ run_motif_embedding <- function(adj_mat, motif_name,
                        num_eigs, type_lap = c("comb", "rw")) {
 
   # check args
+  adj_mat = drop0(adj_mat)
   if (!(motif_name %in% get_motif_names())) {
     stop("Invalid motif name.")
   }
