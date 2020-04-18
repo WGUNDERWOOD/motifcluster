@@ -19,6 +19,7 @@ knitr::opts_chunk$set(
   comment = "#> "
 )
 set.seed(200401293)
+options(digits = 2)
 ```
 
 \tableofcontents
@@ -74,17 +75,13 @@ G1 <- matrix(c(
 ), byrow = TRUE, nrow = 4)
 ```
 
-TODO plot network
-\begin{tikzpicture}
-\end{tikzpicture}
-
 ## Basic motif adjacency matrix construction
 
 The `build_motif_adjacency_matrix` function is the main workhorse
 for building MAMs with `motifclustr`.
 Let's use it to build an MAM for the network $\mathcal{G}_1$.
-First we must choose a motif to look for;
-a full list can be obtained with:
+First we must choose a motif to look for.
+A full list can be obtained with:
 
 ```{r}
 get_motif_names()
@@ -114,13 +111,13 @@ you might notice that there is seemingly another instance
 of the motif $\mathcal{M}_1$
 in our network $\mathcal{G}_1$,
 on the vertices 2, 3 and 4,
-albeit with an extra edge from 2 to 3.
+albeit with an "extra" edge from 2 to 3.
 The reason for this is that we instructed
 `build_motif_adjacency_matrix`
 to look for *structural* motif instances (this is the default).
 Structural instances require an exact match, with no extra edges.
 If we want to also include instances which may have extra edges present,
-we can instead use functional motif instances:
+we must instead use functional motif instances:
 
 ```{r}
 build_motif_adjacency_matrix(G1, "M1", motif_type = "func")
@@ -133,8 +130,8 @@ to two.
 
 ## Weighted motif adjacency matrices
 
-Our example network has weighted edges,
-which we have not yet taken into account:
+Our example network $\mathcal{G}_1$ has weighted edges,
+which we have not yet used:
 so far our MAMs have been simply counting
 instances of motifs.
 This is because the default weighting scheme is
@@ -142,7 +139,7 @@ This is because the default weighting scheme is
 
 ### Mean-weighted instances
 
-We can instead use the "mean" weighting scheme,
+We could instead use the "mean" weighting scheme,
 where every instance is assigned a weight equal to its
 mean edge weight.
 The $(i,j)$th MAM entry is then defined as the sum of these
@@ -150,15 +147,13 @@ instance weights across all instances containing
 both vertices $i$ and $j$:
 
 ```{r}
-mam <- build_motif_adjacency_matrix(G1, "M1", motif_type = "func",
-  weight_type = "mean")
-prmatrix(mam)
+build_motif_adjacency_matrix(G1, "M1", motif_type = "func", weight_type = "mean")
 ```
 
 The 3-cycle on vertices 1, 2 and 4
 has edge weights of 2, 3 and 4, so its mean edge weight is 3.
 Similarly the 3-cycle on vertices 2, 3 and 4 has mean edge weight of 4.
-Vertices 2 and 4 appear in both, so their shared MAM entries are the
+Vertices 2 and 4 appear in both, so their mutual MAM entries are the
 sum of these two mean weights, which is 7.
 
 ### Product-weighted instances
@@ -171,9 +166,7 @@ instance weights across all instances containing
 both vertices $i$ and $j$:
 
 ```{r}
-mam <- build_motif_adjacency_matrix(G1, "M1", motif_type = "func",
-  weight_type = "product")
-prmatrix(mam)
+build_motif_adjacency_matrix(G1, "M1", motif_type = "func", weight_type = "product")
 ```
 
 The 3-cycle on vertices 1, 2 and 4
@@ -195,9 +188,9 @@ denser matrices, tends to be faster for small dense networks.
 
 
 ```{r}
-mam_1 <- build_motif_adjacency_matrix(G1, "M1", method = "sparse")
-mam_2 <- build_motif_adjacency_matrix(G1, "M1", method = "dense")
-print(all(mam_1 == mam_2))
+mam_sparse <- build_motif_adjacency_matrix(G1, "M1", method = "sparse")
+mam_dense  <- build_motif_adjacency_matrix(G1, "M1", method = "dense")
+all(mam_sparse == mam_dense)
 ```
 
 # Sampling random weighted directed networks
@@ -215,20 +208,20 @@ which has two blocks of vertices;
 the first containing 5 vertices and the second containing 3.
 We use strong within-block connections,
 with the diagonal entries of the connection matrix set to 0.9.
-The between-block connections are much weaker, with the off-diagonal
-connection matrix entries set to 0.1.
-Note how the resulting adjacency matrix is dense
+The between-block connections are weaker, with the off-diagonal
+connection matrix entries set to 0.2.
+Note how the resulting adjacency matrix is denser
 on its diagonal blocks
 $\{1, \dots, 5\} \times \{1, \dots, 5\}$
 and
 $\{6, \dots, 8\} \times \{6, \dots, 8\}$,
-and is sparse on its off-diagonal blocks
+and is sparser on its off-diagonal blocks
 $\{1, \dots, 5\} \times \{6, \dots, 8\}$
 and
 $\{6, \dots, 8\} \times \{1, \dots, 5\}$.
 All the entries which lie exactly on the diagonal will
 always be zero,
-since we consider networks without self-loops.
+since we only consider networks without self-loops.
 
 ```{r}
 block_sizes = c(5, 3)
@@ -236,13 +229,12 @@ connection_matrix = matrix(c(
   0.9, 0.2,
   0.2, 0.9
 ), nrow = 2, byrow = TRUE)
-adj_mat = sample_dsbm(block_sizes, connection_matrix)
-prmatrix(adj_mat)
+sample_dsbm(block_sizes, connection_matrix)
 ```
 
 ### Constant-weighted directed stochastic block models
 
-The adjacency matrix above has binary entries,
+The matrix above has binary entries,
 indicating that it is the adjacency matrix of an unweighted
 directed network.
 The `motifclustr` package also allows sampling of weighted directed networks.
@@ -254,9 +246,7 @@ weight_matrix = matrix(c(
   5, 2,
   2, 5
 ), nrow = 2, byrow = TRUE)
-adj_mat = sample_dsbm(block_sizes, connection_matrix, weight_matrix,
-                      weight_type = "constant")
-prmatrix(adj_mat)
+sample_dsbm(block_sizes, connection_matrix, weight_matrix, weight_type = "constant")
 ```
 
 ### Poisson-weighted directed stochastic block models
@@ -269,9 +259,7 @@ Note that in this scheme it is possible for the weight to be zero,
 removing an edge which might have otherwise been present.
 
 ```{r}
-adj_mat = sample_dsbm(block_sizes, connection_matrix, weight_matrix,
-                      weight_type = "poisson")
-prmatrix(adj_mat)
+sample_dsbm(block_sizes, connection_matrix, weight_matrix, weight_type = "poisson")
 ```
 
 # Spectral embedding with motif adjacency matrices
@@ -286,10 +274,10 @@ because motif adjacency matrices are always symmetric.
 
 We can construct two types of Laplacian matrix for a network
 using the `motifclustr` package.
-First we create a toy example of a weighted undirected adjacency matrix.
+First we create an example of a weighted undirected network $\mathcal{G}_2$.
 
 ```{r}
-toy_adj_mat_sym <- matrix(c(
+G2 <- matrix(c(
   0, 2, 0, 0,
   2, 0, 4, 3,
   0, 4, 0, 5,
@@ -304,19 +292,18 @@ $L_\mathrm{c} = D - G$,
 where $D$ is the diagonal matrix of weighted vertex degrees:
 
 ```{r}
-Lc = build_laplacian(toy_adj_mat_sym, "comb")
-prmatrix(Lc)
+build_laplacian(G2, "comb")
 ```
 
 ### Random-walk Laplacian
 
 The random-walk Laplacian of an adjacency matrix $G$ is
-$L_\mathrm{c} = I - D^{-1}G$,
-where $D$ is the diagonal matrix of weighted vertex degrees:
+$L_\mathrm{rw} = I - D^{-1}G$,
+where $D$ is the diagonal matrix of weighted vertex degrees
+and $I$ is the identity matrix:
 
 ```{r}
-Lrw = build_laplacian(toy_adj_mat_sym, "rw")
-prmatrix(round(Lrw, 2))
+build_laplacian(G2, "rw")
 ```
 
 ## Laplace embedding
@@ -329,9 +316,9 @@ Below we use the random-walk Laplacian,
 and embedding dimension $l=2$:
 
 ```{r}
-spectrum = run_laplace_embedding(toy_adj_mat_sym, 2, "rw")
-round(spectrum$vects, 2)
-round(spectrum$vals, 4)
+spectrum = run_laplace_embedding(G2, 2, "rw")
+spectrum$vects
+spectrum$vals
 ```
 
 For a random-walk Laplacian,
@@ -340,7 +327,7 @@ and its corresponding eigenvector is constant.
 
 ## Motif embedding
 
-Motif embedding is simply the process of building a MAM
+Motif embedding is simply the process of building an MAM
 and then performing Laplace embedding with it.
 This function also makes the MAM available.
 As an example we go back to the first toy network,
