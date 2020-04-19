@@ -24,19 +24,19 @@ get_first_eigs <- function(mat, num_eigs) {
   }
 
   # get spectrum
-  ans_eigs <- eigs(mat, num_eigs, which = "SM")
+  spectrum_eigs <- eigs(mat, num_eigs, which = "SM")
 
   # order eigenvalues and eigenvectors
   inds <- seq(num_eigs, 1, -1)
-  vects <- Re(ans_eigs[["vectors"]])[, inds]
-  vals <- Re(ans_eigs[["values"]])[inds]
+  vects <- Re(spectrum_eigs[["vectors"]])[, inds]
+  vals <- Re(spectrum_eigs[["values"]])[inds]
 
   # return a list
-  ans_spect <- list()
-  ans_spect[["vects"]] <- vects
-  ans_spect[["vals"]] <- vals
+  spectrum <- list()
+  spectrum[["vects"]] <- vects
+  spectrum[["vals"]] <- vals
 
-  return(ans_spect)
+  return(spectrum)
 }
 
 #' Build a Laplacian matrix
@@ -116,9 +116,9 @@ run_laplace_embedding <- function(adj_mat, num_eigs,
 
   # build and embed Laplacian
   laplacian <- build_laplacian(adj_mat, type_lap)
-  ans_spect <- get_first_eigs(laplacian, num_eigs)
+  spectrum <- get_first_eigs(laplacian, num_eigs)
 
-  return(ans_spect)
+  return(spectrum)
 }
 
 #' Run motif embedding
@@ -151,7 +151,7 @@ run_laplace_embedding <- function(adj_mat, num_eigs,
 #'   \item \code{vals}: a length-\code{num_eigs} vector containing the
 #'     eigenvalues associated with the Laplace embedding
 #'     of the restricted motif adjacency matrix.
-#'   \item \code{vects}: an \code{nrow(adj_mat)} by \code{num_eigs} matrix
+#'   \item \code{vects}: a matrix
 #'     containing the eigenvectors associated with the Laplace embedding
 #'     of the restricted motif adjacency matrix.
 #' }
@@ -162,7 +162,7 @@ run_laplace_embedding <- function(adj_mat, num_eigs,
 
 run_motif_embedding <- function(adj_mat, motif_name,
                        motif_type = c("struc", "func"),
-                       weight_type = c("unweighted", "mean", "poisson"),
+                       weight_type = c("unweighted", "mean", "product"),
                        method = c("sparse", "dense"),
                        num_eigs, type_lap = c("comb", "rw")) {
 
@@ -195,14 +195,14 @@ run_motif_embedding <- function(adj_mat, motif_name,
   spect <- run_laplace_embedding(motif_adj_mat_comps, num_eigs, type_lap)
 
   # return list
-  ans <- list()
-  ans$adj_mat <- adj_mat
-  ans$motif_adj_mat <- motif_adj_mat
-  ans$comps <- comps
-  ans$adj_mat_comps <- adj_mat_comps
-  ans$motif_adj_mat_comps <- motif_adj_mat_comps
-  ans$vals <- spect$vals
-  ans$vects <- spect$vects
+  spectrum <- list()
+  spectrum$adj_mat <- adj_mat
+  spectrum$motif_adj_mat <- motif_adj_mat
+  spectrum$comps <- comps
+  spectrum$adj_mat_comps <- adj_mat_comps
+  spectrum$motif_adj_mat_comps <- motif_adj_mat_comps
+  spectrum$vals <- spect$vals
+  spectrum$vects <- spect$vects
 
-  return(ans)
+  return(spectrum)
 }

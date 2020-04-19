@@ -16,7 +16,7 @@ LazyData: true
 RoxygenNote: 7.0.2
 Depends: R (>= 3.6.0)
 Imports:
-    igraph, Matrix, RSpectra
+    igraph, LICORS, Matrix, RSpectra
 Suggests:
-    testthat, knitr, rmarkdown
+    knitr, mclust, rmarkdown, testthat
 VignetteBuilder: knitr

@@ -37,7 +37,7 @@ test_that("build_laplacian returns correct matrices on dense matrix", {
 
   degs_mat <- diag(c(12, 24, 36))
   comb_lap <- degs_mat - G
-  rw_lap <- solve(degs_mat) %*% (degs_mat - G)
+  rw_lap <- drop0(solve(degs_mat) %*% (degs_mat - G))
 
   expect_equal(build_laplacian(G, type_lap = "comb"), comb_lap)
   expect_equal(build_laplacian(G, type_lap = "rw"), rw_lap)
@@ -50,7 +50,7 @@ test_that("build_laplacian returns correct matrices on sparse matrix", {
 
   degs_mat <- diag(c(12, 24, 36))
   comb_lap <- degs_mat - G
-  rw_lap <- solve(degs_mat) %*% (degs_mat - G)
+  rw_lap <- drop0(solve(degs_mat) %*% (degs_mat - G))
 
   expect_equal(build_laplacian(G, type_lap = "comb"), comb_lap)
   expect_equal(build_laplacian(G, type_lap = "rw"), rw_lap)
