@@ -79,6 +79,8 @@ build_laplacian <- function(adj_mat, type_lap = c("comb", "rw")) {
     L <-  diag(n) - inv_degs_matrix %*% adj_mat
   }
 
+  L = drop0(L)
+
   return(L)
 }
 

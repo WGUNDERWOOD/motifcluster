@@ -26,9 +26,6 @@ options(digits = 2)
 
 # Introduction
 
-TODO consistent variable names
-TODO name args
-
 This vignette demonstrates how to use the R package `motifclustr`.
 These methods are detailed in the paper
 *Motif-Based Spectral Clustering of Weighted Directed Networks*,
@@ -311,7 +308,7 @@ build_laplacian(G2, "rw")
 Once we have constructed the desired Laplacian matrix,
 we use it to embed each vertex into $\mathbb{R}^l$
 by finding the eigenvectors associated with
-its first (smallest magnitude) eigenvalues.
+its first (smallest magnitude) few eigenvalues.
 Below we use the random-walk Laplacian,
 and embedding dimension $l=2$:
 
@@ -328,36 +325,33 @@ and its corresponding eigenvector is constant.
 ## Motif embedding
 
 Motif embedding is simply the process of building an MAM
-and then performing Laplace embedding with it.
-This function also makes the MAM available.
-As an example we go back to the first toy network,
-which is weighted and directed.
+and performing Laplace embedding with it.
+As an example we use the
+`run_motif_embedding`
+function on the network $\mathcal{G}_3$ below.
 
 ```{r}
-spectrum = run_motif_embedding(G1, "M1", "func", "unweighted", "sparse", 2, "rw")
-round(spectrum$vals, 4)
-round(spectrum$vects, 2)
-prmatrix(spectrum$motif_adj_mat)
+G3 <- matrix(c(
+  0, 0, 0, 0,
+  0, 0, 2, 3,
+  0, 4, 0, 0,
+  4, 0, 5, 0
+), byrow = TRUE, nrow = 4)
 ```
 
 An artefact of building MAMs is that although the original network may
 be connected, there is no guarantee that the MAM is also connected.
 Hence the MAM is restricted to its largest connected component
 before the Laplacian is formed.
-This is demonstrated below,
-where only three of the four vertices are embedded.
+We observe this with the network $\mathcal{G}_3$,
+in which only three of the four vertices are embedded.
 
 ```{r}
-toy_adj_mat <- matrix(c(
-  0, 0, 0, 0,
-  0, 0, 2, 3,
-  0, 4, 0, 0,
-  4, 0, 5, 0
-), byrow = TRUE, nrow = 4)
-spectrum = run_motif_embedding(toy_adj_mat, "M1", "func", "unweighted", "sparse", 2, "rw")
-round(spectrum$vals, 4)
-round(spectrum$vects, 2)
+spectrum = run_motif_embedding(G3, "M1", "func", "unweighted", "sparse", 2, "rw")
+spectrum$vals
+spectrum$vects
 ```
+
 
 # Motif-based spectral clustering
 
