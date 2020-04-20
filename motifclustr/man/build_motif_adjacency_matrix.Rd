@@ -8,7 +8,7 @@ build_motif_adjacency_matrix(
   adj_mat,
   motif_name,
   motif_type = c("struc", "func"),
-  weight_type = c("unweighted", "mean", "poisson"),
+  mam_weight_type = c("unweighted", "mean", "poisson"),
   mam_method = c("sparse", "dense")
 )
 }
@@ -21,7 +21,7 @@ adjacency matrix.}
 \item{motif_type}{Type of motif adjacency matrix to build.
 One of \code{"func"} or \code{"struc"}.}
 
-\item{weight_type}{The weighting scheme to use.
+\item{mam_weight_type}{The weighting scheme to use.
 One of \code{"unweighted"}, \code{"mean"} or \code{"product"}.}
 
 \item{mam_method}{Which formulation to use.
@@ -34,6 +34,8 @@ A motif adjacency matrix.
 }
 \description{
 Build a motif adjacency matrix from an adjacency matrix.
+}
+\details{
 Entry (\emph{i}, \emph{j}) of a motif adjacency matrix is the
 sum of the weights of all motifs containing both
 nodes \emph{i} and \emph{j}.
@@ -52,6 +54,6 @@ The weighting scheme can be one of:
 }
 }
 \examples{
-adj_mat = matrix(c(1:9), nrow = 3)
+adj_mat <- matrix(c(1:9), nrow = 3)
 build_motif_adjacency_matrix(adj_mat, "M1", "func", "mean")
 }

@@ -45,14 +45,14 @@ test_that("run_motif_clustering returns correct values", {
   num_eigs <- 3
   num_clusts <- 3
 
-  for (dsbm_weight_type in c("unweighted", "constant", "poisson")) {
+  for (sample_weight_type in c("unweighted", "constant", "poisson")) {
     for (motif_name in get_motif_names()[1:15]) {
       for (mam_weight_type in c("unweighted", "mean", "product")) {
         for (type_lap in c("comb", "rw")) {
 
           # sample a new graph
           adj_mat <- sample_dsbm(block_sizes, connection_matrix,
-                      weight_matrix, dsbm_weight_type)
+                      weight_matrix, sample_weight_type)
 
           # run full method
           motif_clust_list <- run_motif_clustering(adj_mat, motif_name,

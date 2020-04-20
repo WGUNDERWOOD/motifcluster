@@ -8,7 +8,7 @@ run_motif_embedding(
   adj_mat,
   motif_name,
   motif_type = c("struc", "func"),
-  weight_type = c("unweighted", "mean", "product"),
+  mam_weight_type = c("unweighted", "mean", "product"),
   mam_method = c("sparse", "dense"),
   num_eigs,
   type_lap = c("comb", "rw")
@@ -22,7 +22,7 @@ run_motif_embedding(
 \item{motif_type}{Type of motif adjacency matrix to use.
 One of \code{"func"} or \code{"struc"}.}
 
-\item{weight_type}{Weighting scheme for the motif adjacency matrix.
+\item{mam_weight_type}{Weighting scheme for the motif adjacency matrix.
 One of \code{"unweighted"}, \code{"mean"} or \code{"product"}.}
 
 \item{mam_method}{The method to use for building the motif adjacency matrix.

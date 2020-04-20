@@ -1,6 +1,7 @@
 #' Build a motif adjacency matrix
 #'
 #' Build a motif adjacency matrix from an adjacency matrix.
+#'
 #' Entry (\emph{i}, \emph{j}) of a motif adjacency matrix is the
 #' sum of the weights of all motifs containing both
 #' nodes \emph{i} and \emph{j}.
@@ -22,7 +23,7 @@
 #' @param motif_name Motif used for the motif adjacency matrix.
 #' @param motif_type Type of motif adjacency matrix to build.
 #' One of \code{"func"} or \code{"struc"}.
-#' @param weight_type The weighting scheme to use.
+#' @param mam_weight_type The weighting scheme to use.
 #' One of \code{"unweighted"}, \code{"mean"} or \code{"product"}.
 #' @param mam_method Which formulation to use.
 #' One of \code{"dense"} or \code{"sparse"}.
@@ -31,13 +32,13 @@
 #' @return A motif adjacency matrix.
 #' @importFrom Matrix drop0 t
 #' @examples
-#' adj_mat = matrix(c(1:9), nrow = 3)
+#' adj_mat <- matrix(c(1:9), nrow = 3)
 #' build_motif_adjacency_matrix(adj_mat, "M1", "func", "mean")
 #' @export
 
 build_motif_adjacency_matrix <- function(adj_mat, motif_name,
   motif_type = c("struc", "func"),
-  weight_type = c("unweighted", "mean", "poisson"),
+  mam_weight_type = c("unweighted", "mean", "poisson"),
   mam_method = c("sparse", "dense")) {
 
   # check args
@@ -46,77 +47,75 @@ build_motif_adjacency_matrix <- function(adj_mat, motif_name,
   }
 
   motif_type <- match.arg(motif_type)
-
-  weight_type <- match.arg(weight_type, weight_type)
-
+  mam_weight_type <- match.arg(mam_weight_type, mam_weight_type)
   mam_method <- match.arg(mam_method)
 
   if (motif_name == "Ms") {
-    return(mam_Ms(adj_mat, motif_type, weight_type))
+    return(mam_Ms(adj_mat, motif_type, mam_weight_type))
   }
 
   if (motif_name == "Md") {
-    return(mam_Md(adj_mat, weight_type))
+    return(mam_Md(adj_mat, mam_weight_type))
   }
 
   if (motif_name == "M1") {
-    return(mam_M1(adj_mat, motif_type, weight_type))
+    return(mam_M1(adj_mat, motif_type, mam_weight_type))
   }
 
   if (motif_name == "M2") {
-    return(mam_M2(adj_mat, motif_type, weight_type))
+    return(mam_M2(adj_mat, motif_type, mam_weight_type))
   }
 
   if (motif_name == "M3") {
-    return(mam_M3(adj_mat, motif_type, weight_type))
+    return(mam_M3(adj_mat, motif_type, mam_weight_type))
   }
 
   if (motif_name == "M4") {
-    return(mam_M4(adj_mat, weight_type))
+    return(mam_M4(adj_mat, mam_weight_type))
   }
 
   if (motif_name == "M5") {
-    return(mam_M5(adj_mat, motif_type, weight_type))
+    return(mam_M5(adj_mat, motif_type, mam_weight_type))
   }
 
   if (motif_name == "M6") {
-    return(mam_M6(adj_mat, motif_type, weight_type))
+    return(mam_M6(adj_mat, motif_type, mam_weight_type))
   }
 
   if (motif_name == "M7") {
-    return(mam_M7(adj_mat, motif_type, weight_type))
+    return(mam_M7(adj_mat, motif_type, mam_weight_type))
   }
 
   if (motif_name == "M8") {
-    return(mam_M8(adj_mat, motif_type, weight_type, mam_method))
+    return(mam_M8(adj_mat, motif_type, mam_weight_type, mam_method))
   }
 
   if (motif_name == "M9") {
-    return(mam_M9(adj_mat, motif_type, weight_type, mam_method))
+    return(mam_M9(adj_mat, motif_type, mam_weight_type, mam_method))
   }
 
   if (motif_name == "M10") {
-    return(mam_M10(adj_mat, motif_type, weight_type, mam_method))
+    return(mam_M10(adj_mat, motif_type, mam_weight_type, mam_method))
   }
 
   if (motif_name == "M11") {
-    return(mam_M11(adj_mat, motif_type, weight_type, mam_method))
+    return(mam_M11(adj_mat, motif_type, mam_weight_type, mam_method))
   }
 
   if (motif_name == "M12") {
-    return(mam_M12(adj_mat, motif_type, weight_type, mam_method))
+    return(mam_M12(adj_mat, motif_type, mam_weight_type, mam_method))
   }
 
   if (motif_name == "M13") {
-    return(mam_M13(adj_mat, motif_type, weight_type, mam_method))
+    return(mam_M13(adj_mat, motif_type, mam_weight_type, mam_method))
   }
 
   if (motif_name == "Mcoll") {
-    return(mam_Mcoll(adj_mat, motif_type, weight_type, mam_method))
+    return(mam_Mcoll(adj_mat, motif_type, mam_weight_type, mam_method))
   }
 
   if (motif_name == "Mexpa") {
-    return(mam_Mexpa(adj_mat, motif_type, weight_type, mam_method))
+    return(mam_Mexpa(adj_mat, motif_type, mam_weight_type, mam_method))
   }
 }
 
@@ -125,15 +124,15 @@ build_motif_adjacency_matrix <- function(adj_mat, motif_name,
 #' @param adj_mat Adjacency matrix from which to build the motif
 #' adjacency matrix.
 #' @param motif_type Type of motif adjacency matrix to build.
-#' @param weight_type The weighting scheme to use.
+#' @param mam_weight_type The weighting scheme to use.
 #' One of \code{"unweighted"}, \code{"mean"} or \code{"product"}.
 #' @return A motif adjacency matrix.
 #' @keywords internal
 #' @importFrom Matrix drop0 t
 
-mam_Ms <- function(adj_mat, motif_type, weight_type) {
+mam_Ms <- function(adj_mat, motif_type, mam_weight_type) {
 
-  if (weight_type == "unweighted") {
+  if (mam_weight_type == "unweighted") {
     if (motif_type == "func") {
       J <- build_J(adj_mat)
       return(J + t(J))
@@ -145,7 +144,7 @@ mam_Ms <- function(adj_mat, motif_type, weight_type) {
     }
   }
 
-  if (weight_type == "mean") {
+  if (mam_weight_type == "mean") {
     if (motif_type == "func") {
       G <- build_G(adj_mat)
       return(G + t(G))
@@ -157,7 +156,7 @@ mam_Ms <- function(adj_mat, motif_type, weight_type) {
     }
   }
 
-  if (weight_type == "product") {
+  if (mam_weight_type == "product") {
     if (motif_type == "func") {
       G <- build_G(adj_mat)
       return(G + t(G))
@@ -174,25 +173,25 @@ mam_Ms <- function(adj_mat, motif_type, weight_type) {
 #'
 #' @param adj_mat Adjacency matrix from which to build the motif
 #' adjacency matrix.
-#' @param weight_type The weighting scheme to use.
+#' @param mam_weight_type The weighting scheme to use.
 #' One of \code{"unweighted"}, \code{"mean"} or \code{"product"}.
 #' @return A motif adjacency matrix.
 #' @keywords internal
 #' @importFrom Matrix drop0 t
 
-mam_Md <- function(adj_mat, weight_type) {
+mam_Md <- function(adj_mat, mam_weight_type) {
 
-  if (weight_type == "unweighted") {
+  if (mam_weight_type == "unweighted") {
     Jd <- build_Jd(adj_mat)
     return(Jd)
   }
 
-  if (weight_type == "mean") {
+  if (mam_weight_type == "mean") {
     Gd <- build_Gd(adj_mat)
     return(Gd / 2)
   }
 
-  if (weight_type == "product") {
+  if (mam_weight_type == "product") {
     Gp <- build_Gp(adj_mat)
     return(Gp)
   }
@@ -203,15 +202,15 @@ mam_Md <- function(adj_mat, weight_type) {
 #' @param adj_mat Adjacency matrix from which to build the motif
 #' adjacency matrix.
 #' @param motif_type Type of motif adjacency matrix to build.
-#' @param weight_type The weighting scheme to use.
+#' @param mam_weight_type The weighting scheme to use.
 #' One of \code{"unweighted"}, \code{"mean"} or \code{"product"}.
 #' @return A motif adjacency matrix.
 #' @keywords internal
 #' @importFrom Matrix drop0 t
 
-mam_M1 <- function(adj_mat, motif_type, weight_type) {
+mam_M1 <- function(adj_mat, motif_type, mam_weight_type) {
 
-  if (weight_type == "unweighted") {
+  if (mam_weight_type == "unweighted") {
     if (motif_type == "func") {
       J <- build_J(adj_mat)
       C <- t(J) * (J %*% J)
@@ -225,7 +224,7 @@ mam_M1 <- function(adj_mat, motif_type, weight_type) {
     }
   }
 
-  if (weight_type == "mean") {
+  if (mam_weight_type == "mean") {
     if (motif_type == "func") {
       J <- build_J(adj_mat)
       G <- build_G(adj_mat)
@@ -241,7 +240,7 @@ mam_M1 <- function(adj_mat, motif_type, weight_type) {
     }
   }
 
-  if (weight_type == "product") {
+  if (mam_weight_type == "product") {
     if (motif_type == "func") {
       G <- build_G(adj_mat)
       C <- t(G) * (G %*% G)
@@ -261,15 +260,15 @@ mam_M1 <- function(adj_mat, motif_type, weight_type) {
 #' @param adj_mat Adjacency matrix from which to build the motif
 #' adjacency matrix.
 #' @param motif_type Type of motif adjacency matrix to build.
-#' @param weight_type The weighting scheme to use.
+#' @param mam_weight_type The weighting scheme to use.
 #' One of \code{"unweighted"}, \code{"mean"} or \code{"product"}.
 #' @return A motif adjacency matrix.
 #' @keywords internal
 #' @importFrom Matrix drop0 t
 
-mam_M2 <- function(adj_mat, motif_type, weight_type) {
+mam_M2 <- function(adj_mat, motif_type, mam_weight_type) {
 
-  if (weight_type == "unweighted") {
+  if (mam_weight_type == "unweighted") {
     if (motif_type == "func") {
       J <- build_J(adj_mat)
       Jd <- build_Jd(adj_mat)
@@ -285,7 +284,7 @@ mam_M2 <- function(adj_mat, motif_type, weight_type) {
     }
   }
 
-  if (weight_type == "mean") {
+  if (mam_weight_type == "mean") {
     if (motif_type == "func") {
       J <- build_J(adj_mat)
       Jd <- build_Jd(adj_mat)
@@ -309,7 +308,7 @@ mam_M2 <- function(adj_mat, motif_type, weight_type) {
     }
   }
 
-  if (weight_type == "product") {
+  if (mam_weight_type == "product") {
     if (motif_type == "func") {
       G <- build_G(adj_mat)
       Gp <- build_Gp(adj_mat)
@@ -331,15 +330,15 @@ mam_M2 <- function(adj_mat, motif_type, weight_type) {
 #' @param adj_mat Adjacency matrix from which to build the motif
 #' adjacency matrix.
 #' @param motif_type Type of motif adjacency matrix to build.
-#' @param weight_type The weighting scheme to use.
+#' @param mam_weight_type The weighting scheme to use.
 #' One of \code{"unweighted"}, \code{"mean"} or \code{"product"}.
 #' @return A motif adjacency matrix.
 #' @keywords internal
 #' @importFrom Matrix drop0 t
 
-mam_M3 <- function(adj_mat, motif_type, weight_type) {
+mam_M3 <- function(adj_mat, motif_type, mam_weight_type) {
 
-  if (weight_type == "unweighted") {
+  if (mam_weight_type == "unweighted") {
     if (motif_type == "func") {
       J <- build_J(adj_mat)
       Jd <- build_Jd(adj_mat)
@@ -355,7 +354,7 @@ mam_M3 <- function(adj_mat, motif_type, weight_type) {
     }
   }
 
-  if (weight_type == "mean") {
+  if (mam_weight_type == "mean") {
     if (motif_type == "func") {
       J <- build_J(adj_mat)
       Jd <- build_Jd(adj_mat)
@@ -379,7 +378,7 @@ mam_M3 <- function(adj_mat, motif_type, weight_type) {
     }
   }
 
-  if (weight_type == "product") {
+  if (mam_weight_type == "product") {
     if (motif_type == "func") {
       G <- build_G(adj_mat)
       Gp <- build_Gp(adj_mat)
@@ -400,26 +399,26 @@ mam_M3 <- function(adj_mat, motif_type, weight_type) {
 #'
 #' @param adj_mat Adjacency matrix from which to build the motif
 #' adjacency matrix.
-#' @param weight_type The weighting scheme to use.
+#' @param mam_weight_type The weighting scheme to use.
 #' One of \code{"unweighted"}, \code{"mean"} or \code{"product"}.
 #' @return A motif adjacency matrix.
 #' @keywords internal
 #' @importFrom Matrix drop0 t
 
-mam_M4 <- function(adj_mat, weight_type) {
+mam_M4 <- function(adj_mat, mam_weight_type) {
 
-  if (weight_type == "unweighted") {
+  if (mam_weight_type == "unweighted") {
     Jd <- build_Jd(adj_mat)
     return(Jd * (Jd %*% Jd))
   }
 
-  if (weight_type == "mean") {
+  if (mam_weight_type == "mean") {
     Jd <- build_Jd(adj_mat)
     Gd <- build_Gd(adj_mat)
     return((Jd * (Jd %*% Gd) + Jd * (Gd %*% Jd) + Gd * (Jd %*% Jd)) / 6)
   }
 
-  if (weight_type == "product") {
+  if (mam_weight_type == "product") {
     Gp <- build_Gp(adj_mat)
     return(Gp * (Gp %*% Gp))
   }
@@ -430,15 +429,15 @@ mam_M4 <- function(adj_mat, weight_type) {
 #' @param adj_mat Adjacency matrix from which to build the motif
 #' adjacency matrix.
 #' @param motif_type Type of motif adjacency matrix to build.
-#' @param weight_type The weighting scheme to use.
+#' @param mam_weight_type The weighting scheme to use.
 #' One of \code{"unweighted"}, \code{"mean"} or \code{"product"}.
 #' @return A motif adjacency matrix.
 #' @keywords internal
 #' @importFrom Matrix drop0 t
 
-mam_M5 <- function(adj_mat, motif_type, weight_type) {
+mam_M5 <- function(adj_mat, motif_type, mam_weight_type) {
 
-  if (weight_type == "unweighted") {
+  if (mam_weight_type == "unweighted") {
     if (motif_type == "func") {
       J <- build_J(adj_mat)
       C <- J * (J %*% J) + J * (J %*% t(J)) + J * (t(J) %*% J)
@@ -452,7 +451,7 @@ mam_M5 <- function(adj_mat, motif_type, weight_type) {
     }
   }
 
-  if (weight_type == "mean") {
+  if (mam_weight_type == "mean") {
     if (motif_type == "func") {
       J <- build_J(adj_mat)
       G <- build_G(adj_mat)
@@ -472,7 +471,7 @@ mam_M5 <- function(adj_mat, motif_type, weight_type) {
     }
   }
 
-  if (weight_type == "product") {
+  if (mam_weight_type == "product") {
     if (motif_type == "func") {
       G <- build_G(adj_mat)
       C <- G * (G %*% G) + G * (G %*% t(G)) + G * (t(G) %*% G)
@@ -492,15 +491,15 @@ mam_M5 <- function(adj_mat, motif_type, weight_type) {
 #' @param adj_mat Adjacency matrix from which to build the motif
 #' adjacency matrix.
 #' @param motif_type Type of motif adjacency matrix to build.
-#' @param weight_type The weighting scheme to use.
+#' @param mam_weight_type The weighting scheme to use.
 #' One of \code{"unweighted"}, \code{"mean"} or \code{"product"}.
 #' @return A motif adjacency matrix.
 #' @keywords internal
 #' @importFrom Matrix drop0 t
 
-mam_M6 <- function(adj_mat, motif_type, weight_type) {
+mam_M6 <- function(adj_mat, motif_type, mam_weight_type) {
 
-  if (weight_type == "unweighted") {
+  if (mam_weight_type == "unweighted") {
     if (motif_type == "func") {
       J <- build_J(adj_mat)
       Jd <- build_Jd(adj_mat)
@@ -518,7 +517,7 @@ mam_M6 <- function(adj_mat, motif_type, weight_type) {
     }
   }
 
-  if (weight_type == "mean") {
+  if (mam_weight_type == "mean") {
     if (motif_type == "func") {
       J <- build_J(adj_mat)
       Jd <- build_Jd(adj_mat)
@@ -540,7 +539,7 @@ mam_M6 <- function(adj_mat, motif_type, weight_type) {
     }
   }
 
-  if (weight_type == "product") {
+  if (mam_weight_type == "product") {
     if (motif_type == "func") {
       G <- build_G(adj_mat)
       Gp <- build_Gp(adj_mat)
@@ -564,15 +563,15 @@ mam_M6 <- function(adj_mat, motif_type, weight_type) {
 #' @param adj_mat Adjacency matrix from which to build the motif
 #' adjacency matrix.
 #' @param motif_type Type of motif adjacency matrix to build.
-#' @param weight_type The weighting scheme to use.
+#' @param mam_weight_type The weighting scheme to use.
 #' One of \code{"unweighted"}, \code{"mean"} or \code{"product"}.
 #' @return A motif adjacency matrix.
 #' @keywords internal
 #' @importFrom Matrix drop0 t
 
-mam_M7 <- function(adj_mat, motif_type, weight_type) {
+mam_M7 <- function(adj_mat, motif_type, mam_weight_type) {
 
-  if (weight_type == "unweighted") {
+  if (mam_weight_type == "unweighted") {
     if (motif_type == "func") {
       J <- build_J(adj_mat)
       Jd <- build_Jd(adj_mat)
@@ -590,7 +589,7 @@ mam_M7 <- function(adj_mat, motif_type, weight_type) {
     }
   }
 
-  if (weight_type == "mean") {
+  if (mam_weight_type == "mean") {
     if (motif_type == "func") {
       J <- build_J(adj_mat)
       Jd <- build_Jd(adj_mat)
@@ -612,7 +611,7 @@ mam_M7 <- function(adj_mat, motif_type, weight_type) {
     }
   }
 
-  if (weight_type == "product") {
+  if (mam_weight_type == "product") {
     if (motif_type == "func") {
       G <- build_G(adj_mat)
       Gp <- build_Gp(adj_mat)
@@ -636,7 +635,7 @@ mam_M7 <- function(adj_mat, motif_type, weight_type) {
 #' @param adj_mat Adjacency matrix from which to build the motif
 #' adjacency matrix.
 #' @param motif_type Type of motif adjacency matrix to build.
-#' @param weight_type The weighting scheme to use.
+#' @param mam_weight_type The weighting scheme to use.
 #' One of \code{"unweighted"}, \code{"mean"} or \code{"product"}.
 #' @param mam_method Which formulation to use.
 #' One of \code{"dense"} or \code{"sparse"}.
@@ -644,10 +643,10 @@ mam_M7 <- function(adj_mat, motif_type, weight_type) {
 #' @keywords internal
 #' @importFrom Matrix drop0 t
 
-mam_M8 <- function(adj_mat, motif_type, weight_type, mam_method) {
+mam_M8 <- function(adj_mat, motif_type, mam_weight_type, mam_method) {
 
   if (mam_method == "dense") {
-    if (weight_type == "unweighted") {
+    if (mam_weight_type == "unweighted") {
       if (motif_type == "func") {
         J <- build_J(adj_mat)
         Jn <- build_Jn(adj_mat)
@@ -665,7 +664,7 @@ mam_M8 <- function(adj_mat, motif_type, weight_type, mam_method) {
       }
     }
 
-    if (weight_type == "mean") {
+    if (mam_weight_type == "mean") {
       if (motif_type == "func") {
         J <- build_J(adj_mat)
         Jn <- build_Jn(adj_mat)
@@ -685,7 +684,7 @@ mam_M8 <- function(adj_mat, motif_type, weight_type, mam_method) {
       }
     }
 
-    if (weight_type == "product") {
+    if (mam_weight_type == "product") {
       if (motif_type == "func") {
         G <- build_G(adj_mat)
         Jn <- build_Jn(adj_mat)
@@ -705,7 +704,7 @@ mam_M8 <- function(adj_mat, motif_type, weight_type, mam_method) {
   }
 
   if (mam_method == "sparse") {
-    if (weight_type == "unweighted") {
+    if (mam_weight_type == "unweighted") {
       if (motif_type == "func") {
         J <- build_J(adj_mat)
         Id <- build_Id(adj_mat)
@@ -723,7 +722,7 @@ mam_M8 <- function(adj_mat, motif_type, weight_type, mam_method) {
       }
     }
 
-    if (weight_type == "mean") {
+    if (mam_weight_type == "mean") {
       if (motif_type == "func") {
         J <- build_J(adj_mat)
         G <- build_G(adj_mat)
@@ -746,7 +745,7 @@ mam_M8 <- function(adj_mat, motif_type, weight_type, mam_method) {
       }
     }
 
-    if (weight_type == "product") {
+    if (mam_weight_type == "product") {
       if (motif_type == "func") {
         G <- build_G(adj_mat)
         Id <- build_Id(adj_mat)
@@ -771,7 +770,7 @@ mam_M8 <- function(adj_mat, motif_type, weight_type, mam_method) {
 #' @param adj_mat Adjacency matrix from which to build the motif
 #' adjacency matrix.
 #' @param motif_type Type of motif adjacency matrix to build.
-#' @param weight_type The weighting scheme to use.
+#' @param mam_weight_type The weighting scheme to use.
 #' One of \code{"unweighted"}, \code{"mean"} or \code{"product"}.
 #' @param mam_method Which formulation to use.
 #' One of \code{"dense"} or \code{"sparse"}.
@@ -779,10 +778,10 @@ mam_M8 <- function(adj_mat, motif_type, weight_type, mam_method) {
 #' @keywords internal
 #' @importFrom Matrix drop0 t
 
-mam_M9 <- function(adj_mat, motif_type, weight_type, mam_method) {
+mam_M9 <- function(adj_mat, motif_type, mam_weight_type, mam_method) {
 
   if (mam_method == "dense") {
-    if (weight_type == "unweighted") {
+    if (mam_weight_type == "unweighted") {
       if (motif_type == "func") {
         J <- build_J(adj_mat)
         Jn <- build_Jn(adj_mat)
@@ -798,7 +797,7 @@ mam_M9 <- function(adj_mat, motif_type, weight_type, mam_method) {
       }
     }
 
-    if (weight_type == "mean") {
+    if (mam_weight_type == "mean") {
       if (motif_type == "func") {
         J <- build_J(adj_mat)
         Jn <- build_Jn(adj_mat)
@@ -820,7 +819,7 @@ mam_M9 <- function(adj_mat, motif_type, weight_type, mam_method) {
       }
     }
 
-    if (weight_type == "product") {
+    if (mam_weight_type == "product") {
       if (motif_type == "func") {
         G <- build_G(adj_mat)
         Jn <- build_Jn(adj_mat)
@@ -838,7 +837,7 @@ mam_M9 <- function(adj_mat, motif_type, weight_type, mam_method) {
   }
 
   if (mam_method == "sparse") {
-    if (weight_type == "unweighted") {
+    if (mam_weight_type == "unweighted") {
       if (motif_type == "func") {
         J <- build_J(adj_mat)
         Id <- build_Id(adj_mat)
@@ -857,7 +856,7 @@ mam_M9 <- function(adj_mat, motif_type, weight_type, mam_method) {
       }
     }
 
-    if (weight_type == "mean") {
+    if (mam_weight_type == "mean") {
       if (motif_type == "func") {
         J <- build_J(adj_mat)
         G <- build_G(adj_mat)
@@ -883,7 +882,7 @@ mam_M9 <- function(adj_mat, motif_type, weight_type, mam_method) {
       }
     }
 
-    if (weight_type == "product") {
+    if (mam_weight_type == "product") {
       if (motif_type == "func") {
         G <- build_G(adj_mat)
         Id <- build_Id(adj_mat)
@@ -909,7 +908,7 @@ mam_M9 <- function(adj_mat, motif_type, weight_type, mam_method) {
 #' @param adj_mat Adjacency matrix from which to build the motif
 #' adjacency matrix.
 #' @param motif_type Type of motif adjacency matrix to build.
-#' @param weight_type The weighting scheme to use.
+#' @param mam_weight_type The weighting scheme to use.
 #' One of \code{"unweighted"}, \code{"mean"} or \code{"product"}.
 #' @param mam_method Which formulation to use.
 #' One of \code{"dense"} or \code{"sparse"}.
@@ -917,10 +916,10 @@ mam_M9 <- function(adj_mat, motif_type, weight_type, mam_method) {
 #' @keywords internal
 #' @importFrom Matrix drop0 t
 
-mam_M10 <- function(adj_mat, motif_type, weight_type, mam_method) {
+mam_M10 <- function(adj_mat, motif_type, mam_weight_type, mam_method) {
 
   if (mam_method == "dense") {
-    if (weight_type == "unweighted") {
+    if (mam_weight_type == "unweighted") {
       if (motif_type == "func") {
         J <- build_J(adj_mat)
         Jn <- build_Jn(adj_mat)
@@ -938,7 +937,7 @@ mam_M10 <- function(adj_mat, motif_type, weight_type, mam_method) {
       }
     }
 
-    if (weight_type == "mean") {
+    if (mam_weight_type == "mean") {
       if (motif_type == "func") {
         J <- build_J(adj_mat)
         Jn <- build_Jn(adj_mat)
@@ -958,7 +957,7 @@ mam_M10 <- function(adj_mat, motif_type, weight_type, mam_method) {
       }
     }
 
-    if (weight_type == "product") {
+    if (mam_weight_type == "product") {
       if (motif_type == "func") {
         G <- build_G(adj_mat)
         Jn <- build_Jn(adj_mat)
@@ -978,7 +977,7 @@ mam_M10 <- function(adj_mat, motif_type, weight_type, mam_method) {
   }
 
   if (mam_method == "sparse") {
-    if (weight_type == "unweighted") {
+    if (mam_weight_type == "unweighted") {
       if (motif_type == "func") {
         J <- build_J(adj_mat)
         Id <- build_Id(adj_mat)
@@ -996,7 +995,7 @@ mam_M10 <- function(adj_mat, motif_type, weight_type, mam_method) {
       }
     }
 
-    if (weight_type == "mean") {
+    if (mam_weight_type == "mean") {
       if (motif_type == "func") {
         J <- build_J(adj_mat)
         G <- build_G(adj_mat)
@@ -1019,7 +1018,7 @@ mam_M10 <- function(adj_mat, motif_type, weight_type, mam_method) {
       }
     }
 
-    if (weight_type == "product") {
+    if (mam_weight_type == "product") {
       if (motif_type == "func") {
         G <- build_G(adj_mat)
         Id <- build_Id(adj_mat)
@@ -1044,7 +1043,7 @@ mam_M10 <- function(adj_mat, motif_type, weight_type, mam_method) {
 #' @param adj_mat Adjacency matrix from which to build the motif
 #' adjacency matrix.
 #' @param motif_type Type of motif adjacency matrix to build.
-#' @param weight_type The weighting scheme to use.
+#' @param mam_weight_type The weighting scheme to use.
 #' One of \code{"unweighted"}, \code{"mean"} or \code{"product"}.
 #' @param mam_method Which formulation to use.
 #' One of \code{"dense"} or \code{"sparse"}.
@@ -1052,10 +1051,10 @@ mam_M10 <- function(adj_mat, motif_type, weight_type, mam_method) {
 #' @keywords internal
 #' @importFrom Matrix drop0 t
 
-mam_M11 <- function(adj_mat, motif_type, weight_type, mam_method) {
+mam_M11 <- function(adj_mat, motif_type, mam_weight_type, mam_method) {
 
   if (mam_method == "dense") {
-    if (weight_type == "unweighted") {
+    if (mam_weight_type == "unweighted") {
       if (motif_type == "func") {
         Jd <- build_Jd(adj_mat)
         Jn <- build_Jn(adj_mat)
@@ -1073,7 +1072,7 @@ mam_M11 <- function(adj_mat, motif_type, weight_type, mam_method) {
       }
     }
 
-    if (weight_type == "mean") {
+    if (mam_weight_type == "mean") {
       if (motif_type == "func") {
         Jd <- build_Jd(adj_mat)
         Gd <- build_Gd(adj_mat)
@@ -1099,7 +1098,7 @@ mam_M11 <- function(adj_mat, motif_type, weight_type, mam_method) {
       }
     }
 
-    if (weight_type == "product") {
+    if (mam_weight_type == "product") {
       if (motif_type == "func") {
         Gp <- build_Gp(adj_mat)
         Jn <- build_Jn(adj_mat)
@@ -1119,7 +1118,7 @@ mam_M11 <- function(adj_mat, motif_type, weight_type, mam_method) {
   }
 
   if (mam_method == "sparse") {
-    if (weight_type == "unweighted") {
+    if (mam_weight_type == "unweighted") {
       if (motif_type == "func") {
         Jd <- build_Jd(adj_mat)
         Id <- build_Id(adj_mat)
@@ -1141,7 +1140,7 @@ mam_M11 <- function(adj_mat, motif_type, weight_type, mam_method) {
       }
     }
 
-    if (weight_type == "mean") {
+    if (mam_weight_type == "mean") {
       if (motif_type == "func") {
         Jd <- build_Jd(adj_mat)
         Gd <- build_Gd(adj_mat)
@@ -1169,7 +1168,7 @@ mam_M11 <- function(adj_mat, motif_type, weight_type, mam_method) {
       }
     }
 
-    if (weight_type == "product") {
+    if (mam_weight_type == "product") {
       if (motif_type == "func") {
         Gp <- build_Gp(adj_mat)
         Id <- build_Id(adj_mat)
@@ -1198,7 +1197,7 @@ mam_M11 <- function(adj_mat, motif_type, weight_type, mam_method) {
 #' @param adj_mat Adjacency matrix from which to build the motif
 #' adjacency matrix.
 #' @param motif_type Type of motif adjacency matrix to build.
-#' @param weight_type The weighting scheme to use.
+#' @param mam_weight_type The weighting scheme to use.
 #' One of \code{"unweighted"}, \code{"mean"} or \code{"product"}.
 #' @param mam_method Which formulation to use.
 #' One of \code{"dense"} or \code{"sparse"}.
@@ -1206,10 +1205,10 @@ mam_M11 <- function(adj_mat, motif_type, weight_type, mam_method) {
 #' @keywords internal
 #' @importFrom Matrix drop0 t
 
-mam_M12 <- function(adj_mat, motif_type, weight_type, mam_method) {
+mam_M12 <- function(adj_mat, motif_type, mam_weight_type, mam_method) {
 
   if (mam_method == "dense") {
-    if (weight_type == "unweighted") {
+    if (mam_weight_type == "unweighted") {
       if (motif_type == "func") {
         Jd <- build_Jd(adj_mat)
         Jn <- build_Jn(adj_mat)
@@ -1227,7 +1226,7 @@ mam_M12 <- function(adj_mat, motif_type, weight_type, mam_method) {
       }
     }
 
-    if (weight_type == "mean") {
+    if (mam_weight_type == "mean") {
       if (motif_type == "func") {
         Jd <- build_Jd(adj_mat)
         Gd <- build_Gd(adj_mat)
@@ -1253,7 +1252,7 @@ mam_M12 <- function(adj_mat, motif_type, weight_type, mam_method) {
       }
     }
 
-    if (weight_type == "product") {
+    if (mam_weight_type == "product") {
       if (motif_type == "func") {
         Gp <- build_Gp(adj_mat)
         Jn <- build_Jn(adj_mat)
@@ -1273,7 +1272,7 @@ mam_M12 <- function(adj_mat, motif_type, weight_type, mam_method) {
   }
 
   if (mam_method == "sparse") {
-    if (weight_type == "unweighted") {
+    if (mam_weight_type == "unweighted") {
       if (motif_type == "func") {
         Jd <- build_Jd(adj_mat)
         Id <- build_Id(adj_mat)
@@ -1295,7 +1294,7 @@ mam_M12 <- function(adj_mat, motif_type, weight_type, mam_method) {
       }
     }
 
-    if (weight_type == "mean") {
+    if (mam_weight_type == "mean") {
       if (motif_type == "func") {
         Jd <- build_Jd(adj_mat)
         Gd <- build_Gd(adj_mat)
@@ -1323,7 +1322,7 @@ mam_M12 <- function(adj_mat, motif_type, weight_type, mam_method) {
       }
     }
 
-    if (weight_type == "product") {
+    if (mam_weight_type == "product") {
       if (motif_type == "func") {
         Gp <- build_Gp(adj_mat)
         Id <- build_Id(adj_mat)
@@ -1352,7 +1351,7 @@ mam_M12 <- function(adj_mat, motif_type, weight_type, mam_method) {
 #' @param adj_mat Adjacency matrix from which to build the motif
 #' adjacency matrix.
 #' @param motif_type Type of motif adjacency matrix to build.
-#' @param weight_type The weighting scheme to use.
+#' @param mam_weight_type The weighting scheme to use.
 #' One of \code{"unweighted"}, \code{"mean"} or \code{"product"}.
 #' @param mam_method Which formulation to use.
 #' One of \code{"dense"} or \code{"sparse"}.
@@ -1360,10 +1359,10 @@ mam_M12 <- function(adj_mat, motif_type, weight_type, mam_method) {
 #' @keywords internal
 #' @importFrom Matrix drop0 t
 
-mam_M13 <- function(adj_mat, motif_type, weight_type, mam_method) {
+mam_M13 <- function(adj_mat, motif_type, mam_weight_type, mam_method) {
 
   if (mam_method == "dense") {
-    if (weight_type == "unweighted") {
+    if (mam_weight_type == "unweighted") {
       if (motif_type == "func") {
         Jd <- build_Jd(adj_mat)
         Jn <- build_Jn(adj_mat)
@@ -1381,7 +1380,7 @@ mam_M13 <- function(adj_mat, motif_type, weight_type, mam_method) {
       }
     }
 
-    if (weight_type == "mean") {
+    if (mam_weight_type == "mean") {
       if (motif_type == "func") {
         Jd <- build_Jd(adj_mat)
         Jn <- build_Jn(adj_mat)
@@ -1399,7 +1398,7 @@ mam_M13 <- function(adj_mat, motif_type, weight_type, mam_method) {
       }
     }
 
-    if (weight_type == "product") {
+    if (mam_weight_type == "product") {
       if (motif_type == "func") {
         Gp <- build_Gp(adj_mat)
         Jn <- build_Jn(adj_mat)
@@ -1419,7 +1418,7 @@ mam_M13 <- function(adj_mat, motif_type, weight_type, mam_method) {
   }
 
   if (mam_method == "sparse") {
-    if (weight_type == "unweighted") {
+    if (mam_weight_type == "unweighted") {
       if (motif_type == "func") {
         Jd <- build_Jd(adj_mat)
         Id <- build_Id(adj_mat)
@@ -1437,7 +1436,7 @@ mam_M13 <- function(adj_mat, motif_type, weight_type, mam_method) {
       }
     }
 
-    if (weight_type == "mean") {
+    if (mam_weight_type == "mean") {
       if (motif_type == "func") {
         Jd <- build_Jd(adj_mat)
         Gd <- build_Gd(adj_mat)
@@ -1458,7 +1457,7 @@ mam_M13 <- function(adj_mat, motif_type, weight_type, mam_method) {
       }
     }
 
-    if (weight_type == "product") {
+    if (mam_weight_type == "product") {
       if (motif_type == "func") {
         Gp <- build_Gp(adj_mat)
         Id <- build_Id(adj_mat)
@@ -1483,7 +1482,7 @@ mam_M13 <- function(adj_mat, motif_type, weight_type, mam_method) {
 #' @param adj_mat Adjacency matrix from which to build the motif
 #' adjacency matrix.
 #' @param motif_type Type of motif adjacency matrix to build.
-#' @param weight_type The weighting scheme to use.
+#' @param mam_weight_type The weighting scheme to use.
 #' One of \code{"unweighted"}, \code{"mean"} or \code{"product"}.
 #' @param mam_method Which formulation to use.
 #' One of \code{"dense"} or \code{"sparse"}.
@@ -1491,10 +1490,10 @@ mam_M13 <- function(adj_mat, motif_type, weight_type, mam_method) {
 #' @keywords internal
 #' @importFrom Matrix drop0 t
 
-mam_Mcoll <- function(adj_mat, motif_type, weight_type, mam_method) {
+mam_Mcoll <- function(adj_mat, motif_type, mam_weight_type, mam_method) {
 
   if (mam_method == "dense") {
-    if (weight_type == "unweighted") {
+    if (mam_weight_type == "unweighted") {
       if (motif_type == "func") {
         J <- build_J(adj_mat)
         Jn <- build_Jn(adj_mat)
@@ -1510,7 +1509,7 @@ mam_Mcoll <- function(adj_mat, motif_type, weight_type, mam_method) {
       }
     }
 
-    if (weight_type == "mean") {
+    if (mam_weight_type == "mean") {
       if (motif_type == "func") {
         G <- build_G(adj_mat)
         J <- build_J(adj_mat)
@@ -1528,7 +1527,7 @@ mam_Mcoll <- function(adj_mat, motif_type, weight_type, mam_method) {
       }
     }
 
-    if (weight_type == "product") {
+    if (mam_weight_type == "product") {
       if (motif_type == "func") {
         G <- build_G(adj_mat)
         Jn <- build_Jn(adj_mat)
@@ -1546,7 +1545,7 @@ mam_Mcoll <- function(adj_mat, motif_type, weight_type, mam_method) {
   }
 
   if (mam_method == "sparse") {
-    if (weight_type == "unweighted") {
+    if (mam_weight_type == "unweighted") {
       if (motif_type == "func") {
         J <- build_J(adj_mat)
         Id <- build_Id(adj_mat)
@@ -1562,7 +1561,7 @@ mam_Mcoll <- function(adj_mat, motif_type, weight_type, mam_method) {
       }
     }
 
-    if (weight_type == "mean") {
+    if (mam_weight_type == "mean") {
       if (motif_type == "func") {
         J <- build_J(adj_mat)
         G <- build_G(adj_mat)
@@ -1582,7 +1581,7 @@ mam_Mcoll <- function(adj_mat, motif_type, weight_type, mam_method) {
       }
     }
 
-    if (weight_type == "product") {
+    if (mam_weight_type == "product") {
       if (motif_type == "func") {
         G <- build_G(adj_mat)
         Id <- build_Id(adj_mat)
@@ -1605,7 +1604,7 @@ mam_Mcoll <- function(adj_mat, motif_type, weight_type, mam_method) {
 #' @param adj_mat Adjacency matrix from which to build the motif
 #' adjacency matrix.
 #' @param motif_type Type of motif adjacency matrix to build.
-#' @param weight_type The weighting scheme to use.
+#' @param mam_weight_type The weighting scheme to use.
 #' One of \code{"unweighted"}, \code{"mean"} or \code{"product"}.
 #' @param mam_method Which formulation to use.
 #' One of \code{"dense"} or \code{"sparse"}.
@@ -1613,10 +1612,10 @@ mam_Mcoll <- function(adj_mat, motif_type, weight_type, mam_method) {
 #' @keywords internal
 #' @importFrom Matrix drop0 t
 
-mam_Mexpa <- function(adj_mat, motif_type, weight_type, mam_method) {
+mam_Mexpa <- function(adj_mat, motif_type, mam_weight_type, mam_method) {
 
   if (mam_method == "dense") {
-    if (weight_type == "unweighted") {
+    if (mam_weight_type == "unweighted") {
       if (motif_type == "func") {
         J <- build_J(adj_mat)
         Jn <- build_Jn(adj_mat)
@@ -1632,7 +1631,7 @@ mam_Mexpa <- function(adj_mat, motif_type, weight_type, mam_method) {
       }
     }
 
-    if (weight_type == "mean") {
+    if (mam_weight_type == "mean") {
       if (motif_type == "func") {
         J <- build_J(adj_mat)
         Jn <- build_Jn(adj_mat)
@@ -1650,7 +1649,7 @@ mam_Mexpa <- function(adj_mat, motif_type, weight_type, mam_method) {
       }
     }
 
-    if (weight_type == "product") {
+    if (mam_weight_type == "product") {
       if (motif_type == "func") {
         G <- build_G(adj_mat)
         Jn <- build_Jn(adj_mat)
@@ -1668,7 +1667,7 @@ mam_Mexpa <- function(adj_mat, motif_type, weight_type, mam_method) {
   }
 
   if (mam_method == "sparse") {
-    if (weight_type == "unweighted") {
+    if (mam_weight_type == "unweighted") {
       if (motif_type == "func") {
         J <- build_J(adj_mat)
         Id <- build_Id(adj_mat)
@@ -1684,7 +1683,7 @@ mam_Mexpa <- function(adj_mat, motif_type, weight_type, mam_method) {
       }
     }
 
-    if (weight_type == "mean") {
+    if (mam_weight_type == "mean") {
       if (motif_type == "func") {
         J <- build_J(adj_mat)
         G <- build_G(adj_mat)
@@ -1704,7 +1703,7 @@ mam_Mexpa <- function(adj_mat, motif_type, weight_type, mam_method) {
       }
     }
 
-    if (weight_type == "product") {
+    if (mam_weight_type == "product") {
       if (motif_type == "func") {
         G <- build_G(adj_mat)
         Id <- build_Id(adj_mat)

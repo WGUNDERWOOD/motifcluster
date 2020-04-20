@@ -20,6 +20,7 @@ knitr::opts_chunk$set(
 )
 set.seed(200401293)
 options(digits = 2)
+library(mclust)
 ```
 
 \tableofcontents
@@ -87,7 +88,7 @@ get_motif_names()
 Let's use the 3-cycle motif $\mathcal{M}_1$.
 
 ```{r}
-build_motif_adjacency_matrix(G1, "M1")
+build_motif_adjacency_matrix(G1, motif_name = "M1")
 ```
 
 Note that all the entries are zero except for entries
@@ -116,8 +117,10 @@ Structural instances require an exact match, with no extra edges.
 If we want to also include instances which may have extra edges present,
 we must instead use functional motif instances:
 
+\pagebreak
+
 ```{r}
-build_motif_adjacency_matrix(G1, "M1", motif_type = "func")
+build_motif_adjacency_matrix(G1, motif_name = "M1", motif_type = "func")
 ```
 
 This time we also pick up the 3-cycle on vertices 2, 3 and 4.
@@ -144,7 +147,8 @@ instance weights across all instances containing
 both vertices $i$ and $j$:
 
 ```{r}
-build_motif_adjacency_matrix(G1, "M1", motif_type = "func", weight_type = "mean")
+build_motif_adjacency_matrix(G1, motif_name = "M1", motif_type = "func",
+  mam_weight_type = "mean")
 ```
 
 The 3-cycle on vertices 1, 2 and 4
@@ -163,7 +167,8 @@ instance weights across all instances containing
 both vertices $i$ and $j$:
 
 ```{r}
-build_motif_adjacency_matrix(G1, "M1", motif_type = "func", weight_type = "product")
+build_motif_adjacency_matrix(G1, motif_name = "M1", motif_type = "func",
+  mam_weight_type = "product")
 ```
 
 The 3-cycle on vertices 1, 2 and 4
@@ -185,8 +190,8 @@ denser matrices, tends to be faster for small dense networks.
 
 
 ```{r}
-mam_sparse <- build_motif_adjacency_matrix(G1, "M1", mam_method = "sparse")
-mam_dense  <- build_motif_adjacency_matrix(G1, "M1", mam_method = "dense")
+mam_sparse <- build_motif_adjacency_matrix(G1, motif_name = "M1", mam_method = "sparse")
+mam_dense  <- build_motif_adjacency_matrix(G1, motif_name = "M1", mam_method = "dense")
 all(mam_sparse == mam_dense)
 ```
 
@@ -216,7 +221,7 @@ and is sparser on its off-diagonal blocks
 $\{1, \dots, 5\} \times \{6, \dots, 8\}$
 and
 $\{6, \dots, 8\} \times \{1, \dots, 5\}$.
-All the entries which lie exactly on the diagonal will
+The entries which lie exactly on the diagonal will
 always be zero,
 since we only consider networks without self-loops.
 
@@ -238,12 +243,15 @@ The `motifclustr` package also allows sampling of weighted directed networks.
 The simplest example of this is "constant" weighting,
 where we simply multiply each block of the adjacency matrix by a constant.
 
+\pagebreak
+
 ```{r}
 weight_matrix = matrix(c(
   5, 2,
   2, 5
 ), nrow = 2, byrow = TRUE)
-sample_dsbm(block_sizes, connection_matrix, weight_matrix, weight_type = "constant")
+sample_dsbm(block_sizes, connection_matrix, weight_matrix,
+  sample_weight_type = "constant")
 ```
 
 ### Poisson-weighted directed stochastic block models
@@ -256,7 +264,7 @@ Note that in this scheme it is possible for the weight to be zero,
 removing an edge which might have otherwise been present.
 
 ```{r}
-sample_dsbm(block_sizes, connection_matrix, weight_matrix, weight_type = "poisson")
+sample_dsbm(block_sizes, connection_matrix, weight_matrix, sample_weight_type = "poisson")
 ```
 
 # Spectral embedding with motif adjacency matrices
@@ -289,7 +297,7 @@ $L_\mathrm{c} = D - G$,
 where $D$ is the diagonal matrix of weighted vertex degrees:
 
 ```{r}
-build_laplacian(G2, "comb")
+build_laplacian(G2, type_lap = "comb")
 ```
 
 ### Random-walk Laplacian
@@ -300,7 +308,7 @@ where $D$ is the diagonal matrix of weighted vertex degrees
 and $I$ is the identity matrix:
 
 ```{r}
-build_laplacian(G2, "rw")
+build_laplacian(G2, type_lap = "rw")
 ```
 
 ## Laplace embedding
@@ -313,7 +321,7 @@ Below we use the random-walk Laplacian,
 and embedding dimension $l=2$:
 
 ```{r}
-spectrum = run_laplace_embedding(G2, 2, "rw")
+spectrum = run_laplace_embedding(G2, num_eigs = 2, type_lap = "rw")
 spectrum$vects
 spectrum$vals
 ```
@@ -347,7 +355,8 @@ We observe this with the network $\mathcal{G}_3$,
 in which only three of the four vertices are embedded.
 
 ```{r}
-spectrum = run_motif_embedding(G3, "M1", "func", "unweighted", "sparse", 2, "rw")
+spectrum = run_motif_embedding(G3, motif_name = "M1", motif_type = "func",
+  mam_weight_type = "unweighted", mam_method = "sparse", num_eigs = 2, type_lap = "rw")
 spectrum$vals
 spectrum$vects
 ```
@@ -360,17 +369,71 @@ so now we see how to extract clusters from the motif-based
 eigenvector embeddings.
 The `run_motif_clustering` function handles the entire process of
 building an MAM, restricting it to its largest connected component,
-performing eigenvector embedding and extracting clusters.
+performing eigenvector embedding, and extracting clusters.
+We therefore take the opportunity to showcase the ability of
+`motifclustr` to recover the blocks of a DSBM,
+demonstrating all of the methods outlined in this vignette.
 
-TODO
+Let's use a DSBM with three blocks of 10 nodes each.
 
+```{r}
+block_sizes = rep(10, 3)
+```
 
+We use strong connections of 0.8 within the blocks,
+and weaker connections of 0.3 between the blocks.
 
+```{r}
+connection_matrix = matrix(c(
+  0.8, 0.2, 0.2,
+  0.2, 0.8, 0.2,
+  0.2, 0.2, 0.8
+), nrow = 3)
+```
 
+We also set the within-block edges to be Poisson-weighted with
+mean 20,
+and the between-block edges to be Poisson-weighted with smaller
+mean 10.
 
+```{r}
+weight_matrix = matrix(c(
+  20, 10, 10,
+  10, 20, 10,
+  10, 10, 20
+), nrow = 3)
 
+G4 = sample_dsbm(block_sizes, connection_matrix, weight_matrix,
+  sample_weight_type = "poisson")
+```
 
+Now we can run the motif-based spectral clustering algorithm
+on this network with the three-cycle motif $\mathcal{M}_1$.
+We build a functional MAM,
+weighting the instances by their mean edge weights,
+using the sparse formulation.
+We restrict this MAM to its largest connected component.
+Then we construct a random-walk Laplacian and embed it using the
+first four eigenvalues and eigenvectors.
+Finally we extract three clusters.
 
+```{r}
+motif_cluster = run_motif_clustering(G4, motif_name = "M1", motif_type = "func",
+  mam_weight_type = "mean", mam_method = "sparse", type_lap = "rw", num_eigs = 4,
+  num_clusts = 3
+)
+```
+
+We can evaluate the performance by comparing it to the ground-truth
+labels using the adjusted Rand index
+from the `mclust` package:
+
+```{r}
+truth = c(rep(1, 10), rep(2, 10), rep(3, 10))
+mclust::adjustedRandIndex(motif_cluster$clusts, truth)
+```
+
+A value of one indicates perfect recovery of the blocks.
 
 
 [arxivpaper]: https://arxiv.org/abs/2004.01293

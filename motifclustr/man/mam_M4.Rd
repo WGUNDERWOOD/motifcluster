@@ -4,13 +4,13 @@
 \alias{mam_M4}
 \title{Perform the motif adjacency matrix calculations for motif M4}
 \usage{
-mam_M4(adj_mat, weight_type)
+mam_M4(adj_mat, mam_weight_type)
 }
 \arguments{
 \item{adj_mat}{Adjacency matrix from which to build the motif
 adjacency matrix.}
 
-\item{weight_type}{The weighting scheme to use.
+\item{mam_weight_type}{The weighting scheme to use.
 One of \code{"unweighted"}, \code{"mean"} or \code{"product"}.}
 }
 \value{

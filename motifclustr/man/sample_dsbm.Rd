@@ -8,7 +8,7 @@ sample_dsbm(
   block_sizes,
   connection_matrix,
   weight_matrix = NULL,
-  weight_type = c("unweighted", "constant", "poisson")
+  sample_weight_type = c("unweighted", "constant", "poisson")
 )
 }
 \arguments{
@@ -19,10 +19,10 @@ probabilities.}
 
 \item{weight_matrix}{A matrix containing the block-to-block weight
 parameters.
-Unused for \code{weight_type = "constant"}.
+Unused for \code{sample_weight_type = "constant"}.
 Defaults to \code{NULL}.}
 
-\item{weight_type}{The type of weighting scheme.
+\item{sample_weight_type}{The type of weighting scheme.
 One of \code{"unweighted"}, \code{"constant"} or \code{"poisson"}.}
 }
 \value{
@@ -33,9 +33,8 @@ Sample the (weighted) adjacency matrix of a (weighted) directed stochastic
 block model (DSBM) with specified parameters.
 }
 \examples{
-block_sizes = c(10, 10)
-connection_matrix = matrix(c(0.8, 0.1, 0.1, 0.8), nrow = 2, byrow = TRUE)
-weight_type = "poisson"
-weight_matrix = matrix(c(10, 3, 3, 10), nrow = 2, byrow = TRUE)
-sample_dsbm(block_sizes, connection_matrix, weight_matrix, weight_type)
+block_sizes <- c(10, 10)
+connection_matrix <- matrix(c(0.8, 0.1, 0.1, 0.8), nrow = 2, byrow = TRUE)
+weight_matrix <- matrix(c(10, 3, 3, 10), nrow = 2, byrow = TRUE)
+sample_dsbm(block_sizes, connection_matrix, weight_matrix, "poisson")
 }

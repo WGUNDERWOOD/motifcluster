@@ -6,20 +6,21 @@ test_that("sample_dsbm returns correct unweighted adjacency matrix", {
 
   set.seed(9687)
 
-  weight_type <- "unweighted"
+  sample_weight_type <- "unweighted"
   block_sizes <- c(2, 3)
   connection_matrix <- matrix(c(0.4, 0.5, 0.6, 0.7), nrow = 2, byrow = TRUE)
   n_reps <- 200
   weight_matrix <- NULL
 
-  G <- sample_dsbm(block_sizes, connection_matrix, weight_matrix, weight_type)
+  G <- sample_dsbm(block_sizes, connection_matrix, weight_matrix,
+                   sample_weight_type)
   expect_true(all((G == 0) | (G == 1)))
 
   G <- matrix(0, nrow = 5, ncol = 5)
 
   for (rep in 1:n_reps) {
     G <- G + sample_dsbm(block_sizes, connection_matrix, weight_matrix,
-                         weight_type) / n_reps
+                         sample_weight_type) / n_reps
   }
 
   G <- drop0(G)
@@ -39,20 +40,21 @@ test_that("sample_dsbm returns correct constant
 
   set.seed(2239)
 
-  weight_type <- "constant"
+  sample_weight_type <- "constant"
   block_sizes <- c(2, 3)
   connection_matrix <- matrix(c(0.4, 0.5, 0.6, 0.7), nrow = 2, byrow = TRUE)
   n_reps <- 200
   weight_matrix <- matrix(c(20, 30, 40, 50), nrow = 2, byrow = TRUE)
 
-  G <- sample_dsbm(block_sizes, connection_matrix, weight_matrix, weight_type)
+  G <- sample_dsbm(block_sizes, connection_matrix, weight_matrix,
+                   sample_weight_type)
   expect_true(all((G == 0) | (G == 20) | (G == 30) | (G == 40) | (G == 50)))
 
   G <- matrix(0, nrow = 5, ncol = 5)
 
   for (rep in 1:n_reps) {
     G <- G + sample_dsbm(block_sizes, connection_matrix, weight_matrix,
-                         weight_type) / n_reps
+                         sample_weight_type) / n_reps
   }
 
   G <- drop0(G)
@@ -71,20 +73,21 @@ test_that("sample_dsbm returns correct poisson weighted adjacency matrix", {
 
   set.seed(9323)
 
-  weight_type <- "poisson"
+  sample_weight_type <- "poisson"
   block_sizes <- c(2, 3)
   connection_matrix <- matrix(c(0.4, 0.5, 0.6, 0.7), nrow = 2, byrow = TRUE)
   n_reps <- 200
   weight_matrix <- matrix(c(20, 30, 40, 50), nrow = 2, byrow = TRUE)
 
-  G <- sample_dsbm(block_sizes, connection_matrix, weight_matrix, weight_type)
+  G <- sample_dsbm(block_sizes, connection_matrix, weight_matrix,
+                   sample_weight_type)
   expect_true(all((G == floor(G)) & (G >= 0)))
 
   G <- matrix(0, nrow = 5, ncol = 5)
 
   for (rep in 1:n_reps) {
     G <- G + sample_dsbm(block_sizes, connection_matrix, weight_matrix,
-                         weight_type) / n_reps
+                         sample_weight_type) / n_reps
   }
 
   G <- drop0(G)
@@ -105,7 +108,7 @@ test_that("sample_bsbm returns correct unweighted adjacency matrix", {
 
   set.seed(9423)
 
-  weight_type <- "unweighted"
+  sample_weight_type <- "unweighted"
   source_block_sizes <- c(1, 2)
   dest_block_sizes <- c(1, 1, 1)
   bipartite_connection_matrix <- matrix(c(0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
@@ -115,7 +118,7 @@ test_that("sample_bsbm returns correct unweighted adjacency matrix", {
 
   G <- sample_bsbm(source_block_sizes, dest_block_sizes,
                   bipartite_connection_matrix, bipartite_weight_matrix,
-                  weight_type)
+                  sample_weight_type)
   expect_true(all((G == 0) | (G == 1)))
 
   G <- matrix(0, nrow = 6, ncol = 6)
@@ -123,7 +126,7 @@ test_that("sample_bsbm returns correct unweighted adjacency matrix", {
   for (rep in 1:n_reps) {
     G <- G + sample_bsbm(source_block_sizes, dest_block_sizes,
                         bipartite_connection_matrix, bipartite_weight_matrix,
-                        weight_type) / n_reps
+                        sample_weight_type) / n_reps
   }
 
   G <- drop0(G)
@@ -144,7 +147,7 @@ test_that("sample_bsbm returns correct constant weighted
 
   set.seed(7482)
 
-  weight_type <- "constant"
+  sample_weight_type <- "constant"
   source_block_sizes <- c(1, 2)
   dest_block_sizes <- c(1, 1, 1)
   bipartite_connection_matrix <- matrix(c(0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
@@ -155,7 +158,7 @@ test_that("sample_bsbm returns correct constant weighted
 
   G <- sample_bsbm(source_block_sizes, dest_block_sizes,
                   bipartite_connection_matrix, bipartite_weight_matrix,
-                  weight_type)
+                  sample_weight_type)
   expect_true(all((G == 0) | (G == 10) | (G == 20) | (G == 30)
                   | (G == 40) | (G == 50) | (G == 60)))
 
@@ -164,7 +167,7 @@ test_that("sample_bsbm returns correct constant weighted
   for (rep in 1:n_reps) {
     G <- G + sample_bsbm(source_block_sizes, dest_block_sizes,
                          bipartite_connection_matrix, bipartite_weight_matrix,
-                         weight_type) / n_reps
+                         sample_weight_type) / n_reps
   }
 
   G <- drop0(G)
@@ -184,7 +187,7 @@ test_that("sample_bsbm returns correct poisson weighted adjacency matrix", {
 
   set.seed(7482)
 
-  weight_type <- "poisson"
+  sample_weight_type <- "poisson"
   source_block_sizes <- c(1, 2)
   dest_block_sizes <- c(1, 1, 1)
   bipartite_connection_matrix <- matrix(c(0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
@@ -195,7 +198,7 @@ test_that("sample_bsbm returns correct poisson weighted adjacency matrix", {
 
   G <- sample_bsbm(source_block_sizes, dest_block_sizes,
                   bipartite_connection_matrix, bipartite_weight_matrix,
-                  weight_type)
+                  sample_weight_type)
   expect_true(all((G == floor(G)) & (G >= 0)))
 
   G <- matrix(0, nrow = 6, ncol = 6)
@@ -203,7 +206,7 @@ test_that("sample_bsbm returns correct poisson weighted adjacency matrix", {
   for (rep in 1:n_reps) {
     G <- G + sample_bsbm(source_block_sizes, dest_block_sizes,
                          bipartite_connection_matrix, bipartite_weight_matrix,
-                         weight_type) / n_reps
+                         sample_weight_type) / n_reps
   }
 
   G <- drop0(G)

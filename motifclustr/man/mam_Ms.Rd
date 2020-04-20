@@ -4,7 +4,7 @@
 \alias{mam_Ms}
 \title{Perform the motif adjacency matrix calculations for motif Ms}
 \usage{
-mam_Ms(adj_mat, motif_type, weight_type)
+mam_Ms(adj_mat, motif_type, mam_weight_type)
 }
 \arguments{
 \item{adj_mat}{Adjacency matrix from which to build the motif
@@ -12,7 +12,7 @@ adjacency matrix.}
 
 \item{motif_type}{Type of motif adjacency matrix to build.}
 
-\item{weight_type}{The weighting scheme to use.
+\item{mam_weight_type}{The weighting scheme to use.
 One of \code{"unweighted"}, \code{"mean"} or \code{"product"}.}
 }
 \value{

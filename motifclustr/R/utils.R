@@ -72,7 +72,7 @@ drop0_killdiag <- function(some_mat) {
 #' connected component.
 #' @importFrom igraph components graph_from_adjacency_matrix
 #' @examples
-#' adj_mat = matrix(c(0, 1, 0, 0, 0, 0, 0, 0, 0), nrow = 3)
+#' adj_mat <- matrix(c(0, 1, 0, 0, 0, 0, 0, 0, 0), nrow = 3)
 #' get_largest_component(adj_mat)
 #' @export
 
