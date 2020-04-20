@@ -14,11 +14,10 @@ A preprint of the paper is avaliable on the
 [![Build Status](https://travis-ci.com/WGUNDERWOOD/motif-based-clustering.svg?branch=master)](https://travis-ci.com/github/WGUNDERWOOD/motif-based-clustering)
 
 The R package is in [motifclustr/](./motifclustr/)
-and has the following dependencies,
-available on
-CRAN:
+and has the following dependencies, available on CRAN:
 
 - igraph
+- LICORS
 - Matrix
 - RSpectra
 
