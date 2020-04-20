@@ -27,6 +27,7 @@ The `develop` branch may be unstable,
 and is for development purposes only.
 
 
+
 ## R package
 
 [![Build Status](https://travis-ci.com/WGUNDERWOOD/motif-based-clustering.svg?branch=master)](https://travis-ci.com/github/WGUNDERWOOD/motif-based-clustering)
@@ -35,10 +36,10 @@ The R package `motifcluster` is in the [R](./R/) directory.
 
 ### Installation
 
-The R package can be installed from the GitHub `master` branch with
+The R package can be installed from the GitHub `master` branch with:
 
 ```
-install_github("WGUNDERWOOD/motif-based-clustering/R")
+install_github("wgunderwood/motif-based-clustering/R")
 ```
 
 ### Dependencies
