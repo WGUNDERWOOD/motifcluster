@@ -1,12 +1,12 @@
 ---
-title: "Using the `motifclustr` package"
+title: "Using the `motifcluster` package"
 author: "William G Underwood"
 date: "`r format(Sys.Date(), '%d %B %Y')`"
 output:
   pdf_document:
     number_sections: true
 vignette: >
-  %\VignetteIndexEntry{Using the `motifclustr` package}
+  %\VignetteIndexEntry{Using the `motifcluster` package}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 header-includes:
@@ -27,11 +27,11 @@ library(mclust)
 
 # Introduction
 
-This vignette demonstrates how to use the R package `motifclustr`.
+This vignette demonstrates how to use the R package `motifcluster`.
 These methods are detailed in the paper
 *Motif-Based Spectral Clustering of Weighted Directed Networks*,
 which is available at [`arXiv:2004.01293`](arxivpaper).
-The functionality of the `motifclustr` package falls into a few main categories:
+The functionality of the `motifcluster` package falls into a few main categories:
 
 - Building motif adjacency matrices
 - Sampling random weighted directed networks
@@ -39,16 +39,16 @@ The functionality of the `motifclustr` package falls into a few main categories:
 - Motif-based spectral clustering
 
 This vignette comprehensibly demonstrates all of these functionalities,
-showcasing the full capability of the `motifclustr` package.
+showcasing the full capability of the `motifcluster` package.
 The package can be loaded with
 
 ```{r}
-library(motifclustr)
+library(motifcluster)
 ```
 
 # Building motif adjacency matrices
 
-The main novelty in the `motifclustr` package is its ability to
+The main novelty in the `motifcluster` package is its ability to
 build a wide variety of motif adjacency matrices (MAMs), and to do so quickly.
 There are several options to consider when building an MAM,
 which are covered in this section.
@@ -76,7 +76,7 @@ G1 <- matrix(c(
 ## Basic motif adjacency matrix construction
 
 The `build_motif_adjacency_matrix` function is the main workhorse
-for building MAMs with `motifclustr`.
+for building MAMs with `motifcluster`.
 Let's use it to build an MAM for the network $\mathcal{G}_1$.
 First we must choose a motif to look for.
 A full list can be obtained with:
@@ -239,7 +239,7 @@ sample_dsbm(block_sizes, connection_matrix)
 The matrix above has binary entries,
 indicating that it is the adjacency matrix of an unweighted
 directed network.
-The `motifclustr` package also allows sampling of weighted directed networks.
+The `motifcluster` package also allows sampling of weighted directed networks.
 The simplest example of this is "constant" weighting,
 where we simply multiply each block of the adjacency matrix by a constant.
 
@@ -278,7 +278,7 @@ because motif adjacency matrices are always symmetric.
 ## Laplacian matrices
 
 We can construct two types of Laplacian matrix for a network
-using the `motifclustr` package.
+using the `motifcluster` package.
 First we create an example of a weighted undirected network $\mathcal{G}_2$.
 
 ```{r}
@@ -364,14 +364,14 @@ spectrum$vects
 
 # Motif-based spectral clustering
 
-The overall aim of `motifclustr` is to use motifs for spectral clustering,
+The overall aim of `motifcluster` is to use motifs for spectral clustering,
 so now we see how to extract clusters from the motif-based
 eigenvector embeddings.
 The `run_motif_clustering` function handles the entire process of
 building an MAM, restricting it to its largest connected component,
 performing eigenvector embedding, and extracting clusters.
 We therefore take the opportunity to showcase the ability of
-`motifclustr` to recover the blocks of a DSBM,
+`motifcluster` to recover the blocks of a DSBM,
 demonstrating all of the methods outlined in this vignette.
 
 Let's use a DSBM with three blocks of 10 nodes each.

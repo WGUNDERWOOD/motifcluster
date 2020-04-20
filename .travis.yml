@@ -3,4 +3,4 @@
 language: R
 cache: packages
 before_install:
-  - cd motifclustr/
+  - cd R/

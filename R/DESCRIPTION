@@ -1,4 +1,4 @@
-Package: motifclustr
+Package: motifcluster
 Title: Motif-Based Spectral Clustering of Weighted Directed Networks
 Version: 0.0.0.9001
 Authors@R:
