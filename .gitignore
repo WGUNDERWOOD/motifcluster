@@ -6,6 +6,7 @@ R/scratch.R
 R/inst
 R/doc/*.R
 R/doc/*.Rmd
+R/doc/*.html
 R.Rcheck/
 R/Meta/
 R/.gitignore
