@@ -48,7 +48,7 @@ get_first_eigs <- function(mat, num_eigs) {
 #' One of \code{"comb"} (combinatorial) or \code{"rw"} (random-walk).
 #' @return The specified Laplacian matrix.
 #' @examples
-#' adj_mat = matrix(c(1:9), nrow = 3)
+#' adj_mat <- matrix(c(1:9), nrow = 3)
 #' build_laplacian(adj_mat, "rw")
 #' @export
 
@@ -56,7 +56,7 @@ build_laplacian <- function(adj_mat, type_lap = c("comb", "rw")) {
 
   # check args
   type_lap <- match.arg(type_lap)
-  adj_mat = drop0(adj_mat)
+  adj_mat <- drop0(adj_mat)
 
   # initialize parameters
   degs_adj_mat <- apply(adj_mat, 1, sum)
@@ -79,7 +79,7 @@ build_laplacian <- function(adj_mat, type_lap = c("comb", "rw")) {
     L <-  diag(n) - inv_degs_matrix %*% adj_mat
   }
 
-  L = drop0(L)
+  L <- drop0(L)
 
   return(L)
 }
@@ -98,7 +98,7 @@ build_laplacian <- function(adj_mat, type_lap = c("comb", "rw")) {
 #' and \code{vects} contains an \code{nrow(adj_mat)} by \code{num_eigs} matrix
 #' of the associated eigenvectors.
 #' @examples
-#' adj_mat = matrix(c(1:9), nrow = 3)
+#' adj_mat <- matrix(c(1:9), nrow = 3)
 #' run_laplace_embedding(adj_mat, 2, "rw")
 #' @export
 
@@ -133,7 +133,7 @@ run_laplace_embedding <- function(adj_mat, num_eigs,
 #' One of \code{"func"} or \code{"struc"}.
 #' @param weight_type Weighting scheme for the motif adjacency matrix.
 #' One of \code{"unweighted"}, \code{"mean"} or \code{"product"}.
-#' @param method The method to use for building the motif adjacency matrix.
+#' @param mam_method The method to use for building the motif adjacency matrix.
 #' One of \code{"sparse"} or \code{"dense"}.
 #' @param num_eigs Number of eigenvalues and eigenvectors for the embedding.
 #' @param type_lap Type of Laplacian for the embedding.
@@ -156,18 +156,18 @@ run_laplace_embedding <- function(adj_mat, num_eigs,
 #'     of the restricted motif adjacency matrix.
 #' }
 #' @examples
-#' adj_mat = matrix(c(1:9), nrow = 3)
+#' adj_mat <- matrix(c(1:9), nrow = 3)
 #' run_motif_embedding(adj_mat, "M1", "func", "mean", "sparse", 2, "rw")
 #' @export
 
 run_motif_embedding <- function(adj_mat, motif_name,
                        motif_type = c("struc", "func"),
                        weight_type = c("unweighted", "mean", "product"),
-                       method = c("sparse", "dense"),
+                       mam_method = c("sparse", "dense"),
                        num_eigs, type_lap = c("comb", "rw")) {
 
   # check args
-  adj_mat = drop0(adj_mat)
+  adj_mat <- drop0(adj_mat)
   if (!(motif_name %in% get_motif_names())) {
     stop("Invalid motif name.")
   }
@@ -176,7 +176,7 @@ run_motif_embedding <- function(adj_mat, motif_name,
     stop("num_eigs must be an integer.")
   }
   weight_type <- match.arg(weight_type)
-  method <- match.arg(method)
+  mam_method <- match.arg(mam_method)
   if (!(num_eigs > 0)) {
     stop("num_eigs must be at least 1.")
   }
@@ -184,7 +184,7 @@ run_motif_embedding <- function(adj_mat, motif_name,
 
   # build motif adjacency matrix
   motif_adj_mat <- build_motif_adjacency_matrix(adj_mat, motif_name,
-                     motif_type, weight_type, method)
+                     motif_type, weight_type, mam_method)
 
   # restrict to largest connected component
   comps <- get_largest_component(motif_adj_mat)

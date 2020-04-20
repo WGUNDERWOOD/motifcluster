@@ -20,6 +20,6 @@ Build a Laplacian matrix (combinatorial Laplacian or random-walk Laplacian)
 from a symmetric (weighted) graph adjacency matrix.
 }
 \examples{
-adj_mat = matrix(c(1:9), nrow = 3)
+adj_mat <- matrix(c(1:9), nrow = 3)
 build_laplacian(adj_mat, "rw")
 }

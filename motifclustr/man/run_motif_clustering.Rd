@@ -9,7 +9,7 @@ run_motif_clustering(
   motif_name,
   motif_type = c("struc", "func"),
   weight_type = c("unweighted", "mean", "product"),
-  method = c("sparse", "dense"),
+  mam_method = c("sparse", "dense"),
   num_eigs,
   type_lap = c("comb", "rw"),
   num_clusts
@@ -26,7 +26,7 @@ One of \code{"func"} or \code{"struc"}.}
 \item{weight_type}{Weighting scheme for the motif adjacency matrix.
 One of \code{"unweighted"}, \code{"mean"} or \code{"product"}.}
 
-\item{method}{The method to use for building the motif adjacency matrix.
+\item{mam_method}{The method to use for building the motif adjacency matrix.
 One of \code{"sparse"} or \code{"dense"}.}
 
 \item{num_eigs}{Number of eigenvalues and eigenvectors for the embedding.}
@@ -62,4 +62,9 @@ Run motif-based clustering on the adjacency matrix of a
 (weighted directed) network,
 using a specified motif, motif type, weighting scheme,
 embedding dimension, number of clusters and Laplacian type.
+}
+\examples{
+adj_mat <- matrix(c(1:9), nrow = 3)
+run_motif_clustering(adj_mat, "M1", "func",
+  "mean", "sparse", 2, "rw", 2)
 }

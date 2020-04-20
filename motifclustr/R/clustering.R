@@ -12,8 +12,8 @@
 
 cluster_spectrum <- function(spectrum, num_clusts) {
 
-  vects = spectrum$vects[, -1]
-  kmeans_plus_plus <- LICORS::kmeanspp(vects, k = num_clusts)
+  vects <- spectrum$vects[, -1]
+  kmeans_plus_plus <- kmeanspp(vects, k = num_clusts)
   cluster_assigns <- kmeans_plus_plus$cluster
 
   return(cluster_assigns)
@@ -31,7 +31,7 @@ cluster_spectrum <- function(spectrum, num_clusts) {
 #' One of \code{"func"} or \code{"struc"}.
 #' @param weight_type Weighting scheme for the motif adjacency matrix.
 #' One of \code{"unweighted"}, \code{"mean"} or \code{"product"}.
-#' @param method The method to use for building the motif adjacency matrix.
+#' @param mam_method The method to use for building the motif adjacency matrix.
 #' One of \code{"sparse"} or \code{"dense"}.
 #' @param num_eigs Number of eigenvalues and eigenvectors for the embedding.
 #' @param type_lap Type of Laplacian for the embedding.
@@ -56,24 +56,27 @@ cluster_spectrum <- function(spectrum, num_clusts) {
 #'   \item \code{clusts}: a vector containing integers representing the
 #'     cluster assignment of each vertex.
 #' }
-#' @importFrom LICORS kmeanspp
+#' @examples
+#' adj_mat <- matrix(c(1:9), nrow = 3)
+#' run_motif_clustering(adj_mat, "M1", "func",
+#'   "mean", "sparse", 2, "rw", 2)
 #' @export
 
 run_motif_clustering <- function(adj_mat, motif_name,
   motif_type = c("struc", "func"),
   weight_type = c("unweighted", "mean", "product"),
-  method = c("sparse", "dense"),
+  mam_method = c("sparse", "dense"),
   num_eigs,
   type_lap = c("comb", "rw"),
   num_clusts) {
 
   spectrum <- run_motif_embedding(
     adj_mat, motif_name, motif_type, weight_type,
-    method, num_eigs, type_lap)
+    mam_method, num_eigs, type_lap)
 
-  cluster_assigns = cluster_spectrum(spectrum, num_clusts)
+  cluster_assigns <- cluster_spectrum(spectrum, num_clusts)
 
-  ans = list()
+  ans <- list()
   ans$adj_mat <- adj_mat
   ans$motif_adj_mat <- spectrum$motif_adj_mat
   ans$comps <- spectrum$comps

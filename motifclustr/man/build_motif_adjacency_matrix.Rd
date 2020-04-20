@@ -9,7 +9,7 @@ build_motif_adjacency_matrix(
   motif_name,
   motif_type = c("struc", "func"),
   weight_type = c("unweighted", "mean", "poisson"),
-  method = c("sparse", "dense")
+  mam_method = c("sparse", "dense")
 )
 }
 \arguments{
@@ -24,7 +24,7 @@ One of \code{"func"} or \code{"struc"}.}
 \item{weight_type}{The weighting scheme to use.
 One of \code{"unweighted"}, \code{"mean"} or \code{"product"}.}
 
-\item{method}{Which formulation to use.
+\item{mam_method}{Which formulation to use.
 One of \code{"dense"} or \code{"sparse"}.
 The sparse formulation avoids generating large dense matrices
 so tends to be faster for large sparse graphs.}

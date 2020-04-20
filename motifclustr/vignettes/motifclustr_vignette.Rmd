@@ -175,7 +175,7 @@ sum of these two product weights, which is 84.
 ### Computation method
 
 The final argument to `build_motif_adjacency_matrix`
-is the "method" argument.
+is the "mam_method" argument.
 This does not affect the value returned but may impact the
 amount of time taken to return the MAM.
 In general the "sparse" method (the default)
@@ -185,8 +185,8 @@ denser matrices, tends to be faster for small dense networks.
 
 
 ```{r}
-mam_sparse <- build_motif_adjacency_matrix(G1, "M1", method = "sparse")
-mam_dense  <- build_motif_adjacency_matrix(G1, "M1", method = "dense")
+mam_sparse <- build_motif_adjacency_matrix(G1, "M1", mam_method = "sparse")
+mam_dense  <- build_motif_adjacency_matrix(G1, "M1", mam_method = "dense")
 all(mam_sparse == mam_dense)
 ```
 
@@ -355,11 +355,14 @@ spectrum$vects
 
 # Motif-based spectral clustering
 
-The overall aim is to use motifs for spectral clustering,
+The overall aim of `motifclustr` is to use motifs for spectral clustering,
 so now we see how to extract clusters from the motif-based
 eigenvector embeddings.
+The `run_motif_clustering` function handles the entire process of
+building an MAM, restricting it to its largest connected component,
+performing eigenvector embedding and extracting clusters.
 
-TODO write this after writing the code for it
+TODO
 
 
 
