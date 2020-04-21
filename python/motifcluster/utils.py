@@ -1,8 +1,36 @@
+"""
+utils.py
+====================================
+Assorted utility functions for the motifcluster module.
+"""
+
 import numpy as np
 import networkx as nx
 from scipy import sparse
 
-def a_b_one(a, b):
+def _a_b_one(a, b):
+
+  """
+  Compute a right-multiplication with the ones matrix.
+
+  Compute `a * (b @ one_mat)` where `a`, `b`,
+  `ones_mat` are square matrices of the same size,
+  and `ones_mat` contains all entries equal to one.
+  The product `*` is an entry-wise (Hadamard) product,
+  while `@` represents matrix multiplication.
+  This method is more efficient than the naive approach
+  when `a` or `b` are sparse.
+
+  Parameters
+  ----------
+  a, b : matrix
+    Square matrices of the same size.
+
+  Returns
+  -------
+  sparse matrix
+    The sparse square matrix `a * (b @ one_mat)`.
+  """
 
   a_sparse = sparse.csr_matrix(a)
   b_sparse = sparse.csr_matrix(b)
