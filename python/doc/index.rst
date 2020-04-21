@@ -1,15 +1,8 @@
-Welcome to motifcluster's documentation!
+motifcluster
 ========================================
+
+Motif-Based Spectral Clustering of Weighted Directed Networks
 
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
-
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
