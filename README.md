@@ -22,8 +22,8 @@ and are easy to install and use.
 
 ### Branches
 
-The `master` branch contains stable versions.
-The `develop` branch may be unstable,
+The master branch contains stable versions.
+The develop branch may be unstable,
 and is for development purposes only.
 
 
@@ -36,7 +36,7 @@ The R package `motifcluster` is in the [R](./R/) directory.
 
 ### Installation
 
-The R package can be installed from the GitHub `master` branch with:
+The R package can be installed from the GitHub master branch with:
 
 ```
 install_github("wgunderwood/motif-based-clustering/R")
