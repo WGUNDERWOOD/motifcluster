@@ -4,9 +4,20 @@ from scipy.sparse import diags
 
 def a_b_one(a, b):
 
-  n = np.shape(a)[0]
-  ones_vec = np.ones((n, 1))
-  diagonal = (b @ ones_vec).reshape((n))
-  ans = diags(diagonal) @ a
+  a_sparse = csr_matrix(a)
+  b_sparse = csr_matrix(b)
+  n = a.shape[0]
+  ones_vec = np.ones(n)
+  ans = (a_sparse.T.multiply(b_sparse @ ones_vec)).T
+
+  return csr_matrix(ans)
+
+def a_one_b(a, b):
+
+  a_sparse = csr_matrix(a)
+  b_sparse = csr_matrix(b)
+  n = a.shape[0]
+  ones_vec = np.ones(n)
+  ans = (a_sparse.multiply(ones_vec @ b))
 
   return csr_matrix(ans)
