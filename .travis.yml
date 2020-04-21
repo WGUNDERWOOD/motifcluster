@@ -1,6 +1,18 @@
-# R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
+matrix:
+  include:
 
-language: R
-cache: packages
-before_install:
-  - cd R/
+    # R
+    - language: R
+      cache: packages
+      before_install:
+      - cd R/
+
+    # python
+    - language: python
+      #python: 2.7
+      #install:
+        #- pip install -r requirements.txt
+      before_script:
+        - cd python/
+      script:
+        - pytest
