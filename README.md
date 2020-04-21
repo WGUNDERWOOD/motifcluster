@@ -33,7 +33,7 @@ and is for development purposes only.
 
 ## R package
 
-The R package `motifcluster` is in the [R](./R/) directory.
+The R package "motifcluster" is in the [R](./R/) directory.
 
 ### Installation
 
