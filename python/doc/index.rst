@@ -3,13 +3,11 @@ motifcluster
 
 Motif-Based Spectral Clustering of Weighted Directed Networks
 
-.. automodule:: motifcluster.utils
-   :members:
-   :private-members:
-
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
    :caption: Contents:
+
+   utils
 
 Indices and tables
 ==================

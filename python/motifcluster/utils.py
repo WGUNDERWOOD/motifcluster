@@ -1,7 +1,6 @@
 """
-utils.py
-====================================
-Assorted utility functions for the motifcluster module.
+Assorted utility functions for the motifcluster module
+are in `motifcluster.utils`.
 """
 
 import numpy as np
@@ -28,7 +27,7 @@ def _a_b_one(a, b):
 
   Returns
   -------
-  sparse matrix
+  scipy.sparse.csr_matrix
     The sparse square matrix `a * (b @ one_mat)`.
   """
 
@@ -41,7 +40,29 @@ def _a_b_one(a, b):
   return sparse.csr_matrix(ans)
 
 
-def a_one_b(a, b):
+def _a_one_b(a, b):
+
+  """
+  Compute a left-multiplication with the ones matrix.
+
+  Compute `a * (one_mat @ b)` where `a`, `b`,
+  `ones_mat` are square matrices of the same size,
+  and `ones_mat` contains all entries equal to one.
+  The product `*` is an entry-wise (Hadamard) product,
+  while `@` represents matrix multiplication.
+  This method is more efficient than the naive approach
+  when `a` or `b` are sparse.
+
+  Parameters
+  ----------
+  a, b : matrix
+    Square matrices of the same size.
+
+  Returns
+  -------
+  scipy.sparse.csr_matrix
+    The sparse square matrix `a * (one_mat @ b)`.
+  """
 
   a_sparse = sparse.csr_matrix(a)
   b_sparse = sparse.csr_matrix(b)
