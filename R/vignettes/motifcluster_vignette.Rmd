@@ -9,8 +9,6 @@ vignette: >
   %\VignetteIndexEntry{Using the `motifcluster` package}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
-header-includes:
-  - \usepackage{tikz}
 ---
 
 ```{r, include = FALSE}
@@ -21,9 +19,11 @@ knitr::opts_chunk$set(
 set.seed(200401293)
 options(digits = 2)
 library(mclust)
+library(motifcluster)
 ```
 
 \tableofcontents
+\pagebreak
 
 # Introduction
 
@@ -40,9 +40,10 @@ The functionality of the `motifcluster` package falls into a few main categories
 
 This vignette comprehensibly demonstrates all of these functionalities,
 showcasing the full capability of the `motifcluster` package.
-The package can be loaded with
+The package can be installed and loaded using the `devtools` package:
 
-```{r}
+```{r, eval = FALSE}
+install_github("wgunderwood/motif-based-clustering/R")
 library(motifcluster)
 ```
 
@@ -117,7 +118,6 @@ Structural instances require an exact match, with no extra edges.
 If we want to also include instances which may have extra edges present,
 we must instead use functional motif instances:
 
-\pagebreak
 
 ```{r}
 build_motif_adjacency_matrix(G1, motif_name = "M1", motif_type = "func")
@@ -166,6 +166,8 @@ The $(i,j)$th MAM entry is then defined as the sum of these
 instance weights across all instances containing
 both vertices $i$ and $j$:
 
+\pagebreak
+
 ```{r}
 build_motif_adjacency_matrix(G1, motif_name = "M1", motif_type = "func",
   mam_weight_type = "product")
@@ -205,7 +207,7 @@ We use (weighted) directed stochastic block models (DSBMs) and
 
 ## Directed stochastic block models
 
-First let's sample a the adjacency matrix of a DSBM
+First let's sample the adjacency matrix of a DSBM
 which has two blocks of vertices;
 the first containing 5 vertices and the second containing 3.
 We use strong within-block connections,
@@ -231,6 +233,11 @@ connection_matrix = matrix(c(
   0.9, 0.2,
   0.2, 0.9
 ), nrow = 2, byrow = TRUE)
+```
+
+\pagebreak
+
+```{r}
 sample_dsbm(block_sizes, connection_matrix)
 ```
 
@@ -243,7 +250,6 @@ The `motifcluster` package also allows sampling of weighted directed networks.
 The simplest example of this is "constant" weighting,
 where we simply multiply each block of the adjacency matrix by a constant.
 
-\pagebreak
 
 ```{r}
 weight_matrix = matrix(c(
@@ -267,6 +273,44 @@ removing an edge which might have otherwise been present.
 sample_dsbm(block_sizes, connection_matrix, weight_matrix, sample_weight_type = "poisson")
 ```
 
+## Bipartite stochastic block models
+
+The `motifcluster` package can also be used to sample
+bipartite networks.
+The vertices of a bipartite network are partitioned
+into "source" and "destination" vertices,
+and edges are only permitted to go from source vertices
+to destination vertices.
+Let's sample a DSBM with a single block of two source vertices
+and two block of destination vertices, with
+sizes of three and two respectively.
+We can use a strong connection probability of 0.9 to the first block of
+destination vertices,
+and a weaker connection probability of 0.2 to the second.
+
+```{r}
+source_block_sizes = c(2)
+destination_block_sizes = c(3, 2)
+bipartite_connection_matrix = matrix(c(0.9, 0.2), nrow = 1)
+sample_bsbm(source_block_sizes, destination_block_sizes, bipartite_connection_matrix)
+```
+
+### Weighted bipartite stochastic block models
+
+Similarly to the more general directed stochastic block models,
+we can also use constant-weighted or Poisson-weighted edges for bipartite
+stochastic block models.
+
+```{r}
+bipartite_weight_matrix = matrix(c(7, 2), nrow = 1)
+sample_bsbm(source_block_sizes, destination_block_sizes,
+  bipartite_connection_matrix, bipartite_weight_matrix,
+  sample_weight_type = "poisson")
+```
+
+
+
+
 # Spectral embedding with motif adjacency matrices
 
 Spectral methods involve performing eigenvalue and
@@ -280,6 +324,8 @@ because motif adjacency matrices are always symmetric.
 We can construct two types of Laplacian matrix for a network
 using the `motifcluster` package.
 First we create an example of a weighted undirected network $\mathcal{G}_2$.
+
+\pagebreak
 
 ```{r}
 G2 <- matrix(c(
@@ -407,6 +453,8 @@ G4 = sample_dsbm(block_sizes, connection_matrix, weight_matrix,
   sample_weight_type = "poisson")
 ```
 
+\pagebreak
+
 Now we can run the motif-based spectral clustering algorithm
 on this network with the three-cycle motif $\mathcal{M}_1$.
 We build a functional MAM,
@@ -433,7 +481,8 @@ truth = c(rep(1, 10), rep(2, 10), rep(3, 10))
 mclust::adjustedRandIndex(motif_cluster$clusts, truth)
 ```
 
-A value of one indicates perfect recovery of the blocks.
+A larger value indicates better recovery of the blocks,
+with a value of one indicating perfect agreement.
 
 
 [arxivpaper]: https://arxiv.org/abs/2004.01293

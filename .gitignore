@@ -10,3 +10,7 @@ R/doc/*.html
 R.Rcheck/
 R/Meta/
 R/.gitignore
+
+# python package
+__pycache__
+_build

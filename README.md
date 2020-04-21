@@ -1,5 +1,8 @@
 # motif-based-clustering
 
+[![Build Status](https://img.shields.io/travis/wgunderwood/motif-based-clustering/master.svg?label=master)](https://travis-ci.com/github/WGUNDERWOOD/motif-based-clustering)
+[![Build Status](https://img.shields.io/travis/wgunderwood/motif-based-clustering/develop.svg?label=develop)](https://travis-ci.com/github/WGUNDERWOOD/motif-based-clustering)
+
 Source code for my paper
 *Motif-Based Spectral Clustering of Weighted Directed Networks*,
 with Andrew Elliott and Mihai Cucuringu.
@@ -22,21 +25,19 @@ and are easy to install and use.
 
 ### Branches
 
-The `master` branch contains stable versions.
-The `develop` branch may be unstable,
+The master branch contains stable versions.
+The develop branch may be unstable,
 and is for development purposes only.
 
 
 
 ## R package
 
-[![Build Status](https://travis-ci.com/WGUNDERWOOD/motif-based-clustering.svg?branch=master)](https://travis-ci.com/github/WGUNDERWOOD/motif-based-clustering)
-
 The R package `motifcluster` is in the [R](./R/) directory.
 
 ### Installation
 
-The R package can be installed from the GitHub `master` branch with:
+The R package can be installed from the GitHub master branch with:
 
 ```
 install_github("wgunderwood/motif-based-clustering/R")
