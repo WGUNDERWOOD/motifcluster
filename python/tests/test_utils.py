@@ -1,8 +1,11 @@
+# import motifcluster
 from motifcluster import utils as mcut
 
+# import other dependencies
 import numpy as np
 from scipy.sparse import csr_matrix
 
+# tests
 
 def test_a_b_one():
 
