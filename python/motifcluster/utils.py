@@ -4,6 +4,7 @@ are in `motifcluster.utils`.
 """
 
 import numpy as np
+from numpy import random as rd
 import networkx as nx
 from scipy import sparse
 
@@ -155,3 +156,22 @@ def get_motif_names():
   motif_names = [motif_names, "Mcoll", "Mexpa"]
 
   return(motif_names)
+
+
+def random_sparse_matrix(m, n, p):
+
+  # TODO doc and test
+  mn = m * n
+
+  # number of nonzero entries
+  k = rd.binomial(mn, p)
+  vals = np.ones(k)
+
+  # indices of nonzero entries
+  inds = rd.choice(mn, size = k, replace = False)
+  zs = k * [0]
+
+  ans = sparse.csr_matrix((vals, (inds, zs)), shape = (mn, 1))
+  ans = ans.reshape((m, n))
+
+  return(ans)

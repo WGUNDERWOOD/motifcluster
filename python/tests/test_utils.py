@@ -3,7 +3,7 @@ from motifcluster import utils as mcut
 import numpy as np
 from scipy import sparse
 
-def test__a_b_one():
+def test_a_b_one():
 
   a_dense = np.array(range(-4, 5)).reshape((3, 3))
   b_dense = np.array(range(-1, 8)).reshape((3, 3))
@@ -23,7 +23,7 @@ def test__a_b_one():
   )
 
 
-def test__a_one_b():
+def test_a_one_b():
 
   a_dense = np.array(range(-4, 5)).reshape((3, 3))
   b_dense = np.array(range(-1, 8)).reshape((3, 3))
@@ -43,7 +43,7 @@ def test__a_one_b():
   )
 
 
-def test__drop0_kill_diag():
+def test_drop0_kill_diag():
 
   adj_mat_dense = np.array(range(-1, 8)).reshape((3,3))
   adj_mat_sparse = sparse.csr_matrix(adj_mat_dense)
