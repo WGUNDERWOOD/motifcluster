@@ -73,7 +73,25 @@ def _a_one_b(a, b):
   return sparse.csr_matrix(ans)
 
 
-def drop0_killdiag(some_mat):
+def _drop0_killdiag(some_mat):
+
+  """
+  Set diagonal entries to zero and sparsify.
+
+  Set the diagonal entries of a matrix to zero
+  and convert it to sparse form.
+
+  Parameters
+  ----------
+  some_mat : matrix
+    A square matrix.
+
+  Returns
+  -------
+  scipy.sparse.csr_matrix
+    A sparse-form copy of `some_matrix` with its
+    diagonal entries set to zero.
+  """
 
   ans = sparse.csr_matrix(some_mat)
   I = sparse.identity(ans.shape[0])
@@ -84,9 +102,56 @@ def drop0_killdiag(some_mat):
 
 def get_largest_component(adj_mat):
 
+  """
+  Get largest connected component.
+
+  Get the indices of the vertices in the largest connected
+  component of a graph from its adjacency matrix.
+
+  Parameters
+  ----------
+  adj_mat : matrix
+    An adjacency matrix of a graph.
+
+  Returns
+  -------
+  list
+    A list of indices corresponding to the vertices in the largest
+    connected component.
+
+  Examples
+  --------
+  >>> adj_mat = np.array([0, 1, 0, 0, 0, 0, 0, 0, 0]).reshape((3, 3))
+  >>> get_largest_component(adj_mat)
+  """
+
   adj_mat_sparse = sparse.csr_matrix(adj_mat)
   gr = nx.from_scipy_sparse_matrix(adj_mat_sparse > 0)
   verts_to_keep = max(nx.connected_components(gr), key=len)
   verts_to_keep = sorted(verts_to_keep)
 
   return verts_to_keep
+
+
+def get_motif_names():
+
+  """
+  Get common motif names.
+
+  Get the names of some common motifs as strings.
+
+  Returns
+  -------
+  list
+    A list of names (strings) of common motifs.
+  """
+
+  motif_names = ["Ms", "Md"]
+
+  for i in range(1, 14):
+    motif_name = "M" + str(i)
+    motif_names = [motif_names, motif_name]
+
+  motif_names = [motif_names, "Mcoll", "Mexpa"]
+
+  return(motif_names)
