@@ -1,6 +1,6 @@
 context("Indicator matrices")
 
-test_that("build_indicator_matrices returns correct matrices", {
+test_that("indicator matrices return correct matrices", {
 
   G_dense <- matrix(c(0, 2, 0, 3, 0, 4, 0, 0, 0), nrow = 3, byrow = TRUE)
   G_sparse <- drop0(G_dense)

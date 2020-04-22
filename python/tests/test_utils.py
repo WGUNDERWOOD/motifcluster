@@ -1,11 +1,7 @@
-# import motifcluster
 from motifcluster import utils as mcut
 
-# import other dependencies
 import numpy as np
 from scipy import sparse
-
-# tests
 
 def test__a_b_one():
 
@@ -47,7 +43,7 @@ def test__a_one_b():
   )
 
 
-def test_drop0_kill_diag():
+def test__drop0_kill_diag():
 
   adj_mat_dense = np.array(range(-1, 8)).reshape((3,3))
   adj_mat_sparse = sparse.csr_matrix(adj_mat_dense)
@@ -55,12 +51,12 @@ def test_drop0_kill_diag():
   ans = np.array([0, 0, 1, 2, 0, 4, 5, 6, 0]).reshape((3,3))
 
   assert np.allclose(
-    mcut.drop0_killdiag(adj_mat_dense).toarray(),
+    mcut._drop0_killdiag(adj_mat_dense).toarray(),
     ans
   )
 
   assert np.allclose(
-    mcut.drop0_killdiag(adj_mat_sparse).toarray(),
+    mcut._drop0_killdiag(adj_mat_sparse).toarray(),
     ans
   )
 

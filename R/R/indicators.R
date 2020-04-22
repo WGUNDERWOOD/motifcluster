@@ -1,7 +1,7 @@
 #' Build sparse adjacency matrix
 #'
 #' Build the sparse adjacency matrix \code{G} from a graph adjacency matrix.
-#' @param adj_mat Original adjacency matrix.
+#' @param adj_mat The original adjacency matrix.
 #' @return The adjacency matrix \code{G} in sparse form.
 #' @keywords internal
 
@@ -14,7 +14,7 @@ build_G <- function(adj_mat) {
 #'
 #' Build the sparse directed indicator matrix \code{J}
 #' from a graph adjacency matrix.
-#' @param adj_mat Original adjacency matrix.
+#' @param adj_mat The original adjacency matrix.
 #' @return A directed indicator matrix \code{J} in sparse form.
 #' @keywords internal
 
@@ -27,13 +27,13 @@ build_J <- function(adj_mat) {
 #'
 #' Build the sparse single-edge adjacency matrix \code{Gs} from a
 #' graph adjacency matrix.
-#' @param adj_mat Original adjacency matrix.
+#' @param adj_mat The original adjacency matrix.
 #' @return A single-edge adjacency matrix \code{Gs} in sparse form.
 #' @keywords internal
 
 build_Gs <- function(adj_mat) {
   J <- build_J(adj_mat)
-  Gs <- drop0_killdiag(adj_mat * (1 - t(J)))
+  Gs <- drop0_killdiag(adj_mat - adj_mat * t(J))
   return(Gs)
 }
 
@@ -41,7 +41,7 @@ build_Gs <- function(adj_mat) {
 #'
 #' Build the sparse single-edge indicator matrix \code{Js} from a
 #' graph adjacency matrix.
-#' @param adj_mat Original adjacency matrix.
+#' @param adj_mat The original adjacency matrix.
 #' @return A single-edge indicator matrix \code{Js} in sparse form.
 #' @keywords internal
 
@@ -55,7 +55,7 @@ build_Js <- function(adj_mat) {
 #'
 #' Build the sparse double-edge adjacency matrix \code{Gd} from a
 #' graph adjacency matrix.
-#' @param adj_mat Original adjacency matrix.
+#' @param adj_mat The original adjacency matrix.
 #' @return A double-edge adjacency matrix \code{Gd} in sparse form.
 #' @keywords internal
 
@@ -69,7 +69,7 @@ build_Gd <- function(adj_mat) {
 #'
 #' Build the sparse double-edge indicator matrix \code{Jd} from a
 #' graph adjacency matrix.
-#' @param adj_mat Original adjacency matrix.
+#' @param adj_mat The original adjacency matrix.
 #' @return A double-edge indicator matrix \code{Jd} in sparse form.
 #' @keywords internal
 
@@ -83,7 +83,7 @@ build_Jd <- function(adj_mat) {
 #'
 #' Build the missing-edge indicator matrix \code{J0} from a
 #' graph adjacency matrix.
-#' @param adj_mat Original adjacency matrix.
+#' @param adj_mat The original adjacency matrix.
 #' @return A missing-edge indicator matrix \code{J0}.
 #' @keywords internal
 
@@ -96,7 +96,7 @@ build_J0 <- function(adj_mat) {
 #'
 #' Build the vertex-distinct indicator matrix \code{Jn} from a
 #' graph adjacency matrix.
-#' @param adj_mat Original adjacency matrix.
+#' @param adj_mat The original adjacency matrix.
 #' @return A vertex-distinct indicator matrix \code{Jn}.
 #' @keywords internal
 
@@ -107,9 +107,9 @@ build_Jn <- function(adj_mat) {
 
 #' Build identity matrix
 #'
-#' Build the sparse identity matrix Id from a graph adjacency matrix.
-#' @param adj_mat Original adjacency matrix.
-#' @return An identity matrix Id in sparse form.
+#' Build the sparse identity matrix \code{Id} from a graph adjacency matrix.
+#' @param adj_mat The original adjacency matrix.
+#' @return An identity matrix \code{Id} in sparse form.
 #' @keywords internal
 #' @importFrom Matrix Diagonal
 
@@ -122,7 +122,7 @@ build_Id <- function(adj_mat) {
 #'
 #' Build the sparse edge-and-diagonal indicator matrix \code{Je} from a
 #' graph adjacency matrix.
-#' @param adj_mat Original adjacency matrix.
+#' @param adj_mat The original adjacency matrix.
 #' @return An edge-and-diagonal indicator matrix \code{Je} in sparse form.
 #' @keywords internal
 
@@ -136,7 +136,7 @@ build_Je <- function(adj_mat) {
 #'
 #' Build the sparse product adjacency matrix \code{Jp} from a
 #' graph adjacency matrix.
-#' @param adj_mat Original adjacency matrix.
+#' @param adj_mat The original adjacency matrix.
 #' @return A product adjacency matrix \code{Jp} in sparse form.
 #' @keywords internal
 
