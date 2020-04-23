@@ -72,8 +72,9 @@ def sample_dsbm(block_sizes, connection_matrix,
       # poisson weights
       elif sample_weight_type == "poisson":
         w = weight_matrix[i, j]
-        weights = rd.poisson(w, (ni, nj))
-        block = block.multiply(weights)
+        weights_vec = rd.poisson(w, block.nnz)
+        weights_mat = sparse.csr_matrix((weights_vec, block.nonzero()), shape = (ni, nj))
+        block = block.multiply(weights_mat)
 
       row_list.append(block)
 
@@ -118,6 +119,8 @@ def sample_bsbm(source_block_sizes, dest_block_sizes,
   bipartite_connection_matrix,
   bipartite_weight_matrix = None,
   sample_weight_type = "unweighted"):
+
+  # TODO docs
 
   # check args
   assert source_block_sizes == [int(x) for x in source_block_sizes]
@@ -170,10 +173,9 @@ def sample_bsbm(source_block_sizes, dest_block_sizes,
 #' \code{adj_mat_dense} is the adjacency matrix in dense form, and
 #' \code{adj_mat_sparse} is the adjacency matrix in sparse form.
 #' @keywords internal
-"""
-demonstration_graph = function() {
+def demonstration_graph():
 
-  adj_mat_dense = matrix(c(
+  adj_mat_dense = np.array([
     0, 0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 0,
     2, 0,  3,  0,  6,  8,  0,  0,  0,  0,  0, 0,
     0, 0,  0,  0,  0, 10,  0,  0,  0,  0,  0, 0,
@@ -186,12 +188,13 @@ demonstration_graph = function() {
     0, 0,  0,  0,  0, 20,  0,  0,  0,  0,  0, 0,
     0, 0,  0,  0,  0,  0, 22,  0,  0,  0,  0, 0,
     0, 0,  0,  0,  0,  0, 23,  0,  0,  0,  0, 0
-  ), nrow = 12, byrow = TRUE)
+  ]).reshape((12, 12))
 
-  adj_mat_sparse = drop0(adj_mat_dense)
+  adj_mat_sparse = sparse.csr_matrix(adj_mat_dense)
 
-  ans = list(adj_mat_dense = adj_mat_dense, adj_mat_sparse = adj_mat_sparse)
+  ans = {
+    "adj_mat_dense": adj_mat_dense,
+    "adj_mat_sparse": adj_mat_sparse,
+  }
 
-  return(ans)
-}
-"""
+  return ans

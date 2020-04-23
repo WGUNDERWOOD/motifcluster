@@ -7,6 +7,7 @@ import numpy as np
 from numpy import random as rd
 import networkx as nx
 from scipy import sparse
+import random
 
 def _a_b_one(a, b):
 
@@ -161,6 +162,7 @@ def get_motif_names():
 def random_sparse_matrix(m, n, p):
 
   # TODO doc and test
+  # TODO include weights and poisson in here
   mn = m * n
 
   # number of nonzero entries
@@ -168,10 +170,25 @@ def random_sparse_matrix(m, n, p):
   vals = np.ones(k)
 
   # indices of nonzero entries
-  inds = rd.choice(mn, size = k, replace = False)
   zs = k * [0]
+  inds = random.sample(range(mn), k)
 
-  ans = sparse.csr_matrix((vals, (inds, zs)), shape = (mn, 1))
+  ans = sparse.csc_matrix((vals, (inds, zs)), shape = (mn, 1))
   ans = ans.reshape((m, n))
 
   return(ans)
+
+
+def sample_from_range_without_replacement(n, lower, upper):
+
+    result = []
+    pool = {}
+
+    for _ in range(n):
+        i = random.randrange(lower, upper)
+        x = pool.get(i, i)
+        pool[i] = pool.get(lower, lower)
+        lower += 1
+        result.append(x)
+
+    return result
