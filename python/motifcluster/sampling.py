@@ -44,7 +44,7 @@ def sample_dsbm(block_sizes, connection_matrix,
     assert weight_matrix is not None
     assert len(block_sizes) == weight_matrix.shape[0]
     assert len(block_sizes) == weight_matrix.shape[1]
-    assert weight_matrix >= 0
+    assert (weight_matrix >= 0).all()
 
   # initialize variables
   k = len(block_sizes)
@@ -67,13 +67,13 @@ def sample_dsbm(block_sizes, connection_matrix,
       # constant weights
       if sample_weight_type == "constant":
         w = weight_matrix[i, j]
-        block *= w
+        block = w * block
 
       # poisson weights
       elif sample_weight_type == "poisson":
         w = weight_matrix[i, j]
         weights = rd.poisson(w, (ni, nj))
-        block *= weights
+        block = block.multiply(weights)
 
       row_list.append(block)
 
@@ -114,63 +114,53 @@ def sample_dsbm(block_sizes, connection_matrix,
 #' sample_bsbm(source_block_sizes, dest_block_sizes,
 #'       bipartite_connection_matrix, bipartite_weight_matrix, "poisson")
 
-"""
-sample_bsbm = function(source_block_sizes, dest_block_sizes,
+def sample_bsbm(source_block_sizes, dest_block_sizes,
   bipartite_connection_matrix,
-  bipartite_weight_matrix = NULL,
-  sample_weight_type = c("unweighted", "constant", "poisson")) {
+  bipartite_weight_matrix = None,
+  sample_weight_type = "unweighted"):
 
   # check args
-  sample_weight_type = match.arg(sample_weight_type)
-  if (!(length(source_block_sizes) == nrow(bipartite_connection_matrix))) {
-    stop("length(source_block_sizes) must equal
-         nrow(bipartite_connection_matrix)")
-  }
-  if (!(length(dest_block_sizes) == ncol(bipartite_connection_matrix))) {
-    stop("length(dest_block_sizes) must equal
-         ncol(bipartite_connection_matrix)")
-  }
-  if ((sample_weight_type != "unweighted") & is.null(bipartite_weight_matrix)) {
-    stop("weighted requires a bipartite_weight_matrix")
-  }
-  if (!is.null(bipartite_weight_matrix)) {
-    if (!(length(source_block_sizes) == nrow(bipartite_weight_matrix))) {
-      stop("length(source_block_sizes) must equal
-           nrow(bipartite_weight_matrix)")
-    }
-    if (!(length(dest_block_sizes) == ncol(bipartite_weight_matrix))) {
-      stop("length(dest_block_sizes) must equal ncol(bipartite_weight_matrix)")
-    }
-  }
+  assert source_block_sizes == [int(x) for x in source_block_sizes]
+  assert dest_block_sizes == [int(x) for x in dest_block_sizes]
+  assert all(x > 0 for x in source_block_sizes)
+  assert all(x > 0 for x in dest_block_sizes)
+  assert len(source_block_sizes) == bipartite_connection_matrix.shape[0]
+  assert len(dest_block_sizes) == bipartite_connection_matrix.shape[1]
+  assert (bipartite_connection_matrix >= 0).all()
+  assert (bipartite_connection_matrix <= 1).all()
+  assert sample_weight_type in ["unweighted", "constant", "poisson"]
+
+  if not sample_weight_type == "unweighted":
+    assert bipartite_weight_matrix is not None
+    assert len(source_block_sizes) == bipartite_weight_matrix.shape[0]
+    assert len(dest_block_sizes) == bipartite_weight_matrix.shape[1]
+    assert (bipartite_weight_matrix >= 0).all()
 
   # initialize parameters
-  ks = length(source_block_sizes)
-  kd = length(dest_block_sizes)
-  zeros_ss = matrix(0, nrow = ks, ncol = ks)
-  zeros_d = matrix(0, nrow = kd, ncol = (ks + kd))
+  ks = len(source_block_sizes)
+  kd = len(dest_block_sizes)
+  zeros_ss = np.zeros((ks, ks))
+  zeros_d = np.zeros((kd, ks + kd))
 
   # build block sizes vector
-  block_sizes = c(source_block_sizes, dest_block_sizes)
+  block_sizes = [source_block_sizes, dest_block_sizes]
 
   # build connection matrix
-  connection_matrix = cbind(zeros_ss, bipartite_connection_matrix)
-  connection_matrix = rbind(connection_matrix, zeros_d)
+  connection_matrix = np.block([[zeros_ss, bipartite_connection_matrix], [zeros_d]])
 
   # build weight matrix
-  if (!is.null(bipartite_weight_matrix)) {
-    weight_matrix = cbind(zeros_ss, bipartite_weight_matrix)
-    weight_matrix = rbind(weight_matrix, zeros_d)
-  }
-  else{
-    weight_matrix = NULL
-  }
+  if bipartite_weight_matrix is not None:
+    weight_matrix = np.block([[zeros_ss, bipartite_weight_matrix], [zeros_d]])
+
+  else:
+    weight_matrix = None
 
   # sample BSBM
   adj_mat = sample_dsbm(block_sizes, connection_matrix,
                          weight_matrix, sample_weight_type)
 
   return(adj_mat)
-}
+
 
 #' Generate a small graph for demonstrations
 #'
@@ -180,7 +170,7 @@ sample_bsbm = function(source_block_sizes, dest_block_sizes,
 #' \code{adj_mat_dense} is the adjacency matrix in dense form, and
 #' \code{adj_mat_sparse} is the adjacency matrix in sparse form.
 #' @keywords internal
-
+"""
 demonstration_graph = function() {
 
   adj_mat_dense = matrix(c(
