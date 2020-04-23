@@ -24,6 +24,8 @@ sample_dsbm <- function(block_sizes, connection_matrix,
   weight_matrix = NULL,
   sample_weight_type = c("unweighted", "constant", "poisson")) {
 
+  # TODO make faster like python code
+
   # check args
   if (!all.equal(block_sizes, as.integer(block_sizes))) {
     stop("block_sizes must be integers.")

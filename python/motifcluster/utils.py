@@ -159,7 +159,7 @@ def get_motif_names():
   return(motif_names)
 
 
-def random_sparse_matrix(m, n, p):
+def random_sparse_matrix(m, n, p, w = 0, sample_weight_type = None):
 
   # TODO doc and test
   # TODO include weights and poisson in here
@@ -167,28 +167,23 @@ def random_sparse_matrix(m, n, p):
 
   # number of nonzero entries
   k = rd.binomial(mn, p)
-  vals = np.ones(k)
 
   # indices of nonzero entries
   zs = k * [0]
   inds = random.sample(range(mn), k)
 
+  # values to go in matrix
+  if sample_weight_type == "constant":
+    vals = np.full(k, w)
+
+  elif sample_weight_type == "poisson":
+    vals = rd.poisson(w, size = k)
+
+  else:
+    vals = np.ones(k)
+
+  # create matrix
   ans = sparse.csc_matrix((vals, (inds, zs)), shape = (mn, 1))
   ans = ans.reshape((m, n))
 
   return(ans)
-
-
-def sample_from_range_without_replacement(n, lower, upper):
-
-    result = []
-    pool = {}
-
-    for _ in range(n):
-        i = random.randrange(lower, upper)
-        x = pool.get(i, i)
-        pool[i] = pool.get(lower, lower)
-        lower += 1
-        result.append(x)
-
-    return result

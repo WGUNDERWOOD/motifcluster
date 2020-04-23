@@ -62,20 +62,13 @@ def sample_dsbm(block_sizes, connection_matrix,
       p = connection_matrix[i, j]
 
       # generate block
-      block = mcut.random_sparse_matrix(ni, nj, p)
+      if sample_weight_type == "unweighted":
+        w = 1
 
-      # constant weights
-      if sample_weight_type == "constant":
+      else:
         w = weight_matrix[i, j]
-        block = w * block
 
-      # poisson weights
-      elif sample_weight_type == "poisson":
-        w = weight_matrix[i, j]
-        weights_vec = rd.poisson(w, block.nnz)
-        weights_mat = sparse.csr_matrix((weights_vec, block.nonzero()), shape = (ni, nj))
-        block = block.multiply(weights_mat)
-
+      block = mcut.random_sparse_matrix(ni, nj, p, w, sample_weight_type)
       row_list.append(block)
 
     block_list.append(row_list)
