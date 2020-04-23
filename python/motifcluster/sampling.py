@@ -143,7 +143,7 @@ def sample_bsbm(source_block_sizes, dest_block_sizes,
   zeros_d = np.zeros((kd, ks + kd))
 
   # build block sizes vector
-  block_sizes = [source_block_sizes, dest_block_sizes]
+  block_sizes = source_block_sizes + dest_block_sizes
 
   # build connection matrix
   connection_matrix = np.block([[zeros_ss, bipartite_connection_matrix], [zeros_d]])
