@@ -159,10 +159,10 @@ def get_motif_names():
   return(motif_names)
 
 
-def random_sparse_matrix(m, n, p, w = 0, sample_weight_type = None):
+def _random_sparse_matrix(m, n, p, w = 0, sample_weight_type = None):
 
   # TODO doc and test
-  # TODO include weights and poisson in here
+
   mn = m * n
 
   # number of nonzero entries

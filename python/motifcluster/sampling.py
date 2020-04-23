@@ -68,7 +68,7 @@ def sample_dsbm(block_sizes, connection_matrix,
       else:
         w = weight_matrix[i, j]
 
-      block = mcut.random_sparse_matrix(ni, nj, p, w, sample_weight_type)
+      block = mcut._random_sparse_matrix(ni, nj, p, w, sample_weight_type)
       row_list.append(block)
 
     block_list.append(row_list)
@@ -166,6 +166,7 @@ def sample_bsbm(source_block_sizes, dest_block_sizes,
 #' \code{adj_mat_dense} is the adjacency matrix in dense form, and
 #' \code{adj_mat_sparse} is the adjacency matrix in sparse form.
 #' @keywords internal
+
 def demonstration_graph():
 
   adj_mat_dense = np.array([
