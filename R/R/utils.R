@@ -49,7 +49,7 @@ a_one_b <- function(a, b) {
 #' Set the diagonal entries of a matrix to zero
 #' and convert it to sparse form.
 #' @param some_mat A square matrix.
-#' @return A sparse-form copy of \code{some_matrix} with its
+#' @return A sparse-form copy of \code{some_mat} with its
 #' diagonal entries set to zero.
 #' @importFrom Matrix drop0
 #' @keywords internal

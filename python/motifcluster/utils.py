@@ -90,8 +90,8 @@ def _drop0_killdiag(some_mat):
 
   Returns
   -------
-  sparse_mat : spase matrix
-    A sparse-form copy of `some_matrix` with its
+  sparse_mat : sparse matrix
+    A sparse-form copy of `some_mat` with its
     diagonal entries set to zero.
   """
 

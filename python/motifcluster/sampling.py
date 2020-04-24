@@ -188,7 +188,7 @@ def demonstration_graph():
   adj_mat_dense : matrix
     the adjacency matrix in dense form.
   adj_mat_sparse : sparse matrix
-  t  he adjacency matrix in sparse form.
+    the adjacency matrix in sparse form.
   """
 
   adj_mat_dense = np.array([

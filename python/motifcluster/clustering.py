@@ -6,7 +6,7 @@ def cluster_spectrum(spectrum, num_clusts):
   """
   Get cluster assignments from spectrum using k-means++.
 
-  Get a vector of cluster assignments from a spectrum,
+  Get a list of cluster assignments from a spectrum,
   using k-means++ and `num_clusts` clusters.
 
   Parameters
@@ -20,7 +20,7 @@ def cluster_spectrum(spectrum, num_clusts):
   Returns
   -------
   cluster_assigns : list of int
-    A vector of integers from 1 to num_clusts,
+    A list of integers from `1` to `num_clusts`,
     representing cluster assignments.
   """
 
