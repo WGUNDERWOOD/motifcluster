@@ -4,32 +4,42 @@ import numpy as np
 from scipy import sparse
 from numpy import random as rd
 
-#' Sample a directed stochastic block model (DSBM)
-#'
-#' Sample the (weighted) adjacency matrix of a (weighted) directed stochastic
-#' block model (DSBM) with specified parameters.
-#' @param block_sizes A vector containing the size of each block of vertices.
-#' @param connection_matrix A matrix containing the block-to-block connection
-#' probabilities.
-#' @param sample_weight_type The type of weighting scheme.
-#' One of \code{"unweighted"}, \code{"constant"} or \code{"poisson"}.
-#' @param weight_matrix A matrix containing the block-to-block weight
-#' parameters.
-#' Unused for \code{sample_weight_type = "constant"}.
-#' Defaults to \code{NULL}.
-#' @return A randomly sampled (weighted) adjacency matrix of a DSBM.
-#' @export
-#' @importFrom stats rpois rbinom
-#' @examples
-#' block_sizes = c(10, 10)
-#' connection_matrix = matrix(c(0.8, 0.1, 0.1, 0.8), nrow = 2, byrow = TRUE)
-#' weight_matrix = matrix(c(10, 3, 3, 10), nrow = 2, byrow = TRUE)
-#' sample_dsbm(block_sizes, connection_matrix, weight_matrix, "poisson")
-
 def sample_dsbm(block_sizes, connection_matrix,
   weight_matrix = None, sample_weight_type = "unweighted"):
 
-  # TODO docs
+  """
+  Sample a directed stochastic block model (DSBM).
+
+  Sample the (weighted) adjacency matrix of a (weighted) directed stochastic
+  block model (DSBM) with specified parameters.
+
+  Parameters
+  ----------
+  block_sizes : list of int
+    A list containing the size of each block of vertices.
+  connection_matrix : matrix
+    A matrix containing the block-to-block connection probabilities.
+  sample_weight_type : str
+    The type of weighting scheme.
+    One of `"unweighted"`, `"constant"` or `"poisson"`.
+  weight_matrix : matrix
+    A matrix containing the block-to-block weight
+    parameters.
+    Unused for `sample_weight_type = "constant"`.
+    Defaults to `None`.
+
+  Returns
+  -------
+  adj_mat : scipy.sparse.csr_matrix
+    A randomly sampled (weighted) adjacency matrix of a DSBM.
+
+  Examples
+  --------
+  >>> block_sizes = [10, 10]
+  >>> connection_matrix = np.array([0.8, 0.1, 0.1, 0.8]).reshape((2, 2))
+  >>> weight_matrix = np.array([10, 3, 3, 10]).reshape((2, 2))
+  >>> sample_dsbm(block_sizes, connection_matrix, weight_matrix, "poisson")
+  """
 
   # check args
   assert block_sizes == [int(x) for x in block_sizes]
@@ -68,7 +78,7 @@ def sample_dsbm(block_sizes, connection_matrix,
       else:
         w = weight_matrix[i, j]
 
-      block = mcut._random_sparse_matrix(ni, nj, p, w, sample_weight_type)
+      block = mcut._random_sparse_matrix(ni, nj, p, sample_weight_type, w)
       row_list.append(block)
 
     block_list.append(row_list)
@@ -79,41 +89,48 @@ def sample_dsbm(block_sizes, connection_matrix,
   return(adj_mat)
 
 
-#' Sample a bipartite stochastic block model (BSBM)
-#'
-#' Sample the (weighted) adjacency matrix of a (weighted) bipartite stochastic
-#' block model (BSBM) with specified parameters.
-#' @param source_block_sizes A vector containing the size of each block
-#' of source vertices.
-#' @param dest_block_sizes A vector containing the size of each block
-#' of destination vertices.
-#' @param bipartite_connection_matrix A matrix containing the
-#' source block to destination block
-#' connection probabilities.
-#' @param sample_weight_type The type of weighting scheme.
-#' One of \code{"unweighted"}, \code{"constant"} or \code{"poisson"}.
-#' @param bipartite_weight_matrix A matrix containing the
-#' sourece block to destination block weight parameters.
-#' Unused for \code{sample_weight_type = "constant"}.
-#' Defaults to \code{NULL}.
-#' @return A randomly sampled (weighted) adjacency matrix of a BSBM.
-#' @export
-#' @examples
-#' source_block_sizes = c(10, 10)
-#' dest_block_sizes = c(10, 10, 10)
-#' bipartite_connection_matrix = matrix(c(0.8, 0.5, 0.1, 0.1, 0.5, 0.8),
-#'       nrow = 2, byrow = TRUE)
-#' bipartite_weight_matrix = matrix(c(20, 10, 2, 2, 10, 20),
-#'       nrow = 2, byrow = TRUE)
-#' sample_bsbm(source_block_sizes, dest_block_sizes,
-#'       bipartite_connection_matrix, bipartite_weight_matrix, "poisson")
-
 def sample_bsbm(source_block_sizes, dest_block_sizes,
   bipartite_connection_matrix,
   bipartite_weight_matrix = None,
   sample_weight_type = "unweighted"):
 
-  # TODO docs
+  """
+  Sample a bipartite stochastic block model (BSBM).
+
+  Sample the (weighted) adjacency matrix of a (weighted) bipartite stochastic
+  block model (BSBM) with specified parameters.
+
+  Parameters
+  ----------
+  source_block_sizes : list of int
+    A list containing the size of each block of source vertices.
+  dest_block_sizes : list of int
+    A list containing the size of each block of destination vertices.
+  bipartite_connection_matrix : matrix
+    A matrix containing the source block to destination block
+    connection probabilities.
+  sample_weight_type : str
+    The type of weighting scheme.
+    One of `"unweighted"`, `"constant"` or `"poisson"`.
+  weight_matrix : matrix
+    A matrix containing the source block to destination block weight
+    parameters. Unused for `sample_weight_type = "constant"`.
+    Defaults to `None`.
+
+  Returns
+  -------
+  adj_mat : scipy.sparse.csr_matrix
+    A randomly sampled (weighted) adjacency matrix of a BSBM.
+
+  Examples
+  --------
+  >>> source_block_sizes = [10, 10]
+  >>> dest_block_sizes = [10, 10, 10]
+  >>> bipartite_connection_matrix = np.array([0.8, 0.5, 0.1, 0.1, 0.5, 0.8]).reshape((2, 3))
+  >>> bipartite_weight_matrix = np.array([20, 10, 2, 2, 10, 20]).reshape((2, 3))
+  >>> sample_bsbm(block_sizes, bipartite_connection_matrix,
+  ...   bipartite_weight_matrix, "poisson")
+  """
 
   # check args
   assert source_block_sizes == [int(x) for x in source_block_sizes]
@@ -158,16 +175,22 @@ def sample_bsbm(source_block_sizes, dest_block_sizes,
   return(adj_mat)
 
 
-#' Generate a small graph for demonstrations
-#'
-#' Generate the sparse and dense adjacency matrices of a small weighted
-#' directed graph, for demonstrating methods and running tests.
-#' @return A list with two entries:
-#' \code{adj_mat_dense} is the adjacency matrix in dense form, and
-#' \code{adj_mat_sparse} is the adjacency matrix in sparse form.
-#' @keywords internal
-
 def demonstration_graph():
+
+  """
+  Generate a small graph for demonstrations.
+
+  Generate the sparse and dense adjacency matrices of a small weighted
+  directed graph, for demonstrating methods and running tests.
+
+  Returns
+  -------
+
+  dict
+    A dictionary with two entries:
+    `adj_mat_dense` is the adjacency matrix in dense form, and
+    `adj_mat_sparse` is the adjacency matrix in sparse form.
+  """
 
   adj_mat_dense = np.array([
     0, 0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 0,

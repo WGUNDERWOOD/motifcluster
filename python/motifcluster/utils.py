@@ -90,7 +90,7 @@ def _drop0_killdiag(some_mat):
 
   Returns
   -------
-  scipy.sparse.csr_matrix
+  sparse_mat : scipy.sparse.csr_matrix
     A sparse-form copy of `some_matrix` with its
     diagonal entries set to zero.
   """
@@ -98,8 +98,9 @@ def _drop0_killdiag(some_mat):
   ans = sparse.csr_matrix(some_mat)
   I = sparse.identity(ans.shape[0])
   ans = ans - I.multiply(ans)
+  sparse_mat = sparse.csr_matrix(ans)
 
-  return(sparse.csr_matrix(ans))
+  return(sparse_mat)
 
 
 def get_largest_component(adj_mat):
@@ -117,7 +118,7 @@ def get_largest_component(adj_mat):
 
   Returns
   -------
-  list
+  verts_to_keep : list
     A list of indices corresponding to the vertices in the largest
     connected component.
 
@@ -144,7 +145,7 @@ def get_motif_names():
 
   Returns
   -------
-  list
+  motif_names : list
     A list of names (strings) of common motifs.
   """
 
@@ -159,9 +160,31 @@ def get_motif_names():
   return(motif_names)
 
 
-def _random_sparse_matrix(m, n, p, w = 0, sample_weight_type = None):
+def _random_sparse_matrix(m, n, p, sample_weight_type = None, w = 0):
 
-  # TODO doc and test
+  """
+  Build a random sparse matrix.
+
+  Build a sparse matrix of size `m * n` with non-zero probability `p`.
+  Edge weights can be unweighted, constant-weighted or
+  Poisson-weighted.
+
+  Parameters
+  ----------
+  m, n : int
+    Dimension of matrix to build is `(m, n)`.
+  p : float
+    Probability that each entry is non-zero (before weighting).
+  sample_weight_type : str
+    Type of weighting scheme.
+  w : float
+    Weight parameter.
+
+  Returns
+  -------
+  csr_sparse_matrix
+    A random sparse matrix.
+  """
 
   mn = m * n
 
