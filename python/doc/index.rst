@@ -7,6 +7,7 @@ Motif-Based Spectral Clustering of Weighted Directed Networks
    :maxdepth: 1
    :caption: Contents:
 
+   clustering
    indicators
    sampling
    utils

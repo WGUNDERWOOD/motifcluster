@@ -29,7 +29,7 @@ def _a_b_one(a, b):
 
   Returns
   -------
-  scipy.sparse.csr_matrix
+  sparse matrix
     The sparse square matrix `a * (b @ one_mat)`.
   """
 
@@ -62,7 +62,7 @@ def _a_one_b(a, b):
 
   Returns
   -------
-  scipy.sparse.csr_matrix
+  sparse matrix
     The sparse square matrix `a * (one_mat @ b)`.
   """
 
@@ -90,7 +90,7 @@ def _drop0_killdiag(some_mat):
 
   Returns
   -------
-  sparse_mat : scipy.sparse.csr_matrix
+  sparse_mat : spase matrix
     A sparse-form copy of `some_matrix` with its
     diagonal entries set to zero.
   """
@@ -182,7 +182,7 @@ def _random_sparse_matrix(m, n, p, sample_weight_type = None, w = 0):
 
   Returns
   -------
-  csr_sparse_matrix
+  sparse matrix
     A random sparse matrix.
   """
 

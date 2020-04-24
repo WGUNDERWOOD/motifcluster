@@ -30,7 +30,7 @@ def sample_dsbm(block_sizes, connection_matrix,
 
   Returns
   -------
-  adj_mat : scipy.sparse.csr_matrix
+  adj_mat : sparse matrix
     A randomly sampled (weighted) adjacency matrix of a DSBM.
 
   Examples
@@ -119,7 +119,7 @@ def sample_bsbm(source_block_sizes, dest_block_sizes,
 
   Returns
   -------
-  adj_mat : scipy.sparse.csr_matrix
+  adj_mat : sparse matrix
     A randomly sampled (weighted) adjacency matrix of a BSBM.
 
   Examples
@@ -185,11 +185,10 @@ def demonstration_graph():
 
   Returns
   -------
-
-  dict
-    A dictionary with two entries:
-    `adj_mat_dense` is the adjacency matrix in dense form, and
-    `adj_mat_sparse` is the adjacency matrix in sparse form.
+  adj_mat_dense : matrix
+    the adjacency matrix in dense form.
+  adj_mat_sparse : sparse matrix
+  t  he adjacency matrix in sparse form.
   """
 
   adj_mat_dense = np.array([

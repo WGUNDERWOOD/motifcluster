@@ -22,7 +22,7 @@ def _build_G(adj_mat):
 
   Returns
   -------
-  scipy.sparse.csr_matrix
+  sparse matrix
     The adjacency matrix `G` in sparse form.
   """
 
@@ -45,7 +45,7 @@ def _build_J(adj_mat):
 
   Returns
   -------
-  scipy.sparse.csr_matrix
+  sparse matrix
     A directed indicator matrix `J` in sparse form.
   """
 
@@ -69,7 +69,7 @@ def _build_Gs(adj_mat):
 
   Returns
   -------
-  scipy.sparse.csr_matrix
+  sparse matrix
     A single-edge adjacency matrix `Gs` in sparse form.
   """
 
@@ -94,7 +94,7 @@ def _build_Js(adj_mat):
 
   Returns
   -------
-  scipy.sparse.csr_matrix
+  sparse matrix
     A single-edge indicator matrix `Js` in sparse form.
   """
 
@@ -118,7 +118,7 @@ def _build_Gd(adj_mat):
 
   Returns
   -------
-  scipy.sparse.csr_matrix
+  sparse matrix
     A double-edge adjacency matrix `Gd` in sparse form.
   """
 
@@ -144,7 +144,7 @@ def _build_Jd(adj_mat):
 
   Returns
   -------
-  scipy.sparse.csr_matrix
+  sparse matrix
     A double-edge indicator matrix `Jd` in sparse form.
   """
 
@@ -168,7 +168,7 @@ def _build_J0(adj_mat):
 
   Returns
   -------
-  scipy.sparse.csr_matrix
+  sparse matrix
     A missing-edge indicator matrix `J0`.
   """
 
@@ -192,7 +192,7 @@ def _build_Jn(adj_mat):
 
   Returns
   -------
-  scipy.sparse.csr_matrix
+  sparse matrix
     A vertex-distinct indicator matrix `Jn`.
   """
 
@@ -216,7 +216,7 @@ def _build_Id(adj_mat):
 
   Returns
   -------
-  scipy.sparse.csr_matrix
+  sparse matrix
     An identity matrix `Id` in sparse form.
   """
 
@@ -240,7 +240,7 @@ def _build_Je(adj_mat):
 
   Returns
   -------
-  scipy.sparse.csr_matrix
+  sparse matrix
     An edge-and-diagonal matrix `Ie` in sparse form.
   """
 
@@ -265,7 +265,7 @@ def _build_Gp(adj_mat):
 
   Returns
   -------
-  scipy.sparse.csr_matrix
+  sparse matrix
     A product matrix `Gp` in sparse form.
   """
 
