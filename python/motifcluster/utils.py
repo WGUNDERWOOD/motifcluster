@@ -153,9 +153,9 @@ def get_motif_names():
 
   for i in range(1, 14):
     motif_name = "M" + str(i)
-    motif_names = [motif_names, motif_name]
+    motif_names = motif_names + [motif_name]
 
-  motif_names = [motif_names, "Mcoll", "Mexpa"]
+  motif_names = motif_names + ["Mcoll"] + ["Mexpa"]
 
   return(motif_names)
 
