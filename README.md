@@ -1,7 +1,6 @@
 # motif-based-clustering
 
-[![Build Status](https://img.shields.io/travis/wgunderwood/motif-based-clustering/master.svg?label=master)](https://travis-ci.com/github/WGUNDERWOOD/motif-based-clustering)
-[![Build Status](https://img.shields.io/travis/wgunderwood/motif-based-clustering/develop.svg?label=develop)](https://travis-ci.com/github/WGUNDERWOOD/motif-based-clustering)
+[![Build Status](https://travis-ci.com/WGUNDERWOOD/motif-based-clustering.svg?branch=master)](https://travis-ci.com/github/WGUNDERWOOD/motif-based-clustering)
 [![Build Status](https://img.shields.io/readthedocs/motifcluster?label=python%20docs)](https://motifcluster.readthedocs.io/en/latest/)
 
 
