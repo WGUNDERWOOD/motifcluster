@@ -123,18 +123,26 @@ def build_motif_adjacency_matrix(adj_mat, motif_name, motif_type = "struc",
 
   return
 
-#' Perform the motif adjacency matrix calculations for motif Ms
-#'
-#' @param adj_mat Adjacency matrix from which to build the motif
-#' adjacency matrix.
-#' @param motif_type Type of motif adjacency matrix to build.
-#' @param mam_weight_type The weighting scheme to use.
-#' One of \code{"unweighted"}, \code{"mean"} or \code{"product"}.
-#' @return A motif adjacency matrix.
-#' @keywords internal
-#' @importFrom Matrix sparse.csr_matrix t
 
 def mam_Ms(adj_mat, motif_type, mam_weight_type):
+
+  """
+  Perform the motif adjacency matrix calculations for motif Ms.
+
+  Parameters
+  ----------
+  adj_mat : matrix
+    Adjacency matrix from which to build the motif adjacency matrix.
+  motif_type : str
+    Type of motif adjacency matrix to build.
+  mam_weight_type : str
+    The weighting scheme to use. One of `"unweighted"`, `"mean"` or `"product"`.
+
+  Returns
+  -------
+  sparse matrix
+    A motif adjacency matrix.
+  """
 
   if mam_weight_type == "unweighted":
     if motif_type == "func":
@@ -163,17 +171,24 @@ def mam_Ms(adj_mat, motif_type, mam_weight_type):
       Gs = mcin._build_Gs(adj_mat)
       return Gs + Gs.transpose()
 
-#' Perform the motif adjacency matrix calculations for motif Md
-#'
-#' @param adj_mat Adjacency matrix from which to build the motif
-#' adjacency matrix.
-#' @param mam_weight_type The weighting scheme to use.
-#' One of \code{"unweighted"}, \code{"mean"} or \code{"product"}.
-#' @return A motif adjacency matrix.
-#' @keywords internal
-#' @importFrom Matrix sparse.csr_matrix t
 
 def mam_Md(adj_mat, mam_weight_type):
+
+  """
+  Perform the motif adjacency matrix calculations for motif Md.
+
+  Parameters
+  ----------
+  adj_mat : matrix
+    Adjacency matrix from which to build the motif adjacency matrix.
+  mam_weight_type : str
+    The weighting scheme to use. One of `"unweighted"`, `"mean"` or `"product"`.
+
+  Returns
+  -------
+  sparse matrix
+    A motif adjacency matrix.
+  """
 
   if mam_weight_type == "unweighted":
     Jd = mcin._build_Jd(adj_mat)
@@ -187,18 +202,26 @@ def mam_Md(adj_mat, mam_weight_type):
     Gp = mcin._build_Gp(adj_mat)
     return Gp
 
-#' Perform the motif adjacency matrix calculations for motif M1
-#'
-#' @param adj_mat Adjacency matrix from which to build the motif
-#' adjacency matrix.
-#' @param motif_type Type of motif adjacency matrix to build.
-#' @param mam_weight_type The weighting scheme to use.
-#' One of \code{"unweighted"}, \code{"mean"} or \code{"product"}.
-#' @return A motif adjacency matrix.
-#' @keywords internal
-#' @importFrom Matrix sparse.csr_matrix t
 
 def mam_M1(adj_mat, motif_type, mam_weight_type):
+
+  """
+  Perform the motif adjacency matrix calculations for motif M1.
+
+  Parameters
+  ----------
+  adj_mat : matrix
+    Adjacency matrix from which to build the motif adjacency matrix.
+  motif_type : str
+    Type of motif adjacency matrix to build.
+  mam_weight_type : str
+    The weighting scheme to use. One of `"unweighted"`, `"mean"` or `"product"`.
+
+  Returns
+  -------
+  sparse matrix
+    A motif adjacency matrix.
+  """
 
   if mam_weight_type == "unweighted":
     if motif_type == "func":
@@ -235,18 +258,26 @@ def mam_M1(adj_mat, motif_type, mam_weight_type):
       C = Gs.transpose().multiply(Gs * Gs)
       return C + C.transpose()
 
-#' Perform the motif adjacency matrix calculations for motif M2
-#'
-#' @param adj_mat Adjacency matrix from which to build the motif
-#' adjacency matrix.
-#' @param motif_type Type of motif adjacency matrix to build.
-#' @param mam_weight_type The weighting scheme to use.
-#' One of \code{"unweighted"}, \code{"mean"} or \code{"product"}.
-#' @return A motif adjacency matrix.
-#' @keywords internal
-#' @importFrom Matrix sparse.csr_matrix t
 
 def mam_M2(adj_mat, motif_type, mam_weight_type):
+
+  """
+  Perform the motif adjacency matrix calculations for motif M2.
+
+  Parameters
+  ----------
+  adj_mat : matrix
+    Adjacency matrix from which to build the motif adjacency matrix.
+  motif_type : str
+    Type of motif adjacency matrix to build.
+  mam_weight_type : str
+    The weighting scheme to use. One of `"unweighted"`, `"mean"` or `"product"`.
+
+  Returns
+  -------
+  sparse matrix
+    A motif adjacency matrix.
+  """
 
   if mam_weight_type == "unweighted":
     if motif_type == "func":
@@ -295,18 +326,26 @@ def mam_M2(adj_mat, motif_type, mam_weight_type):
       C = Gs.transpose().multiply(Gp * Gs) + Gs.transpose().multiply(Gs * Gp) + Gp.multiply(Gs * Gs)
       return C + C.transpose()
 
-#' Perform the motif adjacency matrix calculations for motif M3
-#'
-#' @param adj_mat Adjacency matrix from which to build the motif
-#' adjacency matrix.
-#' @param motif_type Type of motif adjacency matrix to build.
-#' @param mam_weight_type The weighting scheme to use.
-#' One of \code{"unweighted"}, \code{"mean"} or \code{"product"}.
-#' @return A motif adjacency matrix.
-#' @keywords internal
-#' @importFrom Matrix sparse.csr_matrix t
 
 def mam_M3(adj_mat, motif_type, mam_weight_type):
+
+  """
+  Perform the motif adjacency matrix calculations for motif M3.
+
+  Parameters
+  ----------
+  adj_mat : matrix
+    Adjacency matrix from which to build the motif adjacency matrix.
+  motif_type : str
+    Type of motif adjacency matrix to build.
+  mam_weight_type : str
+    The weighting scheme to use. One of `"unweighted"`, `"mean"` or `"product"`.
+
+  Returns
+  -------
+  sparse matrix
+    A motif adjacency matrix.
+  """
 
   if mam_weight_type == "unweighted":
     if motif_type == "func":
@@ -355,17 +394,24 @@ def mam_M3(adj_mat, motif_type, mam_weight_type):
       C = Gs.multiply(Gp * Gp) + Gp.multiply(Gp * Gs) + Gp.multiply(Gs * Gp)
       return C + C.transpose()
 
-#' Perform the motif adjacency matrix calculations for motif M4
-#'
-#' @param adj_mat Adjacency matrix from which to build the motif
-#' adjacency matrix.
-#' @param mam_weight_type The weighting scheme to use.
-#' One of \code{"unweighted"}, \code{"mean"} or \code{"product"}.
-#' @return A motif adjacency matrix.
-#' @keywords internal
-#' @importFrom Matrix sparse.csr_matrix t
 
 def mam_M4(adj_mat, mam_weight_type):
+
+  """
+  Perform the motif adjacency matrix calculations for motif M4.
+
+  Parameters
+  ----------
+  adj_mat : matrix
+    Adjacency matrix from which to build the motif adjacency matrix.
+  mam_weight_type : str
+    The weighting scheme to use. One of `"unweighted"`, `"mean"` or `"product"`.
+
+  Returns
+  -------
+  sparse matrix
+    A motif adjacency matrix.
+  """
 
   if mam_weight_type == "unweighted":
     Jd = mcin._build_Jd(adj_mat)
@@ -380,18 +426,26 @@ def mam_M4(adj_mat, mam_weight_type):
     Gp = mcin._build_Gp(adj_mat)
     return Gp.multiply(Gp * Gp)
 
-#' Perform the motif adjacency matrix calculations for motif M5
-#'
-#' @param adj_mat Adjacency matrix from which to build the motif
-#' adjacency matrix.
-#' @param motif_type Type of motif adjacency matrix to build.
-#' @param mam_weight_type The weighting scheme to use.
-#' One of \code{"unweighted"}, \code{"mean"} or \code{"product"}.
-#' @return A motif adjacency matrix.
-#' @keywords internal
-#' @importFrom Matrix sparse.csr_matrix t
 
 def mam_M5(adj_mat, motif_type, mam_weight_type):
+
+  """
+  Perform the motif adjacency matrix calculations for motif M5.
+
+  Parameters
+  ----------
+  adj_mat : matrix
+    Adjacency matrix from which to build the motif adjacency matrix.
+  motif_type : str
+    Type of motif adjacency matrix to build.
+  mam_weight_type : str
+    The weighting scheme to use. One of `"unweighted"`, `"mean"` or `"product"`.
+
+  Returns
+  -------
+  sparse matrix
+    A motif adjacency matrix.
+  """
 
   if mam_weight_type == "unweighted":
     if motif_type == "func":
@@ -432,18 +486,26 @@ def mam_M5(adj_mat, motif_type, mam_weight_type):
       C = Gs.multiply(Gs * Gs) + Gs.multiply(Gs * Gs.transpose()) + Gs.multiply(Gs.transpose() * Gs)
       return C + C.transpose()
 
-#' Perform the motif adjacency matrix calculations for motif M6
-#'
-#' @param adj_mat Adjacency matrix from which to build the motif
-#' adjacency matrix.
-#' @param motif_type Type of motif adjacency matrix to build.
-#' @param mam_weight_type The weighting scheme to use.
-#' One of \code{"unweighted"}, \code{"mean"} or \code{"product"}.
-#' @return A motif adjacency matrix.
-#' @keywords internal
-#' @importFrom Matrix sparse.csr_matrix t
 
 def mam_M6(adj_mat, motif_type, mam_weight_type):
+
+  """
+  Perform the motif adjacency matrix calculations for motif M6.
+
+  Parameters
+  ----------
+  adj_mat : matrix
+    Adjacency matrix from which to build the motif adjacency matrix.
+  motif_type : str
+    Type of motif adjacency matrix to build.
+  mam_weight_type : str
+    The weighting scheme to use. One of `"unweighted"`, `"mean"` or `"product"`.
+
+  Returns
+  -------
+  sparse matrix
+    A motif adjacency matrix.
+  """
 
   if mam_weight_type == "unweighted":
     if motif_type == "func":
@@ -494,18 +556,26 @@ def mam_M6(adj_mat, motif_type, mam_weight_type):
       Cprime = Gp.multiply(Gs.transpose() * Gs)
       return C + C.transpose() + Cprime
 
-#' Perform the motif adjacency matrix calculations for motif M7
-#'
-#' @param adj_mat Adjacency matrix from which to build the motif
-#' adjacency matrix.
-#' @param motif_type Type of motif adjacency matrix to build.
-#' @param mam_weight_type The weighting scheme to use.
-#' One of \code{"unweighted"}, \code{"mean"} or \code{"product"}.
-#' @return A motif adjacency matrix.
-#' @keywords internal
-#' @importFrom Matrix sparse.csr_matrix t
 
 def mam_M7(adj_mat, motif_type, mam_weight_type):
+
+  """
+  Perform the motif adjacency matrix calculations for motif M7.
+
+  Parameters
+  ----------
+  adj_mat : matrix
+    Adjacency matrix from which to build the motif adjacency matrix.
+  motif_type : str
+    Type of motif adjacency matrix to build.
+  mam_weight_type : str
+    The weighting scheme to use. One of `"unweighted"`, `"mean"` or `"product"`.
+
+  Returns
+  -------
+  sparse matrix
+    A motif adjacency matrix.
+  """
 
   if mam_weight_type == "unweighted":
     if motif_type == "func":
@@ -556,20 +626,28 @@ def mam_M7(adj_mat, motif_type, mam_weight_type):
       Cprime = Gp.multiply(Gs * Gs.transpose())
       return C + C.transpose() + Cprime
 
-#' Perform the motif adjacency matrix calculations for motif M8
-#'
-#' @param adj_mat Adjacency matrix from which to build the motif
-#' adjacency matrix.
-#' @param motif_type Type of motif adjacency matrix to build.
-#' @param mam_weight_type The weighting scheme to use.
-#' One of \code{"unweighted"}, \code{"mean"} or \code{"product"}.
-#' @param mam_method Which formulation to use.
-#' One of \code{"dense"} or \code{"sparse"}.
-#' @return A motif adjacency matrix.
-#' @keywords internal
-#' @importFrom Matrix sparse.csr_matrix t
 
 def mam_M8(adj_mat, motif_type, mam_weight_type, mam_method):
+
+  """
+  Perform the motif adjacency matrix calculations for motif M8.
+
+  Parameters
+  ----------
+  adj_mat : matrix
+    Adjacency matrix from which to build the motif adjacency matrix.
+  motif_type : str
+    Type of motif adjacency matrix to build.
+  mam_weight_type : str
+    The weighting scheme to use. One of `"unweighted"`, `"mean"` or `"product"`.
+  mam_method : str
+    Which formulation to use. One of `"dense"` or `"sparse"`.
+
+  Returns
+  -------
+  sparse matrix
+    A motif adjacency matrix.
+  """
 
   if mam_method == "dense":
     if mam_weight_type == "unweighted":
@@ -670,20 +748,28 @@ def mam_M8(adj_mat, motif_type, mam_weight_type, mam_method):
         Cprime = Gs.transpose() * Gs - Je.multiply(Gs.transpose() * Gs)
         return sparse.csr_matrix(C + C.transpose() + Cprime)
 
-#' Perform the motif adjacency matrix calculations for motif M9
-#'
-#' @param adj_mat Adjacency matrix from which to build the motif
-#' adjacency matrix.
-#' @param motif_type Type of motif adjacency matrix to build.
-#' @param mam_weight_type The weighting scheme to use.
-#' One of \code{"unweighted"}, \code{"mean"} or \code{"product"}.
-#' @param mam_method Which formulation to use.
-#' One of \code{"dense"} or \code{"sparse"}.
-#' @return A motif adjacency matrix.
-#' @keywords internal
-#' @importFrom Matrix sparse.csr_matrix t
 
 def mam_M9(adj_mat, motif_type, mam_weight_type, mam_method):
+
+  """
+  Perform the motif adjacency matrix calculations for motif M9.
+
+  Parameters
+  ----------
+  adj_mat : matrix
+    Adjacency matrix from which to build the motif adjacency matrix.
+  motif_type : str
+    Type of motif adjacency matrix to build.
+  mam_weight_type : str
+    The weighting scheme to use. One of `"unweighted"`, `"mean"` or `"product"`.
+  mam_method : str
+    Which formulation to use. One of `"dense"` or `"sparse"`.
+
+  Returns
+  -------
+  sparse matrix
+    A motif adjacency matrix.
+  """
 
   if mam_method == "dense":
     if mam_weight_type == "unweighted":
@@ -787,20 +873,28 @@ def mam_M9(adj_mat, motif_type, mam_weight_type, mam_method):
         C = C + mcut._a_b_one(Gs, Gs.transpose()) - Gs.multiply(Gs.transpose() * Je)
         return sparse.csr_matrix(C + C.transpose())
 
-#' Perform the motif adjacency matrix calculations for motif M10
-#'
-#' @param adj_mat Adjacency matrix from which to build the motif
-#' adjacency matrix.
-#' @param motif_type Type of motif adjacency matrix to build.
-#' @param mam_weight_type The weighting scheme to use.
-#' One of \code{"unweighted"}, \code{"mean"} or \code{"product"}.
-#' @param mam_method Which formulation to use.
-#' One of \code{"dense"} or \code{"sparse"}.
-#' @return A motif adjacency matrix.
-#' @keywords internal
-#' @importFrom Matrix sparse.csr_matrix t
 
 def mam_M10(adj_mat, motif_type, mam_weight_type, mam_method):
+
+  """
+  Perform the motif adjacency matrix calculations for motif M10.
+
+  Parameters
+  ----------
+  adj_mat : matrix
+    Adjacency matrix from which to build the motif adjacency matrix.
+  motif_type : str
+    Type of motif adjacency matrix to build.
+  mam_weight_type : str
+    The weighting scheme to use. One of `"unweighted"`, `"mean"` or `"product"`.
+  mam_method : str
+    Which formulation to use. One of `"dense"` or `"sparse"`.
+
+  Returns
+  -------
+  sparse matrix
+    A motif adjacency matrix.
+  """
 
   if mam_method == "dense":
     if mam_weight_type == "unweighted":
@@ -901,20 +995,28 @@ def mam_M10(adj_mat, motif_type, mam_weight_type, mam_method):
         Cprime = Gs * Gs.transpose() - Je.multiply(Gs * Gs.transpose())
         return sparse.csr_matrix(C + C.transpose() + Cprime)
 
-#' Perform the motif adjacency matrix calculations for motif M11
-#'
-#' @param adj_mat Adjacency matrix from which to build the motif
-#' adjacency matrix.
-#' @param motif_type Type of motif adjacency matrix to build.
-#' @param mam_weight_type The weighting scheme to use.
-#' One of \code{"unweighted"}, \code{"mean"} or \code{"product"}.
-#' @param mam_method Which formulation to use.
-#' One of \code{"dense"} or \code{"sparse"}.
-#' @return A motif adjacency matrix.
-#' @keywords internal
-#' @importFrom Matrix sparse.csr_matrix t
 
 def mam_M11(adj_mat, motif_type, mam_weight_type, mam_method):
+
+  """
+  Perform the motif adjacency matrix calculations for motif M11.
+
+  Parameters
+  ----------
+  adj_mat : matrix
+    Adjacency matrix from which to build the motif adjacency matrix.
+  motif_type : str
+    Type of motif adjacency matrix to build.
+  mam_weight_type : str
+    The weighting scheme to use. One of `"unweighted"`, `"mean"` or `"product"`.
+  mam_method : str
+    Which formulation to use. One of `"dense"` or `"sparse"`.
+
+  Returns
+  -------
+  sparse matrix
+    A motif adjacency matrix.
+  """
 
   if mam_method == "dense":
     if mam_weight_type == "unweighted":
@@ -1034,20 +1136,28 @@ def mam_M11(adj_mat, motif_type, mam_weight_type, mam_method):
         C = C + mcut._a_b_one(Gs, Gp) - Gs.multiply(Gp * Je)
         return sparse.csr_matrix(C + C.transpose())
 
-#' Perform the motif adjacency matrix calculations for motif M12
-#'
-#' @param adj_mat Adjacency matrix from which to build the motif
-#' adjacency matrix.
-#' @param motif_type Type of motif adjacency matrix to build.
-#' @param mam_weight_type The weighting scheme to use.
-#' One of \code{"unweighted"}, \code{"mean"} or \code{"product"}.
-#' @param mam_method Which formulation to use.
-#' One of \code{"dense"} or \code{"sparse"}.
-#' @return A motif adjacency matrix.
-#' @keywords internal
-#' @importFrom Matrix sparse.csr_matrix t
 
 def mam_M12(adj_mat, motif_type, mam_weight_type, mam_method):
+
+  """
+  Perform the motif adjacency matrix calculations for motif M12.
+
+  Parameters
+  ----------
+  adj_mat : matrix
+    Adjacency matrix from which to build the motif adjacency matrix.
+  motif_type : str
+    Type of motif adjacency matrix to build.
+  mam_weight_type : str
+    The weighting scheme to use. One of `"unweighted"`, `"mean"` or `"product"`.
+  mam_method : str
+    Which formulation to use. One of `"dense"` or `"sparse"`.
+
+  Returns
+  -------
+  sparse matrix
+    A motif adjacency matrix.
+  """
 
   if mam_method == "dense":
     if mam_weight_type == "unweighted":
@@ -1167,20 +1277,28 @@ def mam_M12(adj_mat, motif_type, mam_weight_type, mam_method):
         C = C + mcut._a_one_b(Gs, Gp) - Gs.multiply(Je * Gp)
         return sparse.csr_matrix(C + C.transpose())
 
-#' Perform the motif adjacency matrix calculations for motif M13
-#'
-#' @param adj_mat Adjacency matrix from which to build the motif
-#' adjacency matrix.
-#' @param motif_type Type of motif adjacency matrix to build.
-#' @param mam_weight_type The weighting scheme to use.
-#' One of \code{"unweighted"}, \code{"mean"} or \code{"product"}.
-#' @param mam_method Which formulation to use.
-#' One of \code{"dense"} or \code{"sparse"}.
-#' @return A motif adjacency matrix.
-#' @keywords internal
-#' @importFrom Matrix sparse.csr_matrix t
 
 def mam_M13(adj_mat, motif_type, mam_weight_type, mam_method):
+
+  """
+  Perform the motif adjacency matrix calculations for motif M13.
+
+  Parameters
+  ----------
+  adj_mat : matrix
+    Adjacency matrix from which to build the motif adjacency matrix.
+  motif_type : str
+    Type of motif adjacency matrix to build.
+  mam_weight_type : str
+    The weighting scheme to use. One of `"unweighted"`, `"mean"` or `"product"`.
+  mam_method : str
+    Which formulation to use. One of `"dense"` or `"sparse"`.
+
+  Returns
+  -------
+  sparse matrix
+    A motif adjacency matrix.
+  """
 
   if mam_method == "dense":
     if mam_weight_type == "unweighted":
@@ -1277,20 +1395,28 @@ def mam_M13(adj_mat, motif_type, mam_weight_type, mam_method):
         Cprime = Gp * Gp - Je.multiply(Gp * Gp)
         return sparse.csr_matrix(C + C.transpose() + Cprime)
 
-#' Perform the motif adjacency matrix calculations for motif Mcoll
-#'
-#' @param adj_mat Adjacency matrix from which to build the motif
-#' adjacency matrix.
-#' @param motif_type Type of motif adjacency matrix to build.
-#' @param mam_weight_type The weighting scheme to use.
-#' One of \code{"unweighted"}, \code{"mean"} or \code{"product"}.
-#' @param mam_method Which formulation to use.
-#' One of \code{"dense"} or \code{"sparse"}.
-#' @return A motif adjacency matrix.
-#' @keywords internal
-#' @importFrom Matrix sparse.csr_matrix t
 
 def mam_Mcoll(adj_mat, motif_type, mam_weight_type, mam_method):
+
+  """
+  Perform the motif adjacency matrix calculations for motif Mcoll.
+
+  Parameters
+  ----------
+  adj_mat : matrix
+    Adjacency matrix from which to build the motif adjacency matrix.
+  motif_type : str
+    Type of motif adjacency matrix to build.
+  mam_weight_type : str
+    The weighting scheme to use. One of `"unweighted"`, `"mean"` or `"product"`.
+  mam_method : str
+    Which formulation to use. One of `"dense"` or `"sparse"`.
+
+  Returns
+  -------
+  sparse matrix
+    A motif adjacency matrix.
+  """
 
   if mam_method == "dense":
     if mam_weight_type == "unweighted":
@@ -1378,20 +1504,28 @@ def mam_Mcoll(adj_mat, motif_type, mam_weight_type, mam_method):
         C = Gs * Gs.transpose() - Je.multiply(Gs * Gs.transpose())
         return sparse.csr_matrix(C)
 
-#' Perform the motif adjacency matrix calculations for motif Mexpa
-#'
-#' @param adj_mat Adjacency matrix from which to build the motif
-#' adjacency matrix.
-#' @param motif_type Type of motif adjacency matrix to build.
-#' @param mam_weight_type The weighting scheme to use.
-#' One of \code{"unweighted"}, \code{"mean"} or \code{"product"}.
-#' @param mam_method Which formulation to use.
-#' One of \code{"dense"} or \code{"sparse"}.
-#' @return A motif adjacency matrix.
-#' @keywords internal
-#' @importFrom Matrix sparse.csr_matrix t
 
 def mam_Mexpa(adj_mat, motif_type, mam_weight_type, mam_method):
+
+  """
+  Perform the motif adjacency matrix calculations for motif Mexpa.
+
+  Parameters
+  ----------
+  adj_mat : matrix
+    Adjacency matrix from which to build the motif adjacency matrix.
+  motif_type : str
+    Type of motif adjacency matrix to build.
+  mam_weight_type : str
+    The weighting scheme to use. One of `"unweighted"`, `"mean"` or `"product"`.
+  mam_method : str
+    Which formulation to use. One of `"dense"` or `"sparse"`.
+
+  Returns
+  -------
+  sparse matrix
+    A motif adjacency matrix.
+  """
 
   if mam_method == "dense":
     if mam_weight_type == "unweighted":
