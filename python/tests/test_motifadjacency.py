@@ -1,16 +1,15 @@
-context("Motif adjacency matrices")
+from motifcluster import motifadjacency as mcmo
+from motifcluster import sampling as mcsa
 
-test_that("build_motif_adjacency_matrix returns correct
-           unweighted functional matrix", {
+def test_mam_unweighted_func():
 
-  # test case
-  adj_mat_dense <- demonstration_graph()$adj_mat_dense
-  adj_mat_sparse <- demonstration_graph()$adj_mat_sparse
+  adj_mat_dense = mcsa.demonstration_graph()["adj_mat_dense"]
+  adj_mat_sparse = mcsa.demonstration_graph()["adj_mat_sparse"]
 
   # correct answers
-  ans <- list()
+  ans = {}
 
-  ans$Ms <- drop0(matrix(c(
+  ans$Ms = drop0(matrix(c(
     0,  1,  0,  0,  1,  0,  0,  0,  0,  0,  0,  0,
     1,  0,  1,  0,  2,  2,  0,  0,  0,  0,  0,  0,
     0,  1,  0,  0,  0,  2,  1,  0,  0,  0,  0,  0,
@@ -25,7 +24,7 @@ test_that("build_motif_adjacency_matrix returns correct
     0,  0,  0,  0,  0,  0,  1,  0,  0,  0,  0,  0
   ), nrow = 12, byrow = TRUE))
 
-  ans$Md <- drop0(matrix(c(
+  ans$Md = drop0(matrix(c(
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
     0,  0,  0,  0,  1,  1,  0,  0,  0,  0,  0,  0,
     0,  0,  0,  0,  0,  1,  0,  0,  0,  0,  0,  0,
@@ -40,7 +39,7 @@ test_that("build_motif_adjacency_matrix returns correct
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0
   ), nrow = 12, byrow = TRUE))
 
-  ans$M1 <- drop0(matrix(c(
+  ans$M1 = drop0(matrix(c(
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
     0,  0,  1,  0,  2,  3,  0,  0,  0,  0,  0,  0,
     0,  1,  0,  0,  0,  1,  0,  0,  0,  0,  0,  0,
@@ -55,7 +54,7 @@ test_that("build_motif_adjacency_matrix returns correct
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0
   ), nrow = 12, byrow = TRUE))
 
-  ans$M2 <- drop0(matrix(c(
+  ans$M2 = drop0(matrix(c(
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
     0,  0,  2,  0,  6,  8,  0,  0,  0,  0,  0,  0,
     0,  2,  0,  0,  0,  2,  0,  0,  0,  0,  0,  0,
@@ -70,7 +69,7 @@ test_that("build_motif_adjacency_matrix returns correct
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0
   ), nrow = 12, byrow = TRUE))
 
-  ans$M3 <- drop0(matrix(c(
+  ans$M3 = drop0(matrix(c(
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
     0,  0,  1,  0,  6,  7,  0,  0,  0,  0,  0,  0,
     0,  1,  0,  0,  0,  1,  0,  0,  0,  0,  0,  0,
@@ -85,7 +84,7 @@ test_that("build_motif_adjacency_matrix returns correct
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0
   ), nrow = 12, byrow = TRUE))
 
-  ans$M4 <- drop0(matrix(c(
+  ans$M4 = drop0(matrix(c(
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
     0,  0,  0,  0,  1,  1,  0,  0,  0,  0,  0,  0,
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
@@ -100,7 +99,7 @@ test_that("build_motif_adjacency_matrix returns correct
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0
   ), nrow = 12, byrow = TRUE))
 
-  ans$M5 <- drop0(matrix(c(
+  ans$M5 = drop0(matrix(c(
     0,  2,  0,  0,  2,  0,  0,  0,  0,  0,  0,  0,
     2,  0,  3,  0,  8,  9,  0,  0,  0,  0,  0,  0,
     0,  3,  0,  0,  0,  5,  2,  0,  0,  0,  0,  0,
@@ -115,7 +114,7 @@ test_that("build_motif_adjacency_matrix returns correct
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0
   ), nrow = 12, byrow = TRUE))
 
-  ans$M6 <- drop0(matrix(c(
+  ans$M6 = drop0(matrix(c(
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
     0,  0,  1,  0,  3,  4,  0,  0,  0,  0,  0,  0,
     0,  1,  0,  0,  0,  2,  1,  0,  0,  0,  0,  0,
@@ -130,7 +129,7 @@ test_that("build_motif_adjacency_matrix returns correct
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0
   ), nrow = 12, byrow = TRUE))
 
-  ans$M7 <- drop0(matrix(c(
+  ans$M7 = drop0(matrix(c(
     0,  1,  0,  0,  1,  0,  0,  0,  0,  0,  0,  0,
     1,  0,  1,  0,  4,  4,  0,  0,  0,  0,  0,  0,
     0,  1,  0,  0,  0,  1,  0,  0,  0,  0,  0,  0,
@@ -145,7 +144,7 @@ test_that("build_motif_adjacency_matrix returns correct
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0
   ), nrow = 12, byrow = TRUE))
 
-  ans$M8 <- drop0(matrix(c(
+  ans$M8 = drop0(matrix(c(
     0,  4,  1,  0,  5,  2,  0,  0,  1,  1,  0,  0,
     4,  0,  4,  0,  8,  7,  0,  0,  1,  1,  1,  0,
     1,  4,  0,  1,  2,  5,  3,  1,  0,  0,  1,  0,
@@ -160,7 +159,7 @@ test_that("build_motif_adjacency_matrix returns correct
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0
   ), nrow = 12, byrow = TRUE))
 
-  ans$M9 <- drop0(matrix(c(
+  ans$M9 = drop0(matrix(c(
     0,  3,  0,  0,  3,  2,  0,  0,  0,  0,  0,  0,
     3,  0,  5,  0, 11, 14,  1,  0,  1,  2,  1,  0,
     0,  5,  0,  0,  3, 10,  5,  1,  0,  1,  2,  1,
@@ -175,7 +174,7 @@ test_that("build_motif_adjacency_matrix returns correct
     0,  0,  1,  1,  0,  1,  4,  1,  0,  0,  0,  0
   ), nrow = 12, byrow = TRUE))
 
-  ans$M10 <- drop0(matrix(c(
+  ans$M10 = drop0(matrix(c(
     0,  1,  0,  0,  1,  0,  0,  0,  0,  0,  0,  0,
     1,  0,  3,  0,  4,  7,  2,  0,  0,  1,  0,  0,
     0,  3,  0,  0,  1,  6,  3,  0,  0,  1,  0,  0,
@@ -190,7 +189,7 @@ test_that("build_motif_adjacency_matrix returns correct
     0,  0,  0,  0,  0,  0,  2,  1,  0,  0,  1,  0
   ), nrow = 12, byrow = TRUE))
 
-  ans$M11 <- drop0(matrix(c(
+  ans$M11 = drop0(matrix(c(
     0,  3,  0,  0,  3,  2,  0,  0,  0,  0,  0,  0,
     3,  0,  4,  0, 11, 11,  0,  0,  1,  1,  1,  0,
     0,  4,  0,  0,  3,  6,  1,  1,  0,  0,  1,  0,
@@ -205,7 +204,7 @@ test_that("build_motif_adjacency_matrix returns correct
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0
   ), nrow = 12, byrow = TRUE))
 
-  ans$M12 <- drop0(matrix(c(
+  ans$M12 = drop0(matrix(c(
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
     0,  0,  3,  0,  6, 11,  1,  0,  0,  1,  0,  0,
     0,  3,  0,  0,  2,  8,  2,  0,  0,  1,  0,  0,
@@ -220,7 +219,7 @@ test_that("build_motif_adjacency_matrix returns correct
     0,  0,  0,  0,  0,  0,  1,  1,  0,  0,  0,  0
   ), nrow = 12, byrow = TRUE))
 
-  ans$M13 <- drop0(matrix(c(
+  ans$M13 = drop0(matrix(c(
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
     0,  0,  1,  0,  3,  4,  0,  0,  0,  0,  0,  0,
     0,  1,  0,  0,  1,  2,  0,  0,  0,  0,  0,  0,
@@ -235,7 +234,7 @@ test_that("build_motif_adjacency_matrix returns correct
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0
   ), nrow = 12, byrow = TRUE))
 
-  ans$Mcoll <- drop0(matrix(c(
+  ans$Mcoll = drop0(matrix(c(
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
     0,  0,  1,  0,  2,  2,  2,  0,  0,  1,  0,  0,
     0,  1,  0,  0,  1,  0,  1,  0,  0,  1,  0,  0,
@@ -250,7 +249,7 @@ test_that("build_motif_adjacency_matrix returns correct
     0,  0,  0,  0,  0,  0,  0,  1,  0,  0,  1,  0
   ), nrow = 12, byrow = TRUE))
 
-  ans$Mexpa <- drop0(matrix(c(
+  ans$Mexpa = drop0(matrix(c(
     0,  1,  1,  0,  1,  2,  0,  0,  1,  1,  0,  0,
     1,  0,  1,  0,  1,  1,  0,  0,  1,  1,  1,  0,
     1,  1,  0,  1,  2,  2,  0,  1,  0,  0,  1,  0,
@@ -266,16 +265,16 @@ test_that("build_motif_adjacency_matrix returns correct
   ), nrow = 12, byrow = TRUE))
 
   # compare calculations with answers
-  motifs <- get_motif_names()
+  motifs = get_motif_names()
   for (i in seq_len(length(motifs))) {
 
-    mam_densematrix_densemethod <- build_motif_adjacency_matrix(
+    mam_densematrix_densemethod = build_motif_adjacency_matrix(
       adj_mat_dense, motifs[i], "func", "unweighted", "dense")
-    mam_sparsematrix_densemethod <- build_motif_adjacency_matrix(
+    mam_sparsematrix_densemethod = build_motif_adjacency_matrix(
       adj_mat_sparse, motifs[i], "func", "unweighted", "dense")
-    mam_densematrix_sparsemethod <- build_motif_adjacency_matrix(
+    mam_densematrix_sparsemethod = build_motif_adjacency_matrix(
       adj_mat_dense, motifs[i], "func", "unweighted", "sparse")
-    mam_sparsematrix_sparsemethod <- build_motif_adjacency_matrix(
+    mam_sparsematrix_sparsemethod = build_motif_adjacency_matrix(
       adj_mat_sparse, motifs[i], "func", "unweighted", "sparse")
 
     expect_equal(mam_densematrix_densemethod, ans[[motifs[i]]])
@@ -290,13 +289,13 @@ test_that("build_motif_adjacency_matrix returns correct
            unweighted structural matrix", {
 
   # test case
-  adj_mat_dense <- demonstration_graph()$adj_mat_dense
-  adj_mat_sparse <- demonstration_graph()$adj_mat_sparse
+  adj_mat_dense = mcsa.demonstrationgraph()["adj_mat_dense"]
+  adj_mat_sparse = mcsa.demonstrationgraph()["adj_mat_sparse"]
 
   # correct answers
-  ans <- list()
+  ans = {}
 
-  ans$Ms <- drop0(matrix(c(
+  ans$Ms = drop0(matrix(c(
     0,  1,  0,  0,  1,  0,  0,  0,  0,  0,  0,  0,
     1,  0,  1,  0,  0,  0,  0,  0,  0,  0,  0,  0,
     0,  1,  0,  0,  0,  0,  1,  0,  0,  0,  0,  0,
@@ -311,7 +310,7 @@ test_that("build_motif_adjacency_matrix returns correct
     0,  0,  0,  0,  0,  0,  1,  0,  0,  0,  0,  0
   ), nrow = 12, byrow = TRUE))
 
-  ans$Md <- drop0(matrix(c(
+  ans$Md = drop0(matrix(c(
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
     0,  0,  0,  0,  1,  1,  0,  0,  0,  0,  0,  0,
     0,  0,  0,  0,  0,  1,  0,  0,  0,  0,  0,  0,
@@ -326,7 +325,7 @@ test_that("build_motif_adjacency_matrix returns correct
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0
   ), nrow = 12, byrow = TRUE))
 
-  ans$M1 <- drop0(matrix(c(
+  ans$M1 = drop0(matrix(c(
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
@@ -341,7 +340,7 @@ test_that("build_motif_adjacency_matrix returns correct
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0
   ), nrow = 12, byrow = TRUE))
 
-  ans$M2 <- drop0(matrix(c(
+  ans$M2 = drop0(matrix(c(
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
@@ -356,7 +355,7 @@ test_that("build_motif_adjacency_matrix returns correct
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0
   ), nrow = 12, byrow = TRUE))
 
-  ans$M3 <- drop0(matrix(c(
+  ans$M3 = drop0(matrix(c(
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
     0,  0,  1,  0,  0,  1,  0,  0,  0,  0,  0,  0,
     0,  1,  0,  0,  0,  1,  0,  0,  0,  0,  0,  0,
@@ -371,7 +370,7 @@ test_that("build_motif_adjacency_matrix returns correct
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0
   ), nrow = 12, byrow = TRUE))
 
-  ans$M4 <- drop0(matrix(c(
+  ans$M4 = drop0(matrix(c(
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
     0,  0,  0,  0,  1,  1,  0,  0,  0,  0,  0,  0,
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
@@ -386,7 +385,7 @@ test_that("build_motif_adjacency_matrix returns correct
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0
   ), nrow = 12, byrow = TRUE))
 
-  ans$M5 <- drop0(matrix(c(
+  ans$M5 = drop0(matrix(c(
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
@@ -401,7 +400,7 @@ test_that("build_motif_adjacency_matrix returns correct
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0
   ), nrow = 12, byrow = TRUE))
 
-  ans$M6 <- drop0(matrix(c(
+  ans$M6 = drop0(matrix(c(
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
     0,  0,  0,  0,  0,  1,  1,  0,  0,  0,  0,  0,
@@ -416,7 +415,7 @@ test_that("build_motif_adjacency_matrix returns correct
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0
   ), nrow = 12, byrow = TRUE))
 
-  ans$M7 <- drop0(matrix(c(
+  ans$M7 = drop0(matrix(c(
     0,  1,  0,  0,  1,  0,  0,  0,  0,  0,  0,  0,
     1,  0,  0,  0,  1,  0,  0,  0,  0,  0,  0,  0,
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
@@ -431,7 +430,7 @@ test_that("build_motif_adjacency_matrix returns correct
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0
   ), nrow = 12, byrow = TRUE))
 
-  ans$M8 <- drop0(matrix(c(
+  ans$M8 = drop0(matrix(c(
     0,  1,  1,  0,  2,  0,  0,  0,  1,  1,  0,  0,
     1,  0,  1,  0,  0,  0,  0,  0,  0,  0,  0,  0,
     1,  1,  0,  1,  0,  0,  1,  0,  0,  0,  0,  0,
@@ -446,7 +445,7 @@ test_that("build_motif_adjacency_matrix returns correct
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0
   ), nrow = 12, byrow = TRUE))
 
-  ans$M9 <- drop0(matrix(c(
+  ans$M9 = drop0(matrix(c(
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
     0,  0,  0,  0,  0,  0,  2,  0,  0,  0,  1,  1,
@@ -461,7 +460,7 @@ test_that("build_motif_adjacency_matrix returns correct
     0,  0,  1,  1,  0,  1,  3,  0,  0,  0,  0,  0
   ), nrow = 12, byrow = TRUE))
 
-  ans$M10 <- drop0(matrix(c(
+  ans$M10 = drop0(matrix(c(
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
     0,  0,  1,  0,  0,  0,  1,  0,  0,  0,  0,  0,
     0,  1,  0,  0,  0,  0,  1,  0,  0,  0,  0,  0,
@@ -476,7 +475,7 @@ test_that("build_motif_adjacency_matrix returns correct
     0,  0,  0,  0,  0,  0,  1,  0,  0,  0,  1,  0
   ), nrow = 12, byrow = TRUE))
 
-  ans$M11 <- drop0(matrix(c(
+  ans$M11 = drop0(matrix(c(
     0,  1,  0,  0,  1,  2,  0,  0,  0,  0,  0,  0,
     1,  0,  1,  0,  3,  2,  0,  0,  1,  1,  1,  0,
     0,  1,  0,  0,  1,  1,  1,  1,  0,  0,  1,  0,
@@ -491,7 +490,7 @@ test_that("build_motif_adjacency_matrix returns correct
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0
   ), nrow = 12, byrow = TRUE))
 
-  ans$M12 <- drop0(matrix(c(
+  ans$M12 = drop0(matrix(c(
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
     0,  0,  0,  0,  0,  2,  1,  0,  0,  1,  0,  0,
     0,  0,  0,  0,  0,  1,  0,  0,  0,  1,  0,  0,
@@ -506,7 +505,7 @@ test_that("build_motif_adjacency_matrix returns correct
     0,  0,  0,  0,  0,  0,  1,  1,  0,  0,  0,  0
   ), nrow = 12, byrow = TRUE))
 
-  ans$M13 <- drop0(matrix(c(
+  ans$M13 = drop0(matrix(c(
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
     0,  0,  0,  0,  1,  1,  0,  0,  0,  0,  0,  0,
@@ -521,7 +520,7 @@ test_that("build_motif_adjacency_matrix returns correct
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0
   ), nrow = 12, byrow = TRUE))
 
-  ans$Mcoll <- drop0(matrix(c(
+  ans$Mcoll = drop0(matrix(c(
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
     0,  0,  0,  0,  0,  0,  1,  0,  0,  0,  0,  0,
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
@@ -536,7 +535,7 @@ test_that("build_motif_adjacency_matrix returns correct
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  0
   ), nrow = 12, byrow = TRUE))
 
-  ans$Mexpa <- drop0(matrix(c(
+  ans$Mexpa = drop0(matrix(c(
     0,  0,  1,  0,  0,  0,  0,  0,  1,  1,  0,  0,
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
     1,  0,  0,  1,  0,  0,  0,  0,  0,  0,  0,  0,
@@ -552,16 +551,16 @@ test_that("build_motif_adjacency_matrix returns correct
   ), nrow = 12, byrow = TRUE))
 
   # compare calculations with answers
-  motifs <- get_motif_names()
+  motifs = get_motif_names()
   for (i in seq_len(length(motifs))) {
 
-    mam_densematrix_densemethod <- build_motif_adjacency_matrix(
+    mam_densematrix_densemethod = build_motif_adjacency_matrix(
       adj_mat_dense, motifs[i], "struc", "unweighted", "dense")
-    mam_sparsematrix_densemethod <- build_motif_adjacency_matrix(
+    mam_sparsematrix_densemethod = build_motif_adjacency_matrix(
       adj_mat_sparse, motifs[i], "struc", "unweighted", "dense")
-    mam_densematrix_sparsemethod <- build_motif_adjacency_matrix(
+    mam_densematrix_sparsemethod = build_motif_adjacency_matrix(
       adj_mat_dense, motifs[i], "struc", "unweighted", "sparse")
-    mam_sparsematrix_sparsemethod <- build_motif_adjacency_matrix(
+    mam_sparsematrix_sparsemethod = build_motif_adjacency_matrix(
       adj_mat_sparse, motifs[i], "struc", "unweighted", "sparse")
 
     expect_equal(mam_densematrix_densemethod, ans[[motifs[i]]])
@@ -576,13 +575,13 @@ test_that("build_motif_adjacency_matrix returns correct
            mean-weighted functional matrix", {
 
   # test case
-  adj_mat_dense <- demonstration_graph()$adj_mat_dense
-  adj_mat_sparse <- demonstration_graph()$adj_mat_sparse
+  adj_mat_dense = mcsa.demonstrationgraph()["adj_mat_dense"]
+  adj_mat_sparse = mcsa.demonstrationgraph()["adj_mat_sparse"]
 
   # correct answers
-  ans <- list()
+  ans = {}
 
-  ans$Ms <- drop0(matrix(c(
+  ans$Ms = drop0(matrix(c(
     0,  2,  0,  0,  4,  0,  0,  0,  0,  0,  0,  0,
     2,  0,  3,  0, 11, 15,  0,  0,  0,  0,  0,  0,
     0,  3,  0,  0,  0, 19, 11,  0,  0,  0,  0,  0,
@@ -597,7 +596,7 @@ test_that("build_motif_adjacency_matrix returns correct
     0,  0,  0,  0,  0,  0, 23,  0,  0,  0,  0,  0
   ), nrow = 12, byrow = TRUE))
 
-  ans$Md <- drop0(matrix(c(
+  ans$Md = drop0(matrix(c(
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
     0,  0,  0,  0, 11, 15,  0,  0,  0,  0,  0,  0,
     0,  0,  0,  0,  0, 19,  0,  0,  0,  0,  0,  0,
@@ -612,7 +611,7 @@ test_that("build_motif_adjacency_matrix returns correct
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0
   ), nrow = 12, byrow = TRUE)) / 2
 
-  ans$M1 <- drop0(matrix(c(
+  ans$M1 = drop0(matrix(c(
     0,  0,  0,  0,   0,   0,  0,  0,  0,  0,  0,  0,
     0,  0, 20,  0,  53,  73,  0,  0,  0,  0,  0,  0,
     0, 20,  0,  0,   0,  20,  0,  0,  0,  0,  0,  0,
@@ -627,7 +626,7 @@ test_that("build_motif_adjacency_matrix returns correct
     0,  0,  0,  0,   0,   0,  0,  0,  0,  0,  0,  0
   ), nrow = 12, byrow = TRUE)) / 3
 
-  ans$M2 <- drop0(matrix(c(
+  ans$M2 = drop0(matrix(c(
     0,   0,  0,  0,   0,   0,  0,  0,  0,  0,  0,  0,
     0,   0, 57,  0, 212, 269,  0,  0,  0,  0,  0,  0,
     0,  57,  0,  0,   0,  57,  0,  0,  0,  0,  0,  0,
@@ -642,7 +641,7 @@ test_that("build_motif_adjacency_matrix returns correct
     0,   0,  0,  0,   0,   0,  0,  0,  0,  0,  0,  0
   ), nrow = 12, byrow = TRUE)) / 4
 
-  ans$M3 <- drop0(matrix(c(
+  ans$M3 = drop0(matrix(c(
     0,   0,  0,  0,   0,   0,  0,  0,  0,  0,  0,  0,
     0,   0, 37,  0, 265, 302,  0,  0,  0,  0,  0,  0,
     0,  37,  0,  0,   0,  37,  0,  0,  0,  0,  0,  0,
@@ -657,7 +656,7 @@ test_that("build_motif_adjacency_matrix returns correct
     0,   0,  0,  0,   0,   0,  0,  0,  0,  0,  0,  0
   ), nrow = 12, byrow = TRUE)) / 5
 
-  ans$M4 <- drop0(matrix(c(
+  ans$M4 = drop0(matrix(c(
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
     0,  0,  0,  0, 53, 53,  0,  0,  0,  0,  0,  0,
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
@@ -672,7 +671,7 @@ test_that("build_motif_adjacency_matrix returns correct
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0
   ), nrow = 12, byrow = TRUE)) / 6
 
-  ans$M5 <- drop0(matrix(c(
+  ans$M5 = drop0(matrix(c(
     0,  23,   0,  0,  23,   0,  0,  0,  0,   0,  0,  0,
    23,   0,  60,  0, 182, 219,  0,  0,  0,   0,  0,  0,
     0,  60,   0,  0,   0, 131, 71,  0,  0,   0,  0,  0,
@@ -687,7 +686,7 @@ test_that("build_motif_adjacency_matrix returns correct
     0,   0,   0,  0,   0,   0,  0,  0,  0,   0,  0,  0
   ), nrow = 12, byrow = TRUE)) / 3
 
-  ans$M6 <- drop0(matrix(c(
+  ans$M6 = drop0(matrix(c(
     0,   0,  0,  0,   0,   0,  0,  0,  0,  0,  0,  0,
     0,   0, 30,  0, 106, 136,  0,  0,  0,  0,  0,  0,
     0,  30,  0,  0,   0,  75, 45,  0,  0,  0,  0,  0,
@@ -702,7 +701,7 @@ test_that("build_motif_adjacency_matrix returns correct
     0,   0,  0,  0,   0,   0,  0,  0,  0,  0,  0,  0
   ), nrow = 12, byrow = TRUE)) / 4
 
-  ans$M7 <- drop0(matrix(c(
+  ans$M7 = drop0(matrix(c(
     0,  17,  0,  0,  17,   0,  0,  0,  0,  0,  0,  0,
    17,   0, 27,  0, 123, 133,  0,  0,  0,  0,  0,  0,
     0,  27,  0,  0,   0,  27,  0,  0,  0,  0,  0,  0,
@@ -717,7 +716,7 @@ test_that("build_motif_adjacency_matrix returns correct
     0,   0,  0,  0,   0,   0,  0,  0,  0,  0,  0,  0
   ), nrow = 12, byrow = TRUE)) / 4
 
-  ans$M8 <- drop0(matrix(c(
+  ans$M8 = drop0(matrix(c(
     0,  32,   5,  0,  80,  28,  0,  0,  22,  23,  0,  0,
    32,   0,  41,  0, 126, 118,  0,  0,  23,  24, 28,  0,
     5,  41,   0, 23,  31, 105, 77, 28,   0,   0, 30,  0,
@@ -732,7 +731,7 @@ test_that("build_motif_adjacency_matrix returns correct
     0,   0,   0,  0,   0,   0,  0,  0,   0,   0,  0,  0
   ), nrow = 12, byrow = TRUE)) / 2
 
-  ans$M9 <- drop0(matrix(c(
+  ans$M9 = drop0(matrix(c(
     0,  26,   0,  0,  34,  26,   0,   0,  0,   0,   0,   0,
    26,   0,  65,  0, 180, 250,  22,   0, 24,  52,  29,   0,
     0,  65,   0,  0,  54, 208, 139,  27,  0,  29,  64,  34,
@@ -747,7 +746,7 @@ test_that("build_motif_adjacency_matrix returns correct
     0,   0,  34, 35,   0,  38, 147,  40,  0,   0,   0,   0
   ), nrow = 12, byrow = TRUE)) / 2
 
-  ans$M10 <- drop0(matrix(c(
+  ans$M10 = drop0(matrix(c(
     0,   6,   0,  0,   6,   0,   0,  0,  0,   0,  0,  0,
     6,   0,  44,  0,  59, 134,  37,  0,  0,  28,  0,  0,
     0,  44,   0,  0,  24, 129,  59,  0,  0,  30,  0,  0,
@@ -762,7 +761,7 @@ test_that("build_motif_adjacency_matrix returns correct
     0,   0,   0,  0,   0,   0,  84, 39,  0,   0, 45,  0
   ), nrow = 12, byrow = TRUE)) / 2
 
-  ans$M11 <- drop0(matrix(c(
+  ans$M11 = drop0(matrix(c(
     0,  45,   0,  0,  59,  48,   0,   0,  0,  0,   0,  0,
    45,   0,  82,  0, 260, 280,   0,   0, 29, 30,  36,  0,
     0,  82,   0,  0,  82, 176,  44,  44,  0,  0,  40,  0,
@@ -777,7 +776,7 @@ test_that("build_motif_adjacency_matrix returns correct
     0,   0,   0,  0,   0,   0,   0,   0,  0,  0,   0,  0
   ), nrow = 12, byrow = TRUE)) / 3
 
-  ans$M12 <- drop0(matrix(c(
+  ans$M12 = drop0(matrix(c(
     0,   0,   0,  0,   0,   0,   0,   0,  0,   0,  0,  0,
     0,   0,  74,  0, 159, 298,  30,   0,  0,  35,  0,  0,
     0,  74,   0,  0,  70, 247,  64,   0,  0,  39,  0,  0,
@@ -792,7 +791,7 @@ test_that("build_motif_adjacency_matrix returns correct
     0,   0,   0,  0,   0,   0,  56,  56,  0,   0,  0,  0
   ), nrow = 12, byrow = TRUE)) / 3
 
-  ans$M13 <- drop0(matrix(c(
+  ans$M13 = drop0(matrix(c(
     0,   0,  0,  0,   0,   0,  0,  0,  0,  0,  0,  0,
     0,   0, 34,  0, 106, 140,  0,  0,  0,  0,  0,  0,
     0,  34,  0,  0,  46,  80,  0,  0,  0,  0,  0,  0,
@@ -807,7 +806,7 @@ test_that("build_motif_adjacency_matrix returns correct
     0,   0,  0,  0,   0,   0,  0,  0,  0,  0,  0,  0
   ), nrow = 12, byrow = TRUE)) / 4
 
-  ans$Mcoll <- drop0(matrix(c(
+  ans$Mcoll = drop0(matrix(c(
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
     0,  0, 18,  0, 28, 31, 37,  0,  0, 28,  0,  0,
     0, 18,  0,  0, 24,  0, 25,  0,  0, 30,  0,  0,
@@ -822,7 +821,7 @@ test_that("build_motif_adjacency_matrix returns correct
     0,  0,  0,  0,  0,  0,  0, 39,  0,  0, 45,  0
   ), nrow = 12, byrow = TRUE)) / 2
 
-  ans$Mexpa <- drop0(matrix(c(
+  ans$Mexpa = drop0(matrix(c(
     0,  9,  5,  0,  8, 28,  0,  0, 22, 23,  0,  0,
     9,  0, 16,  0, 20, 19,  0,  0, 23, 24, 28,  0,
     5, 16,  0, 23, 31, 37,  0, 28,  0,  0, 30,  0,
@@ -838,16 +837,16 @@ test_that("build_motif_adjacency_matrix returns correct
   ), nrow = 12, byrow = TRUE)) / 2
 
   # compare calculations with answers
-  motifs <- get_motif_names()
+  motifs = get_motif_names()
   for (i in seq_len(length(motifs))) {
 
-    mam_densematrix_densemethod <- build_motif_adjacency_matrix(
+    mam_densematrix_densemethod = build_motif_adjacency_matrix(
       adj_mat_dense, motifs[i], "func", "mean", "dense")
-    mam_sparsematrix_densemethod <- build_motif_adjacency_matrix(
+    mam_sparsematrix_densemethod = build_motif_adjacency_matrix(
       adj_mat_sparse, motifs[i], "func", "mean", "dense")
-    mam_densematrix_sparsemethod <- build_motif_adjacency_matrix(
+    mam_densematrix_sparsemethod = build_motif_adjacency_matrix(
       adj_mat_dense, motifs[i], "func", "mean", "sparse")
-    mam_sparsematrix_sparsemethod <- build_motif_adjacency_matrix(
+    mam_sparsematrix_sparsemethod = build_motif_adjacency_matrix(
       adj_mat_sparse, motifs[i], "func", "mean", "sparse")
 
     expect_equal(mam_densematrix_densemethod, ans[[motifs[i]]])
@@ -862,13 +861,13 @@ test_that("build_motif_adjacency_matrix returns correct
            mean-weighted structural matrix", {
 
   # test case
-  adj_mat_dense <- demonstration_graph()$adj_mat_dense
-  adj_mat_sparse <- demonstration_graph()$adj_mat_sparse
+  adj_mat_dense = mcsa.demonstrationgraph()["adj_mat_dense"]
+  adj_mat_sparse = mcsa.demonstrationgraph()["adj_mat_sparse"]
 
   # correct answers
-  ans <- list()
+  ans = {}
 
-  ans$Ms <- drop0(matrix(c(
+  ans$Ms = drop0(matrix(c(
     0,  2,  0,  0,  4,  0,  0,  0,  0,  0,  0,  0,
     2,  0,  3,  0,  0,  0,  0,  0,  0,  0,  0,  0,
     0,  3,  0,  0,  0,  0, 11,  0,  0,  0,  0,  0,
@@ -883,7 +882,7 @@ test_that("build_motif_adjacency_matrix returns correct
     0,  0,  0,  0,  0,  0, 23,  0,  0,  0,  0,  0
   ), nrow = 12, byrow = TRUE))
 
-  ans$Md <- drop0(matrix(c(
+  ans$Md = drop0(matrix(c(
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
     0,  0,  0,  0, 11, 15,  0,  0,  0,  0,  0,  0,
     0,  0,  0,  0,  0, 19,  0,  0,  0,  0,  0,  0,
@@ -898,7 +897,7 @@ test_that("build_motif_adjacency_matrix returns correct
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0
   ), nrow = 12, byrow = TRUE)) / 2
 
-  ans$M1 <- drop0(matrix(c(
+  ans$M1 = drop0(matrix(c(
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
@@ -913,7 +912,7 @@ test_that("build_motif_adjacency_matrix returns correct
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0
   ), nrow = 12, byrow = TRUE)) / 3
 
-  ans$M2 <- drop0(matrix(c(
+  ans$M2 = drop0(matrix(c(
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
@@ -928,7 +927,7 @@ test_that("build_motif_adjacency_matrix returns correct
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0
   ), nrow = 12, byrow = TRUE)) / 4
 
-  ans$M3 <- drop0(matrix(c(
+  ans$M3 = drop0(matrix(c(
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
     0,  0, 37,  0,  0, 37,  0,  0,  0,  0,  0,  0,
     0, 37,  0,  0,  0, 37,  0,  0,  0,  0,  0,  0,
@@ -943,7 +942,7 @@ test_that("build_motif_adjacency_matrix returns correct
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0
   ), nrow = 12, byrow = TRUE)) / 5
 
-  ans$M4 <- drop0(matrix(c(
+  ans$M4 = drop0(matrix(c(
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
     0,  0,  0,  0, 53, 53,  0,  0,  0,  0,  0,  0,
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
@@ -958,7 +957,7 @@ test_that("build_motif_adjacency_matrix returns correct
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0
   ), nrow = 12, byrow = TRUE)) / 6
 
-  ans$M5 <- drop0(matrix(c(
+  ans$M5 = drop0(matrix(c(
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
@@ -973,7 +972,7 @@ test_that("build_motif_adjacency_matrix returns correct
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0
   ), nrow = 12, byrow = TRUE)) / 3
 
-  ans$M6 <- drop0(matrix(c(
+  ans$M6 = drop0(matrix(c(
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
     0,  0,  0,  0,  0, 45, 45,  0,  0,  0,  0,  0,
@@ -988,7 +987,7 @@ test_that("build_motif_adjacency_matrix returns correct
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0
   ), nrow = 12, byrow = TRUE)) / 4
 
-  ans$M7 <- drop0(matrix(c(
+  ans$M7 = drop0(matrix(c(
     0, 17,  0,  0, 17,  0,  0,  0,  0,  0,  0,  0,
    17,  0,  0,  0, 17,  0,  0,  0,  0,  0,  0,  0,
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
@@ -1003,7 +1002,7 @@ test_that("build_motif_adjacency_matrix returns correct
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0
   ), nrow = 12, byrow = TRUE)) / 4
 
-  ans$M8 <- drop0(matrix(c(
+  ans$M8 = drop0(matrix(c(
     0,  5,  5,  0, 45,  0,  0,  0, 22, 23,  0,  0,
     5,  0,  5,  0,  0,  0,  0,  0,  0,  0,  0,  0,
     5,  5,  0, 23,  0,  0, 23,  0,  0,  0,  0,  0,
@@ -1018,7 +1017,7 @@ test_that("build_motif_adjacency_matrix returns correct
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0
   ), nrow = 12, byrow = TRUE)) / 2
 
-  ans$M9 <- drop0(matrix(c(
+  ans$M9 = drop0(matrix(c(
     0,  0,  0,  0,  0,  0,   0,  0,  0,  0,  0,   0,
     0,  0,  0,  0,  0,  0,   0,  0,  0,  0,  0,   0,
     0,  0,  0,  0,  0,  0,  67,  0,  0,  0, 33,  34,
@@ -1033,7 +1032,7 @@ test_that("build_motif_adjacency_matrix returns correct
     0,  0, 34, 35,  0, 38, 107,  0,  0,  0,  0,   0
   ), nrow = 12, byrow = TRUE)) / 2
 
-  ans$M10 <- drop0(matrix(c(
+  ans$M10 = drop0(matrix(c(
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
     0,  0, 14,  0,  0,  0, 14,  0,  0,  0,  0,  0,
     0, 14,  0,  0,  0,  0, 14,  0,  0,  0,  0,  0,
@@ -1048,7 +1047,7 @@ test_that("build_motif_adjacency_matrix returns correct
     0,  0,  0,  0,  0,  0, 45,  0,  0,  0, 45,  0
   ), nrow = 12, byrow = TRUE)) / 2
 
-  ans$M11 <- drop0(matrix(c(
+  ans$M11 = drop0(matrix(c(
     0, 17,  0,  0,  31,  48,   0,   0,  0,  0,   0,  0,
    17,  0, 14,  0,  73,  53,   0,   0, 29, 30,  36,  0,
     0, 14,  0,  0,  14,  40,  44,  44,  0,  0,  40,  0,
@@ -1063,7 +1062,7 @@ test_that("build_motif_adjacency_matrix returns correct
     0,  0,  0,  0,   0,   0,   0,   0,  0,  0,   0,  0
   ), nrow = 12, byrow = TRUE)) / 3
 
-  ans$M12 <- drop0(matrix(c(
+  ans$M12 = drop0(matrix(c(
     0,  0,  0,  0,  0,  0,   0,   0,  0,  0,  0,  0,
     0,  0,  0,  0,  0, 65,  30,   0,  0, 35,  0,  0,
     0,  0,  0,  0,  0, 39,   0,   0,  0, 39,  0,  0,
@@ -1078,7 +1077,7 @@ test_that("build_motif_adjacency_matrix returns correct
     0,  0,  0,  0,  0,  0,  56,  56,  0,  0,  0,  0
   ), nrow = 12, byrow = TRUE)) / 3
 
-  ans$M13 <- drop0(matrix(c(
+  ans$M13 = drop0(matrix(c(
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
     0,  0,  0,  0, 46, 46,  0,  0,  0,  0,  0,  0,
@@ -1093,7 +1092,7 @@ test_that("build_motif_adjacency_matrix returns correct
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0
   ), nrow = 12, byrow = TRUE)) / 4
 
-  ans$Mcoll <- drop0(matrix(c(
+  ans$Mcoll = drop0(matrix(c(
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
     0,  0,  0,  0,  0,  0, 14,  0,  0,  0,  0,  0,
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
@@ -1108,7 +1107,7 @@ test_that("build_motif_adjacency_matrix returns correct
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 45,  0
   ), nrow = 12, byrow = TRUE)) / 2
 
-  ans$Mexpa <- drop0(matrix(c(
+  ans$Mexpa = drop0(matrix(c(
     0,  0,  5,  0,  0,  0,  0,  0, 22, 23,  0,  0,
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
     5,  0,  0, 23,  0,  0,  0,  0,  0,  0,  0,  0,
@@ -1124,16 +1123,16 @@ test_that("build_motif_adjacency_matrix returns correct
   ), nrow = 12, byrow = TRUE)) / 2
 
   # compare calculations with answers
-  motifs <- get_motif_names()
+  motifs = get_motif_names()
   for (i in seq_len(length(motifs))) {
 
-    mam_densematrix_densemethod <- build_motif_adjacency_matrix(
+    mam_densematrix_densemethod = build_motif_adjacency_matrix(
       adj_mat_dense, motifs[i], "struc", "mean", "dense")
-    mam_sparsematrix_densemethod <- build_motif_adjacency_matrix(
+    mam_sparsematrix_densemethod = build_motif_adjacency_matrix(
       adj_mat_sparse, motifs[i], "struc", "mean", "dense")
-    mam_densematrix_sparsemethod <- build_motif_adjacency_matrix(
+    mam_densematrix_sparsemethod = build_motif_adjacency_matrix(
       adj_mat_dense, motifs[i], "struc", "mean", "sparse")
-    mam_sparsematrix_sparsemethod <- build_motif_adjacency_matrix(
+    mam_sparsematrix_sparsemethod = build_motif_adjacency_matrix(
       adj_mat_sparse, motifs[i], "struc", "mean", "sparse")
 
     expect_equal(mam_densematrix_densemethod, ans[[motifs[i]]])
@@ -1148,13 +1147,13 @@ test_that("build_motif_adjacency_matrix returns correct
            product-weighted functional matrix", {
 
   # test case
-  adj_mat_dense <- demonstration_graph()$adj_mat_dense
-  adj_mat_sparse <- demonstration_graph()$adj_mat_sparse
+  adj_mat_dense = mcsa.demonstrationgraph()["adj_mat_dense"]
+  adj_mat_sparse = mcsa.demonstrationgraph()["adj_mat_sparse"]
 
   # correct answers
-  ans <- list()
+  ans = {}
 
-  ans$Ms <- drop0(matrix(c(
+  ans$Ms = drop0(matrix(c(
     0,  2,  0,  0,  4,  0,  0,  0,  0,  0,  0,  0,
     2,  0,  3,  0, 11, 15,  0,  0,  0,  0,  0,  0,
     0,  3,  0,  0,  0, 19, 11,  0,  0,  0,  0,  0,
@@ -1169,7 +1168,7 @@ test_that("build_motif_adjacency_matrix returns correct
     0,  0,  0,  0,  0,  0, 23,  0,  0,  0,  0,  0
   ), nrow = 12, byrow = TRUE))
 
-  ans$Md <- drop0(matrix(c(
+  ans$Md = drop0(matrix(c(
     0,  0,  0,  0,   0,   0,   0,   0,  0,  0,  0,  0,
     0,  0,  0,  0,  30,  56,   0,   0,  0,  0,  0,  0,
     0,  0,  0,  0,   0,  90,   0,   0,  0,  0,  0,  0,
@@ -1184,7 +1183,7 @@ test_that("build_motif_adjacency_matrix returns correct
     0,  0,  0,  0,   0,   0,   0,   0,  0,  0,  0,  0
   ), nrow = 12, byrow = TRUE))
 
-  ans$M1 <- drop0(matrix(c(
+  ans$M1 = drop0(matrix(c(
     0,    0,   0,  0,    0,    0,    0,  0,  0,    0,    0,  0,
     0,    0, 210,  0, 1108, 1318,    0,  0,  0,    0,    0,  0,
     0,  210,   0,  0,    0,  210,    0,  0,  0,    0,    0,  0,
@@ -1199,7 +1198,7 @@ test_that("build_motif_adjacency_matrix returns correct
     0,    0,   0,  0,    0,    0,    0,  0,  0,    0,    0,  0
   ), nrow = 12, byrow = TRUE))
 
-  ans$M2 <- drop0(matrix(c(
+  ans$M2 = drop0(matrix(c(
     0,     0,    0,  0,     0,     0,  0,  0,  0,     0,  0,  0,
     0,     0, 3570,  0, 29328, 32898,  0,  0,  0,     0,  0,  0,
     0,  3570,    0,  0,     0,  3570,  0,  0,  0,     0,  0,  0,
@@ -1214,7 +1213,7 @@ test_that("build_motif_adjacency_matrix returns correct
     0,     0,    0,  0,     0,     0,  0,  0,  0,     0,  0,  0
   ), nrow = 12, byrow = TRUE))
 
-  ans$M3 <- drop0(matrix(c(
+  ans$M3 = drop0(matrix(c(
     0,      0,     0,  0,      0,      0,  0,  0,  0,  0,  0,  0,
     0,      0, 15120,  0, 239372, 254492,  0,  0,  0,  0,  0,  0,
     0,  15120,     0,  0,      0,  15120,  0,  0,  0,  0,  0,  0,
@@ -1229,7 +1228,7 @@ test_that("build_motif_adjacency_matrix returns correct
     0,      0,     0,  0,      0,      0,  0,  0,  0,  0,  0,  0
   ), nrow = 12, byrow = TRUE))
 
-  ans$M4 <- drop0(matrix(c(
+  ans$M4 = drop0(matrix(c(
     0,      0,  0,  0,      0,      0,  0,  0,  0,  0,  0,  0,
     0,      0,  0,  0, 305760, 305760,  0,  0,  0,  0,  0,  0,
     0,      0,  0,  0,      0,      0,  0,  0,  0,  0,  0,  0,
@@ -1244,7 +1243,7 @@ test_that("build_motif_adjacency_matrix returns correct
     0,      0,  0,  0,      0,      0,  0,  0,  0,  0,  0,  0
   ), nrow = 12, byrow = TRUE))
 
-  ans$M5 <- drop0(matrix(c(
+  ans$M5 = drop0(matrix(c(
     0,   88,    0,  0,    88,    0,    0,  0,    0,     0,  0,  0,
    88,    0,  645,  0,  3435, 3992,    0,  0,    0,     0,  0,  0,
     0,  645,    0,  0,     0, 3780, 3135,  0,    0,     0,  0,  0,
@@ -1259,7 +1258,7 @@ test_that("build_motif_adjacency_matrix returns correct
     0,    0,    0,  0,     0,    0,    0,  0,    0,     0,  0,  0
   ), nrow = 12, byrow = TRUE))
 
-  ans$M6 <- drop0(matrix(c(
+  ans$M6 = drop0(matrix(c(
     0,     0,     0,  0,     0,     0,     0,  0,  0,  0,  0,  0,
     0,     0,  2160,  0, 15386, 17546,     0,  0,  0,  0,  0,  0,
     0,  2160,     0,  0,     0, 17010, 14850,  0,  0,  0,  0,  0,
@@ -1274,7 +1273,7 @@ test_that("build_motif_adjacency_matrix returns correct
     0,     0,     0,  0,     0,     0,     0,  0,  0,  0,  0,  0
   ), nrow = 12, byrow = TRUE))
 
-  ans$M7 <- drop0(matrix(c(
+  ans$M7 = drop0(matrix(c(
     0,   240,    0,  0,   240,     0,  0,  0,  0,  0,  0,  0,
   240,     0, 1512,  0, 14338, 15610,  0,  0,  0,  0,  0,  0,
     0,  1512,    0,  0,     0,  1512,  0,  0,  0,  0,  0,  0,
@@ -1289,7 +1288,7 @@ test_that("build_motif_adjacency_matrix returns correct
     0,     0,    0,  0,     0,     0,  0,  0,  0,  0,  0,  0
   ), nrow = 12, byrow = TRUE))
 
-  ans$M8 <- drop0(matrix(c(
+  ans$M8 = drop0(matrix(c(
     0,  54,   6,   0,  236,   72,   0,   0,  72,  76,   0,  0,
    54,   0, 111,   0,  444,  459,   0,   0,  90,  95, 147,  0,
     6, 111,   0, 132,  135,  558, 484, 187,   0,   0, 189,  0,
@@ -1304,7 +1303,7 @@ test_that("build_motif_adjacency_matrix returns correct
     0,   0,   0,   0,    0,    0,   0,   0,   0,   0,   0,  0
   ), nrow = 12, byrow = TRUE))
 
-  ans$M9 <- drop0(matrix(c(
+  ans$M9 = drop0(matrix(c(
     0,   48,    0,   0,   86,   66,    0,    0,   0,    0,    0,    0,
    48,    0,  208,   0,  704, 1053,  105,    0, 108,  254,  168,    0,
     0,  208,    0,   0,  271, 1084,  916,  176,   0,  180,  452,  253,
@@ -1319,7 +1318,7 @@ test_that("build_motif_adjacency_matrix returns correct
     0,    0,  253, 276,    0,  345, 1265,  391,   0,    0,    0,    0
   ), nrow = 12, byrow = TRUE))
 
-  ans$M10 <- drop0(matrix(c(
+  ans$M10 = drop0(matrix(c(
     0,   8,   0,  0,   8,   0,   0,   0,   0,   0,   0,   0,
     8,   0, 140,  0, 233, 612, 153,   0,   0, 160,   0,   0,
     0, 140,   0,  0, 140, 696, 282,   0,   0, 200,   0,   0,
@@ -1334,7 +1333,7 @@ test_that("build_motif_adjacency_matrix returns correct
     0,   0,   0,  0,   0,   0, 874, 368,   0,   0, 506,   0
   ), nrow = 12, byrow = TRUE))
 
-  ans$M11 <- drop0(matrix(c(
+  ans$M11 = drop0(matrix(c(
     0,  292,    0,    0,   908,   840,     0,     0,    0,    0,    0,  0,
   292,    0, 1392,    0,  5288,  6498,     0,     0,  540,  570, 1176,  0,
     0, 1392,    0,    0,  2898,  6000,  2992,  2992,    0,    0, 1890,  0,
@@ -1349,7 +1348,7 @@ test_that("build_motif_adjacency_matrix returns correct
     0,    0,    0,    0,     0,     0,     0,     0,    0,    0,    0,  0
   ), nrow = 12, byrow = TRUE))
 
-  ans$M12 <- drop0(matrix(c(
+  ans$M12 = drop0(matrix(c(
     0,    0,    0,  0,     0,     0,     0,     0,  0,    0,    0,    0,
     0,    0, 1550,  0,  4212,  7722,   840,     0,  0, 1120,    0,    0,
     0, 1550,    0,  0,  3080,  8770,  2340,     0,  0, 1800,    0,    0,
@@ -1364,7 +1363,7 @@ test_that("build_motif_adjacency_matrix returns correct
     0,    0,    0,  0,     0,     0,  6256,  6256,  0,    0,    0,    0
   ), nrow = 12, byrow = TRUE))
 
-  ans$M13 <- drop0(matrix(c(
+  ans$M13 = drop0(matrix(c(
     0,     0,     0,  0,     0,     0,  0,  0,  0,  0,  0,  0,
     0,     0,  5040,  0, 17332, 22372,  0,  0,  0,  0,  0,  0,
     0,  5040,     0,  0, 16380, 21420,  0,  0,  0,  0,  0,  0,
@@ -1379,7 +1378,7 @@ test_that("build_motif_adjacency_matrix returns correct
     0,     0,     0,  0,     0,     0,  0,  0,  0,  0,  0,  0
   ), nrow = 12, byrow = TRUE))
 
-  ans$Mcoll <- drop0(matrix(c(
+  ans$Mcoll = drop0(matrix(c(
     0,   0,   0,  0,   0,   0,   0,   0,   0,   0,   0,   0,
     0,   0,  80,  0, 120, 105, 153,   0,   0, 160,   0,   0,
     0,  80,   0,  0, 140,   0, 150,   0,   0, 200,   0,   0,
@@ -1394,7 +1393,7 @@ test_that("build_motif_adjacency_matrix returns correct
     0,   0,   0,  0,   0,   0,   0, 368,   0,   0, 506,   0
   ), nrow = 12, byrow = TRUE))
 
-  ans$Mexpa <- drop0(matrix(c(
+  ans$Mexpa = drop0(matrix(c(
     0,  20,   6,   0,  12,  72,  0,   0,  72,  76,   0,  0,
    20,   0,  63,   0,  91,  70,  0,   0,  90,  95, 147,  0,
     6,  63,   0, 132, 135, 189,  0, 187,   0,   0, 189,  0,
@@ -1410,16 +1409,16 @@ test_that("build_motif_adjacency_matrix returns correct
   ), nrow = 12, byrow = TRUE))
 
   # compare calculations with answers
-  motifs <- get_motif_names()
+  motifs = get_motif_names()
   for (i in seq_len(length(motifs))) {
 
-    mam_densematrix_densemethod <- build_motif_adjacency_matrix(
+    mam_densematrix_densemethod = build_motif_adjacency_matrix(
       adj_mat_dense, motifs[i], "func", "product", "dense")
-    mam_sparsematrix_densemethod <- build_motif_adjacency_matrix(
+    mam_sparsematrix_densemethod = build_motif_adjacency_matrix(
       adj_mat_sparse, motifs[i], "func", "product", "dense")
-    mam_densematrix_sparsemethod <- build_motif_adjacency_matrix(
+    mam_densematrix_sparsemethod = build_motif_adjacency_matrix(
       adj_mat_dense, motifs[i], "func", "product", "sparse")
-    mam_sparsematrix_sparsemethod <- build_motif_adjacency_matrix(
+    mam_sparsematrix_sparsemethod = build_motif_adjacency_matrix(
       adj_mat_sparse, motifs[i], "func", "product", "sparse")
 
     expect_equal(mam_densematrix_densemethod, ans[[motifs[i]]])
@@ -1435,13 +1434,13 @@ test_that("build_motif_adjacency_matrix returns correct
            product-weighted structural matrix", {
 
   # test case
-  adj_mat_dense <- demonstration_graph()$adj_mat_dense
-  adj_mat_sparse <- demonstration_graph()$adj_mat_sparse
+  adj_mat_dense = mcsa.demonstrationgraph()["adj_mat_dense"]
+  adj_mat_sparse = mcsa.demonstrationgraph()["adj_mat_sparse"]
 
   # correct answers
-  ans <- list()
+  ans = {}
 
-  ans$Ms <- drop0(matrix(c(
+  ans$Ms = drop0(matrix(c(
     0,  2,  0,  0,  4,  0,  0,  0,  0,  0,  0,  0,
     2,  0,  3,  0,  0,  0,  0,  0,  0,  0,  0,  0,
     0,  3,  0,  0,  0,  0, 11,  0,  0,  0,  0,  0,
@@ -1456,7 +1455,7 @@ test_that("build_motif_adjacency_matrix returns correct
     0,  0,  0,  0,  0,  0, 23,  0,  0,  0,  0,  0
   ), nrow = 12, byrow = TRUE))
 
-  ans$Md <- drop0(matrix(c(
+  ans$Md = drop0(matrix(c(
     0,  0,  0,  0,   0,   0,   0,   0,  0,  0,  0,  0,
     0,  0,  0,  0,  30,  56,   0,   0,  0,  0,  0,  0,
     0,  0,  0,  0,   0,  90,   0,   0,  0,  0,  0,  0,
@@ -1471,7 +1470,7 @@ test_that("build_motif_adjacency_matrix returns correct
     0,  0,  0,  0,   0,   0,   0,   0,  0,  0,  0,  0
   ), nrow = 12, byrow = TRUE))
 
-  ans$M1 <- drop0(matrix(c(
+  ans$M1 = drop0(matrix(c(
     0,  0,  0,  0,  0,    0,    0,  0,  0,  0,    0,  0,
     0,  0,  0,  0,  0,    0,    0,  0,  0,  0,    0,  0,
     0,  0,  0,  0,  0,    0,    0,  0,  0,  0,    0,  0,
@@ -1486,7 +1485,7 @@ test_that("build_motif_adjacency_matrix returns correct
     0,  0,  0,  0,  0,    0,    0,  0,  0,  0,    0,  0
   ), nrow = 12, byrow = TRUE))
 
-  ans$M2 <- drop0(matrix(c(
+  ans$M2 = drop0(matrix(c(
     0,  0,  0,  0,     0,     0,  0,  0,  0,     0,  0,  0,
     0,  0,  0,  0,     0,     0,  0,  0,  0,     0,  0,  0,
     0,  0,  0,  0,     0,     0,  0,  0,  0,     0,  0,  0,
@@ -1501,7 +1500,7 @@ test_that("build_motif_adjacency_matrix returns correct
     0,  0,  0,  0,     0,     0,  0,  0,  0,     0,  0,  0
   ), nrow = 12, byrow = TRUE))
 
-  ans$M3 <- drop0(matrix(c(
+  ans$M3 = drop0(matrix(c(
     0,     0,     0,  0,  0,     0,  0,  0,  0,  0,  0,  0,
     0,     0, 15120,  0,  0, 15120,  0,  0,  0,  0,  0,  0,
     0, 15120,     0,  0,  0, 15120,  0,  0,  0,  0,  0,  0,
@@ -1516,7 +1515,7 @@ test_that("build_motif_adjacency_matrix returns correct
     0,     0,     0,  0,  0,     0,  0,  0,  0,  0,  0,  0
   ), nrow = 12, byrow = TRUE))
 
-  ans$M4 <- drop0(matrix(c(
+  ans$M4 = drop0(matrix(c(
     0,      0,  0,  0,      0,      0,  0,  0,  0,  0,  0,  0,
     0,      0,  0,  0, 305760, 305760,  0,  0,  0,  0,  0,  0,
     0,      0,  0,  0,      0,      0,  0,  0,  0,  0,  0,  0,
@@ -1531,7 +1530,7 @@ test_that("build_motif_adjacency_matrix returns correct
     0,      0,  0,  0,      0,      0,  0,  0,  0,  0,  0,  0
   ), nrow = 12, byrow = TRUE))
 
-  ans$M5 <- drop0(matrix(c(
+  ans$M5 = drop0(matrix(c(
     0,  0,  0,  0,    0,  0,  0,  0,    0,    0,  0,  0,
     0,  0,  0,  0,    0,  0,  0,  0,    0,    0,  0,  0,
     0,  0,  0,  0,    0,  0,  0,  0,    0,    0,  0,  0,
@@ -1546,7 +1545,7 @@ test_that("build_motif_adjacency_matrix returns correct
     0,  0,  0,  0,    0,  0,  0,  0,    0,    0,  0,  0
   ), nrow = 12, byrow = TRUE))
 
-  ans$M6 <- drop0(matrix(c(
+  ans$M6 = drop0(matrix(c(
     0,  0,     0,  0,  0,     0,     0,  0,  0,  0,  0,  0,
     0,  0,     0,  0,  0,     0,     0,  0,  0,  0,  0,  0,
     0,  0,     0,  0,  0, 14850, 14850,  0,  0,  0,  0,  0,
@@ -1561,7 +1560,7 @@ test_that("build_motif_adjacency_matrix returns correct
     0,  0,     0,  0,  0,     0,     0,  0,  0,  0,  0,  0
   ), nrow = 12, byrow = TRUE))
 
-  ans$M7 <- drop0(matrix(c(
+  ans$M7 = drop0(matrix(c(
     0, 240,  0,  0, 240,  0,  0,  0,  0,  0,  0,  0,
   240,   0,  0,  0, 240,  0,  0,  0,  0,  0,  0,  0,
     0,   0,  0,  0,   0,  0,  0,  0,  0,  0,  0,  0,
@@ -1576,7 +1575,7 @@ test_that("build_motif_adjacency_matrix returns correct
     0,   0,  0,  0,   0,  0,  0,  0,  0,  0,  0,  0
   ), nrow = 12, byrow = TRUE))
 
-  ans$M8 <- drop0(matrix(c(
+  ans$M8 = drop0(matrix(c(
     0,  6,   6,   0, 148,   0,   0,  0, 72, 76,  0,  0,
     6,  0,   6,   0,   0,   0,   0,  0,  0,  0,  0,  0,
     6,  6,   0, 132,   0,   0, 132,  0,  0,  0,  0,  0,
@@ -1591,7 +1590,7 @@ test_that("build_motif_adjacency_matrix returns correct
     0,  0,   0,   0,   0,   0,   0,  0,  0,  0,  0,  0
   ), nrow = 12, byrow = TRUE))
 
-  ans$M9 <- drop0(matrix(c(
+  ans$M9 = drop0(matrix(c(
     0,  0,   0,   0,  0,   0,   0,  0,   0,   0,   0,   0,
     0,  0,   0,   0,  0,   0,   0,  0,   0,   0,   0,   0,
     0,  0,   0,   0,  0,   0, 495,  0,   0,   0, 242, 253,
@@ -1606,7 +1605,7 @@ test_that("build_motif_adjacency_matrix returns correct
     0,  0, 253, 276,  0, 345, 874,  0,   0,   0,   0,   0
   ), nrow = 12, byrow = TRUE))
 
-  ans$M10 <- drop0(matrix(c(
+  ans$M10 = drop0(matrix(c(
     0,  0,  0,  0,  0,   0,   0,  0,  0,   0,   0,   0,
     0,  0, 33,  0,  0,   0,  33,  0,  0,   0,   0,   0,
     0, 33,  0,  0,  0,   0,  33,  0,  0,   0,   0,   0,
@@ -1621,7 +1620,7 @@ test_that("build_motif_adjacency_matrix returns correct
     0,  0,  0,  0,  0,   0, 506,  0,  0,   0, 506,   0
   ), nrow = 12, byrow = TRUE))
 
-  ans$M11 <- drop0(matrix(c(
+  ans$M11 = drop0(matrix(c(
     0,  112,    0,    0,  728,  840,     0,     0,    0,   0,    0,  0,
   112,    0,   90,    0, 1200, 1288,     0,     0,  540, 570, 1176,  0,
     0,   90,    0,    0,   90, 1890,  2992,  2992,    0,   0, 1890,  0,
@@ -1636,7 +1635,7 @@ test_that("build_motif_adjacency_matrix returns correct
     0,    0,    0,    0,    0,    0,     0,     0,    0,   0,    0,  0
   ), nrow = 12, byrow = TRUE))
 
-  ans$M12 <- drop0(matrix(c(
+  ans$M12 = drop0(matrix(c(
     0,    0,    0,  0,    0,    0,     0,     0,  0,    0,    0,    0,
     0,    0,    0,  0,    0, 1960,   840,     0,  0, 1120,    0,    0,
     0,    0,    0,  0,    0, 1800,     0,     0,  0, 1800,    0,    0,
@@ -1651,7 +1650,7 @@ test_that("build_motif_adjacency_matrix returns correct
     0,    0,    0,  0,    0,    0,  6256,  6256,  0,    0,    0,    0
   ), nrow = 12, byrow = TRUE))
 
-  ans$M13 <- drop0(matrix(c(
+  ans$M13 = drop0(matrix(c(
     0,  0,     0,  0,     0,     0,  0,  0,  0,  0,  0,  0,
     0,  0,     0,  0,     0,     0,  0,  0,  0,  0,  0,  0,
     0,  0,     0,  0, 16380, 16380,  0,  0,  0,  0,  0,  0,
@@ -1666,7 +1665,7 @@ test_that("build_motif_adjacency_matrix returns correct
     0,  0,     0,  0,     0,     0,  0,  0,  0,  0,  0,  0
   ), nrow = 12, byrow = TRUE))
 
-  ans$Mcoll <- drop0(matrix(c(
+  ans$Mcoll = drop0(matrix(c(
     0,  0,  0,  0,  0,  0,   0,  0,  0,   0,   0,   0,
     0,  0,  0,  0,  0,  0,  33,  0,  0,   0,   0,   0,
     0,  0,  0,  0,  0,  0,   0,  0,  0,   0,   0,   0,
@@ -1681,7 +1680,7 @@ test_that("build_motif_adjacency_matrix returns correct
     0,  0,  0,  0,  0,  0,   0,  0,  0,   0, 506,   0
   ), nrow = 12, byrow = TRUE))
 
-  ans$Mexpa <- drop0(matrix(c(
+  ans$Mexpa = drop0(matrix(c(
     0,  0,   6,   0,  0,   0,  0,  0, 72, 76,  0,  0,
     0,  0,   0,   0,  0,   0,  0,  0,  0,  0,  0,  0,
     6,  0,   0, 132,  0,   0,  0,  0,  0,  0,  0,  0,
@@ -1697,16 +1696,16 @@ test_that("build_motif_adjacency_matrix returns correct
   ), nrow = 12, byrow = TRUE))
 
   # compare calculations with answers
-  motifs <- get_motif_names()
+  motifs = get_motif_names()
   for (i in seq_len(length(motifs))) {
 
-    mam_densematrix_densemethod <- build_motif_adjacency_matrix(
+    mam_densematrix_densemethod = build_motif_adjacency_matrix(
       adj_mat_dense, motifs[i], "struc", "product", "dense")
-    mam_sparsematrix_densemethod <- build_motif_adjacency_matrix(
+    mam_sparsematrix_densemethod = build_motif_adjacency_matrix(
       adj_mat_sparse, motifs[i], "struc", "product", "dense")
-    mam_densematrix_sparsemethod <- build_motif_adjacency_matrix(
+    mam_densematrix_sparsemethod = build_motif_adjacency_matrix(
       adj_mat_dense, motifs[i], "struc", "product", "sparse")
-    mam_sparsematrix_sparsemethod <- build_motif_adjacency_matrix(
+    mam_sparsematrix_sparsemethod = build_motif_adjacency_matrix(
       adj_mat_sparse, motifs[i], "struc", "product", "sparse")
 
     expect_equal(mam_densematrix_densemethod, ans[[motifs[i]]])
