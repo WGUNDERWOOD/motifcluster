@@ -281,15 +281,13 @@ def test_mam_unweighted_func():
     mam_sparsematrix_sparsemethod = mcmo.build_motif_adjacency_matrix(
       adj_mat_sparse, motifs[i], "func", "unweighted", "sparse")
 
-    print(motifs[i])
-
     assert np.allclose(mam_densematrix_densemethod.toarray(), ans[motifs[i]])
     assert np.allclose(mam_sparsematrix_densemethod.toarray(), ans[motifs[i]])
     assert np.allclose(mam_densematrix_sparsemethod.toarray(), ans[motifs[i]])
     assert np.allclose(mam_sparsematrix_sparsemethod.toarray(), ans[motifs[i]])
 
 
-def est_mam_unweighted_struc():
+def test_mam_unweighted_struc():
 
   # test case
   adj_mat_dense = mcsa.demonstration_graph()["adj_mat_dense"]
@@ -572,7 +570,7 @@ def est_mam_unweighted_struc():
     assert np.allclose(mam_sparsematrix_sparsemethod.toarray(), ans[motifs[i]])
 
 
-def est_mam_mean_weighted_func():
+def test_mam_mean_weighted_func():
 
   # test case
   adj_mat_dense = mcsa.demonstration_graph()["adj_mat_dense"]
@@ -855,7 +853,7 @@ def est_mam_mean_weighted_func():
     assert np.allclose(mam_sparsematrix_sparsemethod.toarray(), ans[motifs[i]])
 
 
-def est_mam_mean_weighted_struc():
+def test_mam_mean_weighted_struc():
 
   # test case
   adj_mat_dense = mcsa.demonstration_graph()["adj_mat_dense"]
@@ -1138,7 +1136,7 @@ def est_mam_mean_weighted_struc():
     assert np.allclose(mam_sparsematrix_sparsemethod.toarray(), ans[motifs[i]])
 
 
-def est_mam_product_weighted_func():
+def test_mam_product_weighted_func():
 
   # test case
   adj_mat_dense = mcsa.demonstration_graph()["adj_mat_dense"]
@@ -1421,7 +1419,7 @@ def est_mam_product_weighted_func():
     assert np.allclose(mam_sparsematrix_sparsemethod.toarray(), ans[motifs[i]])
 
 
-def est_mam_product_weighted_struc():
+def test_mam_product_weighted_struc():
 
   # test case
   adj_mat_dense = mcsa.demonstration_graph()["adj_mat_dense"]
