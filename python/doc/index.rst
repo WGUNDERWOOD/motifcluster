@@ -9,6 +9,7 @@ Motif-Based Spectral Clustering of Weighted Directed Networks
 
    clustering
    indicators
+   motifadjacency
    sampling
    utils
 

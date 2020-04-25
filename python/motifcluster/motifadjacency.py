@@ -8,46 +8,59 @@ from motifcluster import indicators as mcin
 
 from scipy import sparse
 
-#' Build a motif adjacency matrix
-#'
-#' Build a motif adjacency matrix from an adjacency matrix.
-#'
-#' Entry (\emph{i}, \emph{j}) of a motif adjacency matrix is the
-#' sum of the weights of all motifs containing both
-#' nodes \emph{i} and \emph{j}.
-#' The motif is specified by name and the type of motif instance can be one of:
-#' \itemize{
-#'   \item Functional: motifs should appear as subgraphs.
-#'   \item Structural: motifs should appear as induced subgraphs.
-#' }
-#' The weighting scheme can be one of:
-#' \itemize{
-#'   \item Unweighted: the weight of any motif instance is one.
-#'   \item Mean: the weight of any motif instance
-#'     is the mean of its edge weights.
-#'   \item Product: the weight of any motif instance
-#'     is the product of its edge weights.
-#' }
-#' @param adj_mat Adjacency matrix from which to build the motif
-#' adjacency matrix.
-#' @param motif_name Motif used for the motif adjacency matrix.
-#' @param motif_type Type of motif adjacency matrix to build.
-#' One of \code{"func"} or \code{"struc"}.
-#' @param mam_weight_type The weighting scheme to use.
-#' One of \code{"unweighted"}, \code{"mean"} or \code{"product"}.
-#' @param mam_method Which formulation to use.
-#' One of \code{"dense"} or \code{"sparse"}.
-#' The sparse formulation avoids generating large dense matrices
-#' so tends to be faster for large sparse graphs.
-#' @return A motif adjacency matrix.
-#' @importFrom Matrix sparse.csr_matrix t
-#' @examples
-#' adj_mat = matrix(c(1:9), nrow = 3)
-#' build_motif_adjacency_matrix(adj_mat, "M1", "func", "mean")
-#' @export
 
 def build_motif_adjacency_matrix(adj_mat, motif_name, motif_type = "struc",
   mam_weight_type = "unweighted", mam_method = "sparse"):
+
+  """
+  Build a motif adjacency matrix.
+
+  Build a motif adjacency matrix from an adjacency matrix.
+  Entry (`i, j`) of a motif adjacency matrix is the
+  sum of the weights of all motifs containing both
+  nodes `i` and `j`.
+
+  - The motif is specified by name and the type of motif instance can be one of:
+
+    - Functional: motifs should appear as subgraphs.
+    - Structural: motifs should appear as induced subgraphs.
+
+  - The weighting scheme can be one of:
+
+    - Unweighted: the weight of any motif instance is one.
+    - Mean: the weight of any motif instance
+      is the mean of its edge weights.
+    - Product: the weight of any motif instance
+      is the product of its edge weights.
+
+  Parameters
+  ----------
+  adj_mat : matrix
+    Adjacency matrix from which to build the motif adjacency matrix.
+  motif_name : str
+    Motif used for the motif adjacency matrix.
+  motif_type : str
+    Type of motif adjacency matrix to build.
+    One of `"func"` or `"struc"`.
+  mam_weight_type : str
+    The weighting scheme to use.
+    One of `"unweighted"`, `"mean"` or `"product"`.
+  mam_method : str
+    Which formulation to use.
+    One of `"dense"` or `"sparse"`.
+    The sparse formulation avoids generating large dense matrices
+    so tends to be faster for large sparse graphs.
+
+  Returns
+  -------
+  sparse matrix
+    A motif adjacency matrix.
+
+  Examples
+  --------
+  >>> adj_mat = np.array(range(1, 10)).reshape((3, 3))
+  >>> build_motif_adjacency_matrix(adj_mat, "M1", "func", "mean")
+  """
 
   # check args
   assert motif_name in mcut.get_motif_names()
