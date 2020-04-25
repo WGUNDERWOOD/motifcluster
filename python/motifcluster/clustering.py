@@ -28,7 +28,7 @@ def cluster_spectrum(spectrum, num_clusts):
     representing cluster assignments.
   """
 
-  vects = spectrum["vects"][:,-1]
+  vects = spectrum["vects"][:,1:]
   kmeans_plus_plus = KMeans(n_clusters = num_clusts).fit(vects)
   cluster_assigns = kmeans_plus_plus.labels_
 
