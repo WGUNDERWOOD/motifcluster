@@ -1,4 +1,6 @@
 import numpy as np
+from motifcluster import utils as mcut
+from motifcluster import motifadjacency as mcmo
 from scipy.sparse import linalg
 from scipy import sparse
 
@@ -79,6 +81,7 @@ def build_laplacian(adj_mat, type_lap = "rw"):
 
   return L
 
+
 #' Run Laplace embedding
 #'
 #' Run Laplace embedding on a symmetric (weighted) adjacency matrix
@@ -97,24 +100,18 @@ def build_laplacian(adj_mat, type_lap = "rw"):
 #' run_laplace_embedding(adj_mat, 2, "rw")
 #' @export
 
-#run_laplace_embedding = function(adj_mat, num_eigs,
-                                  #type_lap = c("comb", "rw")) {
+def run_laplace_embedding(adj_mat, num_eigs, type_lap = "rw"):
 
   # check args
-  #if (!all.equal(num_eigs, as.integer(num_eigs))) {
-    #stop("num_eigs must be an integer.")
-  #}
-  #if (!(num_eigs > 0)) {
-    #stop("num_eigs must be at least 1.")
-  #}
-  #type_lap = match.arg(type_lap)
+  assert num_eigs == np.floor(num_eigs)
+  assert num_eigs >= 1
+  assert type_lap in ["comb", "rw"]
 
   # build and embed Laplacian
-  #laplacian = build_laplacian(adj_mat, type_lap)
-  #spectrum = get_first_eigs(laplacian, num_eigs)
+  laplacian = build_laplacian(adj_mat, type_lap)
+  spectrum = get_first_eigs(laplacian, num_eigs)
 
-  #return(spectrum)
-#}
+  return spectrum
 
 #' Run motif embedding
 #'
@@ -155,49 +152,43 @@ def build_laplacian(adj_mat, type_lap = "rw"):
 #' run_motif_embedding(adj_mat, "M1", "func", "mean", "sparse", 2, "rw")
 #' @export
 
-#run_motif_embedding = function(adj_mat, motif_name,
-                       #motif_type = c("struc", "func"),
-                       #mam_weight_type = c("unweighted", "mean", "product"),
-                       #mam_method = c("sparse", "dense"),
-                       #num_eigs, type_lap = c("comb", "rw")) {
+def run_motif_embedding(adj_mat, motif_name,
+                       motif_type = "struc",
+                       mam_weight_type = "unweighted",
+                       mam_method = "sparse",
+                       num_eigs = 2,
+                       type_lap = "rw"):
 
   # check args
-  #adj_mat = drop0(adj_mat)
-  #if (!(motif_name %in% get_motif_names())) {
-    #stop("Invalid motif name.")
-  #}
-  #motif_type = match.arg(motif_type)
-  #if (!all.equal(num_eigs, as.integer(num_eigs))) {
-    #stop("num_eigs must be an integer.")
-  #}
-  #mam_weight_type = match.arg(mam_weight_type)
-  #mam_method = match.arg(mam_method)
-  #if (!(num_eigs > 0)) {
-    #stop("num_eigs must be at least 1.")
-  #}
-  #type_lap = match.arg(type_lap)
+  adj_mat = sparse.csr_matrix(adj_mat)
+  assert motif_name in mcut.get_motif_names()
+  assert motif_type in ["struc", "func"]
+  assert num_eigs == np.floor(num_eigs)
+  assert num_eigs >= 1
+  assert mam_weight_type in ["unweighted", "mean", "product"]
+  assert mam_method in ["sparse", "dense"]
+  assert type_lap in ["comb", "rw"]
 
   # build motif adjacency matrix
-  #motif_adj_mat = build_motif_adjacency_matrix(adj_mat, motif_name,
-                     #motif_type, mam_weight_type, mam_method)
+  motif_adj_mat = mcmo.build_motif_adjacency_matrix(adj_mat, motif_name,
+                     motif_type, mam_weight_type, mam_method)
 
   # restrict to largest connected component
-  #comps = get_largest_component(motif_adj_mat)
-  #adj_mat_comps = adj_mat[comps, comps, drop = FALSE]
-  #motif_adj_mat_comps = motif_adj_mat[comps, comps, drop = FALSE]
+  comps = mcut.get_largest_component(motif_adj_mat)
+  adj_mat_comps = adj_mat[comps, comps]
+  motif_adj_mat_comps = motif_adj_mat[comps, comps]
 
   # Laplace embedding
-  #spect = run_laplace_embedding(motif_adj_mat_comps, num_eigs, type_lap)
+  spect = run_laplace_embedding(motif_adj_mat_comps, num_eigs, type_lap)
 
   # return list
-  #spectrum = list()
-  #spectrum$adj_mat = adj_mat
-  #spectrum$motif_adj_mat = motif_adj_mat
-  #spectrum$comps = comps
-  #spectrum$adj_mat_comps = adj_mat_comps
-  #spectrum$motif_adj_mat_comps = motif_adj_mat_comps
-  #spectrum$vals = spect$vals
-  #spectrum$vects = spect$vects
+  spectrum = {
+    "adj_mat": adj_mat,
+    "motif_adj_mat": motif_adj_mat,
+    "comps": comps,
+    "adj_mat_comps": adj_mat_comps,
+    "motif_adj_mat_comps": motif_adj_mat_comps,
+    "vals": spect["vals"],
+  }
 
-  #return(spectrum)
-#}
+  return spectrum

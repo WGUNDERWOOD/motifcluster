@@ -39,7 +39,7 @@ def run_motif_clustering(adj_mat, motif_name,
   motif_type = "struc",
   mam_weight_type = "unweighted",
   mam_method = "sparse",
-  num_eigs = 1,
+  num_eigs = 2,
   type_lap = "comb",
   num_clusts = 2):
 
