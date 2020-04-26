@@ -5,6 +5,7 @@ library(roxygen2)
 library(lintr)
 library(covr)
 
+document()
 check()
 build_manual(path = "./doc")
 build_vignettes()

@@ -4,10 +4,10 @@
 \alias{get_first_eigs}
 \title{Compute first few eigenvalues and eigenvectors of a matrix}
 \usage{
-get_first_eigs(mat, num_eigs)
+get_first_eigs(some_mat, num_eigs)
 }
 \arguments{
-\item{mat}{Symmetric matrix for which eigenvalues and eigenvectors
+\item{some_mat}{Symmetric matrix for which eigenvalues and eigenvectors
 are to be calculated.}
 
 \item{num_eigs}{Number of eigenvalues and eigenvectors to calculate.}
@@ -16,7 +16,7 @@ are to be calculated.}
 A list with two entries:
 \code{vals} contains a length-\code{num_eigs} vector of the first few
 eigenvalues,
-and vects contains an \code{nrow(mat)} by \code{num_eigs} matrix
+and vects contains an \code{nrow(some_mat)} by \code{num_eigs} matrix
 of the associated eigenvectors.
 }
 \description{

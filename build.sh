@@ -13,8 +13,11 @@ basedir=$PWD
 # python
 echo "Python"
 cd $basedir/python/
+
+# python testing
 pytest --profile-svg
 
+# python linting
 pylint_ignore=_build_G,_build_J,_build_Gs,_build_Js,
 pylint_ignore+=_build_Gd,_build_Jd,_build_J0,_build_Jn,
 pylint_ignore+=_build_Id,_build_Je,_build_Gp,
@@ -27,6 +30,10 @@ pylint \
   --exclude-protected=$pylint_ignore \
   motifcluster
 
+# python distribution packages
+python setup.py sdist bdist_wheel
+
+# python rtfd
 cd $basedir/python/doc/
 make html latex
 
