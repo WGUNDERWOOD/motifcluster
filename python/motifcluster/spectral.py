@@ -1,3 +1,7 @@
+import numpy as np
+from scipy.sparse import linalg
+from scipy import sparse
+
 #' Compute first few eigenvalues and eigenvectors of a matrix
 #'
 #' Compute the first few eigenvalues (by magnitude) and
@@ -12,15 +16,11 @@
 #' of the associated eigenvectors.
 #' @importFrom RSpectra eigs
 #' @keywords internal
-import numpy as np
-from scipy.sparse import linalg
-from scipy import sparse
 
 def get_first_eigs(mat, num_eigs):
 
   # check args
   mat = sparse.csr_matrix(mat, dtype = "f")
-  print(mat.toarray())
   assert num_eigs == np.floor(num_eigs)
   assert num_eigs >= 1
 
@@ -40,6 +40,7 @@ def get_first_eigs(mat, num_eigs):
 
   return(spectrum)
 
+
 #' Build a Laplacian matrix
 #'
 #' Build a Laplacian matrix (combinatorial Laplacian or random-walk Laplacian)
@@ -53,37 +54,30 @@ def get_first_eigs(mat, num_eigs):
 #' build_laplacian(adj_mat, "rw")
 #' @export
 
-#build_laplacian = function(adj_mat, type_lap = c("comb", "rw")) {
+def build_laplacian(adj_mat, type_lap = "rw"):
 
   # check args
-  #type_lap = match.arg(type_lap)
-  #adj_mat = drop0(adj_mat)
+  assert type_lap in ["comb", "rw"]
+  adj_mat = sparse.csr_matrix(adj_mat)
+  n = adj_mat.shape[0]
 
   # initialize parameters
-  #degs_adj_mat = apply(adj_mat, 1, sum)
-  #n = nrow(adj_mat)
+  degs_adj_mat = adj_mat.sum(axis = 0).reshape(n)
 
   # combinatorial Laplacian
-  #if (type_lap == "comb") {
-    #degs_matrix = diag(degs_adj_mat)
-    #L =  degs_matrix - adj_mat
-  #}
+  if type_lap == "comb":
+    degs_matrix = sparse.diags(degs_adj_mat, offsets = [0], shape = (n, n))
+    L =  degs_matrix - adj_mat
 
   # random-walk Laplacian
-  #else if (type_lap == "rw") {
+  elif type_lap == "rw":
+    assert (degs_adj_mat > 0).all()
+    inv_degs_matrix = sparse.diags(1 / degs_adj_mat, offsets = [0], shape = (n, n))
+    L =  sparse.identity(n) - inv_degs_matrix * adj_mat
 
-    #if (!all(degs_adj_mat != 0)) {
-      #stop("row sums of adj_mat must be non-zero")
-    #}
+  L = sparse.csr_matrix(L)
 
-    #inv_degs_matrix = diag(degs_adj_mat ^ (-1))
-    #L =  diag(n) - inv_degs_matrix %*% adj_mat
-  #}
-
-  #L = drop0(L)
-
-  #return(L)
-#}
+  return L
 
 #' Run Laplace embedding
 #'

@@ -33,7 +33,7 @@ test_that("get_first_eigs returns correct values on sparse matrix", {
 test_that("build_laplacian returns correct matrices on dense matrix", {
 
   G <- matrix(c(0:8), nrow = 3)
-  G <- drop0(G + t(G))
+  G <- G + t(G)
 
   degs_mat <- diag(c(12, 24, 36))
   comb_lap <- degs_mat - G
@@ -45,8 +45,8 @@ test_that("build_laplacian returns correct matrices on dense matrix", {
 
 test_that("build_laplacian returns correct matrices on sparse matrix", {
 
-  G <- drop0(matrix(c(0:8), nrow = 3))
-  G <- G + t(G)
+  G <- matrix(c(0:8), nrow = 3)
+  G <- drop0(G + t(G))
 
   degs_mat <- diag(c(12, 24, 36))
   comb_lap <- degs_mat - G

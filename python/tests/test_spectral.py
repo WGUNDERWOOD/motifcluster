@@ -1,5 +1,8 @@
 from motifcluster import spectral as mcsp
+from scipy import sparse
 import numpy as np
+from numpy import linalg
+import pytest
 
 # get_first_eigs
 
@@ -16,50 +19,53 @@ def test_get_first_eigs_dense():
   assert np.allclose(spect["vals"], vals, atol = 1e-6)
   assert np.allclose(spect["vects"], vects, atol = 1e-6)
 
-#test_that("get_first_eigs returns correct values on sparse matrix", {
 
-  #G = drop0(matrix(c(7, -4, 14, 0, -4, 19, 10, 0,
-                      #14, 10, 10, 0, 0, 0, 0, 100), nrow = 4))
-  #vals = c(-9, 18, 27)
-  #vects = matrix(c(-2, -1, 2, 0, -2, 2, -1, 0, -1, -2, -2, 0) / 3, nrow = 4)
+def test_get_first_eigs_sparse():
 
-  #spect = mcsp.get_first_eigs(G, 3)
+  G = sparse.csr_matrix(np.array([7, -4, 14, 0, -4, 19, 10, 0,
+                14, 10, 10, 0, 0, 0, 0, 100]).reshape((4, 4)))
 
-  #expect_equal(spect$vals, vals)
-  #expect_equal(spect$vects, vects)
-#})
+  vals = [-9, 18, 27]
+  vects = np.array([2, 1, -2, 0, -2, 2, -1, 0, 1, 2, 2, 0]).reshape((3, 4)).transpose() / 3
+
+  spect = mcsp.get_first_eigs(G, 3)
+  print(vects)
+  print(spect["vects"])
+
+  assert np.allclose(spect["vals"], vals, atol = 1e-6)
+  assert np.allclose(spect["vects"], vects, atol = 1e-6)
+
 
 # build_laplacian
 
-#test_that("build_laplacian returns correct matrices on dense matrix", {
+def test_build_laplacian_dense():
 
-  #G = matrix(c(0:8), nrow = 3)
-  #G = drop0(G + t(G))
+  G = np.array(range(9)).reshape((3, 3))
+  G = G + G.transpose()
 
-  #degs_mat = diag(c(12, 24, 36))
-  #comb_lap = degs_mat - G
-  #rw_lap = drop0(solve(degs_mat) %*% (degs_mat - G))
+  degs_mat = np.diag([12, 24, 36])
+  comb_lap = degs_mat - G
+  rw_lap = linalg.inv(degs_mat) @ (degs_mat - G)
 
-  #expect_equal(build_laplacian(G, type_lap = "comb"), comb_lap)
-  #expect_equal(build_laplacian(G, type_lap = "rw"), rw_lap)
-#})
+  assert np.allclose(mcsp.build_laplacian(G, type_lap = "comb").toarray(), comb_lap)
+  assert np.allclose(mcsp.build_laplacian(G, type_lap = "rw").toarray(), rw_lap)
 
-#test_that("build_laplacian returns correct matrices on sparse matrix", {
 
-  #G = drop0(matrix(c(0:8), nrow = 3))
-  #G = G + t(G)
+def test_build_laplacian_sparse():
 
-  #degs_mat = diag(c(12, 24, 36))
-  #comb_lap = degs_mat - G
-  #rw_lap = drop0(solve(degs_mat) %*% (degs_mat - G))
+  G = np.array(range(9)).reshape((3, 3))
+  G = sparse.csr_matrix(G + G.transpose())
 
-  #expect_equal(build_laplacian(G, type_lap = "comb"), comb_lap)
-  #expect_equal(build_laplacian(G, type_lap = "rw"), rw_lap)
-#})
+  degs_mat = np.diag([12, 24, 36])
+  comb_lap = degs_mat - G
+  rw_lap = linalg.inv(degs_mat) @ (degs_mat - G)
 
-#test_that("build_laplacian gives correct error if row sums are zero", {
+  assert np.allclose(mcsp.build_laplacian(G, type_lap = "comb").toarray(), comb_lap)
+  assert np.allclose(mcsp.build_laplacian(G, type_lap = "rw").toarray(), rw_lap)
 
-  #G = drop0(matrix(c(0, 1, 0, 2)))
-  #expect_error(build_laplacian(G, type_lap = "rw"),
-               #"row sums of adj_mat must be non-zero")
-#})
+
+def test_build_laplacian_row_sum_error():
+
+  with pytest.raises(AssertionError):
+    G = np.array([0, 1, 0, 2]).reshape((2,2))
+    mcsp.build_laplacian(G, type_lap = "rw")
