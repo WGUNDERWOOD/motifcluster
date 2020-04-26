@@ -8,7 +8,6 @@ from motifcluster import indicators as mcin
 
 from scipy import sparse
 
-
 def build_motif_adjacency_matrix(adj_mat, motif_name, motif_type = "struc",
   mam_weight_type = "unweighted", mam_method = "sparse"):
 
@@ -120,8 +119,6 @@ def build_motif_adjacency_matrix(adj_mat, motif_name, motif_type = "struc",
 
   elif motif_name == "Mexpa":
     return mam_Mexpa(adj_mat, motif_type, mam_weight_type, mam_method)
-
-  return
 
 
 def mam_Ms(adj_mat, motif_type, mam_weight_type):
