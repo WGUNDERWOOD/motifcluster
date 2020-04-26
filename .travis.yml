@@ -5,7 +5,10 @@ matrix:
     - language: R
       cache: packages
       before_install:
-      - cd R/
+        - cd R/
+      after_success:
+        - Rscript -e 'covr::codecov()'
+
 
     # python
     - language: python
