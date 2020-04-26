@@ -36,7 +36,7 @@ test_that("build_laplacian returns correct matrices on dense matrix", {
   G <- G + t(G)
 
   degs_mat <- diag(c(12, 24, 36))
-  comb_lap <- degs_mat - G
+  comb_lap <- drop0(degs_mat - G)
   rw_lap <- drop0(solve(degs_mat) %*% (degs_mat - G))
 
   expect_equal(build_laplacian(G, type_lap = "comb"), comb_lap)
