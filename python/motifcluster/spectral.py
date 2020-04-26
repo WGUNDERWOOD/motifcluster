@@ -1,35 +1,9 @@
 import numpy as np
-<<<<<<< Updated upstream
-=======
-from motifcluster import utils as mcut
-from motifcluster import motifadjacency as mcmo
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
 from scipy.sparse import linalg
 from scipy import sparse
 
 from motifcluster import utils as mcut
 from motifcluster import motifadjacency as mcmo
-
-# TODO docs
-
-#' Compute first few eigenvalues and eigenvectors of a matrix
-#'
-#' Compute the first few eigenvalues (by magnitude) and
-#' associated eigenvectors of a matrix.
-#' @param mat Symmetric matrix for which eigenvalues and eigenvectors
-#' are to be calculated.
-#' @param num_eigs Number of eigenvalues and eigenvectors to calculate.
-#' @return A list with two entries:
-#' \code{vals} contains a length-\code{num_eigs} vector of the first few
-#' eigenvalues,
-#' and vects contains an \code{nrow(mat)} by \code{num_eigs} matrix
-#' of the associated eigenvectors.
-#' @importFrom RSpectra eigs
-#' @keywords internal
-
-def get_first_eigs(mat, num_eigs):
-=======
 
 def _get_first_eigs(some_mat, num_eigs):
 
@@ -55,8 +29,6 @@ def _get_first_eigs(some_mat, num_eigs):
     A `some_mat.shape[0]` by `num_eigs` matrix
     of the associated eigenvectors.
   """
-
->>>>>>> Stashed changes
 
   # check args
   some_mat = sparse.csr_matrix(some_mat, dtype = "f")
