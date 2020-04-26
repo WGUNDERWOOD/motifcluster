@@ -1,4 +1,5 @@
 coveralls
+pytest-cov
 networkx
 numpy
 scipy
