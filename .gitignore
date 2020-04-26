@@ -13,5 +13,10 @@ R/.gitignore
 
 # python package
 __pycache__
-_build/
-prof/
+python/build/
+python/dist/
+python/doc/_build/
+python/doc/_static/
+python/doc/_templates/
+python/prof/
+python/motifcluster.egg-info/
