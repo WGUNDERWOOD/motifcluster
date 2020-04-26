@@ -1,8 +1,8 @@
 # motif-based-clustering
 
 [![Build Status](https://travis-ci.com/WGUNDERWOOD/motif-based-clustering.svg?branch=master)](https://travis-ci.com/github/WGUNDERWOOD/motif-based-clustering)
-[![Build Status](https://img.shields.io/readthedocs/motifcluster?label=python%20docs)](https://motifcluster.readthedocs.io/en/latest/)
-
+[![Python Docs Status](https://img.shields.io/readthedocs/motifcluster?label=python%20docs)](https://motifcluster.readthedocs.io/en/latest/)
+[![Python Coverage Status](https://img.shields.io/coveralls/github/WGUNDERWOOD/motif-based-clustering?label=python%20coverage)](https://coveralls.io/github/WGUNDERWOOD/motif-based-clustering)
 
 Source code for my paper
 *Motif-Based Spectral Clustering of Weighted Directed Networks*,
