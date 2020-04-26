@@ -65,9 +65,12 @@ available in the package.
 
 ## Python code
 
-The Python source code is in the [python](./python/) directory
-and requires the following Python packages:
+The Python module "motifcluster" is in the
+[python](./python/) directory
+and has the following dependencies,
+available on PyPI:
 
 - Networkx
 - Numpy
 - Scipy
+- Scikit-learn
