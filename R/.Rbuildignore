@@ -1,5 +1,4 @@
-^scratch\.R$
 ^motifcluster.*\.pdf$
-^\.travis\.yml$
 ^doc$
 ^Meta$
+^build_R.R$

@@ -10,7 +10,7 @@ drop0_killdiag(some_mat)
 \item{some_mat}{A square matrix.}
 }
 \value{
-A sparse-form copy of the matrix with its
+A sparse-form copy of \code{some_mat} with its
 diagonal entries set to zero.
 }
 \description{

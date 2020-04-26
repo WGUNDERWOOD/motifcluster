@@ -7,7 +7,7 @@
 build_Gd(adj_mat)
 }
 \arguments{
-\item{adj_mat}{Original adjacency matrix.}
+\item{adj_mat}{The original adjacency matrix.}
 }
 \value{
 A double-edge adjacency matrix \code{Gd} in sparse form.

@@ -7,7 +7,7 @@
 build_Jn(adj_mat)
 }
 \arguments{
-\item{adj_mat}{Original adjacency matrix.}
+\item{adj_mat}{The original adjacency matrix.}
 }
 \value{
 A vertex-distinct indicator matrix \code{Jn}.

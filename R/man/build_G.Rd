@@ -7,7 +7,7 @@
 build_G(adj_mat)
 }
 \arguments{
-\item{adj_mat}{Original adjacency matrix.}
+\item{adj_mat}{The original adjacency matrix.}
 }
 \value{
 The adjacency matrix \code{G} in sparse form.

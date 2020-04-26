@@ -7,12 +7,12 @@
 build_Id(adj_mat)
 }
 \arguments{
-\item{adj_mat}{Original adjacency matrix.}
+\item{adj_mat}{The original adjacency matrix.}
 }
 \value{
-An identity matrix Id in sparse form.
+An identity matrix \code{Id} in sparse form.
 }
 \description{
-Build the sparse identity matrix Id from a graph adjacency matrix.
+Build the sparse identity matrix \code{Id} from a graph adjacency matrix.
 }
 \keyword{internal}

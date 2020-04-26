@@ -7,7 +7,7 @@
 build_Gs(adj_mat)
 }
 \arguments{
-\item{adj_mat}{Original adjacency matrix.}
+\item{adj_mat}{The original adjacency matrix.}
 }
 \value{
 A single-edge adjacency matrix \code{Gs} in sparse form.

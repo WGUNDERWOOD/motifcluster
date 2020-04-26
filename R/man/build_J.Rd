@@ -7,7 +7,7 @@
 build_J(adj_mat)
 }
 \arguments{
-\item{adj_mat}{Original adjacency matrix.}
+\item{adj_mat}{The original adjacency matrix.}
 }
 \value{
 A directed indicator matrix \code{J} in sparse form.

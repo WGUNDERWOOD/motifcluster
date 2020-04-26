@@ -7,7 +7,7 @@
 build_Gp(adj_mat)
 }
 \arguments{
-\item{adj_mat}{Original adjacency matrix.}
+\item{adj_mat}{The original adjacency matrix.}
 }
 \value{
 A product adjacency matrix \code{Jp} in sparse form.

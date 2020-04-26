@@ -7,7 +7,7 @@
 build_Jd(adj_mat)
 }
 \arguments{
-\item{adj_mat}{Original adjacency matrix.}
+\item{adj_mat}{The original adjacency matrix.}
 }
 \value{
 A double-edge indicator matrix \code{Jd} in sparse form.
