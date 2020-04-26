@@ -1,8 +1,8 @@
-from motifcluster import utils as mcut
-
 import numpy as np
 from scipy import sparse
 from numpy import random as rd
+
+from motifcluster import utils as mcut
 
 def sample_dsbm(block_sizes, connection_matrix,
   weight_matrix = None, sample_weight_type = "unweighted"):

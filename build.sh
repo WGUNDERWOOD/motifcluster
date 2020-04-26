@@ -15,6 +15,18 @@ echo "Python"
 cd $basedir/python/
 pytest --profile-svg
 
+pylint_ignore=_build_G,_build_J,_build_Gs,_build_Js,
+pylint_ignore+=_build_Gd,_build_Jd,_build_J0,_build_Jn,
+pylint_ignore+=_build_Id,_build_Je,_build_Gp,
+pylint_ignore+=_a_one_b,_a_b_one
+
+pylint \
+  --indent-string="  " \
+  --function-naming-style=any \
+  --variable-naming-style=any \
+  --exclude-protected=$pylint_ignore \
+  motifcluster
+
 cd $basedir/python/doc/
 make html latex
 

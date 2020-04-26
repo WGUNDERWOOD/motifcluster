@@ -3,10 +3,10 @@ Functions for building motif adjacency matrices
 are in `motifcluster.motifadjacency`.
 """
 
+from scipy import sparse
+
 from motifcluster import utils as mcut
 from motifcluster import indicators as mcin
-
-from scipy import sparse
 
 def build_motif_adjacency_matrix(adj_mat, motif_name, motif_type = "struc",
   mam_weight_type = "unweighted", mam_method = "sparse"):

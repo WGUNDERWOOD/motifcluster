@@ -1,8 +1,11 @@
 import numpy as np
-from motifcluster import utils as mcut
-from motifcluster import motifadjacency as mcmo
 from scipy.sparse import linalg
 from scipy import sparse
+
+from motifcluster import utils as mcut
+from motifcluster import motifadjacency as mcmo
+
+# TODO docs
 
 #' Compute first few eigenvalues and eigenvectors of a matrix
 #'

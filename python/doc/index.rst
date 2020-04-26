@@ -1,5 +1,5 @@
 motifcluster
-========================================
+============
 
 Motif-Based Spectral Clustering of Weighted Directed Networks
 
@@ -13,8 +13,6 @@ Motif-Based Spectral Clustering of Weighted Directed Networks
    sampling
    utils
 
-Indices and tables
-==================
+Index
+=====
 * :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`

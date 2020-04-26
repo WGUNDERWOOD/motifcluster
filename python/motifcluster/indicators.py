@@ -3,10 +3,10 @@ Functions for building adjacency and indicator matrices
 are in `motifcluster.indicators`.
 """
 
-import motifcluster.utils as mcut
-
 import numpy as np
 from scipy import sparse
+
+import motifcluster.utils as mcut
 
 def _build_G(adj_mat):
 
