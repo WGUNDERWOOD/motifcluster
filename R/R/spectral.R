@@ -2,18 +2,18 @@
 #'
 #' Compute the first few eigenvalues (by magnitude) and
 #' associated eigenvectors of a matrix.
-#' @param mat Symmetric matrix for which eigenvalues and eigenvectors
+#' @param some_mat Symmetric matrix for which eigenvalues and eigenvectors
 #' are to be calculated.
 #' @param num_eigs Number of eigenvalues and eigenvectors to calculate.
 #' @return A list with two entries:
 #' \code{vals} contains a length-\code{num_eigs} vector of the first few
 #' eigenvalues,
-#' and vects contains an \code{nrow(mat)} by \code{num_eigs} matrix
+#' and vects contains an \code{nrow(some_mat)} by \code{num_eigs} matrix
 #' of the associated eigenvectors.
 #' @importFrom RSpectra eigs
 #' @keywords internal
 
-get_first_eigs <- function(mat, num_eigs) {
+get_first_eigs <- function(some_mat, num_eigs) {
 
   # check args
   if (!all.equal(num_eigs, as.integer(num_eigs))) {
@@ -24,7 +24,7 @@ get_first_eigs <- function(mat, num_eigs) {
   }
 
   # get spectrum
-  spectrum_eigs <- eigs(mat, num_eigs, which = "SM")
+  spectrum_eigs <- eigs(some_mat, num_eigs, which = "SM")
 
   # order eigenvalues and eigenvectors
   inds <- seq(num_eigs, 1, -1)

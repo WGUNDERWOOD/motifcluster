@@ -1,4 +1,10 @@
 import numpy as np
+<<<<<<< Updated upstream
+=======
+from motifcluster import utils as mcut
+from motifcluster import motifadjacency as mcmo
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
 from scipy.sparse import linalg
 from scipy import sparse
 
@@ -23,14 +29,42 @@ from motifcluster import motifadjacency as mcmo
 #' @keywords internal
 
 def get_first_eigs(mat, num_eigs):
+=======
+
+def _get_first_eigs(some_mat, num_eigs):
+
+  """
+  Compute first few eigenvalues and eigenvectors of a matrix.
+
+  Compute the first few eigenvalues (by magnitude) and
+  associated eigenvectors of a matrix.
+
+  Parameters
+  ----------
+  some_mat : matrix
+    Symmetric matrix for which eigenvalues and eigenvectors
+    are to be calculated.
+  num_eigs : int
+    Number of eigenvalues and eigenvectors to calculate.
+
+  Returns
+  -------
+  vals : list
+    A length-`num_eigs` list of the first few eigenvalues.
+  vects : matrix
+    A `some_mat.shape[0]` by `num_eigs` matrix
+    of the associated eigenvectors.
+  """
+
+>>>>>>> Stashed changes
 
   # check args
-  mat = sparse.csr_matrix(mat, dtype = "f")
+  some_mat = sparse.csr_matrix(some_mat, dtype = "f")
   assert num_eigs == np.floor(num_eigs)
   assert num_eigs >= 1
 
   # get spectrum
-  vals, vects = linalg.eigsh(mat, k = num_eigs, which = "SM")
+  vals, vects = linalg.eigsh(some_mat, k = num_eigs, which = "SM")
 
   # order eigenvalues and eigenvectors
   ordering = np.argsort(vals.real)
@@ -46,20 +80,32 @@ def get_first_eigs(mat, num_eigs):
   return(spectrum)
 
 
-#' Build a Laplacian matrix
-#'
-#' Build a Laplacian matrix (combinatorial Laplacian or random-walk Laplacian)
-#' from a symmetric (weighted) graph adjacency matrix.
-#' @param adj_mat Symmetric adjacency matrix from which to build the Laplacian.
-#' @param type_lap Type of Laplacian to build.
-#' One of \code{"comb"} (combinatorial) or \code{"rw"} (random-walk).
-#' @return The specified Laplacian matrix.
-#' @examples
-#' adj_mat = matrix(c(1:9), nrow = 3)
-#' build_laplacian(adj_mat, "rw")
-#' @export
-
 def build_laplacian(adj_mat, type_lap = "rw"):
+
+  """
+  Build a Laplacian matrix.
+
+  Build a Laplacian matrix (combinatorial Laplacian or random-walk Laplacian)
+  from a symmetric (weighted) graph adjacency matrix.
+
+  Parameters
+  ----------
+  adj_mat : matrix
+    Symmetric adjacency matrix from which to build the Laplacian.
+  type_lap : str
+    Type of Laplacian to build.
+    One of `"comb"` (combinatorial) or `"rw"` (random-walk).
+
+  Returns
+  -------
+  sparse matrix
+    The specified Laplacian matrix.
+
+  Examples
+  --------
+  >>> adj_mat = np.array(range(1, 10)).reshape((3, 3))
+  >>> build_laplacian(adj_mat, "rw")
+  """
 
   # check args
   assert type_lap in ["comb", "rw"]
@@ -85,25 +131,38 @@ def build_laplacian(adj_mat, type_lap = "rw"):
   return L
 
 
-#' Run Laplace embedding
-#'
-#' Run Laplace embedding on a symmetric (weighted) adjacency matrix
-#' with a specified number of eigenvalues and eigenvectors.
-#' @param adj_mat Symmetric adjacency matrix to be embedded.
-#' @param num_eigs Number of eigenvalues and eigenvectors for the embedding.
-#' @param type_lap Type of Laplacian for the embedding.
-#' One of \code{"comb"} (combinatorial) or \code{"rw"} (random-walk).
-#' @return A list with two entries:
-#' \code{vals} contains the length-\code{num_eigs} vector
-#' of the first few eigenvalues of the Laplacian,
-#' and \code{vects} contains an \code{nrow(adj_mat)} by \code{num_eigs} matrix
-#' of the associated eigenvectors.
-#' @examples
-#' adj_mat = matrix(c(1:9), nrow = 3)
-#' run_laplace_embedding(adj_mat, 2, "rw")
-#' @export
-
 def run_laplace_embedding(adj_mat, num_eigs, type_lap = "rw"):
+
+  """
+  Run Laplace embedding.
+
+  Run Laplace embedding on a symmetric (weighted) adjacency matrix
+  with a specified number of eigenvalues and eigenvectors.
+
+  Parameters
+  ----------
+  adj_mat : matrix
+    Symmetric adjacency matrix to be embedded.
+  num_eigs : int
+    Number of eigenvalues and eigenvectors for the embedding.
+  type_lap : str
+    Type of Laplacian for the embedding.
+    One of `"comb"` (combinatorial) or `"rw"` (random-walk).
+
+  Returns
+  -------
+  vals : list
+    The length-`num_eigs` list
+    of the first few eigenvalues of the Laplacian.
+  vects : matrix
+    An `adj_mat.shape[0]` by `num_eigs` matrix
+    of the associated eigenvectors.
+
+  Examples
+  --------
+  >>> adj_mat = np.array(range(1, 10)).reshape((3, 3))
+  >>> run_laplace_embedding(adj_mat, 2, "rw")
+  """
 
   # check args
   assert num_eigs == np.floor(num_eigs)
@@ -116,44 +175,6 @@ def run_laplace_embedding(adj_mat, num_eigs, type_lap = "rw"):
 
   return spectrum
 
-#' Run motif embedding
-#'
-#' Calculate a motif adjacency matrix for a given motif and motif type,
-#' restrict it to its largest connected component,
-#' and then run Laplace embedding with specified Laplacian type and
-#' number of eigenvalues and eigenvectors.
-#' @param adj_mat Adjacency matrix to be embedded.
-#' @param motif_name Motif used for the motif adjacency matrix.
-#' @param motif_type Type of motif adjacency matrix to use.
-#' One of \code{"func"} or \code{"struc"}.
-#' @param mam_weight_type Weighting scheme for the motif adjacency matrix.
-#' One of \code{"unweighted"}, \code{"mean"} or \code{"product"}.
-#' @param mam_method The method to use for building the motif adjacency matrix.
-#' One of \code{"sparse"} or \code{"dense"}.
-#' @param num_eigs Number of eigenvalues and eigenvectors for the embedding.
-#' @param type_lap Type of Laplacian for the embedding.
-#' One of \code{"comb"} or \code{"rw"}.
-#' @return A list with 7 entries:
-#' \itemize{
-#'   \item \code{adj_mat}: the original adjacency matrix.
-#'   \item \code{motif_adj_mat}: the motif adjacency matrix.
-#'   \item \code{comps}: the indices of the largest connected component
-#'     of the motif adjacency matrix.
-#'   \item \code{adj_mat_comps}: the original adjacency matrix restricted
-#'     to the largest connected component of the motif adjacency matrix.
-#'   \item \code{motif_adj_mat_comps}: the motif adjacency matrix restricted
-#'     to its largest connected component.
-#'   \item \code{vals}: a length-\code{num_eigs} vector containing the
-#'     eigenvalues associated with the Laplace embedding
-#'     of the restricted motif adjacency matrix.
-#'   \item \code{vects}: a matrix
-#'     containing the eigenvectors associated with the Laplace embedding
-#'     of the restricted motif adjacency matrix.
-#' }
-#' @examples
-#' adj_mat = matrix(c(1:9), nrow = 3)
-#' run_motif_embedding(adj_mat, "M1", "func", "mean", "sparse", 2, "rw")
-#' @export
 
 def run_motif_embedding(adj_mat, motif_name,
                        motif_type = "struc",
@@ -161,6 +182,64 @@ def run_motif_embedding(adj_mat, motif_name,
                        mam_method = "sparse",
                        num_eigs = 2,
                        type_lap = "rw"):
+  """
+  Run motif embedding.
+
+  Calculate a motif adjacency matrix for a given motif and motif type,
+  restrict it to its largest connected component,
+  and then run Laplace embedding with specified Laplacian type and
+  number of eigenvalues and eigenvectors.
+
+  Parameters
+  ----------
+  adj_mat : matrix
+    Adjacency matrix to be embedded.
+  motif_name : str
+    Motif used for the motif adjacency matrix.
+  motif_type : str
+    Type of motif adjacency matrix to use.
+    One of `"func"` or `"struc"`.
+  mam_weight_type : str
+    Weighting scheme for the motif adjacency matrix.
+    One of `"unweighted"`, `"mean"` or `"product"`.
+  mam_method : str
+    The method to use for building the motif adjacency matrix.
+    One of `"sparse"` or `"dense"`.
+  num_eigs : int
+    Number of eigenvalues and eigenvectors for the embedding.
+  type_lap : str
+    Type of Laplacian for the embedding.
+    One of `"comb"` or `"rw"`.
+
+  Returns
+  -------
+  adj_mat : sparse matrix
+    The original adjacency matrix.
+  motif_adj_mat : sparse matrix
+    The motif adjacency matrix.
+  comps : list
+    The indices of the largest connected component
+    of the motif adjacency matrix.
+  adj_mat_comps : matrix
+    The original adjacency matrix restricted
+    to the largest connected component of the motif adjacency matrix.
+  motif_adj_mat_comps : matrix
+    The motif adjacency matrix restricted
+    to its largest connected component.
+  vals : list
+    A length-`num_eigs` list containing the
+    eigenvalues associated with the Laplace embedding
+    of the restricted motif adjacency matrix.
+  vects :
+    A matrix
+    containing the eigenvectors associated with the Laplace embedding
+    of the restricted motif adjacency matrix.
+
+  Examples
+  --------
+  adj_mat = np.array(range(1, 10)),reshape((3, 3))
+  run_motif_embedding(adj_mat, "M1", "func", "mean", "sparse", 2, "rw")
+  """
 
   # check args
   adj_mat = sparse.csr_matrix(adj_mat)

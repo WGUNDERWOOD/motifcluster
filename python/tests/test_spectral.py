@@ -14,7 +14,7 @@ def test_get_first_eigs_dense():
   vals = [-9, 18, 27]
   vects = np.array([-2, -1, 2, 0, -2, 2, -1, 0, -1, -2, -2, 0]).reshape((3, 4)).transpose() / 3
 
-  spect = mcsp.get_first_eigs(G, 3)
+  spect = mcsp._get_first_eigs(G, 3)
 
   assert np.allclose(spect["vals"], vals, atol = 1e-6)
   assert np.allclose(spect["vects"], vects, atol = 1e-6)
@@ -28,7 +28,7 @@ def test_get_first_eigs_sparse():
   vals = [-9, 18, 27]
   vects = np.array([2, 1, -2, 0, -2, 2, -1, 0, 1, 2, 2, 0]).reshape((3, 4)).transpose() / 3
 
-  spect = mcsp.get_first_eigs(G, 3)
+  spect = mcsp._get_first_eigs(G, 3)
   print(vects)
   print(spect["vects"])
 
