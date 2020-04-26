@@ -7,7 +7,8 @@ Authors@R:
         role = c("aut", "cre"),
         email = "wgu2@princeton.edu")
 Description: Construct motif adjacency matrices for (weighted directed)
-    networks, and use them for spectral clustering.
+    networks, and use them for spectral clustering. Also provides random sampling
+    methods for weighted directed networks.
 URL: https://github.com/wgunderwood/motif-based-clustering
 BugReports: https://github.com/wgunderwood/motif-based-clustering/issues
 License: GPL-3

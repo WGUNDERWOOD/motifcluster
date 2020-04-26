@@ -8,7 +8,8 @@ library(covr)
 #check()
 #build_manual(path = "./doc")
 #build_vignettes()
-report()
+cov <- package_coverage()
+zero_coverage(cov)
 #lint_package(linters = with_defaults(
                #object_name_linter = NULL,
                #object_usage_linter = NULL,
