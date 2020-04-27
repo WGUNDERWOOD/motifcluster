@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 
 # python testing
-#pytest --profile-svg
+pytest -n 8 --profile-svg
 
 # python linting
-#pylint --rcfile=.pylintrc motifcluster
+pylint --rcfile=.pylintrc motifcluster
 
 # python distribution packages
-#python setup.py sdist bdist_wheel
+python setup.py sdist bdist_wheel
 
 # python rtfd
 cd doc/

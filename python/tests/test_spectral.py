@@ -1,4 +1,6 @@
 from motifcluster import spectral as mcsp
+
+import random
 from scipy import sparse
 import numpy as np
 from numpy import linalg
@@ -11,13 +13,19 @@ def test_get_first_eigs_dense():
   G = np.array([7, -4, 14, 0, -4, 19, 10, 0,
                 14, 10, 10, 0, 0, 0, 0, 100]).reshape((4, 4))
 
-  vals = [-9, 18, 27]
-  vects = np.array([-2, -1, 2, 0, -2, 2, -1, 0, -1, -2, -2, 0]).reshape((3, 4)).transpose() / 3
+  ans_vals = [-9, 18, 27]
+  ans_vects = np.array([-2, -1, 2, 0, -2, 2, -1, 0, -1, -2, -2, 0]).reshape((3, 4)).transpose() / 3
 
   spect = mcsp._get_first_eigs(G, 3)
+  vects = spect["vects"]
+  vals = spect["vals"]
 
-  assert np.allclose(spect["vals"], vals, atol = 1e-6)
-  assert np.allclose(spect["vects"], vects, atol = 1e-6)
+  for i in range(len(vals)):
+    if np.sign(vects[0, i]) != np.sign(ans_vects[0, i]):
+      vects[:, i] = -vects[:, i]
+
+  assert np.allclose(vals, ans_vals, atol = 1e-6)
+  assert np.allclose(vects, ans_vects, atol = 1e-6)
 
 
 def test_get_first_eigs_sparse():
@@ -25,15 +33,19 @@ def test_get_first_eigs_sparse():
   G = sparse.csr_matrix(np.array([7, -4, 14, 0, -4, 19, 10, 0,
                 14, 10, 10, 0, 0, 0, 0, 100]).reshape((4, 4)))
 
-  vals = [-9, 18, 27]
-  vects = np.array([2, 1, -2, 0, -2, 2, -1, 0, 1, 2, 2, 0]).reshape((3, 4)).transpose() / 3
+  ans_vals = [-9, 18, 27]
+  ans_vects = np.array([2, 1, -2, 0, -2, 2, -1, 0, 1, 2, 2, 0]).reshape((3, 4)).transpose() / 3
 
   spect = mcsp._get_first_eigs(G, 3)
-  print(vects)
-  print(spect["vects"])
+  vects = spect["vects"]
+  vals = spect["vals"]
 
-  assert np.allclose(spect["vals"], vals, atol = 1e-6)
-  assert np.allclose(spect["vects"], vects, atol = 1e-6)
+  for i in range(len(vals)):
+    if np.sign(vects[0, i]) != np.sign(ans_vects[0, i]):
+      vects[:, i] = -vects[:, i]
+
+  assert np.allclose(vals, ans_vals, atol = 1e-6)
+  assert np.allclose(vects, ans_vects, atol = 1e-6)
 
 
 # build_laplacian
