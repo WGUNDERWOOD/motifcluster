@@ -5,6 +5,8 @@ are in `motifcluster.clustering`.
 
 from sklearn.cluster import KMeans
 
+from motifcluster import spectral as mcsp
+
 def cluster_spectrum(spectrum, num_clusts):
 
   """
@@ -28,20 +30,20 @@ def cluster_spectrum(spectrum, num_clusts):
     representing cluster assignments.
   """
 
-  vects = spectrum["vects"][:,1:]
-  kmeans_plus_plus = KMeans(n_clusters = num_clusts).fit(vects)
+  vects = spectrum["vects"][:, 1:]
+  kmeans_plus_plus = KMeans(n_clusters=num_clusts).fit(vects)
   cluster_assigns = kmeans_plus_plus.labels_
 
-  return(cluster_assigns)
+  return cluster_assigns
 
 
 def run_motif_clustering(adj_mat, motif_name,
-  motif_type = "struc",
-  mam_weight_type = "unweighted",
-  mam_method = "sparse",
-  num_eigs = 2,
-  type_lap = "comb",
-  num_clusts = 2):
+                         motif_type="struc",
+                         mam_weight_type="unweighted",
+                         mam_method="sparse",
+                         num_eigs=2,
+                         type_lap="comb",
+                         num_clusts=2):
 
   """
   Run motif-based clustering.
@@ -112,9 +114,8 @@ def run_motif_clustering(adj_mat, motif_name,
   assert mam_method in ["sparse", "dense"]
   assert type_lap in ["comb", "rw"]
 
-  spectrum = run_motif_embedding(
-    adj_mat, motif_name, motif_type, mam_weight_type,
-    mam_method, num_eigs, type_lap)
+  spectrum = mcsp.run_motif_embedding(adj_mat, motif_name, motif_type, mam_weight_type,
+                                      mam_method, num_eigs, type_lap)
 
   cluster_assigns = cluster_spectrum(spectrum, num_clusts)
 
@@ -129,4 +130,4 @@ def run_motif_clustering(adj_mat, motif_name,
     "clusts": cluster_assigns
   }
 
-  return(ans)
+  return ans

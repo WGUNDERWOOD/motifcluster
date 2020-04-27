@@ -27,7 +27,7 @@ def _build_G(adj_mat):
   """
 
   G = sparse.csr_matrix(adj_mat)
-  return(G)
+  return G
 
 
 def _build_J(adj_mat):
@@ -51,7 +51,7 @@ def _build_J(adj_mat):
 
   G = _build_G(adj_mat)
   J = mcut._drop0_killdiag(G > 0)
-  return(J)
+  return J
 
 
 def _build_Gs(adj_mat):
@@ -76,7 +76,7 @@ def _build_Gs(adj_mat):
   G = _build_G(adj_mat)
   J = _build_J(adj_mat)
   Gs = mcut._drop0_killdiag(G - G.multiply(J.T))
-  return(Gs)
+  return Gs
 
 
 def _build_Js(adj_mat):
@@ -100,7 +100,7 @@ def _build_Js(adj_mat):
 
   Gs = _build_Gs(adj_mat)
   Js = mcut._drop0_killdiag(Gs > 0)
-  return(Js)
+  return Js
 
 
 def _build_Gd(adj_mat):
@@ -126,7 +126,7 @@ def _build_Gd(adj_mat):
   G = _build_G(adj_mat)
   Gd = mcut._drop0_killdiag((G + G.T) * J * J.T)
   Gd = mcut._drop0_killdiag((G + G.T).multiply(J).multiply(J.T))
-  return(Gd)
+  return Gd
 
 
 def _build_Jd(adj_mat):
@@ -150,7 +150,7 @@ def _build_Jd(adj_mat):
 
   Gd = _build_Gd(adj_mat)
   Jd = mcut._drop0_killdiag(Gd > 0)
-  return(Jd)
+  return Jd
 
 
 def _build_J0(adj_mat):
@@ -174,7 +174,7 @@ def _build_J0(adj_mat):
 
   G_dense = _build_G(adj_mat).toarray()
   J0 = mcut._drop0_killdiag((G_dense + G_dense.T) == 0)
-  return(J0)
+  return J0
 
 
 def _build_Jn(adj_mat):
@@ -198,7 +198,7 @@ def _build_Jn(adj_mat):
 
   n = adj_mat.shape[0]
   Jn = mcut._drop0_killdiag(np.ones((n, n)))
-  return(Jn)
+  return Jn
 
 
 def _build_Id(adj_mat):
@@ -222,7 +222,7 @@ def _build_Id(adj_mat):
 
   n = adj_mat.shape[0]
   Id = sparse.identity(n)
-  return(Id)
+  return Id
 
 
 def _build_Je(adj_mat):
@@ -247,7 +247,7 @@ def _build_Je(adj_mat):
   G = _build_G(adj_mat)
   Id = _build_Id(adj_mat)
   Je = sparse.csr_matrix(Id + ((G + G.T) > 0))
-  return(Je)
+  return Je
 
 
 def _build_Gp(adj_mat):
@@ -271,4 +271,4 @@ def _build_Gp(adj_mat):
 
   G = _build_G(adj_mat)
   Gp = mcut._drop0_killdiag(G.multiply(G.T))
-  return(Gp)
+  return Gp

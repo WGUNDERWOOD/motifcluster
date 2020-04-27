@@ -42,10 +42,7 @@ build_motif_adjacency_matrix <- function(adj_mat, motif_name,
   mam_method = c("sparse", "dense")) {
 
   # check args
-  if (!(motif_name %in% get_motif_names())) {
-    stop("Invalid motif name.")
-  }
-
+  stopifnot(motif_name %in% get_motif_names())
   motif_type <- match.arg(motif_type)
   mam_weight_type <- match.arg(mam_weight_type, mam_weight_type)
   mam_method <- match.arg(mam_method)

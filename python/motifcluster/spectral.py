@@ -31,12 +31,12 @@ def _get_first_eigs(some_mat, num_eigs):
   """
 
   # check args
-  some_mat = sparse.csr_matrix(some_mat, dtype = "f")
+  some_mat = sparse.csr_matrix(some_mat, dtype="f")
   assert num_eigs == np.floor(num_eigs)
   assert num_eigs >= 1
 
   # get spectrum
-  vals, vects = linalg.eigsh(some_mat, k = num_eigs, which = "SM")
+  vals, vects = linalg.eigsh(some_mat, k=num_eigs, which="SM")
 
   # order eigenvalues and eigenvectors
   ordering = np.argsort(vals.real)
@@ -49,10 +49,10 @@ def _get_first_eigs(some_mat, num_eigs):
     "vals": vals
   }
 
-  return(spectrum)
+  return spectrum
 
 
-def build_laplacian(adj_mat, type_lap = "rw"):
+def build_laplacian(adj_mat, type_lap="rw"):
 
   """
   Build a Laplacian matrix.
@@ -85,25 +85,25 @@ def build_laplacian(adj_mat, type_lap = "rw"):
   n = adj_mat.shape[0]
 
   # initialize parameters
-  degs_adj_mat = adj_mat.sum(axis = 0).reshape(n)
+  degs_adj_mat = adj_mat.sum(axis=0).reshape(n)
 
   # combinatorial Laplacian
   if type_lap == "comb":
-    degs_matrix = sparse.diags(degs_adj_mat, offsets = [0], shape = (n, n))
-    L =  degs_matrix - adj_mat
+    degs_matrix = sparse.diags(degs_adj_mat, offsets=[0], shape=(n, n))
+    L = degs_matrix - adj_mat
 
   # random-walk Laplacian
   elif type_lap == "rw":
     assert (degs_adj_mat > 0).all()
-    inv_degs_matrix = sparse.diags(1 / degs_adj_mat, offsets = [0], shape = (n, n))
-    L =  sparse.identity(n) - inv_degs_matrix * adj_mat
+    inv_degs_matrix = sparse.diags(1 / degs_adj_mat, offsets=[0], shape=(n, n))
+    L = sparse.identity(n) - inv_degs_matrix * adj_mat
 
   L = sparse.csr_matrix(L)
 
   return L
 
 
-def run_laplace_embedding(adj_mat, num_eigs, type_lap = "rw"):
+def run_laplace_embedding(adj_mat, num_eigs, type_lap="rw"):
 
   """
   Run Laplace embedding.
@@ -143,17 +143,17 @@ def run_laplace_embedding(adj_mat, num_eigs, type_lap = "rw"):
 
   # build and embed Laplacian
   laplacian = build_laplacian(adj_mat, type_lap)
-  spectrum = get_first_eigs(laplacian, num_eigs)
+  spectrum = _get_first_eigs(laplacian, num_eigs)
 
   return spectrum
 
 
 def run_motif_embedding(adj_mat, motif_name,
-                       motif_type = "struc",
-                       mam_weight_type = "unweighted",
-                       mam_method = "sparse",
-                       num_eigs = 2,
-                       type_lap = "rw"):
+                        motif_type="struc",
+                        mam_weight_type="unweighted",
+                        mam_method="sparse",
+                        num_eigs=2,
+                        type_lap="rw"):
   """
   Run motif embedding.
 
@@ -225,7 +225,8 @@ def run_motif_embedding(adj_mat, motif_name,
 
   # build motif adjacency matrix
   motif_adj_mat = mcmo.build_motif_adjacency_matrix(adj_mat, motif_name,
-                     motif_type, mam_weight_type, mam_method)
+                                                    motif_type, mam_weight_type,
+                                                    mam_method)
 
   # restrict to largest connected component
   comps = mcut.get_largest_component(motif_adj_mat)

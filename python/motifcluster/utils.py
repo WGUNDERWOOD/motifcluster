@@ -3,13 +3,13 @@ Assorted utility functions for the motifcluster module
 are in `motifcluster.utils`.
 """
 
+import random
 import numpy as np
 from numpy import random as rd
 import networkx as nx
 from scipy import sparse
-import random
 
-def _a_b_one(a, b):
+def _a_b_one(a_mat, b_mat):
 
   """
   Compute a right-multiplication with the ones matrix.
@@ -33,16 +33,16 @@ def _a_b_one(a, b):
     The sparse square matrix `a * (b @ one_mat)`.
   """
 
-  a_sparse = sparse.csr_matrix(a)
-  b_sparse = sparse.csr_matrix(b)
-  n = a.shape[0]
+  a_sparse = sparse.csr_matrix(a_mat)
+  b_sparse = sparse.csr_matrix(b_mat)
+  n = a_mat.shape[0]
   ones_vec = np.ones(n)
   ans = (a_sparse.T.multiply(b_sparse @ ones_vec)).T
 
   return sparse.csr_matrix(ans)
 
 
-def _a_one_b(a, b):
+def _a_one_b(a_mat, b_mat):
 
   """
   Compute a left-multiplication with the ones matrix.
@@ -66,11 +66,11 @@ def _a_one_b(a, b):
     The sparse square matrix `a * (one_mat @ b)`.
   """
 
-  a_sparse = sparse.csr_matrix(a)
-  b_sparse = sparse.csr_matrix(b)
-  n = a.shape[0]
+  a_sparse = sparse.csr_matrix(a_mat)
+  b_sparse = sparse.csr_matrix(b_mat)
+  n = a_mat.shape[0]
   ones_vec = np.ones(n)
-  ans = (a_sparse.multiply(ones_vec @ b))
+  ans = (a_sparse.multiply(ones_vec @ b_sparse))
 
   return sparse.csr_matrix(ans)
 
@@ -100,7 +100,7 @@ def _drop0_killdiag(some_mat):
   ans = ans - I.multiply(ans)
   sparse_mat = sparse.csr_matrix(ans)
 
-  return(sparse_mat)
+  return sparse_mat
 
 
 def get_largest_component(adj_mat):
@@ -157,10 +157,10 @@ def get_motif_names():
 
   motif_names = motif_names + ["Mcoll"] + ["Mexpa"]
 
-  return(motif_names)
+  return motif_names
 
 
-def _random_sparse_matrix(m, n, p, sample_weight_type = None, w = 0):
+def _random_sparse_matrix(m, n, p, sample_weight_type="constant", w=1):
 
   """
   Build a random sparse matrix.
@@ -200,13 +200,13 @@ def _random_sparse_matrix(m, n, p, sample_weight_type = None, w = 0):
     vals = np.full(k, w)
 
   elif sample_weight_type == "poisson":
-    vals = rd.poisson(w, size = k)
+    vals = rd.poisson(w, size=k)
 
   else:
     vals = np.ones(k)
 
   # create matrix
-  ans = sparse.csc_matrix((vals, (inds, zs)), shape = (mn, 1))
+  ans = sparse.csc_matrix((vals, (inds, zs)), shape=(mn, 1))
   ans = ans.reshape((m, n))
 
-  return(ans)
+  return ans

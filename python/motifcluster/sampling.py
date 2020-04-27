@@ -1,11 +1,16 @@
+"""
+Functions for random sampling of weighted directed networks
+are in `motifcluster.sampling`.
+"""
+
 import numpy as np
 from scipy import sparse
-from numpy import random as rd
 
 from motifcluster import utils as mcut
 
 def sample_dsbm(block_sizes, connection_matrix,
-  weight_matrix = None, sample_weight_type = "unweighted"):
+                weight_matrix=None,
+                sample_weight_type="unweighted"):
 
   """
   Sample a directed stochastic block model (DSBM).
@@ -50,7 +55,7 @@ def sample_dsbm(block_sizes, connection_matrix,
   assert (connection_matrix <= 1).all()
   assert sample_weight_type in ["unweighted", "constant", "poisson"]
 
-  if not sample_weight_type == "unweighted":
+  if sample_weight_type != "unweighted":
     assert weight_matrix is not None
     assert len(block_sizes) == weight_matrix.shape[0]
     assert len(block_sizes) == weight_matrix.shape[1]
@@ -86,13 +91,13 @@ def sample_dsbm(block_sizes, connection_matrix,
   adj_mat = sparse.bmat(block_list)
   adj_mat = mcut._drop0_killdiag(adj_mat)
 
-  return(adj_mat)
+  return adj_mat
 
 
 def sample_bsbm(source_block_sizes, dest_block_sizes,
-  bipartite_connection_matrix,
-  bipartite_weight_matrix = None,
-  sample_weight_type = "unweighted"):
+                bipartite_connection_matrix,
+                bipartite_weight_matrix=None,
+                sample_weight_type="unweighted"):
 
   """
   Sample a bipartite stochastic block model (BSBM).
@@ -143,7 +148,7 @@ def sample_bsbm(source_block_sizes, dest_block_sizes,
   assert (bipartite_connection_matrix <= 1).all()
   assert sample_weight_type in ["unweighted", "constant", "poisson"]
 
-  if not sample_weight_type == "unweighted":
+  if sample_weight_type != "unweighted":
     assert bipartite_weight_matrix is not None
     assert len(source_block_sizes) == bipartite_weight_matrix.shape[0]
     assert len(dest_block_sizes) == bipartite_weight_matrix.shape[1]
@@ -170,9 +175,9 @@ def sample_bsbm(source_block_sizes, dest_block_sizes,
 
   # sample BSBM
   adj_mat = sample_dsbm(block_sizes, connection_matrix,
-                         weight_matrix, sample_weight_type)
+                        weight_matrix, sample_weight_type)
 
-  return(adj_mat)
+  return adj_mat
 
 
 def demonstration_graph():
@@ -192,18 +197,18 @@ def demonstration_graph():
   """
 
   adj_mat_dense = np.array([
-    0, 0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 0,
-    2, 0,  3,  0,  6,  8,  0,  0,  0,  0,  0, 0,
-    0, 0,  0,  0,  0, 10,  0,  0,  0,  0,  0, 0,
-    0, 0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 0,
-    4, 5,  0,  0,  0, 14,  0,  0, 18, 19,  0, 0,
-    0, 7,  9,  0, 13,  0,  0,  0,  0,  0, 21, 0,
-    0, 0, 11, 12,  0, 15,  0, 17,  0,  0,  0, 0,
-    0, 0,  0,  0,  0,  0, 16,  0,  0,  0,  0, 0,
-    0, 0,  0,  0,  0,  0,  0,  0,  0, 24,  0, 0,
-    0, 0,  0,  0,  0, 20,  0,  0,  0,  0,  0, 0,
-    0, 0,  0,  0,  0,  0, 22,  0,  0,  0,  0, 0,
-    0, 0,  0,  0,  0,  0, 23,  0,  0,  0,  0, 0
+    0, 0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 0, #pylint: disable=C0326
+    2, 0,  3,  0,  6,  8,  0,  0,  0,  0,  0, 0, #pylint: disable=C0326
+    0, 0,  0,  0,  0, 10,  0,  0,  0,  0,  0, 0, #pylint: disable=C0326
+    0, 0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 0, #pylint: disable=C0326
+    4, 5,  0,  0,  0, 14,  0,  0, 18, 19,  0, 0, #pylint: disable=C0326
+    0, 7,  9,  0, 13,  0,  0,  0,  0,  0, 21, 0, #pylint: disable=C0326
+    0, 0, 11, 12,  0, 15,  0, 17,  0,  0,  0, 0, #pylint: disable=C0326
+    0, 0,  0,  0,  0,  0, 16,  0,  0,  0,  0, 0, #pylint: disable=C0326
+    0, 0,  0,  0,  0,  0,  0,  0,  0, 24,  0, 0, #pylint: disable=C0326
+    0, 0,  0,  0,  0, 20,  0,  0,  0,  0,  0, 0, #pylint: disable=C0326
+    0, 0,  0,  0,  0,  0, 22,  0,  0,  0,  0, 0, #pylint: disable=C0326
+    0, 0,  0,  0,  0,  0, 23,  0,  0,  0,  0, 0  #pylint: disable=C0326
   ]).reshape((12, 12))
 
   adj_mat_sparse = sparse.csr_matrix(adj_mat_dense)

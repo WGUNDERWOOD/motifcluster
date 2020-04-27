@@ -16,12 +16,8 @@
 get_first_eigs <- function(some_mat, num_eigs) {
 
   # check args
-  if (!all.equal(num_eigs, as.integer(num_eigs))) {
-    stop("num_eigs must be an integer.")
-  }
-  if (!(num_eigs > 0)) {
-    stop("num_eigs must be at least 1.")
-  }
+  stopifnot(all.equal(num_eigs, as.integer(num_eigs)))
+  stopifnot(num_eigs > 0)
 
   # get spectrum
   spectrum_eigs <- eigs(some_mat, num_eigs, which = "SM")
@@ -106,12 +102,8 @@ run_laplace_embedding <- function(adj_mat, num_eigs,
                                   type_lap = c("comb", "rw")) {
 
   # check args
-  if (!all.equal(num_eigs, as.integer(num_eigs))) {
-    stop("num_eigs must be an integer.")
-  }
-  if (!(num_eigs > 0)) {
-    stop("num_eigs must be at least 1.")
-  }
+  stopifnot(all.equal(num_eigs, as.integer(num_eigs)))
+  stopifnot(num_eigs > 0)
   type_lap <- match.arg(type_lap)
 
   # build and embed Laplacian
@@ -168,18 +160,12 @@ run_motif_embedding <- function(adj_mat, motif_name,
 
   # check args
   adj_mat <- drop0(adj_mat)
-  if (!(motif_name %in% get_motif_names())) {
-    stop("Invalid motif name.")
-  }
+  stopifnot(motif_name %in% get_motif_names())
   motif_type <- match.arg(motif_type)
-  if (!all.equal(num_eigs, as.integer(num_eigs))) {
-    stop("num_eigs must be an integer.")
-  }
+  stopifnot(all.equal(num_eigs, as.integer(num_eigs)))
   mam_weight_type <- match.arg(mam_weight_type)
   mam_method <- match.arg(mam_method)
-  if (!(num_eigs > 0)) {
-    stop("num_eigs must be at least 1.")
-  }
+  stopifnot(num_eigs > 0)
   type_lap <- match.arg(type_lap)
 
   # build motif adjacency matrix

@@ -8,8 +8,8 @@ from scipy import sparse
 from motifcluster import utils as mcut
 from motifcluster import indicators as mcin
 
-def build_motif_adjacency_matrix(adj_mat, motif_name, motif_type = "struc",
-  mam_weight_type = "unweighted", mam_method = "sparse"):
+def build_motif_adjacency_matrix(adj_mat, motif_name, motif_type="struc",
+                                 mam_weight_type="unweighted", mam_method="sparse"):
 
   """
   Build a motif adjacency matrix.
@@ -72,53 +72,55 @@ def build_motif_adjacency_matrix(adj_mat, motif_name, motif_type = "struc",
   if motif_name == "Ms":
     return mam_Ms(adj_mat, motif_type, mam_weight_type)
 
-  elif motif_name == "Md":
+  if motif_name == "Md":
     return mam_Md(adj_mat, mam_weight_type)
 
-  elif motif_name == "M1":
+  if motif_name == "M1":
     return mam_M1(adj_mat, motif_type, mam_weight_type)
 
-  elif motif_name == "M2":
+  if motif_name == "M2":
     return mam_M2(adj_mat, motif_type, mam_weight_type)
 
-  elif motif_name == "M3":
+  if motif_name == "M3":
     return mam_M3(adj_mat, motif_type, mam_weight_type)
 
-  elif motif_name == "M4":
+  if motif_name == "M4":
     return mam_M4(adj_mat, mam_weight_type)
 
-  elif motif_name == "M5":
+  if motif_name == "M5":
     return mam_M5(adj_mat, motif_type, mam_weight_type)
 
-  elif motif_name == "M6":
+  if motif_name == "M6":
     return mam_M6(adj_mat, motif_type, mam_weight_type)
 
-  elif motif_name == "M7":
+  if motif_name == "M7":
     return mam_M7(adj_mat, motif_type, mam_weight_type)
 
-  elif motif_name == "M8":
+  if motif_name == "M8":
     return mam_M8(adj_mat, motif_type, mam_weight_type, mam_method)
 
-  elif motif_name == "M9":
+  if motif_name == "M9":
     return mam_M9(adj_mat, motif_type, mam_weight_type, mam_method)
 
-  elif motif_name == "M10":
+  if motif_name == "M10":
     return mam_M10(adj_mat, motif_type, mam_weight_type, mam_method)
 
-  elif motif_name == "M11":
+  if motif_name == "M11":
     return mam_M11(adj_mat, motif_type, mam_weight_type, mam_method)
 
-  elif motif_name == "M12":
+  if motif_name == "M12":
     return mam_M12(adj_mat, motif_type, mam_weight_type, mam_method)
 
-  elif motif_name == "M13":
+  if motif_name == "M13":
     return mam_M13(adj_mat, motif_type, mam_weight_type, mam_method)
 
-  elif motif_name == "Mcoll":
+  if motif_name == "Mcoll":
     return mam_Mcoll(adj_mat, motif_type, mam_weight_type, mam_method)
 
-  elif motif_name == "Mexpa":
+  if motif_name == "Mexpa":
     return mam_Mexpa(adj_mat, motif_type, mam_weight_type, mam_method)
+
+  return None
 
 
 def mam_Ms(adj_mat, motif_type, mam_weight_type):
@@ -168,6 +170,8 @@ def mam_Ms(adj_mat, motif_type, mam_weight_type):
       Gs = mcin._build_Gs(adj_mat)
       return Gs + Gs.transpose()
 
+  return None
+
 
 def mam_Md(adj_mat, mam_weight_type):
 
@@ -198,6 +202,8 @@ def mam_Md(adj_mat, mam_weight_type):
   if mam_weight_type == "product":
     Gp = mcin._build_Gp(adj_mat)
     return Gp
+
+  return None
 
 
 def mam_M1(adj_mat, motif_type, mam_weight_type):
@@ -235,13 +241,15 @@ def mam_M1(adj_mat, motif_type, mam_weight_type):
     if motif_type == "func":
       J = mcin._build_J(adj_mat)
       G = mcin._build_G(adj_mat)
-      C = J.transpose().multiply(J * G) + J.transpose().multiply(G * J) + G.transpose().multiply(J * J)
+      C = J.transpose().multiply(J * G) + J.transpose().multiply(G * J)
+      C += G.transpose().multiply(J * J)
       return (C + C.transpose()) / 3
 
     if motif_type == "struc":
       Js = mcin._build_Js(adj_mat)
       Gs = mcin._build_Gs(adj_mat)
-      C = Js.transpose().multiply(Js * Gs) + Js.transpose().multiply(Gs * Js) + Gs.transpose().multiply(Js * Js)
+      C = Js.transpose().multiply(Js * Gs) + Js.transpose().multiply(Gs * Js)
+      C += Gs.transpose().multiply(Js * Js)
       return (C + C.transpose()) / 3
 
   if mam_weight_type == "product":
@@ -254,6 +262,8 @@ def mam_M1(adj_mat, motif_type, mam_weight_type):
       Gs = mcin._build_Gs(adj_mat)
       C = Gs.transpose().multiply(Gs * Gs)
       return C + C.transpose()
+
+  return None
 
 
 def mam_M2(adj_mat, motif_type, mam_weight_type):
@@ -280,13 +290,15 @@ def mam_M2(adj_mat, motif_type, mam_weight_type):
     if motif_type == "func":
       J = mcin._build_J(adj_mat)
       Jd = mcin._build_Jd(adj_mat)
-      C = J.transpose().multiply(Jd * J) + J.transpose().multiply(J * Jd) + Jd.multiply(J * J)
+      C = J.transpose().multiply(Jd * J) + J.transpose().multiply(J * Jd)
+      C += Jd.multiply(J * J)
       return C + C.transpose()
 
     if motif_type == "struc":
       Js = mcin._build_Js(adj_mat)
       Jd = mcin._build_Jd(adj_mat)
-      C = Js.transpose().multiply(Jd * Js) + Js.transpose().multiply(Js * Jd) + Jd.multiply(Js * Js)
+      C = Js.transpose().multiply(Jd * Js) + Js.transpose().multiply(Js * Jd)
+      C += Jd.multiply(Js * Js)
       return C + C.transpose()
 
   if mam_weight_type == "mean":
@@ -295,8 +307,10 @@ def mam_M2(adj_mat, motif_type, mam_weight_type):
       Jd = mcin._build_Jd(adj_mat)
       Gd = mcin._build_Gd(adj_mat)
       G = mcin._build_G(adj_mat)
-      C = J.transpose().multiply(Jd * G) + J.transpose().multiply(Gd * J) + G.transpose().multiply(Jd * J)
-      C = C + J.transpose().multiply(J * Gd) + J.transpose().multiply(G * Jd) + G.transpose().multiply(J * Jd)
+      C = J.transpose().multiply(Jd * G) + J.transpose().multiply(Gd * J)
+      C += G.transpose().multiply(Jd * J)
+      C = C + J.transpose().multiply(J * Gd) + J.transpose().multiply(G * Jd)
+      C += G.transpose().multiply(J * Jd)
       C = C + Jd.multiply(J * G) + Jd.multiply(G * J) + Gd.multiply(J * J)
       return (C + C.transpose()) / 4
 
@@ -305,8 +319,10 @@ def mam_M2(adj_mat, motif_type, mam_weight_type):
       Jd = mcin._build_Jd(adj_mat)
       Gs = mcin._build_Gs(adj_mat)
       Gd = mcin._build_Gd(adj_mat)
-      C = Js.transpose().multiply(Jd * Gs) + Js.transpose().multiply(Gd * Js) + Gs.transpose().multiply(Jd * Js)
-      C = C + Js.transpose().multiply(Js * Gd) + Js.transpose().multiply(Gs * Jd) + Gs.transpose().multiply(Js * Jd)
+      C = Js.transpose().multiply(Jd * Gs) + Js.transpose().multiply(Gd * Js)
+      C += Gs.transpose().multiply(Jd * Js)
+      C = C + Js.transpose().multiply(Js * Gd)
+      C += Js.transpose().multiply(Gs * Jd) + Gs.transpose().multiply(Js * Jd)
       C = C + Jd.multiply(Js * Gs) + Jd.multiply(Gs * Js) + Gd.multiply(Js * Js)
       return (C + C.transpose()) / 4
 
@@ -314,14 +330,18 @@ def mam_M2(adj_mat, motif_type, mam_weight_type):
     if motif_type == "func":
       G = mcin._build_G(adj_mat)
       Gp = mcin._build_Gp(adj_mat)
-      C = G.transpose().multiply(Gp * G) + G.transpose().multiply(G * Gp) + Gp.multiply(G * G)
+      C = G.transpose().multiply(Gp * G) + G.transpose().multiply(G * Gp)
+      C += Gp.multiply(G * G)
       return C + C.transpose()
 
     if motif_type == "struc":
       Gs = mcin._build_Gs(adj_mat)
       Gp = mcin._build_Gp(adj_mat)
-      C = Gs.transpose().multiply(Gp * Gs) + Gs.transpose().multiply(Gs * Gp) + Gp.multiply(Gs * Gs)
+      C = Gs.transpose().multiply(Gp * Gs) + Gs.transpose().multiply(Gs * Gp)
+      C += Gp.multiply(Gs * Gs)
       return C + C.transpose()
+
+  return None
 
 
 def mam_M3(adj_mat, motif_type, mam_weight_type):
@@ -391,6 +411,8 @@ def mam_M3(adj_mat, motif_type, mam_weight_type):
       C = Gs.multiply(Gp * Gp) + Gp.multiply(Gp * Gs) + Gp.multiply(Gs * Gp)
       return C + C.transpose()
 
+  return None
+
 
 def mam_M4(adj_mat, mam_weight_type):
 
@@ -423,6 +445,8 @@ def mam_M4(adj_mat, mam_weight_type):
     Gp = mcin._build_Gp(adj_mat)
     return Gp.multiply(Gp * Gp)
 
+  return None
+
 
 def mam_M5(adj_mat, motif_type, mam_weight_type):
 
@@ -452,7 +476,8 @@ def mam_M5(adj_mat, motif_type, mam_weight_type):
 
     if motif_type == "struc":
       Js = mcin._build_Js(adj_mat)
-      C = Js.multiply(Js * Js) + Js.multiply(Js * Js.transpose()) + Js.multiply(Js.transpose() * Js)
+      C = Js.multiply(Js * Js) + Js.multiply(Js * Js.transpose())
+      C += Js.multiply(Js.transpose() * Js)
       return C + C.transpose()
 
   if mam_weight_type == "mean":
@@ -460,28 +485,36 @@ def mam_M5(adj_mat, motif_type, mam_weight_type):
       J = mcin._build_J(adj_mat)
       G = mcin._build_G(adj_mat)
       C = J.multiply(J * G) + J.multiply(G * J) + G.multiply(J * J)
-      C = C + J.multiply(J * G.transpose()) + J.multiply(G * J.transpose()) + G.multiply(J * J.transpose())
-      C = C + J.multiply(J.transpose() * G) + J.multiply(G.transpose() * J) + G.multiply(J.transpose() * J)
+      C = C + J.multiply(J * G.transpose()) + J.multiply(G * J.transpose())
+      C += G.multiply(J * J.transpose())
+      C = C + J.multiply(J.transpose() * G) + J.multiply(G.transpose() * J)
+      C += G.multiply(J.transpose() * J)
       return (C + C.transpose()) / 3
 
     if motif_type == "struc":
       Js = mcin._build_Js(adj_mat)
       Gs = mcin._build_Gs(adj_mat)
       C = Js.multiply(Js * Gs) + Js.multiply(Gs * Js) + Gs.multiply(Js * Js)
-      C = C + Js.multiply(Js * Gs.transpose()) + Js.multiply(Gs * Js.transpose()) + Gs.multiply(Js * Js.transpose())
-      C = C + Js.multiply(Js.transpose() * Gs) + Js.multiply(Gs.transpose() * Js) + Gs.multiply(Js.transpose() * Js)
+      C = C + Js.multiply(Js * Gs.transpose())
+      C += Js.multiply(Gs * Js.transpose()) + Gs.multiply(Js * Js.transpose())
+      C = C + Js.multiply(Js.transpose() * Gs)
+      C += Js.multiply(Gs.transpose() * Js) + Gs.multiply(Js.transpose() * Js)
       return (C + C.transpose()) / 3
 
   if mam_weight_type == "product":
     if motif_type == "func":
       G = mcin._build_G(adj_mat)
-      C = G.multiply(G * G) + G.multiply(G * G.transpose()) + G.multiply(G.transpose() * G)
+      C = G.multiply(G * G) + G.multiply(G * G.transpose())
+      C += G.multiply(G.transpose() * G)
       return C + C.transpose()
 
     if motif_type == "struc":
       Gs = mcin._build_Gs(adj_mat)
-      C = Gs.multiply(Gs * Gs) + Gs.multiply(Gs * Gs.transpose()) + Gs.multiply(Gs.transpose() * Gs)
+      C = Gs.multiply(Gs * Gs) + Gs.multiply(Gs * Gs.transpose())
+      C += Gs.multiply(Gs.transpose() * Gs)
       return C + C.transpose()
+
+  return None
 
 
 def mam_M6(adj_mat, motif_type, mam_weight_type):
@@ -526,7 +559,8 @@ def mam_M6(adj_mat, motif_type, mam_weight_type):
       Gd = mcin._build_Gd(adj_mat)
       G = mcin._build_G(adj_mat)
       C = J.multiply(J * Gd) + J.multiply(G * Jd) + G.multiply(J * Jd)
-      Cprime = Jd.multiply(J.transpose() * G) + Jd.multiply(G.transpose() * J) + Gd.multiply(J.transpose() * J)
+      Cprime = Jd.multiply(J.transpose() * G) + Jd.multiply(G.transpose() * J)
+      Cprime += Gd.multiply(J.transpose() * J)
       return (C + C.transpose() + Cprime) / 4
 
     if motif_type == "struc":
@@ -535,7 +569,8 @@ def mam_M6(adj_mat, motif_type, mam_weight_type):
       Jd = mcin._build_Jd(adj_mat)
       Gd = mcin._build_Gd(adj_mat)
       C = Js.multiply(Js * Gd) + Js.multiply(Gs * Jd) + Gs.multiply(Js * Jd)
-      Cprime = Jd.multiply(Js.transpose() * Gs) + Jd.multiply(Gs.transpose() * Js) + Gd.multiply(Js.transpose() * Js)
+      Cprime = Jd.multiply(Js.transpose() * Gs)
+      Cprime += Jd.multiply(Gs.transpose() * Js) + Gd.multiply(Js.transpose() * Js)
       return (C + C.transpose() + Cprime) / 4
 
   if mam_weight_type == "product":
@@ -552,6 +587,8 @@ def mam_M6(adj_mat, motif_type, mam_weight_type):
       C = Gs.multiply(Gs * Gp)
       Cprime = Gp.multiply(Gs.transpose() * Gs)
       return C + C.transpose() + Cprime
+
+  return None
 
 
 def mam_M7(adj_mat, motif_type, mam_weight_type):
@@ -596,7 +633,8 @@ def mam_M7(adj_mat, motif_type, mam_weight_type):
       Gd = mcin._build_Gd(adj_mat)
       G = mcin._build_G(adj_mat)
       C = J.multiply(Jd * G) + J.multiply(Gd * J) + G.multiply(Jd * J)
-      Cprime = Jd.multiply(J * G.transpose()) + Jd.multiply(G * J.transpose()) + Gd.multiply(J * J.transpose())
+      Cprime = Jd.multiply(J * G.transpose()) + Jd.multiply(G * J.transpose())
+      Cprime += Gd.multiply(J * J.transpose())
       return (C + C.transpose() + Cprime) / 4
 
     if motif_type == "struc":
@@ -605,7 +643,8 @@ def mam_M7(adj_mat, motif_type, mam_weight_type):
       Jd = mcin._build_Jd(adj_mat)
       Gd = mcin._build_Gd(adj_mat)
       C = Js.multiply(Jd * Gs) + Js.multiply(Gd * Js) + Gs.multiply(Jd * Js)
-      Cprime = Jd.multiply(Js * Gs.transpose()) + Jd.multiply(Gs * Js.transpose()) + Gd.multiply(Js * Js.transpose())
+      Cprime = Jd.multiply(Js * Gs.transpose()) + Jd.multiply(Gs * Js.transpose())
+      Cprime += Gd.multiply(Js * Js.transpose())
       return (C + C.transpose() + Cprime) / 4
 
   if mam_weight_type == "product":
@@ -622,6 +661,8 @@ def mam_M7(adj_mat, motif_type, mam_weight_type):
       C = Gs.multiply(Gp * Gs)
       Cprime = Gp.multiply(Gs * Gs.transpose())
       return C + C.transpose() + Cprime
+
+  return None
 
 
 def mam_M8(adj_mat, motif_type, mam_weight_type, mam_method):
@@ -745,6 +786,8 @@ def mam_M8(adj_mat, motif_type, mam_weight_type, mam_method):
         Cprime = Gs.transpose() * Gs - Je.multiply(Gs.transpose() * Gs)
         return sparse.csr_matrix(C + C.transpose() + Cprime)
 
+  return None
+
 
 def mam_M9(adj_mat, motif_type, mam_weight_type, mam_method):
 
@@ -773,13 +816,15 @@ def mam_M9(adj_mat, motif_type, mam_weight_type, mam_method):
       if motif_type == "func":
         J = mcin._build_J(adj_mat)
         Jn = mcin._build_Jn(adj_mat)
-        C = J.multiply(Jn * J.transpose()) + Jn.multiply(J * J) + J.multiply(J.transpose() * Jn)
+        C = J.multiply(Jn * J.transpose()) + Jn.multiply(J * J)
+        C += J.multiply(J.transpose() * Jn)
         return C + C.transpose()
 
       if motif_type == "struc":
         Js = mcin._build_Js(adj_mat)
         J0 = mcin._build_J0(adj_mat)
-        C = Js.multiply(J0 * Js.transpose()) + J0.multiply(Js * Js) + Js.multiply(Js.transpose() * J0)
+        C = Js.multiply(J0 * Js.transpose()) + J0.multiply(Js * Js)
+        C += Js.multiply(Js.transpose() * J0)
         return C + C.transpose()
 
     if mam_weight_type == "mean":
@@ -811,7 +856,8 @@ def mam_M9(adj_mat, motif_type, mam_weight_type, mam_method):
       if motif_type == "struc":
         Gs = mcin._build_Gs(adj_mat)
         J0 = mcin._build_J0(adj_mat)
-        C = Gs.multiply(J0 * Gs.transpose()) + J0.multiply(Gs * Gs) + Gs.multiply(Gs.transpose() * J0)
+        C = Gs.multiply(J0 * Gs.transpose()) + J0.multiply(Gs * Gs)
+        C += Gs.multiply(Gs.transpose() * J0)
         return C + C.transpose()
 
   if mam_method == "sparse":
@@ -869,6 +915,8 @@ def mam_M9(adj_mat, motif_type, mam_weight_type, mam_method):
         C = C + Gs * Gs - Je.multiply(Gs * Gs)
         C = C + mcut._a_b_one(Gs, Gs.transpose()) - Gs.multiply(Gs.transpose() * Je)
         return sparse.csr_matrix(C + C.transpose())
+
+  return None
 
 
 def mam_M10(adj_mat, motif_type, mam_weight_type, mam_method):
@@ -991,6 +1039,8 @@ def mam_M10(adj_mat, motif_type, mam_weight_type, mam_method):
         C = mcut._a_one_b(Gs, Gs) - Gs.multiply(Je * Gs)
         Cprime = Gs * Gs.transpose() - Je.multiply(Gs * Gs.transpose())
         return sparse.csr_matrix(C + C.transpose() + Cprime)
+
+  return None
 
 
 def mam_M11(adj_mat, motif_type, mam_weight_type, mam_method):
@@ -1133,6 +1183,8 @@ def mam_M11(adj_mat, motif_type, mam_weight_type, mam_method):
         C = C + mcut._a_b_one(Gs, Gp) - Gs.multiply(Gp * Je)
         return sparse.csr_matrix(C + C.transpose())
 
+  return None
+
 
 def mam_M12(adj_mat, motif_type, mam_weight_type, mam_method):
 
@@ -1274,6 +1326,8 @@ def mam_M12(adj_mat, motif_type, mam_weight_type, mam_method):
         C = C + mcut._a_one_b(Gs, Gp) - Gs.multiply(Je * Gp)
         return sparse.csr_matrix(C + C.transpose())
 
+  return None
+
 
 def mam_M13(adj_mat, motif_type, mam_weight_type, mam_method):
 
@@ -1392,6 +1446,8 @@ def mam_M13(adj_mat, motif_type, mam_weight_type, mam_method):
         Cprime = Gp * Gp - Je.multiply(Gp * Gp)
         return sparse.csr_matrix(C + C.transpose() + Cprime)
 
+  return None
+
 
 def mam_Mcoll(adj_mat, motif_type, mam_weight_type, mam_method):
 
@@ -1501,6 +1557,8 @@ def mam_Mcoll(adj_mat, motif_type, mam_weight_type, mam_method):
         C = Gs * Gs.transpose() - Je.multiply(Gs * Gs.transpose())
         return sparse.csr_matrix(C)
 
+  return None
+
 
 def mam_Mexpa(adj_mat, motif_type, mam_weight_type, mam_method):
 
@@ -1609,3 +1667,5 @@ def mam_Mexpa(adj_mat, motif_type, mam_weight_type, mam_method):
         Je = mcin._build_Je(adj_mat)
         C = Gs.transpose() * Gs - Je.multiply(Gs.transpose() * Gs)
         return sparse.csr_matrix(C)
+
+  return None

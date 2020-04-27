@@ -27,35 +27,22 @@ sample_dsbm <- function(block_sizes, connection_matrix,
   # TODO make faster like python code
 
   # check args
-  if (!all.equal(block_sizes, as.integer(block_sizes))) {
-    stop("block_sizes must be integers.")
-  }
-  if (!all(block_sizes > 0)) {
-    stop("block_sizes must be at least 1.")
-  }
-  if (!(length(block_sizes) == nrow(connection_matrix))) {
-    stop("connection_matrix must have length(block_sizes) rows.")
-  }
-  if (!(length(block_sizes) == ncol(connection_matrix))) {
-    stop("connection_matrix must have length(block_sizes) columns.")
-  }
-  if (!(all(connection_matrix >= 0) & all(connection_matrix <= 1))) {
-    stop("connection_matrix entries must be in [0, 1].")
-  }
   sample_weight_type <- match.arg(sample_weight_type)
-  if ((sample_weight_type != "unweighted") & is.null(weight_matrix)) {
-    stop("weighted methods require a weight_matrix")
+  stopifnot(all.equal(block_sizes, as.integer(block_sizes)))
+  stopifnot(all(block_sizes > 0))
+  stopifnot(length(block_sizes) == nrow(connection_matrix))
+  stopifnot(length(block_sizes) == ncol(connection_matrix))
+  stopifnot(all(connection_matrix >= 0))
+  stopifnot(all(connection_matrix <= 1))
+
+  if (sample_weight_type != "unweighted") {
+    stopifnot(!is.null(weight_matrix))
   }
+
   if (!is.null(weight_matrix)) {
-    if (!(length(block_sizes) == nrow(weight_matrix))) {
-      stop("weight_matrix must have length(block_sizes) rows.")
-    }
-    if (!(length(block_sizes) == ncol(weight_matrix))) {
-      stop("weight_matrix must have length(block_sizes) columns.")
-    }
-    if (!all(weight_matrix >= 0)) {
-      stop("weight_matrix entries must be non-negative.")
-    }
+    stopifnot(length(block_sizes) == nrow(weight_matrix))
+    stopifnot(length(block_sizes) == ncol(weight_matrix))
+    stopifnot(all(weight_matrix >= 0))
   }
 
   # initialize variables
@@ -133,25 +120,17 @@ sample_bsbm <- function(source_block_sizes, dest_block_sizes,
 
   # check args
   sample_weight_type <- match.arg(sample_weight_type)
-  if (!(length(source_block_sizes) == nrow(bipartite_connection_matrix))) {
-    stop("length(source_block_sizes) must equal
-         nrow(bipartite_connection_matrix)")
+  stopifnot(length(source_block_sizes) == nrow(bipartite_connection_matrix))
+  stopifnot(length(dest_block_sizes) == ncol(bipartite_connection_matrix))
+
+  if (sample_weight_type != "unweighted") {
+    stopifnot(!is.null(bipartite_weight_matrix))
   }
-  if (!(length(dest_block_sizes) == ncol(bipartite_connection_matrix))) {
-    stop("length(dest_block_sizes) must equal
-         ncol(bipartite_connection_matrix)")
-  }
-  if ((sample_weight_type != "unweighted") & is.null(bipartite_weight_matrix)) {
-    stop("weighted requires a bipartite_weight_matrix")
-  }
+
   if (!is.null(bipartite_weight_matrix)) {
-    if (!(length(source_block_sizes) == nrow(bipartite_weight_matrix))) {
-      stop("length(source_block_sizes) must equal
-           nrow(bipartite_weight_matrix)")
-    }
-    if (!(length(dest_block_sizes) == ncol(bipartite_weight_matrix))) {
-      stop("length(dest_block_sizes) must equal ncol(bipartite_weight_matrix)")
-    }
+    stopifnot(length(source_block_sizes) == nrow(bipartite_weight_matrix))
+    stopifnot(length(dest_block_sizes) == ncol(bipartite_weight_matrix))
+    stopifnot(all(bipartite_weight_matrix >= 0))
   }
 
   # initialize parameters
