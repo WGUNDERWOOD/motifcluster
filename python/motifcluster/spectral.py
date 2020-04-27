@@ -1,3 +1,8 @@
+"""
+Functions relating to spectral methods
+are in `motifcluster.spectral`.
+"""
+
 import numpy as np
 from scipy.sparse import linalg
 from scipy import sparse
