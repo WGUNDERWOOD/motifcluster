@@ -43,7 +43,8 @@ def run_motif_clustering(adj_mat, motif_name,
                          mam_method="sparse",
                          num_eigs=2,
                          type_lap="comb",
-                         num_clusts=2):
+                         num_clusts=2,
+                         gr_method="sparse"):
 
   """
   Run motif-based clustering.
@@ -75,6 +76,9 @@ def run_motif_clustering(adj_mat, motif_name,
     One of `"comb"` or `"rw"`.
   num_clusts : int
     The number of clusters to find.
+  gr_method : str
+    Format to use for getting largest component.
+    One of `"sparse"` or `"dense"`.
 
   Returns
   -------
@@ -115,7 +119,7 @@ def run_motif_clustering(adj_mat, motif_name,
   assert type_lap in ["comb", "rw"]
 
   spectrum = mcsp.run_motif_embedding(adj_mat, motif_name, motif_type, mam_weight_type,
-                                      mam_method, num_eigs, type_lap)
+                                      mam_method, num_eigs, type_lap, gr_method)
 
   cluster_assigns = cluster_spectrum(spectrum, num_clusts)
 

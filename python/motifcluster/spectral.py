@@ -158,7 +158,8 @@ def run_motif_embedding(adj_mat, motif_name,
                         mam_weight_type="unweighted",
                         mam_method="sparse",
                         num_eigs=2,
-                        type_lap="rw"):
+                        type_lap="rw",
+                        gr_method="sparse"):
   """
   Run motif embedding.
 
@@ -187,6 +188,9 @@ def run_motif_embedding(adj_mat, motif_name,
   type_lap : str
     Type of Laplacian for the embedding.
     One of `"comb"` or `"rw"`.
+  gr_method : str
+    Format to use for getting largest component.
+    One of `"sparse"` or `"dense"`.
 
   Returns
   -------
@@ -227,6 +231,7 @@ def run_motif_embedding(adj_mat, motif_name,
   assert mam_weight_type in ["unweighted", "mean", "product"]
   assert mam_method in ["sparse", "dense"]
   assert type_lap in ["comb", "rw"]
+  assert gr_method in ["sparse", "dense"]
 
   # build motif adjacency matrix
   motif_adj_mat = mcmo.build_motif_adjacency_matrix(adj_mat, motif_name,
@@ -234,9 +239,9 @@ def run_motif_embedding(adj_mat, motif_name,
                                                     mam_method)
 
   # restrict to largest connected component
-  comps = mcut.get_largest_component(motif_adj_mat)
+  comps = mcut.get_largest_component(motif_adj_mat, gr_method)
   adj_mat_comps = adj_mat[comps, comps]
-  motif_adj_mat_comps = motif_adj_mat[comps, comps]
+  motif_adj_mat_comps = motif_adj_mat[comps, :].tocsc()[:, comps]
 
   # Laplace embedding
   spect = run_laplace_embedding(motif_adj_mat_comps, num_eigs, type_lap)
@@ -249,6 +254,7 @@ def run_motif_embedding(adj_mat, motif_name,
     "adj_mat_comps": adj_mat_comps,
     "motif_adj_mat_comps": motif_adj_mat_comps,
     "vals": spect["vals"],
+    "vects": spect["vects"],
   }
 
   return spectrum

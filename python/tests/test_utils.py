@@ -74,5 +74,7 @@ def test_get_largest_component():
   adj_mat_sparse = sparse.csr_matrix(adj_mat_dense)
   ans = [1, 2, 4]
 
-  assert mcut.get_largest_component(adj_mat_dense) == ans
-  assert mcut.get_largest_component(adj_mat_sparse) == ans
+  assert mcut.get_largest_component(adj_mat_dense, "dense") == ans
+  assert mcut.get_largest_component(adj_mat_dense, "sparse") == ans
+  assert mcut.get_largest_component(adj_mat_sparse, "dense") == ans
+  assert mcut.get_largest_component(adj_mat_sparse, "sparse") == ans

@@ -103,7 +103,7 @@ def _drop0_killdiag(some_mat):
   return sparse_mat
 
 
-def get_largest_component(adj_mat):
+def get_largest_component(adj_mat, gr_method):
 
   """
   Get largest connected component.
@@ -115,6 +115,9 @@ def get_largest_component(adj_mat):
   ----------
   adj_mat : matrix
     An adjacency matrix of a graph.
+  gr_method : str
+    Format to use before building the graph.
+    One of `"sparse"` or `"dense"`.
 
   Returns
   -------
@@ -127,9 +130,18 @@ def get_largest_component(adj_mat):
   >>> adj_mat = np.array([0, 1, 0, 0, 0, 0, 0, 0, 0]).reshape((3, 3))
   >>> get_largest_component(adj_mat)
   """
+  print(type(adj_mat))
 
-  adj_mat_sparse = sparse.csr_matrix(adj_mat)
-  gr = nx.from_scipy_sparse_matrix(adj_mat_sparse > 0)
+  if gr_method == "sparse":
+    adj_mat_sparse = sparse.csr_matrix(adj_mat)
+    gr = nx.from_scipy_sparse_matrix(adj_mat_sparse > 0)
+
+  else:
+    if isinstance(adj_mat, np.ndarray):
+      gr = nx.from_numpy_array(1 * np.array(adj_mat > 0))
+    else:
+      gr = nx.from_numpy_array(1 * (adj_mat > 0).toarray())
+
   verts_to_keep = max(nx.connected_components(gr), key=len)
   verts_to_keep = sorted(verts_to_keep)
 
