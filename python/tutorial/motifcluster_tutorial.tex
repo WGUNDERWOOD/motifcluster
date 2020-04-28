@@ -107,14 +107,14 @@ A full list can be obtained with:
 mcut.get_motif_names()
 \end{pyverbatim}
 %
-\vspace*{-2mm}
+\vspace*{-3mm}
 \pycon{mcut.get_motif_names()[0:9]} \\
 \pycon{mcut.get_motif_names()[9:17]} \\
 
 Let's use the 3-cycle motif $\mathcal{M}_1$.
 
 \begin{pyconsole}
-mcmo.build_motif_adjacency_matrix(G1, motif_name = "M1").todense()
+mcmo.build_motif_adjacency_matrix(G1, motif_name="M1").todense()
 \end{pyconsole}
 
 Note that all the entries are zero except for entries
@@ -145,7 +145,8 @@ we must instead use functional motif instances:
 
 
 \begin{pyconsole}
-%build_motif_adjacency_matrix(G1, motif_name = "M1", motif_type = "func")
+mcmo.build_motif_adjacency_matrix(G1, motif_name="M1",
+  motif_type="func").todense()
 \end{pyconsole}
 
 This time we also pick up the 3-cycle on vertices 2, 3 and 4.
@@ -172,8 +173,8 @@ instance weights across all instances containing
 both vertices $i$ and $j$:
 
 \begin{pyconsole}
-%build_motif_adjacency_matrix(G1, motif_name = "M1", motif_type = "func",
-  %mam_weight_type = "mean")
+mcmo.build_motif_adjacency_matrix(G1, motif_name="M1",
+  motif_type="func", mam_weight_type="mean").todense()
 \end{pyconsole}
 
 The 3-cycle on vertices 1, 2 and 4
@@ -191,11 +192,9 @@ The $(i,j)$th MAM entry is then defined as the sum of these
 instance weights across all instances containing
 both vertices $i$ and $j$:
 
-\pagebreak
-
 \begin{pyconsole}
-%build_motif_adjacency_matrix(G1, motif_name = "M1", motif_type = "func",
-  %mam_weight_type = "product")
+mcmo.build_motif_adjacency_matrix(G1, motif_name="M1",
+  motif_type="func", mam_weight_type="product").todense()
 \end{pyconsole}
 
 The 3-cycle on vertices 1, 2 and 4
@@ -217,9 +216,11 @@ denser matrices, tends to be faster for small dense networks.
 
 
 \begin{pyconsole}
-%mam_sparse = build_motif_adjacency_matrix(G1, motif_name = "M1", mam_method = "sparse")
-%mam_dense  = build_motif_adjacency_matrix(G1, motif_name = "M1", mam_method = "dense")
-%all(mam_sparse == mam_dense)
+mam_sparse = mcmo.build_motif_adjacency_matrix(G1, motif_name="M1",
+  mam_method="sparse").toarray()
+mam_dense  = mcmo.build_motif_adjacency_matrix(G1, motif_name="M1",
+  mam_method="dense").toarray()
+(mam_sparse == mam_dense).all()
 \end{pyconsole}
 
 \section{Sampling random weighted directed networks}
@@ -257,10 +258,8 @@ since we only consider networks without self-loops.
 %connection_matrix = matrix(c(
   %0.9, 0.2,
   %0.2, 0.9
-%), nrow = 2, byrow = TRUE)
+%), nrow=2, byrow=TRUE)
 \end{pyconsole}
-
-\pagebreak
 
 \begin{pyconsole}
 %sample_dsbm(block_sizes, connection_matrix)
@@ -280,9 +279,9 @@ where we simply multiply each block of the adjacency matrix by a constant.
 %weight_matrix = matrix(c(
   %5, 2,
   %2, 5
-%), nrow = 2, byrow = TRUE)
+%), nrow=2, byrow=TRUE)
 %sample_dsbm(block_sizes, connection_matrix, weight_matrix,
-  %sample_weight_type = "constant")
+  %sample_weight_type="constant")
 \end{pyconsole}
 
 \subsubsection{Poisson-weighted directed stochastic block models}
@@ -295,7 +294,7 @@ Note that in this scheme it is possible for the weight to be zero,
 removing an edge which might have otherwise been present.
 
 \begin{pyconsole}
-%sample_dsbm(block_sizes, connection_matrix, weight_matrix, sample_weight_type = "poisson")
+%sample_dsbm(block_sizes, connection_matrix, weight_matrix, sample_weight_type="poisson")
 \end{pyconsole}
 
 \subsection{Bipartite stochastic block models}
@@ -316,7 +315,7 @@ and a weaker connection probability of 0.2 to the second.
 \begin{pyconsole}
 %source_block_sizes = c(2)
 %destination_block_sizes = c(3, 2)
-%bipartite_connection_matrix = matrix(c(0.9, 0.2), nrow = 1)
+%bipartite_connection_matrix = matrix(c(0.9, 0.2), nrow=1)
 %sample_bsbm(source_block_sizes, destination_block_sizes, bipartite_connection_matrix)
 \end{pyconsole}
 
@@ -327,10 +326,10 @@ we can also use constant-weighted or Poisson-weighted edges for bipartite
 stochastic block models.
 
 \begin{pyconsole}
-%bipartite_weight_matrix = matrix(c(7, 2), nrow = 1)
+%bipartite_weight_matrix = matrix(c(7, 2), nrow=1)
 %sample_bsbm(source_block_sizes, destination_block_sizes,
   %bipartite_connection_matrix, bipartite_weight_matrix,
-  %sample_weight_type = "poisson")
+  %sample_weight_type="poisson")
 \end{pyconsole}
 
 
@@ -350,15 +349,13 @@ We can construct two types of Laplacian matrix for a network
 using the \texttt{motifcluster} package.
 First we create an example of a weighted undirected network $\mathcal{G}_2$.
 
-\pagebreak
-
 \begin{pyconsole}
 %G2 = matrix(c(
   %0, 2, 0, 0,
   %2, 0, 4, 3,
   %0, 4, 0, 5,
   %0, 3, 5, 0
-%), byrow = TRUE, nrow = 4)
+%), byrow=TRUE, nrow=4)
 \end{pyconsole}
 
 \subsubsection{Combinatorial Laplacian}
@@ -368,7 +365,7 @@ $L_\mathrm{c} = D - G$,
 where $D$ is the diagonal matrix of weighted vertex degrees:
 
 \begin{pyconsole}
-%build_laplacian(G2, type_lap = "comb")
+%build_laplacian(G2, type_lap="comb")
 \end{pyconsole}
 
 \subsubsection{Random-walk Laplacian}
@@ -379,7 +376,7 @@ where $D$ is the diagonal matrix of weighted vertex degrees
 and $I$ is the identity matrix:
 
 \begin{pyconsole}
-%build_laplacian(G2, type_lap = "rw")
+%build_laplacian(G2, type_lap="rw")
 \end{pyconsole}
 
 \subsection{Laplace embedding}
@@ -392,7 +389,7 @@ Below we use the random-walk Laplacian,
 and embedding dimension $l=2$:
 
 \begin{pyconsole}
-%spectrum = run_laplace_embedding(G2, num_eigs = 2, type_lap = "rw")
+%spectrum = run_laplace_embedding(G2, num_eigs=2, type_lap="rw")
 %spectrum$vects
 %spectrum$vals
 \end{pyconsole}
@@ -415,7 +412,7 @@ function on the network $\mathcal{G}_3$ below.
   %0, 0, 2, 3,
   %0, 4, 0, 0,
   %4, 0, 5, 0
-%), byrow = TRUE, nrow = 4)
+%), byrow=TRUE, nrow=4)
 \end{pyconsole}
 
 An artefact of building MAMs is that although the original network may
@@ -426,8 +423,8 @@ We observe this with the network $\mathcal{G}_3$,
 in which only three of the four vertices are embedded.
 
 \begin{pyconsole}
-%spectrum = run_motif_embedding(G3, motif_name = "M1", motif_type = "func",
-  %mam_weight_type = "unweighted", mam_method = "sparse", num_eigs = 2, type_lap = "rw")
+%spectrum = run_motif_embedding(G3, motif_name="M1", motif_type="func",
+  %mam_weight_type="unweighted", mam_method="sparse", num_eigs=2, type_lap="rw")
 %spectrum$vals
 %spectrum$vects
 \end{pyconsole}
@@ -459,7 +456,7 @@ and weaker connections of 0.3 between the blocks.
   %0.8, 0.2, 0.2,
   %0.2, 0.8, 0.2,
   %0.2, 0.2, 0.8
-%), nrow = 3)
+%), nrow=3)
 \end{pyconsole}
 
 We also set the within-block edges to be Poisson-weighted with
@@ -472,13 +469,11 @@ mean 10.
   %20, 10, 10,
   %10, 20, 10,
   %10, 10, 20
-%), nrow = 3)
+%), nrow=3)
 
 %G4 = sample_dsbm(block_sizes, connection_matrix, weight_matrix,
-  %sample_weight_type = "poisson")
+  %sample_weight_type="poisson")
 \end{pyconsole}
-
-\pagebreak
 
 Now we can run the motif-based spectral clustering algorithm
 on this network with the three-cycle motif $\mathcal{M}_1$.
@@ -491,9 +486,9 @@ first four eigenvalues and eigenvectors.
 Finally we extract three clusters.
 
 \begin{pyconsole}
-%motif_cluster = run_motif_clustering(G4, motif_name = "M1", motif_type = "func",
-  %mam_weight_type = "mean", mam_method = "sparse", type_lap = "rw", num_eigs = 4,
-  %num_clusts = 3
+%motif_cluster = run_motif_clustering(G4, motif_name="M1", motif_type="func",
+  %mam_weight_type="mean", mam_method="sparse", type_lap="rw", num_eigs=4,
+  %num_clusts=3
 %)
 \end{pyconsole}
 
