@@ -36,9 +36,11 @@ def _get_first_eigs(some_mat, num_eigs):
   """
 
   # check args
-  some_mat = sparse.csr_matrix(some_mat, dtype="f")
   assert num_eigs == np.floor(num_eigs)
   assert num_eigs >= 1
+
+  if not sparse.issparse(some_mat):
+    some_mat = sparse.csr_matrix(some_mat, dtype="f")
 
   # get spectrum
   vals, vects = linalg.eigsh(some_mat, k=num_eigs, which="SM")
@@ -86,8 +88,10 @@ def build_laplacian(adj_mat, type_lap="rw"):
 
   # check args
   assert type_lap in ["comb", "rw"]
-  adj_mat = sparse.csr_matrix(adj_mat)
   n = adj_mat.shape[0]
+
+  if not sparse.issparse(adj_mat):
+    adj_mat = sparse.csr_matrix(adj_mat)
 
   # initialize parameters
   degs_adj_mat = adj_mat.sum(axis=0).reshape(n)
@@ -223,7 +227,6 @@ def run_motif_embedding(adj_mat, motif_name,
   """
 
   # check args
-  adj_mat = sparse.csr_matrix(adj_mat)
   assert motif_name in mcut.get_motif_names()
   assert motif_type in ["struc", "func"]
   assert num_eigs == np.floor(num_eigs)
@@ -232,6 +235,9 @@ def run_motif_embedding(adj_mat, motif_name,
   assert mam_method in ["sparse", "dense"]
   assert type_lap in ["comb", "rw"]
   assert gr_method in ["sparse", "dense"]
+
+  if not sparse.issparse(adj_mat):
+    adj_mat = sparse.csr_matrix(adj_mat)
 
   # build motif adjacency matrix
   motif_adj_mat = mcmo.build_motif_adjacency_matrix(adj_mat, motif_name,

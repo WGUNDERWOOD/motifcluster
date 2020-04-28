@@ -26,7 +26,12 @@ def _build_G(adj_mat):
     The adjacency matrix in sparse form.
   """
 
-  G = sparse.csr_matrix(adj_mat)
+  if sparse.issparse(adj_mat):
+    G = adj_mat
+
+  else:
+    G = sparse.csr_matrix(adj_mat)
+
   return G
 
 

@@ -33,13 +33,17 @@ def _a_b_one(a_mat, b_mat):
     The sparse square matrix `a * (b @ one_mat)`.
   """
 
-  a_sparse = sparse.csr_matrix(a_mat)
-  b_sparse = sparse.csr_matrix(b_mat)
+  if not sparse.issparse(a_mat):
+    a_mat = sparse.csr_matrix(a_mat)
+
+  if not sparse.issparse(b_mat):
+    b_mat = sparse.csr_matrix(b_mat)
+
   n = a_mat.shape[0]
   ones_vec = np.ones(n)
-  ans = (a_sparse.T.multiply(b_sparse @ ones_vec)).T
+  ans = (a_mat.T.multiply(b_mat @ ones_vec)).T
 
-  return sparse.csr_matrix(ans)
+  return ans
 
 
 def _a_one_b(a_mat, b_mat):
@@ -66,13 +70,17 @@ def _a_one_b(a_mat, b_mat):
     The sparse square matrix `a * (one_mat @ b)`.
   """
 
-  a_sparse = sparse.csr_matrix(a_mat)
-  b_sparse = sparse.csr_matrix(b_mat)
+  if not sparse.issparse(a_mat):
+    a_mat = sparse.csr_matrix(a_mat)
+
+  if not sparse.issparse(b_mat):
+    b_mat = sparse.csr_matrix(b_mat)
+
   n = a_mat.shape[0]
   ones_vec = np.ones(n)
-  ans = (a_sparse.multiply(ones_vec @ b_sparse))
+  ans = (a_mat.multiply(ones_vec @ b_mat))
 
-  return sparse.csr_matrix(ans)
+  return ans
 
 
 def _drop0_killdiag(some_mat):
@@ -95,7 +103,12 @@ def _drop0_killdiag(some_mat):
     diagonal entries set to zero.
   """
 
-  ans = sparse.csr_matrix(some_mat)
+  if sparse.issparse(some_mat):
+    ans = some_mat
+
+  else:
+    ans = sparse.csr_matrix(some_mat)
+
   I = sparse.identity(ans.shape[0])
   ans = ans - I.multiply(ans)
   sparse_mat = sparse.csr_matrix(ans)
@@ -132,12 +145,17 @@ def get_largest_component(adj_mat, gr_method):
   """
 
   if gr_method == "sparse":
-    adj_mat_sparse = sparse.csr_matrix(adj_mat)
-    gr = nx.from_scipy_sparse_matrix(adj_mat_sparse > 0)
+
+    if not sparse.issparse(adj_mat):
+      adj_mat= sparse.csr_matrix(adj_mat)
+
+    gr = nx.from_scipy_sparse_matrix(adj_mat > 0)
 
   else:
+
     if isinstance(adj_mat, np.ndarray):
       gr = nx.from_numpy_array(1 * np.array(adj_mat > 0))
+
     else:
       gr = nx.from_numpy_array(1 * (adj_mat > 0).toarray())
 
