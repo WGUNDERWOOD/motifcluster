@@ -31,6 +31,15 @@ The master branch contains stable versions.
 The develop branch may be unstable,
 and is for development purposes only.
 
+### License
+
+This repository,
+along with its included R package and Python package,
+are all licensed under
+[GPL-3](http://gplv3.fsf.org/).
+
+
+
 
 
 ## R package
@@ -66,12 +75,36 @@ available in the package.
 
 ## Python code
 
-The Python module "motifcluster" is in the
-[python](./python/) directory
-and has the following dependencies,
+The Python package "motifcluster" is in the
+[python](./python/) directory.
+
+### Installation
+
+The Python package can be installed from PyPI with
+
+```
+pip install motifcluster
+```
+
+Or, to install to the user directory, with
+
+```
+pip install --user motifcluster
+```
+
+### Dependencies
+
+The Python package has the following dependencies,
 available on PyPI:
 
 - Networkx
 - Numpy
 - Scipy
 - Scikit-learn
+
+### Documentation
+
+The package's manual is in the
+[python/doc](./python/doc/) directory.
+Full documentation is also available at
+[motifcluster.readthedocs.io](https://motifcluster.readthedocs.io/).
