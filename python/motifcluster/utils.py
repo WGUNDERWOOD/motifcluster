@@ -130,7 +130,6 @@ def get_largest_component(adj_mat, gr_method):
   >>> adj_mat = np.array([0, 1, 0, 0, 0, 0, 0, 0, 0]).reshape((3, 3))
   >>> get_largest_component(adj_mat)
   """
-  print(type(adj_mat))
 
   if gr_method == "sparse":
     adj_mat_sparse = sparse.csr_matrix(adj_mat)
