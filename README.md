@@ -4,6 +4,8 @@
 [![Python Docs Status](https://img.shields.io/readthedocs/motifcluster?label=python%20docs)](https://motifcluster.readthedocs.io/en/latest/)
 [![Python Coverage Status](https://img.shields.io/coveralls/github/WGUNDERWOOD/motif-based-clustering?label=python%20coverage)](https://coveralls.io/github/WGUNDERWOOD/motif-based-clustering)
 [![R Coverage Status](https://img.shields.io/codecov/c/github/wgunderwood/motif-based-clustering?label=R%20coverage)](https://codecov.io/gh/WGUNDERWOOD/motif-based-clustering)
+[![license: GPL v3](https://img.shields.io/badge/license-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+
 
 Source code for my paper
 *Motif-Based Spectral Clustering of Weighted Directed Networks*,
@@ -104,7 +106,7 @@ available on PyPI:
 
 ### Documentation
 
-The package's manual is in the
-[python/doc](./python/doc/) directory.
-Full documentation is also available at
+Full documentation is available at
 [motifcluster.readthedocs.io](https://motifcluster.readthedocs.io/).
+The package's manual is also in the
+[python/doc](./python/doc/) directory.
