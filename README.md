@@ -88,7 +88,7 @@ The Python package can be installed from PyPI with
 pip install motifcluster
 ```
 
-Or, to install to the user directory, with
+Or can be installed to the user directory with
 
 ```
 pip install --user motifcluster

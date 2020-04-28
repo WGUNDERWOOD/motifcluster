@@ -1,13 +1,516 @@
-\documentclass[12pt]{article}
+\documentclass{article}
 \usepackage{pythontex}
+\usepackage{geometry}
+\usepackage{microtype}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage[dvipsnames]{xcolor}
+
+\setlength\parindent{0pt}
+\setitemize{itemsep=0pt,topsep=5pt}
+
+\title{Using the Python package \texttt{motifcluster}}
+\author{William G Underwood}
+
+
+
+
 
 \begin{document}
 
+\maketitle
+\tableofcontents
+
+\pagebreak
+
+\section{Introduction}
+
+This vignette demonstrates how to use the Python package \texttt{motifcluster}.
+These methods are detailed in the paper
+\textit{Motif-Based Spectral Clustering of Weighted Directed Networks},
+which is available at
+\href{https://arxiv.org/abs/2004.01293}{\texttt{arXiv:2004.01293}}.
+The functionality of the \texttt{motifcluster} package falls into a few main
+categories:
+
+\begin{itemize}
+\item Building motif adjacency matrices
+\item Sampling random weighted directed networks
+\item Spectral embedding with motif adjacency matrices
+\item Motif-based spectral clustering
+\end{itemize}
+
+This vignette comprehensibly demonstrates all of these functionalities,
+showcasing the full capability of the \texttt{motifcluster} package. The package
+can be installed from PyPI with:
+
+\vspace*{2mm}
+\texttt{> \textcolor{Fuchsia}{pip install motifcluster}}
+\vspace*{3mm}
+
+We load some other helpful packages for this tutorial:
+\begin{pyconsole}
+import numpy as np
+\end{pyconsole}
+
+The \texttt{motifcluster} package can then be loaded
+from within Python with: TODO remove unnecessary imports here
 
 \begin{pyconsole}
-
-2 + 2
-
+from motifcluster import clustering as mccl
+from motifcluster import motifadjacency as mcmo
+from motifcluster import sampling as mcsa
+from motifcluster import spectral as mcsp
+from motifcluster import utils as mcut
 \end{pyconsole}
+
+
+
+\section{Building motif adjacency matrices}
+
+The main novelty in the \texttt{motifcluster} package is its ability to
+build a wide variety of motif adjacency matrices (MAMs), and to do so quickly.
+There are several options to consider when building an MAM,
+which are covered in this section.
+
+\subsection{An example network}
+
+In order to demonstrate the construction of MAMs,
+we first need a small weighted directed network
+$\mathcal{G}_1$ to use as an example.
+Note that throughout this package we represent networks by their
+weighted directed adjacency matrices (possibly in sparse form).
+This means that for use alongside Python packages such as \texttt{networkx},
+one must manually convert between adjacency matrices and
+\texttt{networkx} objects.
+
+\begin{pyconsole}
+G1 = np.array([
+  0, 2, 0, 0,
+  0, 0, 2, 3,
+  0, 4, 0, 0,
+  4, 0, 5, 0
+]).reshape((4, 4))
+\end{pyconsole}
+
+\subsection{Basic motif adjacency matrix construction}
+
+The \texttt{build\_motif\_adjacency\_matrix} function is the main workhorse
+for building MAMs with \texttt{motifcluster}.
+Let's use it to build an MAM for the network $\mathcal{G}_1$.
+First we must choose a motif to look for.
+A full list can be obtained with:
+
+\begin{pyverbatim}
+mcut.get_motif_names()
+\end{pyverbatim}
+%
+\vspace*{-2mm}
+\pycon{mcut.get_motif_names()[0:9]} \\
+\pycon{mcut.get_motif_names()[9:17]} \\
+
+Let's use the 3-cycle motif $\mathcal{M}_1$.
+
+\begin{pyconsole}
+mcmo.build_motif_adjacency_matrix(G1, motif_name = "M1").todense()
+\end{pyconsole}
+
+Note that all the entries are zero except for entries
+$(1,2)$,
+$(1,4)$,
+$(4,1)$,
+and
+$(4,2)$.
+This is because vertices 1, 2 and 4 form an exact copy of
+the motif $\mathcal{M}_1$ in the network $\mathcal{G}_1$,
+and the  $(i,j)$th MAM entry simply counts the number of instances
+containing both vertices $i$ and $j$.
+
+\subsection{Functional and structural motif adjacency matrices}
+
+Looking at our example network $\mathcal{G}_1$ again,
+you might notice that there is seemingly another instance
+of the motif $\mathcal{M}_1$
+in our network $\mathcal{G}_1$,
+on the vertices 2, 3 and 4,
+albeit with an "extra" edge from 2 to 3.
+The reason for this is that we instructed
+\texttt{build\_motif\_adjacency\_matrix}
+to look for *structural* motif instances (this is the default).
+Structural instances require an exact match, with no extra edges.
+If we want to also include instances which may have extra edges present,
+we must instead use functional motif instances:
+
+
+\begin{pyconsole}
+%build_motif_adjacency_matrix(G1, motif_name = "M1", motif_type = "func")
+\end{pyconsole}
+
+This time we also pick up the 3-cycle on vertices 2, 3 and 4.
+Vertices 2 and 4 therefore occur in two distinct instances
+of the motif, and so their motif adjacency matrix entries are equal
+to two.
+
+\subsection{Weighted motif adjacency matrices}
+
+Our example network $\mathcal{G}_1$ has weighted edges,
+which we have not yet used:
+so far our MAMs have been simply counting
+instances of motifs.
+This is because the default weighting scheme is
+"unweighted", assigning every instance a weight of one.
+
+\subsubsection{Mean-weighted instances}
+
+We could instead use the "mean" weighting scheme,
+where every instance is assigned a weight equal to its
+mean edge weight.
+The $(i,j)$th MAM entry is then defined as the sum of these
+instance weights across all instances containing
+both vertices $i$ and $j$:
+
+\begin{pyconsole}
+%build_motif_adjacency_matrix(G1, motif_name = "M1", motif_type = "func",
+  %mam_weight_type = "mean")
+\end{pyconsole}
+
+The 3-cycle on vertices 1, 2 and 4
+has edge weights of 2, 3 and 4, so its mean edge weight is 3.
+Similarly the 3-cycle on vertices 2, 3 and 4 has mean edge weight of 4.
+Vertices 2 and 4 appear in both, so their mutual MAM entries are the
+sum of these two mean weights, which is 7.
+
+\subsubsection{Product-weighted instances}
+
+We can also use the "product" weighting scheme,
+where every instance is assigned a weight equal to the
+product of its edge weights.
+The $(i,j)$th MAM entry is then defined as the sum of these
+instance weights across all instances containing
+both vertices $i$ and $j$:
+
+\pagebreak
+
+\begin{pyconsole}
+%build_motif_adjacency_matrix(G1, motif_name = "M1", motif_type = "func",
+  %mam_weight_type = "product")
+\end{pyconsole}
+
+The 3-cycle on vertices 1, 2 and 4
+has edge weights of 2, 3 and 4, so the product of its edge weights is 24.
+Similarly the 3-cycle on vertices 2, 3 and 4 has mean edge weight of 60.
+Vertices 2 and 4 appear in both, so their shared MAM entries are the
+sum of these two product weights, which is 84.
+
+\subsubsection{Computation method}
+
+The final argument to \texttt{build\_motif\_adjacency\_matrix}
+is the "mam\_method" argument.
+This does not affect the value returned but may impact the
+amount of time taken to return the MAM.
+In general the "sparse" method (the default)
+is faster on large sparse networks.
+The "dense" method, which uses fewer operations but on
+denser matrices, tends to be faster for small dense networks.
+
+
+\begin{pyconsole}
+%mam_sparse = build_motif_adjacency_matrix(G1, motif_name = "M1", mam_method = "sparse")
+%mam_dense  = build_motif_adjacency_matrix(G1, motif_name = "M1", mam_method = "dense")
+%all(mam_sparse == mam_dense)
+\end{pyconsole}
+
+\section{Sampling random weighted directed networks}
+
+Building adjacency matrices by hand is tedious,
+so it is useful to have methods for generating
+the adjacency matrices of networks drawn from some probabilistic model.
+We use (weighted) directed stochastic block models (DSBMs) and
+(weighted) bipartite stochastic block models (BSBMs).
+
+\subsection{Directed stochastic block models}
+
+First let's sample the adjacency matrix of a DSBM
+which has two blocks of vertices;
+the first containing 5 vertices and the second containing 3.
+We use strong within-block connections,
+with the diagonal entries of the connection matrix set to 0.9.
+The between-block connections are weaker, with the off-diagonal
+connection matrix entries set to 0.2.
+Note how the resulting adjacency matrix is denser
+on its diagonal blocks
+$\{1, \dots, 5\} \times \{1, \dots, 5\}$
+and
+$\{6, \dots, 8\} \times \{6, \dots, 8\}$,
+and is sparser on its off-diagonal blocks
+$\{1, \dots, 5\} \times \{6, \dots, 8\}$
+and
+$\{6, \dots, 8\} \times \{1, \dots, 5\}$.
+The entries which lie exactly on the diagonal will
+always be zero,
+since we only consider networks without self-loops.
+
+\begin{pyconsole}
+%block_sizes = c(5, 3)
+%connection_matrix = matrix(c(
+  %0.9, 0.2,
+  %0.2, 0.9
+%), nrow = 2, byrow = TRUE)
+\end{pyconsole}
+
+\pagebreak
+
+\begin{pyconsole}
+%sample_dsbm(block_sizes, connection_matrix)
+\end{pyconsole}
+
+\subsubsection{Constant-weighted directed stochastic block models}
+
+The matrix above has binary entries,
+indicating that it is the adjacency matrix of an unweighted
+directed network.
+The \texttt{motifcluster} package also allows sampling of weighted directed networks.
+The simplest example of this is "constant" weighting,
+where we simply multiply each block of the adjacency matrix by a constant.
+
+
+\begin{pyconsole}
+%weight_matrix = matrix(c(
+  %5, 2,
+  %2, 5
+%), nrow = 2, byrow = TRUE)
+%sample_dsbm(block_sizes, connection_matrix, weight_matrix,
+  %sample_weight_type = "constant")
+\end{pyconsole}
+
+\subsubsection{Poisson-weighted directed stochastic block models}
+
+We can also use weights drawn randomly from a Poisson distribution,
+where each block in the adjacency matrix has its own mean parameter.
+This returns an adjacency matrix with weights which could be any natural
+number, but is equal in expectation to the constant version.
+Note that in this scheme it is possible for the weight to be zero,
+removing an edge which might have otherwise been present.
+
+\begin{pyconsole}
+%sample_dsbm(block_sizes, connection_matrix, weight_matrix, sample_weight_type = "poisson")
+\end{pyconsole}
+
+\subsection{Bipartite stochastic block models}
+
+The \texttt{motifcluster} package can also be used to sample
+bipartite networks.
+The vertices of a bipartite network are partitioned
+into "source" and "destination" vertices,
+and edges are only permitted to go from source vertices
+to destination vertices.
+Let's sample a DSBM with a single block of two source vertices
+and two block of destination vertices, with
+sizes of three and two respectively.
+We can use a strong connection probability of 0.9 to the first block of
+destination vertices,
+and a weaker connection probability of 0.2 to the second.
+
+\begin{pyconsole}
+%source_block_sizes = c(2)
+%destination_block_sizes = c(3, 2)
+%bipartite_connection_matrix = matrix(c(0.9, 0.2), nrow = 1)
+%sample_bsbm(source_block_sizes, destination_block_sizes, bipartite_connection_matrix)
+\end{pyconsole}
+
+\subsubsection{Weighted bipartite stochastic block models}
+
+Similarly to the more general directed stochastic block models,
+we can also use constant-weighted or Poisson-weighted edges for bipartite
+stochastic block models.
+
+\begin{pyconsole}
+%bipartite_weight_matrix = matrix(c(7, 2), nrow = 1)
+%sample_bsbm(source_block_sizes, destination_block_sizes,
+  %bipartite_connection_matrix, bipartite_weight_matrix,
+  %sample_weight_type = "poisson")
+\end{pyconsole}
+
+
+
+
+\section{Spectral embedding with motif adjacency matrices}
+
+Spectral methods involve performing eigenvalue and
+eigenvector operations on matrices related to networks.
+We work here with weighted *undirected* networks
+(which have symmetric adjacency matrices),
+because motif adjacency matrices are always symmetric.
+
+\subsection{Laplacian matrices}
+
+We can construct two types of Laplacian matrix for a network
+using the \texttt{motifcluster} package.
+First we create an example of a weighted undirected network $\mathcal{G}_2$.
+
+\pagebreak
+
+\begin{pyconsole}
+%G2 = matrix(c(
+  %0, 2, 0, 0,
+  %2, 0, 4, 3,
+  %0, 4, 0, 5,
+  %0, 3, 5, 0
+%), byrow = TRUE, nrow = 4)
+\end{pyconsole}
+
+\subsubsection{Combinatorial Laplacian}
+
+The combinatorial Laplacian of an adjacency matrix $G$ is
+$L_\mathrm{c} = D - G$,
+where $D$ is the diagonal matrix of weighted vertex degrees:
+
+\begin{pyconsole}
+%build_laplacian(G2, type_lap = "comb")
+\end{pyconsole}
+
+\subsubsection{Random-walk Laplacian}
+
+The random-walk Laplacian of an adjacency matrix $G$ is
+$L_\mathrm{rw} = I - D^{-1}G$,
+where $D$ is the diagonal matrix of weighted vertex degrees
+and $I$ is the identity matrix:
+
+\begin{pyconsole}
+%build_laplacian(G2, type_lap = "rw")
+\end{pyconsole}
+
+\subsection{Laplace embedding}
+
+Once we have constructed the desired Laplacian matrix,
+we use it to embed each vertex into $\mathbb{R}^l$
+by finding the eigenvectors associated with
+its first (smallest magnitude) few eigenvalues.
+Below we use the random-walk Laplacian,
+and embedding dimension $l=2$:
+
+\begin{pyconsole}
+%spectrum = run_laplace_embedding(G2, num_eigs = 2, type_lap = "rw")
+%spectrum$vects
+%spectrum$vals
+\end{pyconsole}
+
+For a random-walk Laplacian,
+the first eigenvalue is always zero (up to machine precision)
+and its corresponding eigenvector is constant.
+
+\subsection{Motif embedding}
+
+Motif embedding is simply the process of building an MAM
+and performing Laplace embedding with it.
+As an example we use the
+\texttt{run\_motif\_embedding}
+function on the network $\mathcal{G}_3$ below.
+
+\begin{pyconsole}
+%G3 = matrix(c(
+  %0, 0, 0, 0,
+  %0, 0, 2, 3,
+  %0, 4, 0, 0,
+  %4, 0, 5, 0
+%), byrow = TRUE, nrow = 4)
+\end{pyconsole}
+
+An artefact of building MAMs is that although the original network may
+be connected, there is no guarantee that the MAM is also connected.
+Hence the MAM is restricted to its largest connected component
+before the Laplacian is formed.
+We observe this with the network $\mathcal{G}_3$,
+in which only three of the four vertices are embedded.
+
+\begin{pyconsole}
+%spectrum = run_motif_embedding(G3, motif_name = "M1", motif_type = "func",
+  %mam_weight_type = "unweighted", mam_method = "sparse", num_eigs = 2, type_lap = "rw")
+%spectrum$vals
+%spectrum$vects
+\end{pyconsole}
+
+
+\section{Motif-based spectral clustering}
+
+The overall aim of \texttt{motifcluster} is to use motifs for spectral clustering,
+so now we see how to extract clusters from the motif-based
+eigenvector embeddings.
+The \texttt{run\_motif\_clustering} function handles the entire process of
+building an MAM, restricting it to its largest connected component,
+performing eigenvector embedding, and extracting clusters.
+We therefore take the opportunity to showcase the ability of
+\texttt{motifcluster} to recover the blocks of a DSBM,
+demonstrating all of the methods outlined in this vignette.
+
+Let's use a DSBM with three blocks of 10 nodes each.
+
+\begin{pyconsole}
+%block_sizes = rep(10, 3)
+\end{pyconsole}
+
+We use strong connections of 0.8 within the blocks,
+and weaker connections of 0.3 between the blocks.
+
+\begin{pyconsole}
+%connection_matrix = matrix(c(
+  %0.8, 0.2, 0.2,
+  %0.2, 0.8, 0.2,
+  %0.2, 0.2, 0.8
+%), nrow = 3)
+\end{pyconsole}
+
+We also set the within-block edges to be Poisson-weighted with
+mean 20,
+and the between-block edges to be Poisson-weighted with smaller
+mean 10.
+
+\begin{pyconsole}
+%weight_matrix = matrix(c(
+  %20, 10, 10,
+  %10, 20, 10,
+  %10, 10, 20
+%), nrow = 3)
+
+%G4 = sample_dsbm(block_sizes, connection_matrix, weight_matrix,
+  %sample_weight_type = "poisson")
+\end{pyconsole}
+
+\pagebreak
+
+Now we can run the motif-based spectral clustering algorithm
+on this network with the three-cycle motif $\mathcal{M}_1$.
+We build a functional MAM,
+weighting the instances by their mean edge weights,
+using the sparse formulation.
+We restrict this MAM to its largest connected component.
+Then we construct a random-walk Laplacian and embed it using the
+first four eigenvalues and eigenvectors.
+Finally we extract three clusters.
+
+\begin{pyconsole}
+%motif_cluster = run_motif_clustering(G4, motif_name = "M1", motif_type = "func",
+  %mam_weight_type = "mean", mam_method = "sparse", type_lap = "rw", num_eigs = 4,
+  %num_clusts = 3
+%)
+\end{pyconsole}
+
+We can evaluate the performance by comparing it to the ground-truth
+labels using the adjusted Rand index
+from the \texttt{mclust} package:
+
+\begin{pyconsole}
+%truth = c(rep(1, 10), rep(2, 10), rep(3, 10))
+%mclust::adjustedRandIndex(motif_cluster$clusts, truth)
+\end{pyconsole}
+
+A larger value indicates better recovery of the blocks,
+with a value of one indicating perfect agreement.
+
+
+
+
 
 \end{document}
