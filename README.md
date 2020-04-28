@@ -38,7 +38,7 @@ and is for development purposes only.
 This repository,
 along with its included R package and Python package,
 are all licensed under
-[GPL-3](http://gplv3.fsf.org/).
+[GPLv3](http://gplv3.fsf.org/).
 
 
 
