@@ -20,6 +20,8 @@
 
 \begin{document}
 
+
+
 \maketitle
 \tableofcontents
 
@@ -54,6 +56,11 @@ We load some other helpful packages for this tutorial:
 \begin{pyconsole}
 import numpy as np
 \end{pyconsole}
+
+% Other settings
+\pycon{np.random.seed(2348)}
+\pycon{import scipy}
+\pycon{scipy.set_printoptions(precision=2, suppress=True)}
 
 The \texttt{motifcluster} package can then be loaded
 from within Python with: TODO remove unnecessary imports here
@@ -254,15 +261,12 @@ always be zero,
 since we only consider networks without self-loops.
 
 \begin{pyconsole}
-%block_sizes = c(5, 3)
-%connection_matrix = matrix(c(
-  %0.9, 0.2,
-  %0.2, 0.9
-%), nrow=2, byrow=TRUE)
-\end{pyconsole}
-
-\begin{pyconsole}
-%sample_dsbm(block_sizes, connection_matrix)
+block_sizes = [5, 3]
+connection_matrix = np.array([
+  0.9, 0.2,
+  0.2, 0.9
+]).reshape((2, 2))
+mcsa.sample_dsbm(block_sizes, connection_matrix).todense()
 \end{pyconsole}
 
 \subsubsection{Constant-weighted directed stochastic block models}
@@ -276,12 +280,12 @@ where we simply multiply each block of the adjacency matrix by a constant.
 
 
 \begin{pyconsole}
-%weight_matrix = matrix(c(
-  %5, 2,
-  %2, 5
-%), nrow=2, byrow=TRUE)
-%sample_dsbm(block_sizes, connection_matrix, weight_matrix,
-  %sample_weight_type="constant")
+weight_matrix = np.array([
+  5, 2,
+  2, 5
+]).reshape((2, 2))
+mcsa.sample_dsbm(block_sizes, connection_matrix, weight_matrix,
+  sample_weight_type="constant").todense()
 \end{pyconsole}
 
 \subsubsection{Poisson-weighted directed stochastic block models}
@@ -294,7 +298,8 @@ Note that in this scheme it is possible for the weight to be zero,
 removing an edge which might have otherwise been present.
 
 \begin{pyconsole}
-%sample_dsbm(block_sizes, connection_matrix, weight_matrix, sample_weight_type="poisson")
+mcsa.sample_dsbm(block_sizes, connection_matrix, weight_matrix,
+  sample_weight_type="poisson").todense()
 \end{pyconsole}
 
 \subsection{Bipartite stochastic block models}
@@ -313,10 +318,11 @@ destination vertices,
 and a weaker connection probability of 0.2 to the second.
 
 \begin{pyconsole}
-%source_block_sizes = c(2)
-%destination_block_sizes = c(3, 2)
-%bipartite_connection_matrix = matrix(c(0.9, 0.2), nrow=1)
-%sample_bsbm(source_block_sizes, destination_block_sizes, bipartite_connection_matrix)
+source_block_sizes = [2]
+destination_block_sizes = [3, 2]
+bipartite_connection_matrix = np.array([0.9, 0.2]).reshape((1, 2))
+mcsa.sample_bsbm(source_block_sizes, destination_block_sizes,
+  bipartite_connection_matrix).todense()
 \end{pyconsole}
 
 \subsubsection{Weighted bipartite stochastic block models}
@@ -326,10 +332,10 @@ we can also use constant-weighted or Poisson-weighted edges for bipartite
 stochastic block models.
 
 \begin{pyconsole}
-%bipartite_weight_matrix = matrix(c(7, 2), nrow=1)
-%sample_bsbm(source_block_sizes, destination_block_sizes,
-  %bipartite_connection_matrix, bipartite_weight_matrix,
-  %sample_weight_type="poisson")
+bipartite_weight_matrix = np.array([7, 2]).reshape((1, 2))
+mcsa.sample_bsbm(source_block_sizes, destination_block_sizes,
+  bipartite_connection_matrix, bipartite_weight_matrix,
+  sample_weight_type="poisson").todense()
 \end{pyconsole}
 
 
@@ -350,12 +356,12 @@ using the \texttt{motifcluster} package.
 First we create an example of a weighted undirected network $\mathcal{G}_2$.
 
 \begin{pyconsole}
-%G2 = matrix(c(
-  %0, 2, 0, 0,
-  %2, 0, 4, 3,
-  %0, 4, 0, 5,
-  %0, 3, 5, 0
-%), byrow=TRUE, nrow=4)
+G2 = np.array([
+  0, 2, 0, 0,
+  2, 0, 4, 3,
+  0, 4, 0, 5,
+  0, 3, 5, 0
+]).reshape((4, 4))
 \end{pyconsole}
 
 \subsubsection{Combinatorial Laplacian}
@@ -365,7 +371,7 @@ $L_\mathrm{c} = D - G$,
 where $D$ is the diagonal matrix of weighted vertex degrees:
 
 \begin{pyconsole}
-%build_laplacian(G2, type_lap="comb")
+mcsp.build_laplacian(G2, type_lap="comb").todense()
 \end{pyconsole}
 
 \subsubsection{Random-walk Laplacian}
@@ -376,7 +382,7 @@ where $D$ is the diagonal matrix of weighted vertex degrees
 and $I$ is the identity matrix:
 
 \begin{pyconsole}
-%build_laplacian(G2, type_lap="rw")
+mcsp.build_laplacian(G2, type_lap="rw").todense()
 \end{pyconsole}
 
 \subsection{Laplace embedding}
@@ -389,9 +395,9 @@ Below we use the random-walk Laplacian,
 and embedding dimension $l=2$:
 
 \begin{pyconsole}
-%spectrum = run_laplace_embedding(G2, num_eigs=2, type_lap="rw")
-%spectrum$vects
-%spectrum$vals
+spectrum = mcsp.run_laplace_embedding(G2, num_eigs=2, type_lap="rw")
+spectrum["vects"]
+spectrum["vals"]
 \end{pyconsole}
 
 For a random-walk Laplacian,
