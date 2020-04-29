@@ -26,7 +26,7 @@ def test_perf():
 
         mcmo.build_motif_adjacency_matrix(adj_mat, motif_name)
 
-        print(n, p, motif_name)
-        print("{:.2f}".format(time.time() - t0), "\n")
+        #print(n, p, motif_name)
+        #print("{:.2f}".format(time.time() - t0), "\n")
 
   return None

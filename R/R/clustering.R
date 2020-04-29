@@ -70,15 +70,16 @@ run_motif_clustering <- function(adj_mat, motif_name,
   motif_type = c("struc", "func"),
   mam_weight_type = c("unweighted", "mean", "product"),
   mam_method = c("sparse", "dense"),
-  num_eigs,
+  num_eigs = 2,
   type_lap = c("comb", "rw"),
   restrict = TRUE,
-  num_clusts) {
+  num_clusts = 2) {
 
   motif_type <- match.arg(motif_type)
   mam_weight_type <- match.arg(mam_weight_type)
   mam_method <- match.arg(mam_method)
   type_lap <- match.arg(type_lap)
+  stopifnot(typeof(restrict) == typeof(TRUE))
 
   spectrum <- run_motif_embedding(
     adj_mat, motif_name, motif_type, mam_weight_type,

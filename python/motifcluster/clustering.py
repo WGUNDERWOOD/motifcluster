@@ -124,7 +124,7 @@ def run_motif_clustering(adj_mat, motif_name,
   assert motif_type in ["struc", "func"]
   assert mam_weight_type in ["unweighted", "mean", "product"]
   assert mam_method in ["sparse", "dense"]
-  assert type(restrict) == bool
+  assert isinstance(restrict, bool)
   assert type_lap in ["comb", "rw"]
 
   spectrum = mcsp.run_motif_embedding(adj_mat, motif_name, motif_type, mam_weight_type,

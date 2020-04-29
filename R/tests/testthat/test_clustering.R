@@ -57,7 +57,7 @@ test_that("run_motif_clustering returns correct values", {
           # run full method
           motif_clust_list <- run_motif_clustering(adj_mat, motif_name,
                                motif_type, mam_weight_type, "dense", num_eigs,
-                               type_lap, num_clusts)
+                               type_lap, TRUE, num_clusts)
 
           clusts <- motif_clust_list$clusts
           comps <- motif_clust_list$comps

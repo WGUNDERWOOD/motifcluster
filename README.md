@@ -82,16 +82,10 @@ The Python package "motifcluster" is in the
 
 ### Installation
 
-The Python package can be installed from PyPI with
+The Python package can be installed from PyPI with:
 
 ```
 pip install motifcluster
-```
-
-Or can be installed to the user directory with
-
-```
-pip install --user motifcluster
 ```
 
 ### Dependencies

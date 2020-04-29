@@ -241,7 +241,7 @@ def run_motif_embedding(adj_mat, motif_name,
   assert mam_weight_type in ["unweighted", "mean", "product"]
   assert mam_method in ["sparse", "dense"]
   assert type_lap in ["comb", "rw"]
-  assert type(restrict) == bool
+  assert isinstance(restrict, bool)
   assert gr_method in ["sparse", "dense"]
 
   if not sparse.issparse(adj_mat):

@@ -161,7 +161,7 @@ run_motif_embedding <- function(adj_mat, motif_name,
                        motif_type = c("struc", "func"),
                        mam_weight_type = c("unweighted", "mean", "product"),
                        mam_method = c("sparse", "dense"),
-                       num_eigs, type_lap = c("comb", "rw"), restrict = TRUE) {
+                       num_eigs = 2, type_lap = c("comb", "rw"), restrict = TRUE) {
 
   # check args
   adj_mat <- drop0(adj_mat)
@@ -172,7 +172,7 @@ run_motif_embedding <- function(adj_mat, motif_name,
   mam_method <- match.arg(mam_method)
   stopifnot(num_eigs > 0)
   type_lap <- match.arg(type_lap)
-  stopifnot(restrict %in% c(TRUE, FALSE))
+  stopifnot(typeof(restrict) == typeof(TRUE))
 
   # build motif adjacency matrix
   motif_adj_mat <- build_motif_adjacency_matrix(adj_mat, motif_name,

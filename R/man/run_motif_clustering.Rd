@@ -10,9 +10,10 @@ run_motif_clustering(
   motif_type = c("struc", "func"),
   mam_weight_type = c("unweighted", "mean", "product"),
   mam_method = c("sparse", "dense"),
-  num_eigs,
+  num_eigs = 2,
   type_lap = c("comb", "rw"),
-  num_clusts
+  restrict = TRUE,
+  num_clusts = 2
 )
 }
 \arguments{
@@ -34,6 +35,9 @@ One of \code{"sparse"} or \code{"dense"}.}
 \item{type_lap}{Type of Laplacian for the embedding.
 One of \code{"comb"} or \code{"rw"}.}
 
+\item{restrict}{Whether or not to restrict the motif adjacency matrix
+to its largest connected component before embedding.}
+
 \item{num_clusts}{The number of clusters to find.}
 }
 \value{
@@ -42,19 +46,22 @@ A list with 8 entries:
   \item \code{adj_mat}: the original adjacency matrix.
   \item \code{motif_adj_mat}: the motif adjacency matrix.
   \item \code{comps}: the indices of the largest connected component
-    of the motif adjacency matrix.
+    of the motif adjacency matrix
+    (if restrict = TRUE).
   \item \code{adj_mat_comps}: the original adjacency matrix restricted
-    to the largest connected component of the motif adjacency matrix.
+    to the largest connected component of the motif adjacency matrix
+    (if restrict = TRUE).
   \item \code{motif_adj_mat_comps}: the motif adjacency matrix restricted
-    to its largest connected component.
+    to its largest connected component
+    (if restrict = TRUE).
   \item \code{vals}: a length-\code{num_eigs} vector containing the
     eigenvalues associated with the Laplace embedding
-    of the restricted motif adjacency matrix.
+    of the (restricted) motif adjacency matrix.
   \item \code{vects}: a matrix
     containing the eigenvectors associated with the Laplace embedding
-    of the restricted motif adjacency matrix.
+    of the (restricted) motif adjacency matrix.
   \item \code{clusts}: a vector containing integers representing the
-    cluster assignment of each vertex.
+    cluster assignment of each vertex in the (restricted) graph.
 }
 }
 \description{
@@ -65,6 +72,5 @@ embedding dimension, number of clusters and Laplacian type.
 }
 \examples{
 adj_mat <- matrix(c(1:9), nrow = 3)
-run_motif_clustering(adj_mat, "M1", "func",
-  "mean", "sparse", 2, "rw", 2)
+run_motif_clustering(adj_mat, "M1")
 }
