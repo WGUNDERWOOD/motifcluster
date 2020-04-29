@@ -1,7 +1,7 @@
 motifcluster
 ============
 
-Motif-Based Spectral Clustering of Weighted Directed Networks
+.. include:: ../README_python.rst
 
 .. toctree::
    :maxdepth: 1
@@ -13,6 +13,7 @@ Motif-Based Spectral Clustering of Weighted Directed Networks
    sampling
    spectral
    utils
+
 
 Index
 =====

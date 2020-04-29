@@ -25,6 +25,7 @@ echo "Building python distribution packages"
 python setup.py sdist bdist_wheel
 
 # python upload to PyPI
+#python -m twine upload --repository testpypi dist/*
 #python -m twine upload dist/*
 ### username: __token__
 ### password: <PyPI API token>
