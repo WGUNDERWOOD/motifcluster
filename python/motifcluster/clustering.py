@@ -44,6 +44,7 @@ def run_motif_clustering(adj_mat, motif_name,
                          num_eigs=2,
                          type_lap="comb",
                          num_clusts=2,
+                         restrict=True,
                          gr_method="sparse"):
 
   """
@@ -53,6 +54,8 @@ def run_motif_clustering(adj_mat, motif_name,
   (weighted directed) network,
   using a specified motif, motif type, weighting scheme,
   embedding dimension, number of clusters and Laplacian type.
+  Optionally restrict to the largest connected component
+  before clustering.
 
   Parameters
   ----------
@@ -76,50 +79,56 @@ def run_motif_clustering(adj_mat, motif_name,
     One of `"comb"` or `"rw"`.
   num_clusts : int
     The number of clusters to find.
+  restrict : bool
+    Whether or not to restrict the motif adjacency matrix
+    to its largest connected component before embedding.
   gr_method : str
     Format to use for getting largest component.
     One of `"sparse"` or `"dense"`.
 
   Returns
   -------
-  adj_mat : matrix
+  adj_mat : sparse matrix
     The original adjacency matrix.
-  motif_adj_mat : matrix
+  motif_adj_mat : sparse matrix
     The motif adjacency matrix.
   comps : list
     The indices of the largest connected component
-    of the motif adjacency matrix.
+    of the motif adjacency matrix
+    (if restrict=True).
   adj_mat_comps : matrix
     The original adjacency matrix restricted
-    to the largest connected component of the motif adjacency matrix.
+    to the largest connected component of the motif adjacency matrix
+    (if restrict=True).
   motif_adj_mat_comps : matrix
     The motif adjacency matrix restricted
-    to its largest connected component.
+    to its largest connected component
+    (if restrict=True).
   vals : list
     A length-`num_eigs` list containing the
     eigenvalues associated with the Laplace embedding
-    of the restricted motif adjacency matrix.
+    of the (restricted) motif adjacency matrix.
   vects : matrix
     A matrix containing the eigenvectors associated with the Laplace
-    embedding of the restricted motif adjacency matrix.
+    embedding of the (restricted) motif adjacency matrix.
   clusts :
     A vector containing integers representing the
-    cluster assignment of each vertex.
+    cluster assignment of each vertex in the (restricted) graph.
 
   Examples
   --------
   >>> adj_mat = np.array(range(1, 10)).reshape((3, 3))
-  >>> run_motif_clustering(adj_mat, "M1", "func",
-  ...   "mean", "sparse", 2, "rw", 2)
+  >>> run_motif_clustering(adj_mat, "M1")
   """
 
   assert motif_type in ["struc", "func"]
   assert mam_weight_type in ["unweighted", "mean", "product"]
   assert mam_method in ["sparse", "dense"]
+  assert type(restrict) == bool
   assert type_lap in ["comb", "rw"]
 
   spectrum = mcsp.run_motif_embedding(adj_mat, motif_name, motif_type, mam_weight_type,
-                                      mam_method, num_eigs, type_lap, gr_method)
+                                      mam_method, num_eigs, type_lap, restrict, gr_method)
 
   cluster_assigns = cluster_spectrum(spectrum, num_clusts)
 

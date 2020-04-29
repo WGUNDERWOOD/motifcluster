@@ -163,12 +163,13 @@ def run_motif_embedding(adj_mat, motif_name,
                         mam_method="sparse",
                         num_eigs=2,
                         type_lap="rw",
+                        restrict=True,
                         gr_method="sparse"):
   """
   Run motif embedding.
 
   Calculate a motif adjacency matrix for a given motif and motif type,
-  restrict it to its largest connected component,
+  optionally restrict it to its largest connected component,
   and then run Laplace embedding with specified Laplacian type and
   number of eigenvalues and eigenvectors.
 
@@ -192,6 +193,9 @@ def run_motif_embedding(adj_mat, motif_name,
   type_lap : str
     Type of Laplacian for the embedding.
     One of `"comb"` or `"rw"`.
+  restrict : bool
+    Whether or not to restrict the motif adjacency matrix
+    to its largest connected component before embedding.
   gr_method : str
     Format to use for getting largest component.
     One of `"sparse"` or `"dense"`.
@@ -204,26 +208,29 @@ def run_motif_embedding(adj_mat, motif_name,
     The motif adjacency matrix.
   comps : list
     The indices of the largest connected component
-    of the motif adjacency matrix.
+    of the motif adjacency matrix
+    (if restrict=True).
   adj_mat_comps : matrix
     The original adjacency matrix restricted
-    to the largest connected component of the motif adjacency matrix.
+    to the largest connected component of the motif adjacency matrix
+    (if restrict=True).
   motif_adj_mat_comps : matrix
     The motif adjacency matrix restricted
-    to its largest connected component.
+    to its largest connected component
+    (if restrict=True).
   vals : list
     A length-`num_eigs` list containing the
     eigenvalues associated with the Laplace embedding
-    of the restricted motif adjacency matrix.
+    of the (restricted) motif adjacency matrix.
   vects :
     A matrix
     containing the eigenvectors associated with the Laplace embedding
-    of the restricted motif adjacency matrix.
+    of the (restricted) motif adjacency matrix.
 
   Examples
   --------
   adj_mat = np.array(range(1, 10)),reshape((3, 3))
-  run_motif_embedding(adj_mat, "M1", "func", "mean", "sparse", 2, "rw")
+  run_motif_embedding(adj_mat, "M1")
   """
 
   # check args
@@ -234,6 +241,7 @@ def run_motif_embedding(adj_mat, motif_name,
   assert mam_weight_type in ["unweighted", "mean", "product"]
   assert mam_method in ["sparse", "dense"]
   assert type_lap in ["comb", "rw"]
+  assert type(restrict) == bool
   assert gr_method in ["sparse", "dense"]
 
   if not sparse.issparse(adj_mat):
@@ -244,13 +252,24 @@ def run_motif_embedding(adj_mat, motif_name,
                                                     motif_type, mam_weight_type,
                                                     mam_method)
 
-  # restrict to largest connected component
-  comps = mcut.get_largest_component(motif_adj_mat, gr_method)
-  adj_mat_comps = adj_mat[comps, comps]
-  motif_adj_mat_comps = motif_adj_mat[comps, :].tocsc()[:, comps]
+  if restrict:
 
-  # Laplace embedding
-  spect = run_laplace_embedding(motif_adj_mat_comps, num_eigs, type_lap)
+    # restrict to largest connected component
+    comps = mcut.get_largest_component(motif_adj_mat, gr_method)
+    adj_mat_comps = adj_mat[comps, comps]
+    motif_adj_mat_comps = motif_adj_mat[comps, :].tocsc()[:, comps]
+
+    # Laplace embedding restricted
+    spect = run_laplace_embedding(motif_adj_mat_comps, num_eigs, type_lap)
+
+  else:
+    comps = None
+    adj_mat_comps = None
+    motif_adj_mat_comps = None
+
+    # Laplace embedding unrestricted
+    spect = run_laplace_embedding(motif_adj_mat, num_eigs, type_lap)
+
 
   # return list
   spectrum = {
