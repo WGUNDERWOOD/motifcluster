@@ -23,6 +23,7 @@ cp _build/latex/motifcluster.pdf .
 cd ..
 echo "Building python distribution packages"
 python setup.py sdist bdist_wheel
+python -m twine check dist/*
 
 # python upload to PyPI
 #python -m twine upload --repository testpypi dist/*

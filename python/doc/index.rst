@@ -1,11 +1,9 @@
-motifcluster
-============
-
 .. include:: ../README_python.rst
 
+Contents
+--------
 .. toctree::
    :maxdepth: 1
-   :caption: Contents:
 
    clustering
    indicators
@@ -16,5 +14,5 @@ motifcluster
 
 
 Index
-=====
+-----
 * :ref:`genindex`
