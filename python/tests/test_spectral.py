@@ -31,7 +31,7 @@ def test_get_first_eigs_dense():
 def test_get_first_eigs_sparse():
 
   G = sparse.csr_matrix(np.array([7, -4, 14, 0, -4, 19, 10, 0,
-                14, 10, 10, 0, 0, 0, 0, 100]).reshape((4, 4)))
+                14, 10, 10, 0, 0, 0, 0, 100]).reshape((4, 4)), dtype="float")
 
   ans_vals = [-9, 18, 27]
   ans_vects = np.array([2, 1, -2, 0, -2, 2, -1, 0, 1, 2, 2, 0]).reshape((3, 4)).transpose() / 3
