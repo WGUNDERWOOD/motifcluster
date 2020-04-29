@@ -2,7 +2,7 @@
 #'
 #' Compute the first few eigenvalues (by magnitude) and
 #' associated eigenvectors of a matrix.
-#' @param some_mat Symmetric matrix for which eigenvalues and eigenvectors
+#' @param some_mat Matrix for which eigenvalues and eigenvectors
 #' are to be calculated.
 #' @param num_eigs Number of eigenvalues and eigenvectors to calculate.
 #' @return A list with two entries:

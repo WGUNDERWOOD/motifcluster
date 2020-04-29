@@ -21,7 +21,7 @@ def _get_first_eigs(some_mat, num_eigs):
   Parameters
   ----------
   some_mat : matrix
-    Symmetric matrix for which eigenvalues and eigenvectors
+    Matrix for which eigenvalues and eigenvectors
     are to be calculated.
   num_eigs : int
     Number of eigenvalues and eigenvectors to calculate.
@@ -38,8 +38,6 @@ def _get_first_eigs(some_mat, num_eigs):
   # check args
   assert num_eigs == np.floor(num_eigs)
   assert num_eigs >= 1
-  # TODO check sym and in R code too
-
 
   # get spectrum for many eigs
   if num_eigs >= some_mat.shape[0] - 1:
