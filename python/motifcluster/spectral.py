@@ -4,8 +4,8 @@ are in `motifcluster.spectral`.
 """
 
 import numpy as np
-from scipy.sparse import linalg
 from scipy import sparse
+from scipy import linalg
 
 from motifcluster import utils as mcut
 from motifcluster import motifadjacency as mcmo
@@ -38,17 +38,34 @@ def _get_first_eigs(some_mat, num_eigs):
   # check args
   assert num_eigs == np.floor(num_eigs)
   assert num_eigs >= 1
+  # TODO check sym and in R code too
 
-  if not sparse.issparse(some_mat):
-    some_mat = sparse.csr_matrix(some_mat, dtype="f")
 
-  # get spectrum
-  vals, vects = linalg.eigsh(some_mat, k=num_eigs, which="SM")
+  # get spectrum for many eigs
+  if num_eigs >= some_mat.shape[0] - 1:
 
-  # order eigenvalues and eigenvectors
-  ordering = np.argsort(vals.real)
-  vals = vals.real[ordering]
-  vects = vects.real[:, ordering]
+    # make sure matrix is dense
+    if sparse.issparse(some_mat):
+      some_mat = some_mat.toarray()
+
+    vals, vects = linalg.eig(some_mat)
+    ordering = np.argsort(vals.real)
+    vals = vals.real[ordering]
+    vects = vects.real[:, ordering]
+    vals = vals[0:num_eigs]
+    vects = vects[:, 0:num_eigs]
+
+  # get spectrum for few eigs
+  else:
+
+    # make sure matrix is sparse
+    if not sparse.issparse(some_mat):
+      some_mat = sparse.csr_matrix(some_mat, dtype="f")
+
+    vals, vects = sparse.linalg.eigs(some_mat, k=num_eigs, which="SM")
+    ordering = np.argsort(vals.real)
+    vals = vals.real[ordering]
+    vects = vects.real[:, ordering]
 
   # return a list
   spectrum = {
