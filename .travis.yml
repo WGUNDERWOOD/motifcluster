@@ -17,6 +17,6 @@ matrix:
       install:
         - pip install -r requirements.txt
       script:
-        - pytest --cov=motifcluster
+        - pytest --cov=motifcluster tests/
       after_success:
         - coveralls

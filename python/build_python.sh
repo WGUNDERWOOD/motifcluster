@@ -1,7 +1,13 @@
 #!/usr/bin/env bash
 
 echo "Running python tests"
-pytest --profile-svg
+pytest --profile-svg tests/
+
+echo "Running python performance tests"
+cd perf/
+ls
+pytest --profile-svg -s perf.py
+cd ..
 
 # python linting
 echo "Running python linter"

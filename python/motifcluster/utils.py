@@ -147,7 +147,7 @@ def get_largest_component(adj_mat, gr_method):
   if gr_method == "sparse":
 
     if not sparse.issparse(adj_mat):
-      adj_mat= sparse.csr_matrix(adj_mat)
+      adj_mat = sparse.csr_matrix(adj_mat)
 
     gr = nx.from_scipy_sparse_matrix(adj_mat > 0)
 
