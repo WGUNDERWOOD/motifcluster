@@ -63,7 +63,7 @@ cluster_spectrum <- function(spectrum, num_clusts) {
 #' }
 #' @examples
 #' adj_mat <- matrix(c(1:9), nrow = 3)
-#' run_motif_clustering(adj_mat, "M1")
+#' run_motif_clustering(adj_mat, "M1", "func")
 #' @export
 
 run_motif_clustering <- function(adj_mat, motif_name,

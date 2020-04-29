@@ -67,5 +67,5 @@ number of eigenvalues and eigenvectors.
 }
 \examples{
 adj_mat <- matrix(c(1:9), nrow = 3)
-run_motif_embedding(adj_mat, "M1")
+run_motif_embedding(adj_mat, "M1", "func")
 }

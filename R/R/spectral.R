@@ -154,7 +154,7 @@ run_laplace_embedding <- function(adj_mat, num_eigs,
 #' }
 #' @examples
 #' adj_mat <- matrix(c(1:9), nrow = 3)
-#' run_motif_embedding(adj_mat, "M1")
+#' run_motif_embedding(adj_mat, "M1", "func")
 #' @export
 
 run_motif_embedding <- function(adj_mat, motif_name,
