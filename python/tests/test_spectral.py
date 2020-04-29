@@ -81,3 +81,7 @@ def test_build_laplacian_row_sum_error():
   with pytest.raises(AssertionError):
     G = np.array([0, 1, 0, 2]).reshape((2,2))
     mcsp.build_laplacian(G, type_lap = "rw")
+
+
+# TODO test run_laplace_embedding
+# TODO test run_motif_embedding
