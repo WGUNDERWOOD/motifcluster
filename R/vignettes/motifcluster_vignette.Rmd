@@ -1,10 +1,13 @@
 ---
-title: "Using the `motifcluster` package"
-author: "William G Underwood"
-date: "`r format(Sys.Date(), '%d %B %Y')`"
+title: "Using the R package `motifcluster`"
+author: "William G. Underwood"
+date: "`r format(Sys.Date(), '%B %d, %Y')`"
 output:
   pdf_document:
+    citation_package: natbib
     number_sections: true
+keep_tex: TRUE
+bibliography: refs.bib
 vignette: >
   %\VignetteIndexEntry{Using the `motifcluster` package}
   %\VignetteEngine{knitr::rmarkdown}
@@ -18,9 +21,10 @@ knitr::opts_chunk$set(
 )
 set.seed(200401293)
 options(digits = 2)
+library(devtools)
 library(mclust)
-library(motifcluster)
 ```
+
 
 \tableofcontents
 \pagebreak
@@ -30,7 +34,7 @@ library(motifcluster)
 This vignette demonstrates how to use the R package `motifcluster`.
 These methods are detailed in the paper
 *Motif-Based Spectral Clustering of Weighted Directed Networks*,
-which is available at [`arXiv:2004.01293`](arxivpaper).
+which is available at [`arXiv:2004.01293`](arxivpaper) [@UnderwoodElliottCucuringu_2020_Motifs].
 The functionality of the `motifcluster` package falls into a few main categories:
 
 - Building motif adjacency matrices
@@ -40,10 +44,22 @@ The functionality of the `motifcluster` package falls into a few main categories
 
 This vignette comprehensibly demonstrates all of these functionalities,
 showcasing the full capability of the `motifcluster` package.
-The package can be installed and loaded using the `devtools` package:
+We first load some helpful packages for this tutorial:
+
+```{r, eval = FALSE}
+library(devtools)
+library(mclust)
+```
+
+The `motifcluster` package can be installed from GitHub with:
 
 ```{r, eval = FALSE}
 install_github("wgunderwood/motif-based-clustering/R")
+```
+
+The package can then be loaded from within R with:
+
+```{r, results = "hide"}
 library(motifcluster)
 ```
 
@@ -166,8 +182,6 @@ The $(i,j)$th MAM entry is then defined as the sum of these
 instance weights across all instances containing
 both vertices $i$ and $j$:
 
-\pagebreak
-
 ```{r}
 build_motif_adjacency_matrix(G1, motif_name = "M1", motif_type = "func",
   mam_weight_type = "product")
@@ -282,7 +296,7 @@ into "source" and "destination" vertices,
 and edges are only permitted to go from source vertices
 to destination vertices.
 Let's sample a DSBM with a single block of two source vertices
-and two block of destination vertices, with
+and two blocks of destination vertices, with
 sizes of three and two respectively.
 We can use a strong connection probability of 0.9 to the first block of
 destination vertices,
@@ -368,8 +382,8 @@ and embedding dimension $l=2$:
 
 ```{r}
 spectrum = run_laplace_embedding(G2, num_eigs = 2, type_lap = "rw")
-spectrum$vects
 spectrum$vals
+spectrum$vects
 ```
 
 For a random-walk Laplacian,
@@ -402,7 +416,8 @@ in which only three of the four vertices are embedded.
 
 ```{r}
 spectrum = run_motif_embedding(G3, motif_name = "M1", motif_type = "func",
-  mam_weight_type = "unweighted", mam_method = "sparse", num_eigs = 2, type_lap = "rw")
+  mam_weight_type = "unweighted", mam_method = "sparse", num_eigs = 2,
+  restrict = TRUE, type_lap = "rw")
 spectrum$vals
 spectrum$vects
 ```
@@ -427,7 +442,7 @@ block_sizes = rep(10, 3)
 ```
 
 We use strong connections of 0.8 within the blocks,
-and weaker connections of 0.3 between the blocks.
+and weaker connections of 0.2 between the blocks.
 
 ```{r}
 connection_matrix = matrix(c(
@@ -453,10 +468,8 @@ G4 = sample_dsbm(block_sizes, connection_matrix, weight_matrix,
   sample_weight_type = "poisson")
 ```
 
-\pagebreak
-
 Now we can run the motif-based spectral clustering algorithm
-on this network with the three-cycle motif $\mathcal{M}_1$.
+on this network with the 3-cycle motif $\mathcal{M}_1$.
 We build a functional MAM,
 weighting the instances by their mean edge weights,
 using the sparse formulation.
@@ -486,3 +499,6 @@ with a value of one indicating perfect agreement.
 
 
 [arxivpaper]: https://arxiv.org/abs/2004.01293
+
+
+# References

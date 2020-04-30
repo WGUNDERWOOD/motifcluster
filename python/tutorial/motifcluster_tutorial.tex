@@ -1,6 +1,6 @@
 \documentclass{article}
 \usepackage{pythontex}
-\usepackage{geometry}
+\usepackage[margin=1in]{geometry}
 \usepackage{microtype}
 \usepackage{amsmath}
 \usepackage{amssymb}
@@ -13,9 +13,7 @@
 \setitemize{itemsep=0pt,topsep=5pt}
 
 \title{Using the Python package \texttt{motifcluster}}
-\author{William G Underwood}
-
-
+\author{William G. Underwood}
 
 
 
@@ -269,6 +267,11 @@ connection_matrix = np.array([
   0.9, 0.2,
   0.2, 0.9
 ]).reshape((2, 2))
+\end{pyconsole}
+
+\pagebreak
+
+\begin{pyconsole}
 mcsa.sample_dsbm(block_sizes, connection_matrix).todense()
 \end{pyconsole}
 
@@ -305,6 +308,8 @@ mcsa.sample_dsbm(block_sizes, connection_matrix, weight_matrix,
   sample_weight_type="poisson").todense()
 \end{pyconsole}
 
+\pagebreak
+
 \subsection{Bipartite stochastic block models}
 
 The \texttt{motifcluster} package can also be used to sample
@@ -314,7 +319,7 @@ into ``source'' and ``destination'' vertices,
 and edges are only permitted to go from source vertices
 to destination vertices.
 Let's sample a DSBM with a single block of two source vertices
-and two block of destination vertices, with
+and two blocks of destination vertices, with
 sizes of three and two respectively.
 We can use a strong connection probability of 0.9 to the first block of
 destination vertices,
