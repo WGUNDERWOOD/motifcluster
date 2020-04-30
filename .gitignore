@@ -1,6 +1,9 @@
 # private files
 todo.org
 
+# editor files
+auto/
+
 # r package
 R/inst
 R/doc/*.R

@@ -6,6 +6,7 @@
 \usepackage{amssymb}
 \usepackage{hyperref}
 \usepackage{enumitem}
+\usepackage[T1]{fontenc}
 \usepackage[dvipsnames]{xcolor}
 
 \setlength\parindent{0pt}
@@ -29,11 +30,11 @@
 
 \section{Introduction}
 
-This vignette demonstrates how to use the Python package \texttt{motifcluster}.
+This tutorial demonstrates how to use the Python package \texttt{motifcluster}.
 These methods are detailed in the paper
 \textit{Motif-Based Spectral Clustering of Weighted Directed Networks},
 which is available at
-\href{https://arxiv.org/abs/2004.01293}{\texttt{arXiv:2004.01293}}.
+\href{https://arxiv.org/abs/2004.01293}{\texttt{arXiv:2004.01293}}~\cite{UnderwoodElliottCucuringu_2020_Motifs}.
 The functionality of the \texttt{motifcluster} package falls into a few main
 categories:
 
@@ -44,9 +45,9 @@ categories:
 \item Motif-based spectral clustering
 \end{itemize}
 
-This vignette comprehensibly demonstrates all of these functionalities,
-showcasing the full capability of the \texttt{motifcluster} package. The package
-can be installed from PyPI with:
+This tutorial comprehensibly demonstrates all of these functionalities,
+showcasing the full capability of the \texttt{motifcluster} package.
+The package can be installed from PyPI with:
 
 \vspace*{2mm}
 \texttt{> \textcolor{Fuchsia}{pip install motifcluster}}
@@ -55,15 +56,17 @@ can be installed from PyPI with:
 We load some other helpful packages for this tutorial:
 \begin{pyconsole}
 import numpy as np
+import scipy
+import sklearn
 \end{pyconsole}
 
 % Other settings
 \pycon{np.random.seed(2348)}
-\pycon{import scipy}
 \pycon{scipy.set_printoptions(precision=2, suppress=True)}
+\vspace*{-3mm}
 
 The \texttt{motifcluster} package can then be loaded
-from within Python with: TODO remove unnecessary imports here
+from within Python with:
 
 \begin{pyconsole}
 from motifcluster import clustering as mccl
@@ -142,10 +145,10 @@ you might notice that there is seemingly another instance
 of the motif $\mathcal{M}_1$
 in our network $\mathcal{G}_1$,
 on the vertices 2, 3 and 4,
-albeit with an "extra" edge from 2 to 3.
+albeit with an ``extra'' edge from 2 to 3.
 The reason for this is that we instructed
 \texttt{build\_motif\_adjacency\_matrix}
-to look for *structural* motif instances (this is the default).
+to look for \emph{structural} motif instances (this is the default).
 Structural instances require an exact match, with no extra edges.
 If we want to also include instances which may have extra edges present,
 we must instead use functional motif instances:
@@ -168,11 +171,11 @@ which we have not yet used:
 so far our MAMs have been simply counting
 instances of motifs.
 This is because the default weighting scheme is
-"unweighted", assigning every instance a weight of one.
+``unweighted'', assigning every instance a weight of one.
 
 \subsubsection{Mean-weighted instances}
 
-We could instead use the "mean" weighting scheme,
+We could instead use the ``mean'' weighting scheme,
 where every instance is assigned a weight equal to its
 mean edge weight.
 The $(i,j)$th MAM entry is then defined as the sum of these
@@ -192,7 +195,7 @@ sum of these two mean weights, which is 7.
 
 \subsubsection{Product-weighted instances}
 
-We can also use the "product" weighting scheme,
+We can also use the ``product'' weighting scheme,
 where every instance is assigned a weight equal to the
 product of its edge weights.
 The $(i,j)$th MAM entry is then defined as the sum of these
@@ -213,12 +216,12 @@ sum of these two product weights, which is 84.
 \subsubsection{Computation method}
 
 The final argument to \texttt{build\_motif\_adjacency\_matrix}
-is the "mam\_method" argument.
+is the ``mam\_method'' argument.
 This does not affect the value returned but may impact the
 amount of time taken to return the MAM.
-In general the "sparse" method (the default)
+In general the ``sparse'' method (the default)
 is faster on large sparse networks.
-The "dense" method, which uses fewer operations but on
+The ``dense'' method, which uses fewer operations but on
 denser matrices, tends to be faster for small dense networks.
 
 
@@ -275,7 +278,7 @@ The matrix above has binary entries,
 indicating that it is the adjacency matrix of an unweighted
 directed network.
 The \texttt{motifcluster} package also allows sampling of weighted directed networks.
-The simplest example of this is "constant" weighting,
+The simplest example of this is ``constant'' weighting,
 where we simply multiply each block of the adjacency matrix by a constant.
 
 
@@ -307,7 +310,7 @@ mcsa.sample_dsbm(block_sizes, connection_matrix, weight_matrix,
 The \texttt{motifcluster} package can also be used to sample
 bipartite networks.
 The vertices of a bipartite network are partitioned
-into "source" and "destination" vertices,
+into ``source'' and ``destination'' vertices,
 and edges are only permitted to go from source vertices
 to destination vertices.
 Let's sample a DSBM with a single block of two source vertices
@@ -345,7 +348,7 @@ mcsa.sample_bsbm(source_block_sizes, destination_block_sizes,
 
 Spectral methods involve performing eigenvalue and
 eigenvector operations on matrices related to networks.
-We work here with weighted *undirected* networks
+We work here with weighted \emph{undirected} networks
 (which have symmetric adjacency matrices),
 because motif adjacency matrices are always symmetric.
 
@@ -396,8 +399,8 @@ and embedding dimension $l=2$:
 
 \begin{pyconsole}
 spectrum = mcsp.run_laplace_embedding(G2, num_eigs=2, type_lap="rw")
-spectrum["vects"]
 spectrum["vals"]
+spectrum["vects"]
 \end{pyconsole}
 
 For a random-walk Laplacian,
@@ -413,12 +416,12 @@ As an example we use the
 function on the network $\mathcal{G}_3$ below.
 
 \begin{pyconsole}
-%G3 = matrix(c(
-  %0, 0, 0, 0,
-  %0, 0, 2, 3,
-  %0, 4, 0, 0,
-  %4, 0, 5, 0
-%), byrow=TRUE, nrow=4)
+G3 = np.array([
+  0, 0, 0, 0,
+  0, 0, 2, 3,
+  0, 4, 0, 0,
+  4, 0, 5, 0
+]).reshape((4, 4))
 \end{pyconsole}
 
 An artefact of building MAMs is that although the original network may
@@ -429,10 +432,11 @@ We observe this with the network $\mathcal{G}_3$,
 in which only three of the four vertices are embedded.
 
 \begin{pyconsole}
-%spectrum = run_motif_embedding(G3, motif_name="M1", motif_type="func",
-  %mam_weight_type="unweighted", mam_method="sparse", num_eigs=2, type_lap="rw")
-%spectrum$vals
-%spectrum$vects
+spectrum = mcsp.run_motif_embedding(G3, motif_name="M1", motif_type="func",
+  mam_weight_type="unweighted", mam_method="sparse", num_eigs=2,
+  restrict = True, type_lap="rw")
+spectrum["vals"]
+spectrum["vects"]
 \end{pyconsole}
 
 
@@ -446,23 +450,23 @@ building an MAM, restricting it to its largest connected component,
 performing eigenvector embedding, and extracting clusters.
 We therefore take the opportunity to showcase the ability of
 \texttt{motifcluster} to recover the blocks of a DSBM,
-demonstrating all of the methods outlined in this vignette.
+demonstrating all of the methods outlined in this vignette.\\
 
 Let's use a DSBM with three blocks of 10 nodes each.
 
 \begin{pyconsole}
-%block_sizes = rep(10, 3)
+block_sizes = 3 * [10]
 \end{pyconsole}
 
 We use strong connections of 0.8 within the blocks,
-and weaker connections of 0.3 between the blocks.
+and weaker connections of 0.2 between the blocks.
 
 \begin{pyconsole}
-%connection_matrix = matrix(c(
-  %0.8, 0.2, 0.2,
-  %0.2, 0.8, 0.2,
-  %0.2, 0.2, 0.8
-%), nrow=3)
+connection_matrix = np.array([
+  0.8, 0.2, 0.2,
+  0.2, 0.8, 0.2,
+  0.2, 0.2, 0.8
+]).reshape((3, 3))
 \end{pyconsole}
 
 We also set the within-block edges to be Poisson-weighted with
@@ -471,18 +475,18 @@ and the between-block edges to be Poisson-weighted with smaller
 mean 10.
 
 \begin{pyconsole}
-%weight_matrix = matrix(c(
-  %20, 10, 10,
-  %10, 20, 10,
-  %10, 10, 20
-%), nrow=3)
+weight_matrix = np.array([
+  20, 10, 10,
+  10, 20, 10,
+  10, 10, 20
+]).reshape((3, 3))
 
-%G4 = sample_dsbm(block_sizes, connection_matrix, weight_matrix,
-  %sample_weight_type="poisson")
+G4 = mcsa.sample_dsbm(block_sizes, connection_matrix, weight_matrix,
+  sample_weight_type="poisson")
 \end{pyconsole}
 
 Now we can run the motif-based spectral clustering algorithm
-on this network with the three-cycle motif $\mathcal{M}_1$.
+on this network with the 3-cycle motif $\mathcal{M}_1$.
 We build a functional MAM,
 weighting the instances by their mean edge weights,
 using the sparse formulation.
@@ -492,23 +496,29 @@ first four eigenvalues and eigenvectors.
 Finally we extract three clusters.
 
 \begin{pyconsole}
-%motif_cluster = run_motif_clustering(G4, motif_name="M1", motif_type="func",
-  %mam_weight_type="mean", mam_method="sparse", type_lap="rw", num_eigs=4,
-  %num_clusts=3
-%)
+motif_cluster = mccl.run_motif_clustering(G4, motif_name="M1", motif_type="func",
+  mam_weight_type="mean", mam_method="sparse", type_lap="rw", num_eigs=4,
+  restrict=True, num_clusts=3
+)
 \end{pyconsole}
 
 We can evaluate the performance by comparing it to the ground-truth
 labels using the adjusted Rand index
-from the \texttt{mclust} package:
+from the \texttt{sklearn} package:
 
 \begin{pyconsole}
-%truth = c(rep(1, 10), rep(2, 10), rep(3, 10))
-%mclust::adjustedRandIndex(motif_cluster$clusts, truth)
+truth = 10 * [0] + 10 * [1] + 10 * [2]
+sklearn.metrics.adjusted_rand_score(motif_cluster["clusts"], truth)
 \end{pyconsole}
 
 A larger value indicates better recovery of the blocks,
 with a value of one indicating perfect agreement.
+
+
+
+
+\bibliographystyle{abbrv}
+\bibliography{refs}
 
 
 
