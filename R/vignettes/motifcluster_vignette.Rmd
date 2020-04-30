@@ -21,7 +21,6 @@ knitr::opts_chunk$set(
 )
 set.seed(200401293)
 options(digits = 2)
-library(devtools)
 library(mclust)
 ```
 
