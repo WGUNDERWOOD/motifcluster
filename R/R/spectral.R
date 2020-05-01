@@ -28,17 +28,17 @@ get_first_eigs <- function(some_mat, num_eigs) {
   }
 
   # use real parts
-  vals = Re(spectrum_eigs$values)
-  vects = Re(spectrum_eigs$vectors)
+  vals <- Re(spectrum_eigs$values)
+  vects <- Re(spectrum_eigs$vectors)
 
   # order eigenvalues and eigenvectors
-  ordering = order(vals)
-  vals = vals[ordering]
-  vects = vects[, ordering]
+  ordering <- order(vals)
+  vals <- vals[ordering]
+  vects <- vects[, ordering]
 
   # only return the specified number (eigen may return more)
-  vals = vals[1:num_eigs]
-  vects = vects[, 1:num_eigs]
+  vals <- vals[1:num_eigs]
+  vects <- vects[, 1:num_eigs]
 
   # return a list
   spectrum <- list()

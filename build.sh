@@ -19,3 +19,4 @@ bash build_python.sh
 echo "R"
 cd $basedir/R/
 Rscript build_R.R
+rm .gitignore

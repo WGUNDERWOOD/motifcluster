@@ -7,15 +7,16 @@ test_that("get_first_eigs returns correct values on dense matrix", {
   G <- matrix(c(7, -4, 14, 0, -4, 19, 10, 0,
                 14, 10, 10, 0, 0, 0, 0, 100), nrow = 4)
   ans_vals <- c(-9, 18, 27)
-  ans_vects <- matrix(c(-2, -1, 2, 0, -2, 2, -1, 0, -1, -2, -2, 0) / 3, nrow = 4)
+  ans_vects <- matrix(
+    c(-2, -1, 2, 0, -2, 2, -1, 0, -1, -2, -2, 0) / 3, nrow = 4)
 
   spect <- get_first_eigs(G, 3)
-  vals = spect$vals
-  vects = spect$vects
+  vals <- spect$vals
+  vects <- spect$vects
 
-  for (i in 1:length(vals)) {
-    if (sign(vects[1, i]) != sign(ans_vects[1, i])){
-      vects[, i] = -vects[, i]
+  for (i in seq_len(length(vals))) {
+    if (sign(vects[1, i]) != sign(ans_vects[1, i])) {
+      vects[, i] <- -vects[, i]
     }
   }
 
@@ -28,15 +29,16 @@ test_that("get_first_eigs returns correct values on sparse matrix", {
   G <- drop0(matrix(c(7, -4, 14, 0, -4, 19, 10, 0,
                 14, 10, 10, 0, 0, 0, 0, 100), nrow = 4))
   ans_vals <- c(-9, 18, 27)
-  ans_vects <- matrix(c(-2, -1, 2, 0, -2, 2, -1, 0, -1, -2, -2, 0) / 3, nrow = 4)
+  ans_vects <- matrix(c(
+    -2, -1, 2, 0, -2, 2, -1, 0, -1, -2, -2, 0) / 3, nrow = 4)
 
   spect <- get_first_eigs(G, 3)
-  vals = spect$vals
-  vects = spect$vects
+  vals <- spect$vals
+  vects <- spect$vects
 
-  for (i in 1:length(vals)) {
-    if (sign(vects[1, i]) != sign(ans_vects[1, i])){
-      vects[, i] = -vects[, i]
+  for (i in seq_len(length(vals))) {
+    if (sign(vects[1, i]) != sign(ans_vects[1, i])) {
+      vects[, i] <- -vects[, i]
     }
   }
 
@@ -88,15 +90,15 @@ test_that("run_laplace_embedding returns correct spectrum on dense matrix", {
   G <- matrix(c(0:8), nrow = 3)
   G <- G + t(G)
 
-  ans_vals_comb = c(0, 17.07)
-  ans_vects_comb = matrix(c(
+  ans_vals_comb <- c(0, 17.07)
+  ans_vects_comb <- matrix(c(
     0.577,  0.789,
     0.577, -0.577,
     0.577, -0.211
   ), nrow = 3, byrow = TRUE)
 
-  ans_vals_rw = c(0, 1)
-  ans_vects_rw = matrix(c(
+  ans_vals_rw <- c(0, 1)
+  ans_vects_rw <- matrix(c(
     0.577,  0.408,
     0.577, -0.816,
     0.577,  0.408
@@ -105,17 +107,17 @@ test_that("run_laplace_embedding returns correct spectrum on dense matrix", {
   spectrum_comb <- run_laplace_embedding(G, 2, "comb")
   spectrum_rw <- run_laplace_embedding(G, 2, "rw")
 
-  vals_comb = spectrum_comb$vals
-  vects_comb = spectrum_comb$vects
-  vals_rw = spectrum_rw$vals
-  vects_rw = spectrum_rw$vects
+  vals_comb <- spectrum_comb$vals
+  vects_comb <- spectrum_comb$vects
+  vals_rw <- spectrum_rw$vals
+  vects_rw <- spectrum_rw$vects
 
-  for (i in 1:length(vals_comb)) {
-    if (sign(vects_comb[1, i]) != sign(ans_vects_comb[1, i])){
-      vects_comb[, i] = -vects_comb[, i]
+  for (i in seq_len(length(vals_comb))) {
+    if (sign(vects_comb[1, i]) != sign(ans_vects_comb[1, i])) {
+      vects_comb[, i] <- -vects_comb[, i]
     }
-    if (sign(vects_rw[1, i]) != sign(ans_vects_rw[1, i])){
-      vects_rw[, i] = -vects_rw[, i]
+    if (sign(vects_rw[1, i]) != sign(ans_vects_rw[1, i])) {
+      vects_rw[, i] <- -vects_rw[, i]
     }
   }
 
@@ -133,15 +135,15 @@ test_that("run_laplace_embedding returns correct spectrum on sparse matrix", {
   G <- matrix(c(0:8), nrow = 3)
   G <- drop0(G + t(G))
 
-  ans_vals_comb = c(0, 17.07)
-  ans_vects_comb = matrix(c(
+  ans_vals_comb <- c(0, 17.07)
+  ans_vects_comb <- matrix(c(
     0.577,  0.789,
     0.577, -0.577,
     0.577, -0.211
   ), nrow = 3, byrow = TRUE)
 
-  ans_vals_rw = c(0, 1)
-  ans_vects_rw = matrix(c(
+  ans_vals_rw <- c(0, 1)
+  ans_vects_rw <- matrix(c(
     0.577,  0.408,
     0.577, -0.816,
     0.577,  0.408
@@ -150,17 +152,17 @@ test_that("run_laplace_embedding returns correct spectrum on sparse matrix", {
   spectrum_comb <- run_laplace_embedding(G, 2, "comb")
   spectrum_rw <- run_laplace_embedding(G, 2, "rw")
 
-  vals_comb = spectrum_comb$vals
-  vects_comb = spectrum_comb$vects
-  vals_rw = spectrum_rw$vals
-  vects_rw = spectrum_rw$vects
+  vals_comb <- spectrum_comb$vals
+  vects_comb <- spectrum_comb$vects
+  vals_rw <- spectrum_rw$vals
+  vects_rw <- spectrum_rw$vects
 
-  for (i in 1:length(vals_comb)) {
-    if (sign(vects_comb[1, i]) != sign(ans_vects_comb[1, i])){
-      vects_comb[, i] = -vects_comb[, i]
+  for (i in seq_len(length(vals_comb))) {
+    if (sign(vects_comb[1, i]) != sign(ans_vects_comb[1, i])) {
+      vects_comb[, i] <- -vects_comb[, i]
     }
-    if (sign(vects_rw[1, i]) != sign(ans_vects_rw[1, i])){
-      vects_rw[, i] = -vects_rw[, i]
+    if (sign(vects_rw[1, i]) != sign(ans_vects_rw[1, i])) {
+      vects_rw[, i] <- -vects_rw[, i]
     }
   }
 
