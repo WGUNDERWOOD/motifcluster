@@ -173,4 +173,236 @@ test_that("run_laplace_embedding returns correct spectrum on sparse matrix", {
 
 })
 
-# TODO test run_motif_embedding
+# run_motif_embedding
+
+test_that("run_motif_embedding correct on dense matrix with restrict", {
+
+  set.seed(9235)
+
+  adj_mat <- matrix(c(
+    0, 2, 0, 0,
+    0, 0, 3, 0,
+    4, 0, 0, 0,
+    7, 0, 0, 0
+  ), nrow = 4, byrow = TRUE)
+
+  # answers
+  ans_adj_mat <- drop0(matrix(c(
+    0, 2, 0, 0,
+    0, 0, 3, 0,
+    4, 0, 0, 0,
+    7, 0, 0, 0
+  ), nrow = 4, byrow = TRUE))
+
+  ans_motif_adj_mat = drop0(matrix(c(
+    0, 3, 3, 0,
+    3, 0, 3, 0,
+    3, 3, 0, 0,
+    0, 0, 0, 0
+  ), nrow = 4, byrow = TRUE))
+
+  ans_comps = 1:3
+
+  ans_adj_mat_comps <- drop0(matrix(c(
+    0, 2, 0,
+    0, 0, 3,
+    4, 0, 0
+  ), nrow = 3, byrow = TRUE))
+
+  ans_motif_adj_mat_comps = drop0(matrix(c(
+    0, 3, 3,
+    3, 0, 3,
+    3, 3, 0
+  ), nrow = 3, byrow = TRUE))
+
+  ans_vals = c(0, 1.5)
+
+  ans_vects = matrix(c(
+    0.577,  0,
+    0.577, -0.707,
+    0.577,  0.707
+  ), nrow = 3, byrow = TRUE)
+
+  # run motif embedding
+  emb_list = run_motif_embedding(adj_mat, "M1", "func", "mean", "dense", 2,
+                                 "rw", restrict = TRUE)
+
+  # flip eigenvector signs if necessary
+  for (i in seq_len(length(ans_vals))) {
+    if (sign(emb_list$vects[1, i]) != sign(ans_vects[1, i])) {
+      emb_list$vects[, i] <- -emb_list$vects[, i]
+    }
+  }
+
+  expect_equal(ans_adj_mat, emb_list$adj_mat)
+  expect_equal(ans_motif_adj_mat, emb_list$motif_adj_mat)
+  expect_equal(ans_comps, emb_list$comps)
+  expect_equal(ans_adj_mat_comps, emb_list$adj_mat_comps)
+  expect_equal(ans_motif_adj_mat_comps, emb_list$motif_adj_mat_comps)
+  expect_equal(ans_vals, emb_list$vals, tolerance = 0.01)
+  expect_equal(ans_vects, emb_list$vects, tolerance = 0.01)
+})
+
+test_that("run_motif_embedding correct on sparse matrix with restrict", {
+
+  set.seed(9235)
+
+  adj_mat <- drop0(matrix(c(
+    0, 2, 0, 0,
+    0, 0, 3, 0,
+    4, 0, 0, 0,
+    7, 0, 0, 0
+  ), nrow = 4, byrow = TRUE))
+
+  # answers
+  ans_adj_mat <- drop0(matrix(c(
+    0, 2, 0, 0,
+    0, 0, 3, 0,
+    4, 0, 0, 0,
+    7, 0, 0, 0
+  ), nrow = 4, byrow = TRUE))
+
+  ans_motif_adj_mat = drop0(matrix(c(
+    0, 3, 3, 0,
+    3, 0, 3, 0,
+    3, 3, 0, 0,
+    0, 0, 0, 0
+  ), nrow = 4, byrow = TRUE))
+
+  ans_comps = 1:3
+
+  ans_adj_mat_comps <- drop0(matrix(c(
+    0, 2, 0,
+    0, 0, 3,
+    4, 0, 0
+  ), nrow = 3, byrow = TRUE))
+
+  ans_motif_adj_mat_comps = drop0(matrix(c(
+    0, 3, 3,
+    3, 0, 3,
+    3, 3, 0
+  ), nrow = 3, byrow = TRUE))
+
+  ans_vals = c(0, 1.5)
+
+  ans_vects = matrix(c(
+    0.577,  0,
+    0.577, -0.707,
+    0.577,  0.707
+  ), nrow = 3, byrow = TRUE)
+
+  # run motif embedding
+  emb_list = run_motif_embedding(adj_mat, "M1", "func", "mean", "dense", 2,
+                                 "rw", restrict = TRUE)
+
+  # flip eigenvector signs if necessary
+  for (i in seq_len(length(ans_vals))) {
+    if (sign(emb_list$vects[1, i]) != sign(ans_vects[1, i])) {
+      emb_list$vects[, i] <- -emb_list$vects[, i]
+    }
+  }
+
+  expect_equal(ans_adj_mat, emb_list$adj_mat)
+  expect_equal(ans_motif_adj_mat, emb_list$motif_adj_mat)
+  expect_equal(ans_comps, emb_list$comps)
+  expect_equal(ans_adj_mat_comps, emb_list$adj_mat_comps)
+  expect_equal(ans_motif_adj_mat_comps, emb_list$motif_adj_mat_comps)
+  expect_equal(ans_vals, emb_list$vals, tolerance = 0.01)
+  expect_equal(ans_vects, emb_list$vects, tolerance = 0.01)
+})
+
+test_that("run_motif_embedding correct on dense matrix without restrict", {
+
+  set.seed(9235)
+
+  adj_mat <- matrix(c(
+    0, 2, 0,
+    0, 0, 3,
+    4, 0, 0
+  ), nrow = 3, byrow = TRUE)
+
+  # answers
+  ans_adj_mat <- drop0(matrix(c(
+    0, 2, 0,
+    0, 0, 3,
+    4, 0, 0
+  ), nrow = 3, byrow = TRUE))
+
+  ans_motif_adj_mat = drop0(matrix(c(
+    0, 3, 3,
+    3, 0, 3,
+    3, 3, 0
+  ), nrow = 3, byrow = TRUE))
+
+  ans_vals = c(0, 1.5)
+
+  ans_vects = matrix(c(
+    0.577,  0,
+    0.577, -0.707,
+    0.577,  0.707
+  ), nrow = 3, byrow = TRUE)
+
+  # run motif embedding
+  emb_list = run_motif_embedding(adj_mat, "M1", "func", "mean", "dense", 2,
+                                 "rw", restrict = FALSE)
+
+  # flip eigenvector signs if necessary
+  for (i in seq_len(length(ans_vals))) {
+    if (sign(emb_list$vects[1, i]) != sign(ans_vects[1, i])) {
+      emb_list$vects[, i] <- -emb_list$vects[, i]
+    }
+  }
+
+  expect_equal(ans_adj_mat, emb_list$adj_mat)
+  expect_equal(ans_motif_adj_mat, emb_list$motif_adj_mat)
+  expect_equal(ans_vals, emb_list$vals, tolerance = 0.01)
+  expect_equal(ans_vects, emb_list$vects, tolerance = 0.01)
+})
+
+test_that("run_motif_embedding correct on sparse matrix without restrict", {
+
+  set.seed(9235)
+
+  adj_mat <- drop0(matrix(c(
+    0, 2, 0,
+    0, 0, 3,
+    4, 0, 0
+  ), nrow = 3, byrow = TRUE))
+
+  # answers
+  ans_adj_mat <- drop0(matrix(c(
+    0, 2, 0,
+    0, 0, 3,
+    4, 0, 0
+  ), nrow = 3, byrow = TRUE))
+
+  ans_motif_adj_mat = drop0(matrix(c(
+    0, 3, 3,
+    3, 0, 3,
+    3, 3, 0
+  ), nrow = 3, byrow = TRUE))
+
+  ans_vals = c(0, 1.5)
+
+  ans_vects = matrix(c(
+    0.577,  0,
+    0.577, -0.707,
+    0.577,  0.707
+  ), nrow = 3, byrow = TRUE)
+
+  # run motif embedding
+  emb_list = run_motif_embedding(adj_mat, "M1", "func", "mean", "dense", 2,
+                                 "rw", restrict = FALSE)
+
+  # flip eigenvector signs if necessary
+  for (i in seq_len(length(ans_vals))) {
+    if (sign(emb_list$vects[1, i]) != sign(ans_vects[1, i])) {
+      emb_list$vects[, i] <- -emb_list$vects[, i]
+    }
+  }
+
+  expect_equal(ans_adj_mat, emb_list$adj_mat)
+  expect_equal(ans_motif_adj_mat, emb_list$motif_adj_mat)
+  expect_equal(ans_vals, emb_list$vals, tolerance = 0.01)
+  expect_equal(ans_vects, emb_list$vects, tolerance = 0.01)
+})

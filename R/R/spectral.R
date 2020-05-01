@@ -214,6 +214,7 @@ run_motif_embedding <- function(adj_mat, motif_name,
   }
 
   # return list
+  # TODO rename spectrum to embedding here and in py
   spectrum <- list()
   spectrum$adj_mat <- adj_mat
   spectrum$motif_adj_mat <- motif_adj_mat
