@@ -271,8 +271,12 @@ def run_motif_embedding(adj_mat, motif_name,
 
     # restrict to largest connected component
     comps = mcut.get_largest_component(motif_adj_mat, gr_method)
-    adj_mat_comps = adj_mat[comps, comps]
+
+    adj_mat_comps = adj_mat[comps, :].tocsc()[:, comps]
+    adj_mat_comps = sparse.csr_matrix(adj_mat_comps)
+
     motif_adj_mat_comps = motif_adj_mat[comps, :].tocsc()[:, comps]
+    motif_adj_mat_comps = sparse.csr_matrix(motif_adj_mat_comps)
 
     # Laplace embedding restricted
     spect = run_laplace_embedding(motif_adj_mat_comps, num_eigs, type_lap)

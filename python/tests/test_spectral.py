@@ -167,4 +167,227 @@ def test_run_laplace_embedding_sparse():
   assert np.allclose(vects_rw, ans_vects_rw, atol=0.01)
 
 
-# TODO test run_motif_embedding
+# run_motif_embedding
+
+def test_run_mot_embedding_dense_restrict():
+
+  np.random.seed(9235)
+
+  adj_mat = np.array([
+    0, 2, 0, 0,
+    0, 0, 3, 0,
+    4, 0, 0, 0,
+    7, 0, 0, 0
+  ]).reshape((4, 4))
+
+  # answers
+  ans_adj_mat = np.array([
+    0, 2, 0, 0,
+    0, 0, 3, 0,
+    4, 0, 0, 0,
+    7, 0, 0, 0
+  ]).reshape((4, 4))
+
+  ans_motif_adj_mat = np.array([
+    0, 3, 3, 0,
+    3, 0, 3, 0,
+    3, 3, 0, 0,
+    0, 0, 0, 0
+  ]).reshape((4, 4))
+
+  ans_comps = [0, 1, 2]
+
+  ans_adj_mat_comps = np.array([
+    0, 2, 0,
+    0, 0, 3,
+    4, 0, 0
+  ]).reshape((3, 3))
+
+  ans_motif_adj_mat_comps = np.array([
+    0, 3, 3,
+    3, 0, 3,
+    3, 3, 0
+  ]).reshape((3, 3))
+
+  ans_vals = [0, 1.5]
+
+  ans_vects = np.array([
+    0.577, -0.293,
+    0.577, 0.806,
+    0.577, -0.513
+  ]).reshape((3, 2))
+
+  # run motif embedding
+  emb_list = mcsp.run_motif_embedding(adj_mat, "M1", "func", "mean", "dense", 2,
+                                      "rw", restrict=True)
+
+  # flip eigenvector signs if necessary
+  for i in range(len(ans_vals)):
+    if np.sign(emb_list["vects"][0, i]) != np.sign(ans_vects[0, i]):
+      emb_list["vects"][:, i] = -emb_list["vects"][:, i]
+
+  assert np.allclose(ans_adj_mat, emb_list["adj_mat"].toarray())
+  assert np.allclose(ans_motif_adj_mat, emb_list["motif_adj_mat"].toarray())
+  assert np.allclose(ans_comps, emb_list["comps"])
+  assert np.allclose(ans_adj_mat_comps, emb_list["adj_mat_comps"].toarray())
+  assert np.allclose(ans_motif_adj_mat_comps, emb_list["motif_adj_mat_comps"].toarray())
+  assert np.allclose(ans_vals, emb_list["vals"], atol=0.01)
+  assert np.allclose(ans_vects, emb_list["vects"], atol=0.01)
+
+
+def test_run_mot_embedding_sparse_restrict():
+
+  np.random.seed(9235)
+
+  adj_mat = sparse.csr_matrix(np.array([
+    0, 2, 0, 0,
+    0, 0, 3, 0,
+    4, 0, 0, 0,
+    7, 0, 0, 0
+  ]).reshape((4, 4)))
+
+  # answers
+  ans_adj_mat = np.array([
+    0, 2, 0, 0,
+    0, 0, 3, 0,
+    4, 0, 0, 0,
+    7, 0, 0, 0
+  ]).reshape((4, 4))
+
+  ans_motif_adj_mat = np.array([
+    0, 3, 3, 0,
+    3, 0, 3, 0,
+    3, 3, 0, 0,
+    0, 0, 0, 0
+  ]).reshape((4, 4))
+
+  ans_comps = [0, 1, 2]
+
+  ans_adj_mat_comps = np.array([
+    0, 2, 0,
+    0, 0, 3,
+    4, 0, 0
+  ]).reshape((3, 3))
+
+  ans_motif_adj_mat_comps = np.array([
+    0, 3, 3,
+    3, 0, 3,
+    3, 3, 0
+  ]).reshape((3, 3))
+
+  ans_vals = [0, 1.5]
+
+  ans_vects = np.array([
+    0.577, -0.293,
+    0.577, 0.806,
+    0.577, -0.513
+  ]).reshape((3, 2))
+
+  # run motif embedding
+  emb_list = mcsp.run_motif_embedding(adj_mat, "M1", "func", "mean", "dense", 2,
+                                      "rw", restrict=True)
+
+  # flip eigenvector signs if necessary
+  for i in range(len(ans_vals)):
+    if np.sign(emb_list["vects"][0, i]) != np.sign(ans_vects[0, i]):
+      emb_list["vects"][:, i] = -emb_list["vects"][:, i]
+
+  assert np.allclose(ans_adj_mat, emb_list["adj_mat"].toarray())
+  assert np.allclose(ans_motif_adj_mat, emb_list["motif_adj_mat"].toarray())
+  assert np.allclose(ans_comps, emb_list["comps"])
+  assert np.allclose(ans_adj_mat_comps, emb_list["adj_mat_comps"].toarray())
+  assert np.allclose(ans_motif_adj_mat_comps, emb_list["motif_adj_mat_comps"].toarray())
+  assert np.allclose(ans_vals, emb_list["vals"], atol=0.01)
+  assert np.allclose(ans_vects, emb_list["vects"], atol=0.01)
+
+
+def test_run_mot_embedding_dense_no_restrict():
+
+  np.random.seed(9235)
+
+  adj_mat = np.array([
+    0, 2, 0,
+    0, 0, 3,
+    4, 0, 0
+  ]).reshape((3, 3))
+
+  # answers
+  ans_adj_mat = np.array([
+    0, 2, 0,
+    0, 0, 3,
+    4, 0, 0
+  ]).reshape((3, 3))
+
+  ans_motif_adj_mat = np.array([
+    0, 3, 3,
+    3, 0, 3,
+    3, 3, 0
+  ]).reshape((3, 3))
+
+  ans_vals = [0, 1.5]
+
+  ans_vects = np.array([
+    0.577, -0.293,
+    0.577, 0.806,
+    0.577, -0.513
+  ]).reshape((3, 2))
+
+  # run motif embedding
+  emb_list = mcsp.run_motif_embedding(adj_mat, "M1", "func", "mean", "dense", 2,
+                                      "rw", restrict=False)
+
+  # flip eigenvector signs if necessary
+  for i in range(len(ans_vals)):
+    if np.sign(emb_list["vects"][0, i]) != np.sign(ans_vects[0, i]):
+      emb_list["vects"][:, i] = -emb_list["vects"][:, i]
+
+  assert np.allclose(ans_adj_mat, emb_list["adj_mat"].toarray())
+  assert np.allclose(ans_motif_adj_mat, emb_list["motif_adj_mat"].toarray())
+  assert np.allclose(ans_vals, emb_list["vals"], atol=0.01)
+  assert np.allclose(ans_vects, emb_list["vects"], atol=0.01)
+
+
+def test_run_mot_embedding_sparse_no_restrict():
+
+  np.random.seed(9235)
+
+  adj_mat = sparse.csr_matrix(np.array([
+    0, 2, 0,
+    0, 0, 3,
+    4, 0, 0
+  ]).reshape((3, 3)))
+
+  # answers
+  ans_adj_mat = np.array([
+    0, 2, 0,
+    0, 0, 3,
+    4, 0, 0
+  ]).reshape((3, 3))
+
+  ans_motif_adj_mat = np.array([
+    0, 3, 3,
+    3, 0, 3,
+    3, 3, 0
+  ]).reshape((3, 3))
+
+  ans_vals = [0, 1.5]
+
+  ans_vects = np.array([
+    0.577, -0.293,
+    0.577, 0.806,
+    0.577, -0.513
+  ]).reshape((3, 2))
+
+  # run motif embedding
+  emb_list = mcsp.run_motif_embedding(adj_mat, "M1", "func", "mean", "dense", 2,
+                                      "rw", restrict=False)
+
+  # flip eigenvector signs if necessary
+  for i in range(len(ans_vals)):
+    if np.sign(emb_list["vects"][0, i]) != np.sign(ans_vects[0, i]):
+      emb_list["vects"][:, i] = -emb_list["vects"][:, i]
+
+  assert np.allclose(ans_adj_mat, emb_list["adj_mat"].toarray())
+  assert np.allclose(ans_motif_adj_mat, emb_list["motif_adj_mat"].toarray())
+  assert np.allclose(ans_vals, emb_list["vals"], atol=0.01)
+  assert np.allclose(ans_vects, emb_list["vects"], atol=0.01)
