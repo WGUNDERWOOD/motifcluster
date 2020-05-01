@@ -149,7 +149,7 @@ random_sparse_matrix <- function(m, n, p, sample_weight_type = "constant",
 
   # create matrix
   ans <- Matrix::sparseMatrix(inds, zs, x = vals, dims = c(mn, 1))
-  dim(ans) = c(m, n)
+  dim(ans) <- c(m, n)
 
   return(ans)
 }

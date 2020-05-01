@@ -47,11 +47,11 @@ sample_dsbm <- function(block_sizes, connection_matrix,
 
   # initialize variables
   k <- length(block_sizes)
-  block_list = list()
+  block_list <- list()
 
   for (i in 1:k) {
 
-    row_list = list()
+    row_list <- list()
 
     for (j in 1:k) {
 
@@ -68,12 +68,12 @@ sample_dsbm <- function(block_sizes, connection_matrix,
         w <- weight_matrix[i, j]
       }
 
-      block = random_sparse_matrix(ni, nj, p, sample_weight_type, w)
-      row_list = append(row_list, block)
+      block <- random_sparse_matrix(ni, nj, p, sample_weight_type, w)
+      row_list <- append(row_list, block)
     }
 
-    row_block = do.call(cbind, row_list)
-    block_list = append(block_list, row_block)
+    row_block <- do.call(cbind, row_list)
+    block_list <- append(block_list, row_block)
   }
 
   adj_mat <- do.call(rbind, block_list)
