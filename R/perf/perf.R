@@ -22,4 +22,4 @@ for (n in c(100, 200, 500, 1000, 2000)) {
 }
 
 cat("Total time: \n")
-cat(round(Sys.time() - t00, 2)"\n")
+cat(round(Sys.time() - t00, 2), "\n")
