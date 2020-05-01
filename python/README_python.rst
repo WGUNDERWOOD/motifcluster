@@ -17,6 +17,10 @@ These provide the capability for:
 
 The methods are all designed to run quickly on large sparse networks,
 and are easy to install and use.
+These methods are based on those described in
+[Underwood, Elliott and Cucuringu, 2020],
+which is available at
+`arxiv:2004.01293 <https://arxiv.org/abs/2004.01293>`_.
 
 Installation
 ------------
@@ -47,8 +51,9 @@ is available on Github in the
 
 Authors
 -------
-- William George Underwood (maintainer)
-- Andrew Elliott
+- `William George Underwood <https://wgunderwood.github.io/>`_,
+  Princeton University (maintainer)
+- `Andrew Elliott <https://www.turing.ac.uk/people/researchers/andrew-elliott>`_
 
 Links
 -----

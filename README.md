@@ -7,10 +7,10 @@
 [![license: GPL v3](https://img.shields.io/badge/license-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
 
-Source code for my paper
-*Motif-Based Spectral Clustering of Weighted Directed Networks*,
-with Andrew Elliott and Mihai Cucuringu.
-A preprint of this paper is avaliable at
+R and Python code for motif-based spectral clustering of weighted directed networks.
+This code is based on methods detailed in
+[Underwood, Elliott and Cucuringu, 2020],
+which is available at
 [arXiv:2004.01293](https://arxiv.org/abs/2004.01293).
 
 ## Introduction
@@ -35,8 +35,10 @@ and is for development purposes only.
 
 ### Authors
 
-  - William George Underwood (Python, R, maintainer)
-  - Andrew Elliott (Python)
+  - [William George Underwood](https://wgunderwood.github.io/)
+    (Python, R, maintainer)
+  - [Andrew Elliott](https://www.turing.ac.uk/people/researchers/andrew-elliott)
+    (Python)
 
 ### License
 
