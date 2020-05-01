@@ -53,7 +53,8 @@ Authors
 -------
 - `William George Underwood <https://wgunderwood.github.io/>`_,
   Princeton University (maintainer)
-- `Andrew Elliott <https://www.turing.ac.uk/people/researchers/andrew-elliott>`_
+- `Andrew Elliott <https://www.turing.ac.uk/people/researchers/andrew-elliott>`_,
+  The Alan Turing Institute
 
 Links
 -----

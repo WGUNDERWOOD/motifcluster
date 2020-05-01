@@ -35,9 +35,11 @@ and is for development purposes only.
 
 ### Authors
 
-  - [William George Underwood](https://wgunderwood.github.io/)
+  - [William George Underwood](https://wgunderwood.github.io/),
+    Princeton University
     (Python, R, maintainer)
-  - [Andrew Elliott](https://www.turing.ac.uk/people/researchers/andrew-elliott)
+  - [Andrew Elliott](https://www.turing.ac.uk/people/researchers/andrew-elliott),
+    The Alan Turing Institute
     (Python)
 
 ### License
