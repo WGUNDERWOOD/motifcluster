@@ -83,5 +83,88 @@ def test_build_laplacian_row_sum_error():
     mcsp.build_laplacian(G, type_lap = "rw")
 
 
-# TODO test run_laplace_embedding
+# run_laplace_embedding
+
+def test_run_laplace_embedding_dense():
+
+  np.random.seed(9235)
+
+  G = np.array(range(9)).reshape((3, 3))
+  G = G + G.transpose()
+
+  ans_vals_comb = [0, 17.07]
+  ans_vects_comb = np.array([
+    0.577,  0.789,
+    0.577, -0.577,
+    0.577, -0.211
+  ]).reshape((3, 2))
+
+  ans_vals_rw = [0, 1]
+  ans_vects_rw = np.array([
+    0.577,  0.408,
+    0.577, -0.816,
+    0.577,  0.408
+  ]).reshape((3, 2))
+
+  spectrum_comb = mcsp.run_laplace_embedding(G, 2, "comb")
+  spectrum_rw = mcsp.run_laplace_embedding(G, 2, "rw")
+
+  vals_comb = spectrum_comb["vals"]
+  vects_comb = spectrum_comb["vects"]
+  vals_rw = spectrum_rw["vals"]
+  vects_rw = spectrum_rw["vects"]
+
+  for i in range(len(vals_comb)):
+    if np.sign(vects_comb[0, i]) != np.sign(ans_vects_comb[0, i]):
+      vects_comb[:, i] = -vects_comb[:, i]
+    if np.sign(vects_rw[0, i]) != np.sign(ans_vects_rw[0, i]):
+      vects_rw[:, i] = -vects_rw[:, i]
+
+  assert np.allclose(vals_comb, ans_vals_comb, atol=0.01)
+  assert np.allclose(vects_comb, ans_vects_comb, atol=0.01)
+  assert np.allclose(vals_rw, ans_vals_rw, atol=0.01)
+  assert np.allclose(vects_rw, ans_vects_rw, atol=0.01)
+
+
+def test_run_laplace_embedding_sparse():
+
+  np.random.seed(9235)
+
+  G = np.array(range(9)).reshape((3, 3))
+  G = sparse.csr_matrix(G + G.transpose())
+
+  ans_vals_comb = [0, 17.07]
+  ans_vects_comb = np.array([
+    0.577,  0.789,
+    0.577, -0.577,
+    0.577, -0.211
+  ]).reshape((3, 2))
+
+  ans_vals_rw = [0, 1]
+  ans_vects_rw = np.array([
+    0.577,  0.408,
+    0.577, -0.816,
+    0.577,  0.408
+  ]).reshape((3, 2))
+
+  spectrum_comb = mcsp.run_laplace_embedding(G, 2, "comb")
+  spectrum_rw = mcsp.run_laplace_embedding(G, 2, "rw")
+
+  vals_comb = spectrum_comb["vals"]
+  vects_comb = spectrum_comb["vects"]
+  vals_rw = spectrum_rw["vals"]
+  vects_rw = spectrum_rw["vects"]
+
+  for i in range(len(vals_comb)):
+    if np.sign(vects_comb[0, i]) != np.sign(ans_vects_comb[0, i]):
+      vects_comb[:, i] = -vects_comb[:, i]
+    if np.sign(vects_rw[0, i]) != np.sign(ans_vects_rw[0, i]):
+      vects_rw[:, i] = -vects_rw[:, i]
+
+  assert np.allclose(vals_comb, ans_vals_comb, atol=0.01)
+  assert np.allclose(vects_comb, ans_vects_comb, atol=0.01)
+  assert np.allclose(vals_rw, ans_vals_rw, atol=0.01)
+  assert np.allclose(vects_rw, ans_vects_rw, atol=0.01)
+
+
 # TODO test run_motif_embedding

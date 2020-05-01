@@ -79,6 +79,8 @@ test_that("build_laplacian gives correct error if row sums are zero", {
                "row sums of adj_mat must be non-zero")
 })
 
+# run_laplace_embedding
+
 test_that("run_laplace_embedding returns correct spectrum on dense matrix", {
 
   set.seed(9235)
