@@ -291,7 +291,7 @@ def run_motif_embedding(adj_mat, motif_name,
 
 
   # return list
-  spectrum = {
+  embedding = {
     "adj_mat": adj_mat,
     "motif_adj_mat": motif_adj_mat,
     "comps": comps,
@@ -301,4 +301,4 @@ def run_motif_embedding(adj_mat, motif_name,
     "vects": spect["vects"],
   }
 
-  return spectrum
+  return embedding

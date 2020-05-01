@@ -203,7 +203,6 @@ run_motif_embedding <- function(adj_mat, motif_name,
     spect <- run_laplace_embedding(motif_adj_mat_comps, num_eigs, type_lap)
   }
 
-  # TODO test this block
   else {
     comps <- NULL
     adj_mat_comps <- NULL
@@ -214,15 +213,14 @@ run_motif_embedding <- function(adj_mat, motif_name,
   }
 
   # return list
-  # TODO rename spectrum to embedding here and in py
-  spectrum <- list()
-  spectrum$adj_mat <- adj_mat
-  spectrum$motif_adj_mat <- motif_adj_mat
-  spectrum$comps <- comps
-  spectrum$adj_mat_comps <- adj_mat_comps
-  spectrum$motif_adj_mat_comps <- motif_adj_mat_comps
-  spectrum$vals <- spect$vals
-  spectrum$vects <- spect$vects
+  embedding <- list()
+  embedding$adj_mat <- adj_mat
+  embedding$motif_adj_mat <- motif_adj_mat
+  embedding$comps <- comps
+  embedding$adj_mat_comps <- adj_mat_comps
+  embedding$motif_adj_mat_comps <- motif_adj_mat_comps
+  embedding$vals <- spect$vals
+  embedding$vects <- spect$vects
 
-  return(spectrum)
+  return(embedding)
 }
