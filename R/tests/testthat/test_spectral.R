@@ -194,14 +194,14 @@ test_that("run_motif_embedding correct on dense matrix with restrict", {
     7, 0, 0, 0
   ), nrow = 4, byrow = TRUE))
 
-  ans_motif_adj_mat = drop0(matrix(c(
+  ans_motif_adj_mat <- drop0(matrix(c(
     0, 3, 3, 0,
     3, 0, 3, 0,
     3, 3, 0, 0,
     0, 0, 0, 0
   ), nrow = 4, byrow = TRUE))
 
-  ans_comps = 1:3
+  ans_comps <- 1:3
 
   ans_adj_mat_comps <- drop0(matrix(c(
     0, 2, 0,
@@ -209,22 +209,22 @@ test_that("run_motif_embedding correct on dense matrix with restrict", {
     4, 0, 0
   ), nrow = 3, byrow = TRUE))
 
-  ans_motif_adj_mat_comps = drop0(matrix(c(
+  ans_motif_adj_mat_comps <- drop0(matrix(c(
     0, 3, 3,
     3, 0, 3,
     3, 3, 0
   ), nrow = 3, byrow = TRUE))
 
-  ans_vals = c(0, 1.5)
+  ans_vals <- c(0, 1.5)
 
-  ans_vects = matrix(c(
+  ans_vects <- matrix(c(
     0.577,  0,
     0.577, -0.707,
     0.577,  0.707
   ), nrow = 3, byrow = TRUE)
 
   # run motif embedding
-  emb_list = run_motif_embedding(adj_mat, "M1", "func", "mean", "dense", 2,
+  emb_list <- run_motif_embedding(adj_mat, "M1", "func", "mean", "dense", 2,
                                  "rw", restrict = TRUE)
 
   # flip eigenvector signs if necessary
@@ -262,14 +262,14 @@ test_that("run_motif_embedding correct on sparse matrix with restrict", {
     7, 0, 0, 0
   ), nrow = 4, byrow = TRUE))
 
-  ans_motif_adj_mat = drop0(matrix(c(
+  ans_motif_adj_mat <- drop0(matrix(c(
     0, 3, 3, 0,
     3, 0, 3, 0,
     3, 3, 0, 0,
     0, 0, 0, 0
   ), nrow = 4, byrow = TRUE))
 
-  ans_comps = 1:3
+  ans_comps <- 1:3
 
   ans_adj_mat_comps <- drop0(matrix(c(
     0, 2, 0,
@@ -277,23 +277,23 @@ test_that("run_motif_embedding correct on sparse matrix with restrict", {
     4, 0, 0
   ), nrow = 3, byrow = TRUE))
 
-  ans_motif_adj_mat_comps = drop0(matrix(c(
+  ans_motif_adj_mat_comps <- drop0(matrix(c(
     0, 3, 3,
     3, 0, 3,
     3, 3, 0
   ), nrow = 3, byrow = TRUE))
 
-  ans_vals = c(0, 1.5)
+  ans_vals <- c(0, 1.5)
 
-  ans_vects = matrix(c(
+  ans_vects <- matrix(c(
     0.577,  0,
     0.577, -0.707,
     0.577,  0.707
   ), nrow = 3, byrow = TRUE)
 
   # run motif embedding
-  emb_list = run_motif_embedding(adj_mat, "M1", "func", "mean", "dense", 2,
-                                 "rw", restrict = TRUE)
+  emb_list <- run_motif_embedding(adj_mat, "M1", "func", "mean", "dense", 2,
+                                  "rw", restrict = TRUE)
 
   # flip eigenvector signs if necessary
   for (i in seq_len(length(ans_vals))) {
@@ -328,23 +328,23 @@ test_that("run_motif_embedding correct on dense matrix without restrict", {
     4, 0, 0
   ), nrow = 3, byrow = TRUE))
 
-  ans_motif_adj_mat = drop0(matrix(c(
+  ans_motif_adj_mat <- drop0(matrix(c(
     0, 3, 3,
     3, 0, 3,
     3, 3, 0
   ), nrow = 3, byrow = TRUE))
 
-  ans_vals = c(0, 1.5)
+  ans_vals <- c(0, 1.5)
 
-  ans_vects = matrix(c(
+  ans_vects <- matrix(c(
     0.577,  0,
     0.577, -0.707,
     0.577,  0.707
   ), nrow = 3, byrow = TRUE)
 
   # run motif embedding
-  emb_list = run_motif_embedding(adj_mat, "M1", "func", "mean", "dense", 2,
-                                 "rw", restrict = FALSE)
+  emb_list <- run_motif_embedding(adj_mat, "M1", "func", "mean", "dense", 2,
+                                  "rw", restrict = FALSE)
 
   # flip eigenvector signs if necessary
   for (i in seq_len(length(ans_vals))) {
@@ -376,23 +376,23 @@ test_that("run_motif_embedding correct on sparse matrix without restrict", {
     4, 0, 0
   ), nrow = 3, byrow = TRUE))
 
-  ans_motif_adj_mat = drop0(matrix(c(
+  ans_motif_adj_mat <- drop0(matrix(c(
     0, 3, 3,
     3, 0, 3,
     3, 3, 0
   ), nrow = 3, byrow = TRUE))
 
-  ans_vals = c(0, 1.5)
+  ans_vals <- c(0, 1.5)
 
-  ans_vects = matrix(c(
+  ans_vects <- matrix(c(
     0.577,  0,
     0.577, -0.707,
     0.577,  0.707
   ), nrow = 3, byrow = TRUE)
 
   # run motif embedding
-  emb_list = run_motif_embedding(adj_mat, "M1", "func", "mean", "dense", 2,
-                                 "rw", restrict = FALSE)
+  emb_list <- run_motif_embedding(adj_mat, "M1", "func", "mean", "dense", 2,
+                                  "rw", restrict = FALSE)
 
   # flip eigenvector signs if necessary
   for (i in seq_len(length(ans_vals))) {

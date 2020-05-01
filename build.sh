@@ -20,3 +20,8 @@ echo "R"
 cd $basedir/R/
 Rscript build_R.R
 rm .gitignore
+
+# Compress pdf files
+echo "Compress pdfs"
+cd $basedir
+bash compress_pdfs.sh
