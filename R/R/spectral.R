@@ -19,13 +19,26 @@ get_first_eigs <- function(some_mat, num_eigs) {
   stopifnot(all.equal(num_eigs, as.integer(num_eigs)))
   stopifnot(num_eigs > 0)
 
-  # get spectrum
-  spectrum_eigs <- eigs(some_mat, num_eigs, which = "SM")
+  # get spectrum for large num_eigs
+  if (num_eigs >= nrow(some_mat) - 1) {
+    spectrum_eigs <- eigen(some_mat)
+  }
+  else {
+    spectrum_eigs <- eigs(some_mat, num_eigs, which = "SM")
+  }
+
+  # use real parts
+  vals = Re(spectrum_eigs$values)
+  vects = Re(spectrum_eigs$vectors)
 
   # order eigenvalues and eigenvectors
-  inds <- seq(num_eigs, 1, -1)
-  vects <- Re(spectrum_eigs[["vectors"]])[, inds]
-  vals <- Re(spectrum_eigs[["values"]])[inds]
+  ordering = order(vals)
+  vals = vals[ordering]
+  vects = vects[, ordering]
+
+  # only return the specified number (eigen may return more)
+  vals = vals[1:num_eigs]
+  vects = vects[, 1:num_eigs]
 
   # return a list
   spectrum <- list()
