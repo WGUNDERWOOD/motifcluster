@@ -5,7 +5,6 @@ pytest --profile-svg tests/
 
 echo "Running python performance tests"
 cd perf/
-ls
 pytest --profile-svg -s perf.py
 cd ..
 

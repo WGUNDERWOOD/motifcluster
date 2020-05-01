@@ -47,6 +47,7 @@ Authors
 -------
 - William George Underwood (maintainer)
 - Andrew Elliott
+
 .. TODO add links here
 
 Links

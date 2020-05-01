@@ -5,7 +5,7 @@ with open("README_python.rst", "r") as f:
 
 setuptools.setup(
   name='motifcluster',
-  version='0.0.1',
+  version='0.0.2',
   description='Motif-Based Spectral Clustering of Weighted Directed Networks',
   license="GPLv3",
   long_description=long_description,
