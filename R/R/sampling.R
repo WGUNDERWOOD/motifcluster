@@ -46,39 +46,37 @@ sample_dsbm <- function(block_sizes, connection_matrix,
   }
 
   # initialize variables
-  n <- sum(block_sizes)
   k <- length(block_sizes)
-  cumul_sizes <- c(0, cumsum(block_sizes))
-  adj_mat <- matrix(0, nrow = n, ncol = n)
+  block_list = list()
 
   for (i in 1:k) {
+
+    row_list = list()
+
     for (j in 1:k) {
 
       # block parameters
-      x_range <- (cumul_sizes[i] + 1):cumul_sizes[i + 1]
-      y_range <- (cumul_sizes[j] + 1):cumul_sizes[j + 1]
-      n_cells <- block_sizes[i] * block_sizes[j]
+      ni <- block_sizes[i]
+      nj <- block_sizes[j]
       p <- connection_matrix[i, j]
 
-      # fill the adjacency matrix block-by-block
-      adj_mat[x_range, y_range] <- rbinom(n_cells, 1, p)
-
-      # constant weights
-      if (sample_weight_type == "constant") {
+      # generate block
+      if (sample_weight_type == "unweighted") {
+        w <- 1
+      }
+      else {
         w <- weight_matrix[i, j]
-        adj_mat[x_range, y_range] <- w * adj_mat[x_range, y_range]
       }
 
-      # poisson weights
-      else if (sample_weight_type == "poisson") {
-        w <- weight_matrix[i, j]
-        weights <- rpois(n_cells, w)
-        adj_mat[x_range, y_range] <- weights * adj_mat[x_range, y_range]
-      }
+      block = random_sparse_matrix(ni, nj, p, sample_weight_type, w)
+      row_list = append(row_list, block)
     }
+
+    row_block = do.call(cbind, row_list)
+    block_list = append(block_list, row_block)
   }
 
-  # remove self-loops and make sparse
+  adj_mat <- do.call(rbind, block_list)
   adj_mat <- drop0_killdiag(adj_mat)
 
   return(adj_mat)

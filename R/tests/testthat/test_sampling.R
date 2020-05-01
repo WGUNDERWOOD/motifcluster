@@ -4,7 +4,7 @@ context("Sampling")
 
 test_that("sample_dsbm returns correct unweighted adjacency matrix", {
 
-  set.seed(9687)
+  set.seed(9689)
 
   sample_weight_type <- "unweighted"
   block_sizes <- c(2, 3)

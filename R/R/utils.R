@@ -106,3 +106,50 @@ get_motif_names <- function() {
 
   return(motif_names)
 }
+
+#' Build a random sparse matrix
+#'
+#' Build a sparse matrix of size \code{m * n} with
+#' non-zero probability \code{p}.
+#' Edge weights can be unweighted, constant-weighted or
+#' Poisson-weighted.
+#' @param m,n Dimension of matrix to build is \code{(m, n)}.
+#' @param p Probability that each entry is non-zero (before weighting).
+#' @param sample_weight_type Type of weighting scheme.
+#' @param w Weight parameter.
+#' @return A random sparse matrix.
+#' @importFrom stats rbinom rpois
+#' @importFrom Matrix sparseMatrix
+
+random_sparse_matrix <- function(m, n, p, sample_weight_type = "constant",
+                                 w = 1) {
+
+  mn <- m * n
+
+  # number of nonzero entries
+  k <- rbinom(1, mn, p)
+
+  # indices of nonzero entries
+  zs <- rep(1, k)
+  inds <- sample.int(mn, k, replace = FALSE)
+
+  # values to go in matrix
+  if (sample_weight_type == "constant") {
+    vals <- rep(w, k)
+  }
+
+  # TODO importfrom stats
+  else if (sample_weight_type == "poisson") {
+    vals <- rpois(k, w)
+  }
+
+  else {
+    vals <- rep(1, k)
+  }
+
+  # create matrix
+  ans <- Matrix::sparseMatrix(inds, zs, x = vals, dims = c(mn, 1))
+  dim(ans) = c(m, n)
+
+  return(ans)
+}
