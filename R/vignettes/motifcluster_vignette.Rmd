@@ -1,11 +1,12 @@
 ---
 title: "Using the R package `motifcluster`"
-author: "William G. Underwood"
+author: "William George Underwood"
 date: "`r format(Sys.Date(), '%B %d, %Y')`"
 output:
   pdf_document:
     citation_package: natbib
     number_sections: true
+    highlight: tango
 keep_tex: TRUE
 bibliography: refs.bib
 vignette: >

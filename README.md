@@ -33,6 +33,11 @@ The master branch contains stable versions.
 The develop branch may be unstable,
 and is for development purposes only.
 
+### Authors
+
+  - William George Underwood (Python, R, maintainer)
+  - Andrew Elliott (Python)
+
 ### License
 
 This repository,

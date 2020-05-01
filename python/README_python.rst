@@ -1,7 +1,7 @@
 motifcluster
 ============
 
-**A Python package for motif-based spectral clustering of weighted directed networks.**
+A Python package for motif-based spectral clustering of weighted directed networks.
 
 Introduction
 ------------
@@ -40,8 +40,14 @@ is available on
 Tutorial
 --------
 A tutorial for the **motifcluster** package
-is available on GitHub at
-TODO.
+is available on GitHub.
+.. at TODO
+
+Authors
+-------
+- William George Underwood (maintainer)
+- Andrew Elliott
+.. TODO add links here
 
 Links
 -----

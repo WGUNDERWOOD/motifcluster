@@ -20,8 +20,8 @@ import sphinx_rtd_theme
 # -- Project information -----------------------------------------------------
 
 project = 'motifcluster'
-copyright = '2020, William George Underwood'
-author = 'William George Underwood'
+copyright = '2020, William George Underwood, Andrew Elliott'
+author = 'William George Underwood, Andrew Elliott'
 
 # The full version, including alpha/beta/rc tags
 release = '0.0.1'

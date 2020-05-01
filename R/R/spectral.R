@@ -161,7 +161,8 @@ run_motif_embedding <- function(adj_mat, motif_name,
                        motif_type = c("struc", "func"),
                        mam_weight_type = c("unweighted", "mean", "product"),
                        mam_method = c("sparse", "dense"),
-                       num_eigs = 2, type_lap = c("comb", "rw"), restrict = TRUE) {
+                       num_eigs = 2, type_lap = c("comb", "rw"),
+                       restrict = TRUE) {
 
   # check args
   adj_mat <- drop0(adj_mat)
@@ -189,6 +190,7 @@ run_motif_embedding <- function(adj_mat, motif_name,
     spect <- run_laplace_embedding(motif_adj_mat_comps, num_eigs, type_lap)
   }
 
+  # TODO test this block
   else {
     comps <- NULL
     adj_mat_comps <- NULL
