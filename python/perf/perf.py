@@ -11,6 +11,7 @@ import numpy as np
 
 def test_perf():
 
+  t00 = time.time()
   for n in [100, 200, 500, 1000, 2000]:
     for p in [10/n, 100/n]:
       for motif_name in ["Ms", "Md", "M1", "M9", "M11"]:
@@ -26,7 +27,10 @@ def test_perf():
 
         mcmo.build_motif_adjacency_matrix(adj_mat, motif_name)
 
-        #print(n, p, motif_name)
-        #print("{:.2f}".format(time.time() - t0), "\n")
+        print(n, p, motif_name)
+        print("{:.2f}".format(time.time() - t0), "\n")
+
+  print("Total time:")
+  print("{:.2f}".format(time.time() - t00), "\n")
 
   return None
