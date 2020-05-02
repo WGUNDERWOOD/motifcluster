@@ -147,9 +147,19 @@ random_sparse_matrix <- function(m, n, p, sample_weight_type = "constant",
     vals <- rep(1, k)
   }
 
-  # create matrix
-  ans <- Matrix::sparseMatrix(inds, zs, x = vals, dims = c(mn, 1))
-  dim(ans) <- c(m, n)
+  # create small matrix
+  if (mn <= 50){
+    ans <- rep(0, mn)
+    ans[inds] <- vals
+    ans <- matrix(ans, nrow = m, ncol = n)
+    ans <- drop0(ans)
+  }
+
+  # create large matrix
+  else {
+    ans <- Matrix::sparseMatrix(inds, zs, x = vals, dims = c(mn, 1))
+    dim(ans) <- c(m, n)
+  }
 
   return(ans)
 }

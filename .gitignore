@@ -12,6 +12,7 @@ R/doc/*.html
 R.Rcheck/
 R/Meta/
 R/.gitignore
+R/prof/prof.html
 
 # python package
 __pycache__
