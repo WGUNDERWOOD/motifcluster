@@ -138,7 +138,6 @@ random_sparse_matrix <- function(m, n, p, sample_weight_type = "constant",
     vals <- rep(w, k)
   }
 
-  # TODO importfrom stats
   else if (sample_weight_type == "poisson") {
     vals <- rpois(k, w)
   }
@@ -148,7 +147,7 @@ random_sparse_matrix <- function(m, n, p, sample_weight_type = "constant",
   }
 
   # create small matrix
-  if (mn <= 50){
+  if (mn <= 1e4){
     ans <- rep(0, mn)
     ans[inds] <- vals
     ans <- matrix(ans, nrow = m, ncol = n)

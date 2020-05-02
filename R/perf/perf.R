@@ -1,4 +1,5 @@
-library(motifcluster)
+library(devtools)
+load_all()
 
 t00 = Sys.time()
 for (n in c(100, 200, 500, 1000, 2000)) {
