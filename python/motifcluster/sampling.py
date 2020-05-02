@@ -88,7 +88,15 @@ def sample_dsbm(block_sizes, connection_matrix,
 
     block_list.append(row_list)
 
-  adj_mat = sparse.bmat(block_list)
+
+  # build from dense blocks
+  if isinstance(block_list[0][0], np.ndarray):
+    adj_mat = np.block(block_list)
+
+  # build from sparse blocks
+  else:
+    adj_mat = sparse.bmat(block_list)
+
   adj_mat = mcut._drop0_killdiag(adj_mat)
 
   return adj_mat
