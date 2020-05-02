@@ -24,8 +24,6 @@ sample_dsbm <- function(block_sizes, connection_matrix,
   weight_matrix = NULL,
   sample_weight_type = c("unweighted", "constant", "poisson")) {
 
-  # TODO make faster like python code
-
   # check args
   sample_weight_type <- match.arg(sample_weight_type)
   stopifnot(all.equal(block_sizes, as.integer(block_sizes)))
