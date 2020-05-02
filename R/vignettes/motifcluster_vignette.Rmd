@@ -1,6 +1,6 @@
 ---
 title: "Using the R package `motifcluster`"
-author: "William George Underwood"
+author: "William G. Underwood"
 date: "`r format(Sys.Date(), '%B %d, %Y')`"
 output:
   pdf_document:
@@ -111,6 +111,8 @@ build_motif_adjacency_matrix(G1, motif_name = "M1")
 Note that all the entries are zero except for entries
 $(1,2)$,
 $(1,4)$,
+$(2,1)$,
+$(2,4)$,
 $(4,1)$,
 and
 $(4,2)$.
@@ -189,14 +191,14 @@ build_motif_adjacency_matrix(G1, motif_name = "M1", motif_type = "func",
 
 The 3-cycle on vertices 1, 2 and 4
 has edge weights of 2, 3 and 4, so the product of its edge weights is 24.
-Similarly the 3-cycle on vertices 2, 3 and 4 has mean edge weight of 60.
+Similarly the 3-cycle on vertices 2, 3 and 4 has product of edge weights of 60.
 Vertices 2 and 4 appear in both, so their shared MAM entries are the
 sum of these two product weights, which is 84.
 
 ### Computation method
 
 The final argument to `build_motif_adjacency_matrix`
-is the "mam_method" argument.
+is the `mam_method` argument.
 This does not affect the value returned but may impact the
 amount of time taken to return the MAM.
 In general the "sparse" method (the default)
@@ -223,11 +225,11 @@ We use (weighted) directed stochastic block models (DSBMs) and
 
 First let's sample the adjacency matrix of a DSBM
 which has two blocks of vertices;
-the first containing 5 vertices and the second containing 3.
+the first containing five vertices and the second containing three.
 We use strong within-block connections,
-with the diagonal entries of the connection matrix set to 0.9.
+with the diagonal entries of the connection matrix set to $0.9$.
 The between-block connections are weaker, with the off-diagonal
-connection matrix entries set to 0.2.
+connection matrix entries set to $0.2$.
 Note how the resulting adjacency matrix is denser
 on its diagonal blocks
 $\{1, \dots, 5\} \times \{1, \dots, 5\}$
@@ -442,7 +444,7 @@ block_sizes = rep(10, 3)
 ```
 
 We use strong connections of 0.8 within the blocks,
-and weaker connections of 0.2 between the blocks.
+and weaker connections of 0.3 between the blocks.
 
 ```{r}
 connection_matrix = matrix(c(
