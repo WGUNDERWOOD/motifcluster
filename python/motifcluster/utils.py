@@ -234,8 +234,15 @@ def _random_sparse_matrix(m, n, p, sample_weight_type="constant", w=1):
   else:
     vals = np.ones(k)
 
-  # create matrix
-  ans = sparse.csc_matrix((vals, (inds, zs)), shape=(mn, 1))
-  ans = ans.reshape((m, n))
+  # create small matrix
+  if mn <= 1e4:
+    ans = np.zeros(mn)
+    ans[np.array(inds, dtype=int)] = np.array(vals, dtype=int)
+    ans = ans.reshape((m, n))
+
+  # create large matrix
+  else:
+    ans = sparse.csc_matrix((vals, (inds, zs)), shape=(mn, 1))
+    ans = ans.reshape((m, n))
 
   return ans
