@@ -21,10 +21,6 @@ cd $basedir/R/
 Rscript build_R.R
 rm .gitignore
 
-# R profiling
-cd $basedir/R/prof
-Rscript prof.R
-
 # Compress pdf files
 echo "Compress pdfs"
 cd $basedir

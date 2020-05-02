@@ -3,11 +3,6 @@
 echo "Running python tests"
 pytest --profile-svg tests/
 
-echo "Running python performance tests"
-cd perf/
-pytest --profile-svg -s perf.py
-cd ..
-
 # python linting
 echo "Running python linter"
 pylint -j 8 --rcfile=.pylintrc motifcluster
