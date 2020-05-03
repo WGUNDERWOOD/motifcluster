@@ -41,13 +41,13 @@ Documentation for the **motifcluster** package
 is available on
 `Read the Docs <https://motifcluster.readthedocs.io/en/latest/>`_,
 and also on GitHub in the
-`doc directory <https://github.com/WGUNDERWOOD/motif-based-clustering/blob/develop/python/doc/motifcluster.pdf>`_.
+`doc directory <https://github.com/WGUNDERWOOD/motifcluster/blob/develop/python/doc/motifcluster.pdf>`_.
 
 Tutorial
 --------
 A tutorial for the **motifcluster** package
 is available on Github in the
-`tutorial directory <https://github.com/WGUNDERWOOD/motif-based-clustering/blob/develop/python/tutorial/motifcluster_tutorial.pdf>`_.
+`tutorial directory <https://github.com/WGUNDERWOOD/motifcluster/blob/develop/python/tutorial/motifcluster_tutorial.pdf>`_.
 
 Authors
 -------
@@ -59,7 +59,7 @@ Authors
 Links
 -----
 - Source code repository on
-  `GitHub <https://github.com/WGUNDERWOOD/motif-based-clustering>`_
+  `GitHub <https://github.com/WGUNDERWOOD/motifcluster>`_
 - Package index page on
   `PyPI <https://pypi.org/project/motifcluster/>`_
 - Documentation on

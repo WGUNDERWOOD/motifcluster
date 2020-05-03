@@ -2,4 +2,4 @@ codecov:
   require_ci_to_pass: yes
 
 fixes:
-  - "/home/travis/build/WGUNDERWOOD/motif-based-clustering/R/::"
+  - "/home/travis/build/WGUNDERWOOD/motifcluster/R/::"

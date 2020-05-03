@@ -54,7 +54,7 @@ library(mclust)
 The `motifcluster` package can be installed from GitHub with:
 
 ```{r, eval = FALSE}
-install_github("wgunderwood/motif-based-clustering/R")
+install_github("wgunderwood/motifcluster/R")
 ```
 
 The package can then be loaded from within R with:

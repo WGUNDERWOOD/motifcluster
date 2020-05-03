@@ -1,9 +1,9 @@
-# motif-based-clustering
+# motifcluster
 
-[![Build Status](https://travis-ci.com/WGUNDERWOOD/motif-based-clustering.svg?branch=master)](https://travis-ci.com/github/WGUNDERWOOD/motif-based-clustering)
+[![Build Status](https://travis-ci.com/WGUNDERWOOD/motifcluster.svg?branch=master)](https://travis-ci.com/github/WGUNDERWOOD/motifcluster)
 [![Python Docs Status](https://img.shields.io/readthedocs/motifcluster?label=python%20docs)](https://motifcluster.readthedocs.io/en/latest/)
-[![Python Coverage Status](https://img.shields.io/coveralls/github/WGUNDERWOOD/motif-based-clustering?label=python%20coverage)](https://coveralls.io/github/WGUNDERWOOD/motif-based-clustering)
-[![R Coverage Status](https://img.shields.io/codecov/c/github/wgunderwood/motif-based-clustering?label=R%20coverage)](https://codecov.io/gh/WGUNDERWOOD/motif-based-clustering)
+[![Python Coverage Status](https://img.shields.io/coveralls/github/WGUNDERWOOD/motifcluster?label=python%20coverage)](https://coveralls.io/github/WGUNDERWOOD/motifcluster)
+[![R Coverage Status](https://img.shields.io/codecov/c/github/wgunderwood/motifcluster?label=R%20coverage)](https://codecov.io/gh/WGUNDERWOOD/motifcluster)
 [![license: GPL v3](https://img.shields.io/badge/license-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
 
@@ -62,7 +62,7 @@ The R package "motifcluster" is in the [R](./R/) directory.
 The R package can be installed from the GitHub master branch with:
 
 ```
-install_github("wgunderwood/motif-based-clustering/R")
+install_github("wgunderwood/motifcluster/R")
 ```
 
 ### Dependencies

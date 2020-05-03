@@ -12,7 +12,7 @@ setuptools.setup(
   long_description_content_type="text/x-rst",
   author='William George Underwood, Andrew Elliott',
   author_email='wgu2@princeton.edu',
-  url="https://github.com/WGUNDERWOOD/motif-based-clustering",
+  url="https://github.com/WGUNDERWOOD/motifcluster",
   packages=['motifcluster'],
   install_requires=[
     "networkx",

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # check running in right directory
-if [ ${PWD##*/} != "motif-based-clustering" ]
+if [ ${PWD##*/} != "motifcluster" ]
 then
   echo "wrong directory!"
   exit
