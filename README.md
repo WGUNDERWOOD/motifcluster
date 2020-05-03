@@ -1,11 +1,11 @@
-# motifcluster <img src="https://github.com/WGUNDERWOOD/motifcluster/blob/develop/sticker/hex_sticker.png" alt="alt text" width="200">
+# motifcluster <img src="sticker/hex_sticker.png" alt="motifcluster sticker" width="200" align="right" />
 
 
-[![Build Status](https://travis-ci.com/WGUNDERWOOD/motifcluster.svg?branch=master)](https://travis-ci.com/github/WGUNDERWOOD/motifcluster)
-[![Python Docs Status](https://img.shields.io/readthedocs/motifcluster?label=python%20docs)](https://motifcluster.readthedocs.io/en/latest/)
-[![Python Coverage Status](https://img.shields.io/coveralls/github/WGUNDERWOOD/motifcluster?label=python%20coverage)](https://coveralls.io/github/WGUNDERWOOD/motifcluster)
-[![R Coverage Status](https://img.shields.io/codecov/c/github/wgunderwood/motifcluster?label=R%20coverage)](https://codecov.io/gh/WGUNDERWOOD/motifcluster)
-[![license: GPL v3](https://img.shields.io/badge/license-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+[![build status](https://travis-ci.com/WGUNDERWOOD/motifcluster.svg?branch=master)](https://travis-ci.com/github/WGUNDERWOOD/motifcluster)
+[![python docs status](https://img.shields.io/readthedocs/motifcluster?label=python%20docs)](https://motifcluster.readthedocs.io/en/latest/)
+[![python coverage status](https://img.shields.io/coveralls/github/WGUNDERWOOD/motifcluster?label=python%20coverage)](https://coveralls.io/github/WGUNDERWOOD/motifcluster)
+[![R coverage status](https://img.shields.io/codecov/c/github/wgunderwood/motifcluster?label=R%20coverage)](https://codecov.io/gh/WGUNDERWOOD/motifcluster)
+[![license: GPLv3](https://img.shields.io/badge/license-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
 
 R and Python code for motif-based spectral clustering of weighted directed networks.
