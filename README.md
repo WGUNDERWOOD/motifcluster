@@ -1,4 +1,4 @@
-# motifcluster <img src="sticker/hex_sticker.png" alt="motifcluster sticker" width="200" align="right" />
+# motifcluster <img src="sticker/hex_sticker.png" alt="motifcluster sticker" width="150" align="right" />
 
 
 [![build status](https://travis-ci.com/WGUNDERWOOD/motifcluster.svg?branch=master)](https://travis-ci.com/github/WGUNDERWOOD/motifcluster)
