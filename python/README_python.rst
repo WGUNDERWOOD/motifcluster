@@ -1,5 +1,11 @@
+..  image:: ../../sticker/hex_sticker.png
+    :width: 130
+    :alt: motifcluster sticker
+    :align: right
+
 motifcluster
-============
+========================
+
 
 A Python package for motif-based spectral clustering of weighted directed networks.
 
