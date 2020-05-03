@@ -1,0 +1,59 @@
+\documentclass{standalone}
+
+\usepackage[default]{comfortaa}
+\usepackage{tikz}
+
+% tikz options
+\usetikzlibrary{calc}
+\tikzset{
+  every picture/.style = {
+    line width = 0.8mm,
+    draw = edgecol
+  },
+  outer sep = 1mm,
+}
+
+% custom colors
+\definecolor{bgcol}{HTML}{2c2a3b}
+\definecolor{nodecol}{HTML}{ff79c6}
+\definecolor{nodecolalt}{HTML}{8be9fd}
+\definecolor{edgecol}{HTML}{bd93f9}
+\definecolor{textcol}{HTML}{e9e9df}
+
+\begin{document}
+
+\begin{tikzpicture}[
+  vertex/.style = {
+    circle,
+    fill=nodecol,
+    align=center
+  },
+]
+
+  % background
+  \draw[fill=bgcol] (-2.7, -1) rectangle ++(5.4, 6);
+
+  % vertices
+  \node[vertex] (1) at (-1.8, 1.8) {};
+  \node[vertex] (2) at (-1.8, 3.04) {};
+  \node[vertex] (3) at (-0.7, 3.68) {};
+  \node[vertex] (4) at (-0.7, 2.5) {};
+
+  \node[vertex, nodecolalt] (7) at (1.8, 1.8) {};
+  \node[vertex, nodecolalt] (5) at (1.8, 3.04) {};
+  \node[vertex, nodecolalt] (6) at (0.7, 2.5) {};
+
+  % edges
+  \draw (1) -- (2) -- (3) -- (4) -- (1);
+  \draw (2) -- (4);
+  \draw (5) -- (6) -- (7) -- (5);
+  \draw[] (4) -- (6);
+
+  % text
+  \node[textcol] at (0, 1.06) {
+    \fontsize{20pt}{23pt}\selectfont
+    \bfseries{motifcluster}
+  };
+
+\end{tikzpicture}
+\end{document}
