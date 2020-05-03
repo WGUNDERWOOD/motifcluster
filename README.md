@@ -1,4 +1,4 @@
-# motifcluster <img src="sticker/hex_sticker.png" alt="motifcluster sticker" width="150" align="right" />
+# motifcluster <img src="sticker/hex_sticker.png" alt="motifcluster sticker" width="120" align="right" />
 
 
 [![build status](https://travis-ci.com/WGUNDERWOOD/motifcluster.svg?branch=master)](https://travis-ci.com/github/WGUNDERWOOD/motifcluster)
@@ -8,17 +8,17 @@
 [![license: GPLv3](https://img.shields.io/badge/license-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
 
-R and Python code for motif-based spectral clustering of weighted directed networks.
-This code is based on methods detailed in
-[Underwood, Elliott and Cucuringu, 2020],
-which is available at
-[arXiv:2004.01293](https://arxiv.org/abs/2004.01293).
+Motif-based spectral clustering of weighted directed networks
 
 ## Introduction
 
 This repository provides implementations of motif-based spectral clustering
 of weighted directed networks in R and in Python.
-These provide the capability for:
+This code is based on methods detailed in
+[Underwood, Elliott and Cucuringu, 2020],
+which is available at
+[arXiv:2004.01293](https://arxiv.org/abs/2004.01293).
+These packages provide the capability for:
 
 - Building motif adjacency matrices
 - Sampling random weighted directed networks
