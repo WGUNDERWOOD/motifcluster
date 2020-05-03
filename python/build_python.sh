@@ -10,8 +10,7 @@ pylint -j 8 --rcfile=.pylintrc motifcluster
 # python rtfd
 echo "Building python docs"
 cd doc/
-make html latex latexpdf
-cp _build/latex/motifcluster.pdf .
+make html
 
 # python distribution packages
 cd ..

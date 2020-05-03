@@ -45,9 +45,7 @@ Documentation
 -------------
 Documentation for the **motifcluster** package
 is available on
-`Read the Docs <https://motifcluster.readthedocs.io/en/latest/>`_,
-and also on GitHub in the
-`doc directory <https://github.com/WGUNDERWOOD/motifcluster/blob/develop/python/doc/motifcluster.pdf>`_.
+`Read the Docs <https://motifcluster.readthedocs.io/en/latest/>`_.
 
 Tutorial
 --------

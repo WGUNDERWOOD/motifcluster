@@ -112,5 +112,3 @@ available on PyPI:
 
 Full documentation is available at
 [motifcluster.readthedocs.io](https://motifcluster.readthedocs.io/).
-The package's manual is also in the
-[python/doc](./python/doc/) directory.
