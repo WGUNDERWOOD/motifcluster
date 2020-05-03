@@ -1,6 +1,7 @@
 \documentclass{standalone}
 
 \usepackage[default]{comfortaa}
+\usepackage{sourcecodepro}
 \usepackage{tikz}
 
 % tikz options
@@ -18,7 +19,7 @@
 \definecolor{nodecol}{HTML}{ff79c6}
 \definecolor{nodecolalt}{HTML}{8be9fd}
 \definecolor{edgecol}{HTML}{bd93f9}
-\definecolor{textcol}{HTML}{e9e9df}
+\definecolor{textcol}{HTML}{edede8}
 
 \begin{document}
 
@@ -31,7 +32,7 @@
 ]
 
   % background
-  \draw[fill=bgcol] (-2.7, -1) rectangle ++(5.4, 6);
+  \draw[draw=bgcol, fill=bgcol] (-2.7, -1) rectangle ++(5.4, 6);
 
   % vertices
   \node[vertex] (1) at (-1.8, 1.8) {};
@@ -50,8 +51,8 @@
   \draw[] (4) -- (6);
 
   % text
-  \node[textcol] at (0, 1.06) {
-    \fontsize{20pt}{23pt}\selectfont
+  \node[textcol] at (0, 1.03) {
+    \fontsize{20pt}{20pt}\selectfont
     \bfseries{motifcluster}
   };
 
