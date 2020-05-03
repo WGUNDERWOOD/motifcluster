@@ -1,4 +1,4 @@
-# motifcluster
+# motifcluster ![Motifcluster Sticker](https://github.com/WGUNDERWOOD/motifcluster/blob/develop/sticker/hex_sticker.png?s=100)
 
 [![Build Status](https://travis-ci.com/WGUNDERWOOD/motifcluster.svg?branch=master)](https://travis-ci.com/github/WGUNDERWOOD/motifcluster)
 [![Python Docs Status](https://img.shields.io/readthedocs/motifcluster?label=python%20docs)](https://motifcluster.readthedocs.io/en/latest/)
