@@ -1,5 +1,4 @@
-# motifcluster
-<img src="https://github.com/WGUNDERWOOD/motifcluster/blob/develop/sticker/hex_sticker.png" alt="alt text" width="100">
+# motifcluster <img src="https://github.com/WGUNDERWOOD/motifcluster/blob/develop/sticker/hex_sticker.png" alt="alt text" width="200">
 
 
 [![Build Status](https://travis-ci.com/WGUNDERWOOD/motifcluster.svg?branch=master)](https://travis-ci.com/github/WGUNDERWOOD/motifcluster)
