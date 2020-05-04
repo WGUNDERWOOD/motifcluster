@@ -13,6 +13,8 @@ R.Rcheck/
 R/Meta/
 R/.gitignore
 R/prof/prof.html
+motifcluster.Rcheck
+motifcluster*.tar.gz
 
 # python package
 __pycache__
