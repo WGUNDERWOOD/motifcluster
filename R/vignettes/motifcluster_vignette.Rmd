@@ -10,7 +10,7 @@ output:
 keep_tex: TRUE
 bibliography: refs.bib
 vignette: >
-  %\VignetteIndexEntry{Using the `motifcluster` package}
+  %\VignetteIndexEntry{using_the_motifcluster_package}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

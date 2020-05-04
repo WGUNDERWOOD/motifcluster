@@ -4,6 +4,7 @@ library(devtools)
 library(roxygen2)
 library(lintr)
 library(covr)
+library(filesstrings)
 
 print("Building R docs")
 document()
@@ -16,6 +17,9 @@ build_manual(path = "./doc")
 
 print("Building R vignettes")
 build_vignettes()
+file.remove("doc/motifcluster_vignette.R")
+file.remove("doc/motifcluster_vignette.Rmd")
+file.move("doc/motifcluster_vignette.pdf", "vignettes")
 
 print("Checking R coverage")
 cov <- package_coverage()
