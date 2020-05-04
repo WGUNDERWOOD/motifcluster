@@ -33,3 +33,6 @@ lint_package(linters = with_defaults(
 
 print("Installing package")
 install()
+
+print("Removing R gitignore")
+file.remove(".gitignore")

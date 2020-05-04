@@ -16,14 +16,6 @@ do
     optpdf $filename
 done
 
-for filename in python/doc/*.pdf
-do
-    echo Compressing $filename ...
-    optpdf $filename
-    optpdf $filename
-    optpdf $filename
-done
-
 for filename in python/tutorial/*.pdf
 do
     echo Compressing $filename ...

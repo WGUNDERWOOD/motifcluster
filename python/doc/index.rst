@@ -1,4 +1,4 @@
-.. include:: ../README_python.rst
+.. include:: ../README.rst
 
 Contents
 --------

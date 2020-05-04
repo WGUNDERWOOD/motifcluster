@@ -28,3 +28,6 @@ python/perf/prof
 
 # sticker
 sticker/
+
+# logs
+build.log
