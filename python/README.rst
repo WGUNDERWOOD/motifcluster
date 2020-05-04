@@ -1,9 +1,10 @@
 ..  image:: https://github.com/WGUNDERWOOD/motifcluster/raw/develop/sticker/hex_sticker_small.png
+    :width: 130
     :alt: motifcluster sticker
     :align: right
 
 motifcluster
-========================
+============
 
 
 A Python package for motif-based spectral clustering of weighted directed networks.
