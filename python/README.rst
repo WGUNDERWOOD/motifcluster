@@ -1,4 +1,4 @@
-..  image:: ../../sticker/hex_sticker.png
+..  image:: https://github.com/WGUNDERWOOD/motifcluster/raw/develop/sticker/hex_sticker.png
     :width: 130
     :alt: motifcluster sticker
     :align: right
