@@ -38,15 +38,17 @@ install_github("wgunderwood/motifcluster/R")
 
 Documentation for the **motifcluster** package
 is available in the
-[doc](./doc) directory.
+[doc](https://github.com/WGUNDERWOOD/motifcluster/tree/master/R/doc)
+directory.
 
 ## Vignette
 
 An instructional vignette for the **motifcluster** package
 is available in the
-[vignettes](./vignettes) directory.
+[vignettes](https://github.com/WGUNDERWOOD/motifcluster/tree/master/R/vignettes)
+directory.
 
 ## Author
 
-  - [William George Underwood](https://wgunderwood.github.io/),
+- [William George Underwood](https://wgunderwood.github.io/),
     Princeton University

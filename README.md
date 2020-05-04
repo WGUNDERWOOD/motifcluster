@@ -56,7 +56,9 @@ are all licensed under
 
 ## R package
 
-The R package "motifcluster" is in the [R](./R/) directory.
+The **motifcluster** R package is in the
+[R](https://github.com/WGUNDERWOOD/motifcluster/tree/master/R)
+directory.
 
 ### Installation
 
@@ -78,7 +80,8 @@ The R package has the following dependencies, available on CRAN:
 ### Documentation
 
 The package's manual and an instructional vignette are in the
-[R/doc](./R/doc) directory.
+[R/doc](https://github.com/WGUNDERWOOD/motifcluster/tree/master/R/doc)
+directory.
 R documentation files are provided for each function
 available in the package.
 
@@ -87,8 +90,9 @@ available in the package.
 
 ## Python package
 
-The Python package "motifcluster" is in the
-[python](./python/) directory.
+The **motifcluster** Python package is in the
+[python](https://github.com/WGUNDERWOOD/motifcluster/tree/master/python)
+directory.
 
 ### Installation
 
@@ -116,4 +120,5 @@ Full documentation is available at
 ## Sticker
 
 A high-resolution hexagonal sticker is available in the
-[sticker](./sticker) directory.
+[sticker](https://github.com/WGUNDERWOOD/motifcluster/tree/master/sticker)
+directory.
