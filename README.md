@@ -85,7 +85,7 @@ available in the package.
 
 
 
-## Python code
+## Python package
 
 The Python package "motifcluster" is in the
 [python](./python/) directory.
@@ -112,3 +112,8 @@ available on PyPI:
 
 Full documentation is available at
 [motifcluster.readthedocs.io](https://motifcluster.readthedocs.io/).
+
+## Sticker
+
+A high-resolution hexagonal sticker is available in the
+[sticker](./sticker) directory.

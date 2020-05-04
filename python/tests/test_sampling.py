@@ -120,6 +120,21 @@ def test_sample_dsbm_poisson_weighted():
   return
 
 
+def test_sample_dsbm_large():
+
+  rd.seed(seed = 2238)
+  random.seed(2238)
+
+  n = int(1e5)
+
+  block_sizes = [n]
+  connection_matrix = np.array([10 / n]).reshape((1, 1))
+
+  G = mcsa.sample_dsbm(block_sizes, connection_matrix)
+
+  assert G.shape == (n, n)
+
+
 # sample_bsbm
 def test_sample_bsbm_unweighted():
 

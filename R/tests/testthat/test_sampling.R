@@ -102,6 +102,22 @@ test_that("sample_dsbm returns correct poisson weighted adjacency matrix", {
   expect_equal(G, ans, tolerance = 0.05)
 })
 
+test_that("sample_dsbm works with large sparse matrix", {
+
+  set.seed(2238)
+
+  n = 1e4
+
+  block_sizes = c(n)
+  connection_matrix = matrix(10 / n)
+
+  G = sample_dsbm(block_sizes, connection_matrix)
+
+  expect_equal(nrow(G), n)
+  expect_equal(ncol(G), n)
+})
+
+
 # sample_bsbm
 
 test_that("sample_bsbm returns correct unweighted adjacency matrix", {
