@@ -1,4 +1,5 @@
 import numpy as np
+import random
 from numpy import random as rd
 from sklearn.metrics import adjusted_rand_score
 
@@ -30,6 +31,8 @@ def test_cluster_spectrum():
 def test_run_motif_clustering():
 
   rd.seed(3957)
+  random.seed(3957)
+
   n = 50
   block_sizes = 3 * [n]
 
