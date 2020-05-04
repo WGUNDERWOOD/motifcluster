@@ -48,6 +48,27 @@ def test_get_first_eigs_sparse():
   assert np.allclose(vects, ans_vects, atol = 1e-6)
 
 
+def test_get_few_first_eigs_dense():
+
+  G = np.array([7, -4, 14, 0, -4, 19, 10, 0,
+                14, 10, 10, 0, 0, 0, 0, 100]).reshape((4, 4))
+
+  ans_vals = [-9, 18]
+
+  ans_vects = np.array([2, 1, -2, 0, -2, 2, -1, 0]).reshape((2, 4)).transpose() / 3
+
+  spect = mcsp._get_first_eigs(G, 2)
+  vects = spect["vects"]
+  vals = spect["vals"]
+
+  for i in range(len(vals)):
+    if np.sign(vects[0, i]) != np.sign(ans_vects[0, i]):
+      vects[:, i] = -vects[:, i]
+
+  assert np.allclose(vals, ans_vals, atol = 1e-6)
+  assert np.allclose(vects, ans_vects, atol = 1e-6)
+
+
 # build_laplacian
 
 def test_build_laplacian_dense():
