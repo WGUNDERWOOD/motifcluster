@@ -3,10 +3,7 @@ matrix:
 
     # R
     - language: r
-      r:
-        - release
-        - devel
-
+      r: devel
       cache: packages
       before_install:
         - cd R/
