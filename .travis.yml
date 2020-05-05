@@ -44,15 +44,6 @@ matrix:
         - cd R/
 
 
-    # R-devel osx
-    - language: r
-      os: osx
-      r: devel
-      cache: packages
-      before_install:
-        - sudo tlmgr install framed titling
-        - cd R/
-
     # R-oldrel osx
     - language: r
       os: osx
@@ -67,6 +58,7 @@ matrix:
 
     # Python linux
     - language: python
+      python: 3.7
       os: linux
       before_install:
         - cd python/
@@ -79,6 +71,7 @@ matrix:
 
     # Python osx
     - language: python
+      python: 3.7
       os: osx
       osx_image: xcode10.2
       before_install:
