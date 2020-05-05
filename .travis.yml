@@ -57,7 +57,6 @@ matrix:
 
     - name: "Python Linux"
       language: python
-      python: 3.7
       os: linux
       before_install:
         - cd python/
@@ -71,10 +70,7 @@ matrix:
     - name: "Python OSX"
       language: shell
       os: osx
-      osx_image: xcode10.2
       before_install:
-        - pip3 install -U pip
-        - pip3 install -U pytest
         - cd python/
       install:
         - pip3 install -r requirements.txt
