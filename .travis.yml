@@ -2,7 +2,11 @@ matrix:
   include:
 
     # R
-    - language: R
+    - language: r
+      r:
+        - release
+        - devel
+
       cache: packages
       before_install:
         - cd R/
