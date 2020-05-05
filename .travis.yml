@@ -1,8 +1,13 @@
 matrix:
+
   include:
 
-    # R release
+    # R linux
+    ##########################
+
+    # R-release linux
     - language: r
+      os: linux
       r: release
       cache: packages
       before_install:
@@ -10,25 +15,55 @@ matrix:
       after_success:
         - Rscript -e "covr::codecov()"
 
-
-    # R devel
+    # R-devel linux
     - language: r
+      os: linux
       r: devel
       cache: packages
       before_install:
         - cd R/
 
-
-    # R oldrel
+    # R-oldrel linux
     - language: r
+      os: linux
       r: oldrel
       cache: packages
       before_install:
         - cd R/
 
+    # R osx
+    ##########################
 
-    # python
+    # R-release osx
+    - language: r
+      os: osx
+      r: release
+      cache: packages
+      before_install:
+        - cd R/
+
+    # R-devel linux
+    - language: r
+      os: osx
+      r: devel
+      cache: packages
+      before_install:
+        - cd R/
+
+    # R-oldrel osx
+    - language: r
+      os: osx
+      r: oldrel
+      cache: packages
+      before_install:
+        - cd R/
+
+    # Python
+    ##########################
+
+    # Python linux
     - language: python
+      os: linux
       before_install:
         - cd python/
       install:
@@ -37,3 +72,13 @@ matrix:
         - pytest --cov=motifcluster tests/
       after_success:
         - coveralls
+
+    # Python osx
+    - language: python
+      os: osx
+      before_install:
+        - cd python/
+      install:
+        - pip install -r requirements.txt
+      script:
+        - pytest tests/
