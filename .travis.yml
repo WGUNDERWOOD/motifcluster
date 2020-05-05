@@ -1,14 +1,30 @@
 matrix:
   include:
 
-    # R
+    # R release
     - language: r
-      r: devel
+      r: release
       cache: packages
       before_install:
         - cd R/
       after_success:
         - Rscript -e "covr::codecov()"
+
+
+    # R devel
+    - language: r
+      r: devel
+      cache: packages
+      before_install:
+        - cd R/
+
+
+    # R oldrel
+    - language: r
+      r: oldrel
+      cache: packages
+      before_install:
+        - cd R/
 
 
     # python
