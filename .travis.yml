@@ -40,14 +40,17 @@ matrix:
       r: release
       cache: packages
       before_install:
+        - sudo tlmgr install framed titling
         - cd R/
 
-    # R-devel linux
+
+    # R-devel osx
     - language: r
       os: osx
       r: devel
       cache: packages
       before_install:
+        - sudo tlmgr install framed titling
         - cd R/
 
     # R-oldrel osx
@@ -56,6 +59,7 @@ matrix:
       r: oldrel
       cache: packages
       before_install:
+        - sudo tlmgr install framed titling
         - cd R/
 
     # Python
@@ -76,6 +80,7 @@ matrix:
     # Python osx
     - language: python
       os: osx
+      osx_image: xcode10.2
       before_install:
         - cd python/
       install:
