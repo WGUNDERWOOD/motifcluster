@@ -1,17 +1,63 @@
 matrix:
+
   include:
 
-    # R
-    - language: R
+    # R linux
+    ##########################
+
+    - name: "R-release Linux"
+      language: r
+      os: linux
+      r: release
       cache: packages
       before_install:
         - cd R/
       after_success:
         - Rscript -e "covr::codecov()"
 
+    - name: "R-devel Linux"
+      language: r
+      os: linux
+      r: devel
+      cache: packages
+      before_install:
+        - cd R/
 
-    # python
-    - language: python
+    - name: "R-oldrel Linux"
+      language: r
+      os: linux
+      r: oldrel
+      cache: packages
+      before_install:
+        - cd R/
+
+    # R osx
+    ##########################
+
+    - name: "R-release OSX"
+      language: r
+      os: osx
+      r: release
+      cache: packages
+      before_install:
+        - sudo tlmgr install framed titling
+        - cd R/
+
+    - name: "R-oldrel OSX"
+      language: r
+      os: osx
+      r: oldrel
+      cache: packages
+      before_install:
+        - sudo tlmgr install framed titling
+        - cd R/
+
+    # Python
+    ##########################
+
+    - name: "Python Linux"
+      language: python
+      os: linux
       before_install:
         - cd python/
       install:
@@ -20,3 +66,13 @@ matrix:
         - pytest --cov=motifcluster tests/
       after_success:
         - coveralls
+
+    - name: "Python OSX"
+      language: shell
+      os: osx
+      before_install:
+        - cd python/
+      install:
+        - pip3 install -r requirements.txt
+      script:
+        - python3 -m pytest tests/
