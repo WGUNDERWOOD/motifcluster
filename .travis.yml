@@ -5,8 +5,8 @@ matrix:
     # R linux
     ##########################
 
-    # R-release linux
-    - language: r
+    - name: "R-release Linux"
+      language: r
       os: linux
       r: release
       cache: packages
@@ -15,16 +15,16 @@ matrix:
       after_success:
         - Rscript -e "covr::codecov()"
 
-    # R-devel linux
-    - language: r
+    - name: "R-devel Linux"
+      language: r
       os: linux
       r: devel
       cache: packages
       before_install:
         - cd R/
 
-    # R-oldrel linux
-    - language: r
+    - name: "R-oldrel Linux"
+      language: r
       os: linux
       r: oldrel
       cache: packages
@@ -34,8 +34,8 @@ matrix:
     # R osx
     ##########################
 
-    # R-release osx
-    - language: r
+    - name: "R-release OSX"
+      language: r
       os: osx
       r: release
       cache: packages
@@ -43,9 +43,8 @@ matrix:
         - sudo tlmgr install framed titling
         - cd R/
 
-
-    # R-oldrel osx
-    - language: r
+    - name: "R-oldrel OSX"
+      language: r
       os: osx
       r: oldrel
       cache: packages
@@ -56,8 +55,8 @@ matrix:
     # Python
     ##########################
 
-    # Python linux
-    - language: python
+    - name: "Python Linux"
+      language: python
       python: 3.7
       os: linux
       before_install:
@@ -69,14 +68,15 @@ matrix:
       after_success:
         - coveralls
 
-    # Python osx
-    - language: python
-      python: 3.7
+    - name: "Python OSX"
+      language: shell
       os: osx
       osx_image: xcode10.2
       before_install:
+        - pip3 install -U pip
+        - pip3 install -U pytest
         - cd python/
       install:
-        - pip install -r requirements.txt
+        - pip3 install -r requirements.txt
       script:
-        - pytest tests/
+        - python3 -m pytest tests/
