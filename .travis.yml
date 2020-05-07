@@ -22,6 +22,7 @@ matrix:
       r: devel
       cache: packages
       before_install:
+        - sudo apt-get -y install ghostscript
         - cd R/
 
     - name: "R-oldrel Linux"
@@ -30,6 +31,7 @@ matrix:
       r: oldrel
       cache: packages
       before_install:
+        - sudo apt-get -y install ghostscript
         - cd R/
 
     # R osx
@@ -40,8 +42,13 @@ matrix:
       os: osx
       r: release
       cache: packages
+      addons:
+        homebrew:
+          packages:
+          - ghostscript
       before_install:
         - sudo tlmgr install framed titling
+
         - cd R/
 
     - name: "R-oldrel OSX"
@@ -49,6 +56,10 @@ matrix:
       os: osx
       r: oldrel
       cache: packages
+      addons:
+        homebrew:
+          packages:
+          - ghostscript
       before_install:
         - sudo tlmgr install framed titling
         - cd R/
