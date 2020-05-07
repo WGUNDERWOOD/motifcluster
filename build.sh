@@ -3,7 +3,7 @@
 # check running in right directory
 if [ ${PWD##*/} != "motifcluster" ]
 then
-  echo "wrong directory!"
+  echo "Running build.sh from the wrong directory!"
   exit
 fi
 
@@ -11,22 +11,19 @@ fi
 basedir=$PWD
 
 # python
-echo "Python"
+echo "Python build"
 cd $basedir/python/
-bash build_python.sh | tee ../build.log
+bash build_python.sh
 
 # R
-echo "R"
+echo "R build"
 cd $basedir/R/
-Rscript build_R.R | tee -a ../build.log
+Rscript build_R.R
 
 # Compress pdf files
 echo "Compress pdfs"
 cd $basedir
-bash compress_pdfs.sh | tee -a build.log
+bash compress_pdfs.sh
 
 # Finished
-printf "\n\n\n"
-echo "Build finished! Looking for errors..."
-printf "\n\n\n"
-grep -iC 10 "error\|warn\|note" build.log
+echo "Build finished!"

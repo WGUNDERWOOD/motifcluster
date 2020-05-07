@@ -4,3 +4,4 @@
 ^build_R.R$
 ^perf$
 ^prof$
+^cran-comments.md$

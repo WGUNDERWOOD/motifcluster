@@ -11,6 +11,7 @@ matrix:
       r: release
       cache: packages
       before_install:
+        - sudo apt-get -y install ghostscript
         - cd R/
       after_success:
         - Rscript -e "covr::codecov()"

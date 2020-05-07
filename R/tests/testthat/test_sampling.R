@@ -106,12 +106,12 @@ test_that("sample_dsbm works with large sparse matrix", {
 
   set.seed(2238)
 
-  n = 1e4
+  n <- 1e4
 
-  block_sizes = c(n)
-  connection_matrix = matrix(10 / n)
+  block_sizes <- c(n)
+  connection_matrix <- matrix(10 / n)
 
-  G = sample_dsbm(block_sizes, connection_matrix)
+  G <- sample_dsbm(block_sizes, connection_matrix)
 
   expect_equal(nrow(G), n)
   expect_equal(ncol(G), n)
