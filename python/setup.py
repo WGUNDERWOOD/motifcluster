@@ -18,6 +18,6 @@ setuptools.setup(
     "networkx>=2.4",
     "numpy>=1.18.3",
     "scipy>=1.4.1",
-    "sklearn>=0.22.2"
+    "scikit-learn>=0.22.2"
   ],
 )
