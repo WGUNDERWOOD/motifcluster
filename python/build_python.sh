@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 echo "Running python tests"
-pytest --profile-svg tests/
+pytest --cov=motifcluster --profile-svg tests/
 
 # python linting
 echo "Running python linter"

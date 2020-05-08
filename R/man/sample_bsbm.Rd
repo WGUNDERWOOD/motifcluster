@@ -24,7 +24,7 @@ source block to destination block
 connection probabilities.}
 
 \item{bipartite_weight_matrix}{A matrix containing the
-sourece block to destination block weight parameters.
+source block to destination block weight parameters.
 Unused for \code{sample_weight_type = "constant"}.
 Defaults to \code{NULL}.}
 
