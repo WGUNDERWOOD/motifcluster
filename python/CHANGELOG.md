@@ -1,4 +1,4 @@
-# motifcluster 0.1.0 (TODO date)
+# motifcluster 0.1.0 (2020-05-08)
 
 - Updates and corrections to tutorials
 - Added performance tests

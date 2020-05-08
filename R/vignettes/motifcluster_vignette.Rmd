@@ -409,7 +409,7 @@ G3 <- matrix(c(
 ), byrow = TRUE, nrow = 4)
 ```
 
-An artefact of building MAMs is that although the original network may
+An artifact of building MAMs is that although the original network may
 be connected, there is no guarantee that the MAM is also connected.
 Hence the MAM is restricted to its largest connected component
 before the Laplacian is formed.

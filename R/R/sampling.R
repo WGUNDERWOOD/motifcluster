@@ -94,7 +94,7 @@ sample_dsbm <- function(block_sizes, connection_matrix,
 #' @param sample_weight_type The type of weighting scheme.
 #' One of \code{"unweighted"}, \code{"constant"} or \code{"poisson"}.
 #' @param bipartite_weight_matrix A matrix containing the
-#' sourece block to destination block weight parameters.
+#' source block to destination block weight parameters.
 #' Unused for \code{sample_weight_type = "constant"}.
 #' Defaults to \code{NULL}.
 #' @return A randomly sampled (weighted) adjacency matrix of a BSBM.

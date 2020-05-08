@@ -12,6 +12,7 @@ Description:
     random sampling methods for generating weighted directed networks are also
     provided.
 URL: https://github.com/wgunderwood/motifcluster
+Language: en-US
 BugReports: https://github.com/wgunderwood/motifcluster/issues
 License: GPL-3 + file LICENSE
 Encoding: UTF-8
