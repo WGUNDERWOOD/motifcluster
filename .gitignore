@@ -27,6 +27,7 @@ python/prof/
 python/motifcluster.egg-info/
 python/tutorial/
 python/perf/prof
+python/.coverage
 
 # sticker
 sticker/
