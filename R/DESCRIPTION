@@ -22,7 +22,7 @@ Depends: R (>= 3.6.0)
 Imports:
     igraph (>= 1.2.5),
     LICORS (>= 0.2.0),
-    Matrix (>= 1.2.18),
+    Matrix (>= 1.2),
     RSpectra (>= 0.16.0)
 Suggests:
     covr (>= 3.5.0),
