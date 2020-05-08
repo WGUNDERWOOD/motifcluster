@@ -5,7 +5,7 @@ with open("README.rst", "r") as f:
 
 setuptools.setup(
   name='motifcluster',
-  version='0.0.2',
+  version='0.1.0',
   description='Motif-Based Spectral Clustering of Weighted Directed Networks',
   license="GPLv3",
   long_description=long_description,
@@ -15,9 +15,9 @@ setuptools.setup(
   url="https://github.com/WGUNDERWOOD/motifcluster",
   packages=['motifcluster'],
   install_requires=[
-    "networkx",
-    "numpy",
-    "scipy",
-    "sklearn"
+    "networkx>=2.4",
+    "numpy>=1.18.3",
+    "scipy>=1.4.1",
+    "sklearn>=0.22.2"
   ],
 )

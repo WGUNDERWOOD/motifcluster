@@ -1,6 +1,6 @@
-coveralls
-pytest-cov
-networkx
-numpy
-scipy
-sklearn
+coverage>=4.5.4
+pytest-cov>=2.8.1
+networkx>=2.4
+numpy>=1.18.3
+scipy>=1.4.1
+sklearn>=0.22.2
