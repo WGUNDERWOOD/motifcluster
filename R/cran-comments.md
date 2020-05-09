@@ -1,5 +1,8 @@
 # motifcluster 0.1.0
-Resubmission. In this version I have:
+
+## Resubmission
+
+In this resubmitted version I have:
 
 - Added to the package description a reference to the
   arXiv paper on which it is based.
