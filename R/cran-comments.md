@@ -1,6 +1,15 @@
 # motifcluster 0.1.0
 
-## Resubmission
+
+## Resubmission 2
+
+In this resubmitted version I have:
+
+- Reformatted the arXiv link in the package description as
+  <arXiv:2004.01293>.
+
+
+## Resubmission 1
 
 In this resubmitted version I have:
 
@@ -8,6 +17,7 @@ In this resubmitted version I have:
   arXiv paper on which it is based.
 - Removed the license file and the reference to it
   from the package.
+
 
 ## R CMD check results
 
