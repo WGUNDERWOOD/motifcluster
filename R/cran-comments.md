@@ -1,4 +1,10 @@
 # motifcluster 0.1.0
+Resubmission. In this version I have:
+
+- Added to the package description a reference to the
+  arXiv paper on which it is based.
+- Removed the license file and the reference to it
+  from the package.
 
 ## R CMD check results
 
