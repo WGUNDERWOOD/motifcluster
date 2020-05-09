@@ -79,11 +79,14 @@ The R package has the following dependencies, available on CRAN:
 
 ### Documentation
 
-The package's manual and an instructional vignette are in the
+The package's manual is in the
 [R/doc](https://github.com/WGUNDERWOOD/motifcluster/tree/master/R/doc)
 directory.
 R documentation files are provided for each function
 available in the package.
+An instructional vignette is in the
+[R/vignettes](https://github.com/WGUNDERWOOD/motifcluster/tree/master/R/vignettes)
+directory.
 
 
 
