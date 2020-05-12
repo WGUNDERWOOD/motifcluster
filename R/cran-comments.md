@@ -7,6 +7,7 @@ In this resubmitted version I have:
 
 - Reset the user's options after changing them in a vignette.
 
+
 ## Resubmission 2
 
 In this resubmitted version I have:
