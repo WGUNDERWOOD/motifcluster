@@ -1,6 +1,12 @@
 # motifcluster 0.1.0
 
 
+## Resubmission 3
+
+In this resubmitted version I have:
+
+- Reset the user's options after changing them in a vignette.
+
 ## Resubmission 2
 
 In this resubmitted version I have:
