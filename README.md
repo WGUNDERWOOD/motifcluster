@@ -8,7 +8,7 @@
 [![python docs status](https://img.shields.io/readthedocs/motifcluster?label=python%20docs)](https://motifcluster.readthedocs.io/en/latest/)
 
 
-# motifcluster <img src="https://github.com/WGUNDERWOOD/motifcluster/raw/develop/sticker/hex_sticker_small.png" alt="motifcluster sticker" align="right" />
+# motifcluster <img src="https://github.com/WGUNDERWOOD/motifcluster/raw/develop/sticker/hex_sticker_small.png" alt="motifcluster sticker" align="right" width=130 />
 
 
 
