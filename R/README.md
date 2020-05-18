@@ -24,7 +24,7 @@ which is available at
 ## Installation
 
 ```
-install_github("wgunderwood/motifcluster/R")
+install.packages("motifcluster")
 ```
 
 ## Dependencies

@@ -62,10 +62,10 @@ directory.
 
 ### Installation
 
-The R package can be installed from the GitHub master branch with:
+The R package can be installed from CRAN with:
 
 ```
-install_github("wgunderwood/motifcluster/R")
+install.packages("motifcluster")
 ```
 
 ### Dependencies
