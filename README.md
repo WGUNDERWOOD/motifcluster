@@ -49,8 +49,8 @@ and is for development purposes only.
 
 ### License
 
-This repository,
-along with its included R package and Python package,
+This repository
+and its included R and Python packages
 are all licensed under
 [GPLv3](http://gplv3.fsf.org/).
 
