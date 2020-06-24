@@ -129,7 +129,6 @@ def _build_Gd(adj_mat):
 
   J = _build_J(adj_mat)
   G = _build_G(adj_mat)
-  Gd = mcut._drop0_killdiag((G + G.T) * J * J.T)
   Gd = mcut._drop0_killdiag((G + G.T).multiply(J).multiply(J.T))
   return Gd
 
