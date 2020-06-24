@@ -25,5 +25,10 @@ echo "Compress pdfs"
 cd $basedir
 bash compress_pdfs.sh
 
+# Performance
+echo "Testing performance"
+cd performance/
+bash performance.sh
+
 # Finished
 echo "Build finished!"

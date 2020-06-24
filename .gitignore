@@ -29,6 +29,11 @@ python/tutorial/
 python/perf/prof
 python/.coverage
 
+# performance
+*.csv
+profile.png
+performance/plots/
+
 # sticker
 sticker/
 
