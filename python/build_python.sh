@@ -12,9 +12,14 @@ echo "Building python docs"
 cd doc/
 make html
 
+# python tutorial
+echo "Building python docs"
+cd ../tutorial
+bash build_tutorial.sh
+
 # python distribution packages
-cd ..
 echo "Building python distribution packages"
+cd ..
 python setup.py sdist bdist_wheel
 python -m twine check dist/*
 
