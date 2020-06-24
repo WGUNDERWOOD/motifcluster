@@ -103,17 +103,16 @@ def _drop0_killdiag(some_mat):
     diagonal entries set to zero.
   """
 
+  I = sparse.identity(some_mat.shape[0])
+
   if sparse.issparse(some_mat):
-    ans = some_mat
+    ans = some_mat - I.multiply(some_mat)
 
   else:
     ans = sparse.csr_matrix(some_mat)
+    ans = ans - I.multiply(ans)
 
-  I = sparse.identity(ans.shape[0])
-  ans = ans - I.multiply(ans)
-  sparse_mat = sparse.csr_matrix(ans)
-
-  return sparse_mat
+  return ans
 
 
 def get_largest_component(adj_mat, gr_method):

@@ -67,8 +67,8 @@ def build_motif_adjacency_matrix(adj_mat, motif_name, motif_type="struc",
   assert mam_weight_type in ["unweighted", "mean", "product"]
   assert mam_method in ["sparse", "dense"]
 
-  if not sparse.issparse(adj_mat):
-    adj_mat = sparse.csr_matrix(adj_mat)
+  #if not sparse.issparse(adj_mat):
+    #adj_mat = sparse.csr_matrix(adj_mat)
 
   if motif_name == "Ms":
     motif_adj_mat = mam_Ms(adj_mat, motif_type, mam_weight_type)

@@ -18,6 +18,9 @@ echo "Building python distribution packages"
 python setup.py sdist bdist_wheel
 python -m twine check dist/*
 
+# python install local
+#pip install --user dist/motifcluster-0.1.0.tar.gz
+
 # python upload to PyPI
 #python -m twine upload --repository testpypi dist/*
 #python -m twine upload dist/*
