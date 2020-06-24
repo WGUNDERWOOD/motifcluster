@@ -26,7 +26,6 @@ python/doc/_templates/
 python/prof/
 python/motifcluster.egg-info/
 python/tutorial/
-python/perf/prof
 python/.coverage
 
 # performance
