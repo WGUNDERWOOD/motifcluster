@@ -103,14 +103,14 @@ def _drop0_killdiag(some_mat):
     diagonal entries set to zero.
   """
 
-  I = sparse.identity(some_mat.shape[0])
 
   if sparse.issparse(some_mat):
+    I = sparse.identity(some_mat.shape[0])
     ans = some_mat - I.multiply(some_mat)
 
   else:
-    ans = sparse.csr_matrix(some_mat)
-    ans = ans - I.multiply(ans)
+    I = np.identity(some_mat.shape[0])
+    ans = some_mat - some_mat * I
 
   return ans
 
