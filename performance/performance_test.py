@@ -1,17 +1,18 @@
 import sys
 import time
+import networkx as nx
+import numpy as np
+import pandas as pd
 sys.path.insert(0, "../python")
 
 from motifcluster import motifadjacency as mcmo
 from motifcluster import sampling as mcsa
 
-import numpy as np
-import pandas as pd
 
 # functions
 #######################################################################
 
-def performance_trial(ns, k, motifs, method, nreps):
+def performance_trial(ns, k, motifs, method, nreps, graph_type):
 
   results = pd.DataFrame(columns = ["n", "k", "motif", "method", "time"])
 
@@ -19,10 +20,17 @@ def performance_trial(ns, k, motifs, method, nreps):
     for motif in motifs:
       for rep in range(nreps):
 
-        # sample graph
+        # graph parameters
         block_sizes = [n]
         connection_matrix = np.array([k/n]).reshape((1, 1))
-        adj_mat = mcsa.sample_dsbm(block_sizes, connection_matrix)
+
+        # sample graph
+        if graph_type == "erdos_renyi":
+          adj_mat = mcsa.sample_dsbm(block_sizes, connection_matrix)
+        elif graph_type == "barabasi_albert":
+          sample_graph = nx.barabasi_albert_graph(n, k)
+          adj_mat = nx.to_scipy_sparse_matrix(sample_graph)
+
         if method == "dense":
           adj_mat = adj_mat.toarray()
 
@@ -37,10 +45,10 @@ def performance_trial(ns, k, motifs, method, nreps):
         results = results.append(results_dict, ignore_index=True)
 
         print("n = ",n, ", k = ",k, ", ", motif, ", method = ", method,
-              ", rep = ", rep, ", time = {:.3f}".format(dt), sep="")
+              ", rep = ", rep, ", graph type = ", graph_type, ", time = {:.3f}".format(dt), sep="")
 
   # save results
-  results.to_csv("results/python_k" + str(k) + "_" + method + ".csv", index=False)
+  results.to_csv("results/python_k" + str(k) + "_" + method + "_" + graph_type + ".csv", index=False)
 
   return None
 
@@ -49,18 +57,29 @@ def performance_trial(ns, k, motifs, method, nreps):
 # script
 #######################################################################
 
-motifs = ['M1','M8','M9','M11']
-nreps = 5
+motifs = ['M1','M8','M11']
+nreps = 2
 
+ns= [101, 200, 500, 1000]
+performance_trial(ns, 10, motifs, "dense", nreps, "barabasi_albert")
 
-ns= [100, 200, 500, 1000, 2000, 5000]
-performance_trial(ns, 10, motifs, "dense", nreps)
+ns= [101, 200, 500, 1000, 2000, 5000]
+performance_trial(ns, 10, motifs, "sparse", nreps, "barabasi_albert")
 
-ns= [100, 200, 500, 1000, 2000, 5000, 10000, 20000, 50000, 100000]
-performance_trial(ns, 10, motifs, "sparse", nreps)
+ns= [101, 200, 500, 1000]
+performance_trial(ns, 100, motifs, "dense", nreps, "barabasi_albert")
 
-ns= [100, 200, 500, 1000, 2000, 5000]
-performance_trial(ns, 100, motifs, "dense", nreps)
+ns= [101, 200, 500, 1000]
+performance_trial(ns, 100, motifs, "sparse", nreps, "barabasi_albert")
 
-ns= [100, 200, 500, 1000, 2000, 5000]
-performance_trial(ns, 100, motifs, "sparse", nreps)
+ns= [100, 200, 500, 1000]
+performance_trial(ns, 10, motifs, "dense", nreps, "erdos_renyi")
+
+ns= [100, 200, 500, 1000, 2000, 5000, 10000]
+performance_trial(ns, 10, motifs, "sparse", nreps, "erdos_renyi")
+
+ns= [100, 200, 500, 1000]
+performance_trial(ns, 100, motifs, "dense", nreps, "erdos_renyi")
+
+ns= [100, 200, 500, 1000]
+performance_trial(ns, 100, motifs, "sparse", nreps, "erdos_renyi")
