@@ -50,15 +50,17 @@ def performance_trial(ns, k, motifs, method, nreps):
 #######################################################################
 
 motifs = ['M1','M8','M9','M11']
-nreps = 100
+nreps = 5
 
 
-#ns= [100, 200, 500, 1000, 2000]
-ns= [100, 200]
+ns= [100, 200, 500, 1000, 2000, 5000]
 performance_trial(ns, 10, motifs, "dense", nreps)
 
-#performance_trial(ns, 10, motifs, "sparse", nreps)
+ns= [100, 200, 500, 1000, 2000, 5000, 10000, 20000, 50000, 100000]
+performance_trial(ns, 10, motifs, "sparse", nreps)
 
-#performance_trial(ns, 100, motifs, "dense", nreps)
+ns= [100, 200, 500, 1000, 2000, 5000]
+performance_trial(ns, 100, motifs, "dense", nreps)
 
-#performance_trial(ns, 100, motifs, "sparse", nreps)
+ns= [100, 200, 500, 1000, 2000, 5000]
+performance_trial(ns, 100, motifs, "sparse", nreps)

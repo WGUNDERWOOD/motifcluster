@@ -51,7 +51,7 @@ def test_drop0_kill_diag():
   ans = np.array([0, 0, 1, 2, 0, 4, 5, 6, 0]).reshape((3,3))
 
   assert np.allclose(
-    mcut._drop0_killdiag(adj_mat_dense).toarray(),
+    mcut._drop0_killdiag(adj_mat_dense),
     ans
   )
 

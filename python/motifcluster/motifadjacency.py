@@ -3,7 +3,6 @@ Functions for building motif adjacency matrices
 are in `motifcluster.motifadjacency`.
 """
 
-import numpy as np
 from scipy import sparse
 
 from motifcluster import utils as mcut
