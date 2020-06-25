@@ -38,11 +38,11 @@ def test_indicators():
   assert np.allclose(mcin._build_Jd(G_dense).toarray(), Jd)
   assert np.allclose(mcin._build_Jd(G_sparse).toarray(), Jd)
 
-  assert np.allclose(mcin._build_J0(G_dense).toarray(), J0)
-  assert np.allclose(mcin._build_J0(G_sparse).toarray(), J0)
+  assert np.allclose(mcin._build_J0(G_dense), J0)
+  assert np.allclose(mcin._build_J0(G_sparse), J0)
 
-  assert np.allclose(mcin._build_Jn(G_dense).toarray(), Jn)
-  assert np.allclose(mcin._build_Jn(G_sparse).toarray(), Jn)
+  assert np.allclose(mcin._build_Jn(G_dense), Jn)
+  assert np.allclose(mcin._build_Jn(G_sparse), Jn)
 
   assert np.allclose(mcin._build_Id(G_dense).toarray(), Id)
   assert np.allclose(mcin._build_Id(G_sparse).toarray(), Id)
