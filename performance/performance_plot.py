@@ -60,9 +60,15 @@ for graph_type in graph_types:
       pylab.yscale('log')
 
       if graph_type == "erdos_renyi":
-        pylab.title('Timing results for the regime $\mathrm{ER}(n,\\frac{' + str(k) + '}{n})$',fontsize=18)
+        if k == 10:
+          pylab.title('Timing results for the sparser regime $\mathrm{ER}(n,\\frac{' + str(k) + '}{n})$',fontsize=18)
+        elif k == 100:
+          pylab.title('Timing results for the less sparse regime $\mathrm{ER}(n,\\frac{' + str(k) + '}{n})$',fontsize=18)
       elif graph_type == "barabasi_albert":
-        pylab.title('Timing results for the regime $\mathrm{BA}(n,' + str(k) + ')$',fontsize=18)
+        if k == 10:
+          pylab.title('Timing results for the sparser regime $\mathrm{BA}(n,' + str(k) + ')$',fontsize=18)
+        elif k == 100:
+          pylab.title('Timing results for the less sparse regime $\mathrm{BA}(n,' + str(k) + ')$',fontsize=18)
 
       pylab.xticks(fontsize=16)
       pylab.yticks(fontsize=16)
