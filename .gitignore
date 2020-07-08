@@ -38,3 +38,9 @@ sticker/
 
 # logs
 build.log
+
+# tex
+*.aux
+*.log
+*.fdb_latexmk
+*.fls
