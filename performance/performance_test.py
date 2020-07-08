@@ -61,25 +61,13 @@ motifs = ['M1','M8','M11']
 nreps = 2
 
 ns= [101, 200, 500, 1000]
-performance_trial(ns, 10, motifs, "dense", nreps, "barabasi_albert")
-
-ns= [101, 200, 500, 1000, 2000, 5000]
-performance_trial(ns, 10, motifs, "sparse", nreps, "barabasi_albert")
-
-ns= [101, 200, 500, 1000]
 performance_trial(ns, 100, motifs, "dense", nreps, "barabasi_albert")
+performance_trial(ns, 10, motifs, "dense", nreps, "barabasi_albert")
+performance_trial(ns, 100, motifs, "dense", nreps, "erdos_renyi")
+performance_trial(ns, 10, motifs, "dense", nreps, "erdos_renyi")
 
 ns= [101, 200, 500, 1000]
 performance_trial(ns, 100, motifs, "sparse", nreps, "barabasi_albert")
-
-ns= [100, 200, 500, 1000]
-performance_trial(ns, 10, motifs, "dense", nreps, "erdos_renyi")
-
-ns= [100, 200, 500, 1000, 2000, 5000, 10000]
-performance_trial(ns, 10, motifs, "sparse", nreps, "erdos_renyi")
-
-ns= [100, 200, 500, 1000]
-performance_trial(ns, 100, motifs, "dense", nreps, "erdos_renyi")
-
-ns= [100, 200, 500, 1000]
+performance_trial(ns, 10, motifs, "sparse", nreps, "barabasi_albert")
 performance_trial(ns, 100, motifs, "sparse", nreps, "erdos_renyi")
+performance_trial(ns, 10, motifs, "sparse", nreps, "erdos_renyi")
