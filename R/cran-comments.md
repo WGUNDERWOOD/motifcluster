@@ -1,3 +1,10 @@
+# motifcluster 0.1.1
+
+This version is an update to keep version numbers consistent with
+the Python version of this package.
+
+
+
 # motifcluster 0.1.0
 
 

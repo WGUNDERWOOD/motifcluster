@@ -1,3 +1,7 @@
+# motifcluster 0.1.1 (2020-08-10)
+
+- Update to keep version numbers consistent with the Python version of this package
+
 # motifcluster 0.1.0 (2020-05-08)
 
 - Released R package to CRAN

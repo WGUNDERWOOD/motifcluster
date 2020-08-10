@@ -36,3 +36,6 @@ file.remove(".gitignore")
 
 #print("Installing package")
 #install()
+
+#print("Releasing")
+#release()
