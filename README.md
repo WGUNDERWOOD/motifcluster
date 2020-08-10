@@ -124,6 +124,16 @@ available on PyPI:
 Full documentation is available at
 [motifcluster.readthedocs.io](https://motifcluster.readthedocs.io/).
 
+
+
+## Performance
+
+The
+[performance](https://github.com/WGUNDERWOOD/motifcluster/tree/master/performance)
+directory contains scripts and plots relating to timing
+the construction of motif adjacency matrices,
+in both R and Python.
+
 ## Sticker
 
 A high-resolution hexagonal sticker is available in the
