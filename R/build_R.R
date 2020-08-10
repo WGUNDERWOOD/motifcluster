@@ -31,8 +31,8 @@ lint_package(linters = with_defaults(
                object_usage_linter = NULL,
                cyclocomp_linter = NULL))
 
-print("Installing package")
-install()
-
 print("Removing R gitignore")
 file.remove(".gitignore")
+
+#print("Installing package")
+#install()
