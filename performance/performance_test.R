@@ -76,7 +76,7 @@ performance_trial(ns, 10, motifs, "dense", nreps, "barabasi_albert")
 performance_trial(ns, 100, motifs, "dense", nreps, "erdos_renyi")
 performance_trial(ns, 10, motifs, "dense", nreps, "erdos_renyi")
 
-ns= c(101, 200, 500, 1000, 2000, 5000)
+ns= c(101, 200, 500, 1000)
 performance_trial(ns, 100, motifs, "sparse", nreps, "barabasi_albert")
 performance_trial(ns, 10, motifs, "sparse", nreps, "barabasi_albert")
 performance_trial(ns, 100, motifs, "sparse", nreps, "erdos_renyi")
