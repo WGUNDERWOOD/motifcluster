@@ -20,6 +20,13 @@ matrix:
       language: r
       os: linux
       r: devel
+      r_packages:
+        - igraph
+        - LICORS
+        - Matrix
+        - RSpectra
+        - mclust
+        - spam
       cache: packages
       before_install:
         - sudo apt-get -y install ghostscript
