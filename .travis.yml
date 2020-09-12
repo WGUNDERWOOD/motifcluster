@@ -30,8 +30,11 @@ matrix:
       os: linux
       r: oldrel
       r_packages:
-        - spam
+        - igraph
+        - LICORS
+        - Matrix
         - RSpectra
+        - spam
       cache: packages
       before_install:
         - sudo apt-get -y install ghostscript
