@@ -29,6 +29,8 @@ matrix:
       language: r
       os: linux
       r: oldrel
+      r_packages:
+        - spam
       cache: packages
       before_install:
         - sudo apt-get -y install ghostscript
