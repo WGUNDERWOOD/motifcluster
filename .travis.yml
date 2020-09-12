@@ -34,6 +34,7 @@ matrix:
         - LICORS
         - Matrix
         - RSpectra
+        - mclust
         - spam
       cache: packages
       before_install:
