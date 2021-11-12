@@ -23,8 +23,12 @@ cd ..
 python setup.py sdist bdist_wheel
 python -m twine check dist/*
 
+# pip uninstall
+pip uninstall motifcluster
+
 # python install local
-#pip install --user dist/motifcluster-0.1.0.tar.gz
+pip install --user dist/motifcluster-0.1.2.tar.gz
+
 
 # python upload to PyPI
 #python -m twine upload --repository testpypi dist/*

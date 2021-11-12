@@ -1,3 +1,7 @@
+# motifcluster 0.1.2 (2021-11-11)
+
+- Adding license file to PyPI distribution
+
 # motifcluster 0.1.1 (2020-08-10)
 
 - Rewriting dense MAM construction methods using Numpy
