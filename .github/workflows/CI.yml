@@ -36,7 +36,7 @@ jobs:
         with:
           r-version: 'release'
       - run: sudo apt-get -y install ghostscript
-      - run: Rscript -e 'install.packages("igraph, LICORS, Matrix, RSpectra, mclust, spam")'
+      - run: Rscript -e 'install.packages("igraph", "LICORS", "Matrix", "RSpectra", "mclust", "spam", "devtools", "roxygen2", "lintr", "covr")'
       - run: cd R/ && Rscript -e 'library(devtools); document();'
       - run: cd R/ && Rscript -e 'library(devtools); check()'
       - run: cd R/ && Rscript -e 'library(devtools); build_manual(path="doc")'
