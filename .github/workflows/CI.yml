@@ -18,6 +18,8 @@ jobs:
         with:
           python-version: "3.x"
       - run: pip install -r python/requirements.txt
+      - run: pip install sphinx
+      - run: pip install sphinx-rtd-theme
       - run: cd python/ && pytest --cov=motifcluster tests/
       - run: cd python/ && pylint --rcfile=.pylintrc motifcluster
       - run: cd python/doc/ && make html
@@ -33,6 +35,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: sudo apt-get -y install ghostscript
+      - run: cp R/DESCRIPTION .
       - uses: r-lib/actions/setup-r@v1
         with:
           r-version: 'release'
