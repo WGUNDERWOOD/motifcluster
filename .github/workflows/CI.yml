@@ -38,9 +38,9 @@ jobs:
       - run: sudo apt -y install r-base
       - run: sudo apt-get -y install ghostscript
       - run: cd R/ && Rscript -e 'install.packages(c("igraph", "LICORS", "Matrix", "RSpectra", "covr", "knitr", "mclust", "rmarkdown", "testthat", "devtools", "spam", "roxygen2", "lintr"), lib="~/")'
-      - run: cd R/ && Rscript -e 'document()'
-      - run: cd R/ && Rscript -e 'library(devtools); check()'
-      - run: cd R/ && Rscript -e 'library(devtools); build_manual(path="doc")'
-      - run: cd R/ && Rscript -e 'library(devtools); build_vignettes()'
-      - run: cd R/ && Rscript -e 'lint_package(linters = with_defaults(object_name_linter=NULL,object_usage_linter=NULL,cyclocomp_linter=NULL))'
-      - run: cd R/ && Rscript -e 'covr::coveralls()'
+      - run: cd R/ && Rscript -e 'library(devtools, lib.loc="~/"); document()'
+      - run: cd R/ && Rscript -e 'library(devtools, lib.loc="~/"); check()'
+      - run: cd R/ && Rscript -e 'library(devtools, lib.loc="~/"); build_manual(path="doc")'
+      - run: cd R/ && Rscript -e 'library(devtools, lib.loc="~/"); build_vignettes()'
+      - run: cd R/ && Rscript -e 'library(lintr, lib.loc="~/"); lint_package(linters = with_defaults(object_name_linter=NULL,object_usage_linter=NULL,cyclocomp_linter=NULL))'
+      - run: cd R/ && Rscript -e 'library(covr, lib.loc="~/"); covr::coveralls()'
