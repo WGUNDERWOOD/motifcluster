@@ -20,12 +20,9 @@ jobs:
       - run: pip install -r python/requirements.txt
       - run: pip install sphinx
       - run: pip install sphinx-rtd-theme
-      - run: sudo apt-get -y install texlive-latex-base texlive-fonts-recommended texlive-fonts-extra texlive-latex-extra
-      - run: tlmgr install pythontex
       - run: cd python/ && pytest --cov=motifcluster tests/
       - run: cd python/ && pylint --rcfile=.pylintrc motifcluster
       - run: cd python/doc/ && make html
-      - run: cd python/tutorial && bash build_tutorial.sh
       - run: cd python/ && coverage-lcov
       - uses: coverallsapp/github-action@master
         with:
@@ -36,10 +33,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - run: sudo apt-get update
+      - run: sudo apt -y install pandoc
+      - run: sudo apt -y install r-base
       - run: sudo apt-get -y install ghostscript
-      - uses: r-lib/actions/setup-r@v1
-        with:
-          r-version: 'release'
       - run: cd R/ && Rscript -e 'install.packages(c("igraph", "LICORS", "Matrix", "RSpectra", "covr", "knitr", "mclust", "rmarkdown", "testthat", "devtools", "spam", "roxygen2", "lintr"))'
       - run: cd R/ && Rscript -e 'library(devtools); document();'
       - run: cd R/ && Rscript -e 'library(devtools); check()'
