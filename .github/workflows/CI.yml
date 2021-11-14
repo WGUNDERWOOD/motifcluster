@@ -32,11 +32,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - run: sudo apt-get -y install ghostscript
       - uses: r-lib/actions/setup-r@v1
         with:
           r-version: 'release'
-      - run: sudo apt-get -y install ghostscript
-      - run: Rscript -e 'install.packages("igraph", "LICORS", "Matrix", "RSpectra", "mclust", "spam", "devtools", "roxygen2", "lintr", "covr")'
+      - uses: r-lib/actions/setup-r-dependencies@v1
+        with:
+          extra-packages: |
+            covr
+            knitr
+            mclust
+            rmarkdown
+            testthat
+            spam
+            devtools
+            roxygen2
+            lintr
       - run: cd R/ && Rscript -e 'library(devtools); document();'
       - run: cd R/ && Rscript -e 'library(devtools); check()'
       - run: cd R/ && Rscript -e 'library(devtools); build_manual(path="doc")'
