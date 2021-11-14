@@ -18,8 +18,8 @@ jobs:
         with:
           python-version: "3.x"
       - run: pip install -r python/requirements.txt
-      - run: pytest --cov=motifcluster python/tests/
-      - run: coverage-lcov --data_file_path python/.coverage --output_file_path python/lcov.info
+      - run: cd python/ && pytest --cov=motifcluster tests/
+      - run: cd python/ && coverage-lcov
       - uses: coverallsapp/github-action@master
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
