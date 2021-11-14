@@ -1,4 +1,4 @@
-[![build status](https://travis-ci.com/WGUNDERWOOD/motifcluster.svg?branch=master)](https://travis-ci.com/github/WGUNDERWOOD/motifcluster)
+[![CI](https://github.com/WGUNDERWOOD/motifcluster/actions/workflows/python.yml/badge.svg)](https://github.com/WGUNDERWOOD/motifcluster/actions/workflows/python.yml)
 [![license: GPLv3](https://img.shields.io/badge/license-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![DOI](https://zenodo.org/badge/249007000.svg)](https://zenodo.org/badge/latestdoi/249007000)
 [![CRAN version](https://img.shields.io/cran/v/motifcluster?color=7733BB&label=CRAN)](https://cran.r-project.org/web/packages/motifcluster/index.html)
@@ -6,6 +6,10 @@
 [![R coverage status](https://img.shields.io/codecov/c/github/wgunderwood/motifcluster?label=R%20cov)](https://codecov.io/gh/WGUNDERWOOD/motifcluster)
 [![python coverage status](https://img.shields.io/coveralls/github/WGUNDERWOOD/motifcluster?label=python%20cov)](https://coveralls.io/github/WGUNDERWOOD/motifcluster)
 [![python docs status](https://img.shields.io/readthedocs/motifcluster?label=python%20docs)](https://motifcluster.readthedocs.io/en/latest/)
+
+
+
+
 
 
 # motifcluster <img src="https://github.com/WGUNDERWOOD/motifcluster/raw/develop/sticker/hex_sticker_small.png" alt="motifcluster sticker" align="right" width=120 />
