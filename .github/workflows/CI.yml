@@ -20,6 +20,8 @@ jobs:
       - run: pip install -r python/requirements.txt
       - run: pip install sphinx
       - run: pip install sphinx-rtd-theme
+      - run: sudo apt-get -y install texlive-latex-base texlive-fonts-recommended texlive-fonts-extra texlive-latex-extra
+      - run: tlmgr install pythontex
       - run: cd python/ && pytest --cov=motifcluster tests/
       - run: cd python/ && pylint --rcfile=.pylintrc motifcluster
       - run: cd python/doc/ && make html
@@ -35,22 +37,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: sudo apt-get -y install ghostscript
-      - run: cp R/DESCRIPTION .
       - uses: r-lib/actions/setup-r@v1
         with:
           r-version: 'release'
-      - uses: r-lib/actions/setup-r-dependencies@v1
-        with:
-          extra-packages: |
-            covr
-            knitr
-            mclust
-            rmarkdown
-            testthat
-            spam
-            devtools
-            roxygen2
-            lintr
+      - run: cd R/ && Rscript -e 'install.packages(c("igraph", "LICORS", "Matrix", "RSpectra", "covr", "knitr", "mclust", "rmarkdown", "testthat", "devtools", "spam", "roxygen2", "lintr"))'
       - run: cd R/ && Rscript -e 'library(devtools); document();'
       - run: cd R/ && Rscript -e 'library(devtools); check()'
       - run: cd R/ && Rscript -e 'library(devtools); build_manual(path="doc")'
