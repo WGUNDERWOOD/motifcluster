@@ -183,7 +183,7 @@ test_that("run_motif_embedding correct on dense matrix with restrict", {
     0, 2, 0, 0,
     0, 0, 3, 0,
     4, 0, 0, 0,
-    7, 0, 0, 0
+    0, 0, 0, 0
   ), nrow = 4, byrow = TRUE)
 
   # answers
@@ -191,13 +191,13 @@ test_that("run_motif_embedding correct on dense matrix with restrict", {
     0, 2, 0, 0,
     0, 0, 3, 0,
     4, 0, 0, 0,
-    7, 0, 0, 0
+    0, 0, 0, 0
   ), nrow = 4, byrow = TRUE))
 
   ans_motif_adj_mat <- drop0(matrix(c(
-    0, 3, 3, 0,
-    3, 0, 3, 0,
-    3, 3, 0, 0,
+    0, 2, 4, 0,
+    2, 0, 3, 0,
+    4, 3, 0, 0,
     0, 0, 0, 0
   ), nrow = 4, byrow = TRUE))
 
@@ -210,21 +210,21 @@ test_that("run_motif_embedding correct on dense matrix with restrict", {
   ), nrow = 3, byrow = TRUE))
 
   ans_motif_adj_mat_comps <- drop0(matrix(c(
-    0, 3, 3,
-    3, 0, 3,
-    3, 3, 0
+    0, 2, 4,
+    2, 0, 3,
+    4, 3, 0
   ), nrow = 3, byrow = TRUE))
 
-  ans_vals <- c(0, 1.5)
+  ans_vals <- c(0, 1.354)
 
   ans_vects <- matrix(c(
-    0.577,  0,
-    0.577, -0.707,
-    0.577,  0.707
+    0.577, 0.544,
+    0.577, -0.830,
+    0.577, 0.126
   ), nrow = 3, byrow = TRUE)
 
   # run motif embedding
-  emb_list <- run_motif_embedding(adj_mat, "M1", "func", "mean", "dense", 2,
+  emb_list <- run_motif_embedding(adj_mat, "Ms", "func", "mean", "dense", 2,
                                  "rw", restrict = TRUE)
 
   # flip eigenvector signs if necessary
@@ -247,25 +247,25 @@ test_that("run_motif_embedding correct on sparse matrix with restrict", {
 
   set.seed(9235)
 
-  adj_mat <- drop0(matrix(c(
+  adj_mat <- matrix(c(
     0, 2, 0, 0,
     0, 0, 3, 0,
     4, 0, 0, 0,
-    7, 0, 0, 0
-  ), nrow = 4, byrow = TRUE))
+    0, 0, 0, 0
+  ), nrow = 4, byrow = TRUE)
 
   # answers
   ans_adj_mat <- drop0(matrix(c(
     0, 2, 0, 0,
     0, 0, 3, 0,
     4, 0, 0, 0,
-    7, 0, 0, 0
+    0, 0, 0, 0
   ), nrow = 4, byrow = TRUE))
 
   ans_motif_adj_mat <- drop0(matrix(c(
-    0, 3, 3, 0,
-    3, 0, 3, 0,
-    3, 3, 0, 0,
+    0, 2, 4, 0,
+    2, 0, 3, 0,
+    4, 3, 0, 0,
     0, 0, 0, 0
   ), nrow = 4, byrow = TRUE))
 
@@ -278,21 +278,21 @@ test_that("run_motif_embedding correct on sparse matrix with restrict", {
   ), nrow = 3, byrow = TRUE))
 
   ans_motif_adj_mat_comps <- drop0(matrix(c(
-    0, 3, 3,
-    3, 0, 3,
-    3, 3, 0
+    0, 2, 4,
+    2, 0, 3,
+    4, 3, 0
   ), nrow = 3, byrow = TRUE))
 
-  ans_vals <- c(0, 1.5)
+  ans_vals <- c(0, 1.354)
 
   ans_vects <- matrix(c(
-    0.577,  0,
-    0.577, -0.707,
-    0.577,  0.707
+    0.577, 0.544,
+    0.577, -0.830,
+    0.577, 0.126
   ), nrow = 3, byrow = TRUE)
 
   # run motif embedding
-  emb_list <- run_motif_embedding(adj_mat, "M1", "func", "mean", "dense", 2,
+  emb_list <- run_motif_embedding(adj_mat, "Ms", "func", "mean", "dense", 2,
                                   "rw", restrict = TRUE)
 
   # flip eigenvector signs if necessary
@@ -329,21 +329,21 @@ test_that("run_motif_embedding correct on dense matrix without restrict", {
   ), nrow = 3, byrow = TRUE))
 
   ans_motif_adj_mat <- drop0(matrix(c(
-    0, 3, 3,
-    3, 0, 3,
-    3, 3, 0
+    0, 2, 4,
+    2, 0, 3,
+    4, 3, 0
   ), nrow = 3, byrow = TRUE))
 
-  ans_vals <- c(0, 1.5)
+  ans_vals <- c(0, 1.354)
 
   ans_vects <- matrix(c(
-    0.577,  0,
-    0.577, -0.707,
-    0.577,  0.707
+    0.577, 0.544,
+    0.577, -0.830,
+    0.577, 0.126
   ), nrow = 3, byrow = TRUE)
 
   # run motif embedding
-  emb_list <- run_motif_embedding(adj_mat, "M1", "func", "mean", "dense", 2,
+  emb_list <- run_motif_embedding(adj_mat, "Ms", "func", "mean", "dense", 2,
                                   "rw", restrict = FALSE)
 
   # flip eigenvector signs if necessary
@@ -363,11 +363,11 @@ test_that("run_motif_embedding correct on sparse matrix without restrict", {
 
   set.seed(9235)
 
-  adj_mat <- drop0(matrix(c(
+  adj_mat <- matrix(c(
     0, 2, 0,
     0, 0, 3,
     4, 0, 0
-  ), nrow = 3, byrow = TRUE))
+  ), nrow = 3, byrow = TRUE)
 
   # answers
   ans_adj_mat <- drop0(matrix(c(
@@ -377,21 +377,21 @@ test_that("run_motif_embedding correct on sparse matrix without restrict", {
   ), nrow = 3, byrow = TRUE))
 
   ans_motif_adj_mat <- drop0(matrix(c(
-    0, 3, 3,
-    3, 0, 3,
-    3, 3, 0
+    0, 2, 4,
+    2, 0, 3,
+    4, 3, 0
   ), nrow = 3, byrow = TRUE))
 
-  ans_vals <- c(0, 1.5)
+  ans_vals <- c(0, 1.354)
 
   ans_vects <- matrix(c(
-    0.577,  0,
-    0.577, -0.707,
-    0.577,  0.707
+    0.577, 0.544,
+    0.577, -0.830,
+    0.577, 0.126
   ), nrow = 3, byrow = TRUE)
 
   # run motif embedding
-  emb_list <- run_motif_embedding(adj_mat, "M1", "func", "mean", "dense", 2,
+  emb_list <- run_motif_embedding(adj_mat, "Ms", "func", "mean", "dense", 2,
                                   "rw", restrict = FALSE)
 
   # flip eigenvector signs if necessary
