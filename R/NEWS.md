@@ -1,3 +1,7 @@
+# motifcluster 0.1.2 (2021-11-14)
+
+- Moving from Travis CI to Github Actions
+
 # motifcluster 0.1.1 (2020-08-10)
 
 - Update to keep version numbers consistent with the Python version of this package

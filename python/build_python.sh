@@ -13,7 +13,7 @@ cd doc/
 make html
 
 # python tutorial
-echo "Building python docs"
+echo "Building python tutorial"
 cd ../tutorial
 bash build_tutorial.sh
 
@@ -24,10 +24,10 @@ python setup.py sdist bdist_wheel
 python -m twine check dist/*
 
 # pip uninstall
-pip uninstall motifcluster
+#pip uninstall motifcluster
 
 # python install local
-pip install --user dist/motifcluster-0.1.2.tar.gz
+#pip install --user dist/motifcluster-0.1.2.tar.gz
 
 
 # python upload to PyPI

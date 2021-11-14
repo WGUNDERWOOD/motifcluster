@@ -1,3 +1,9 @@
+# motifcluster 0.1.2
+
+Moving from Travis CI to Github Actions
+
+
+
 # motifcluster 0.1.1
 
 This version is an update to keep version numbers consistent with

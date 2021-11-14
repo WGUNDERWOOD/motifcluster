@@ -1,6 +1,6 @@
 Package: motifcluster
 Title: Motif-Based Spectral Clustering of Weighted Directed Networks
-Version: 0.1.1
+Version: 0.1.2
 Authors@R:
     person(given = "William George",
         family = "Underwood",

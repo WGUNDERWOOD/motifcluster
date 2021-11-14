@@ -19,6 +19,9 @@ jobs:
           python-version: "3.x"
       - run: pip install -r python/requirements.txt
       - run: cd python/ && pytest --cov=motifcluster tests/
+      - run: cd python/ && pylint --rcfile=.pylintrc motifcluster
+      - run: cd python/doc/ && make html
+      - run: cd python/tutorial && bash build_tutorial.sh
       - run: cd python/ && coverage-lcov
       - uses: coverallsapp/github-action@master
         with:
@@ -32,4 +35,11 @@ jobs:
       - uses: r-lib/actions/setup-r@v1
         with:
           r-version: 'release'
-      - run: Rscript -e 'install.packages("igraph")'
+      - run: sudo apt-get -y install ghostscript
+      - run: Rscript -e 'install.packages("igraph, LICORS, Matrix, RSpectra, mclust, spam")'
+      - run: cd R/ && Rscript -e 'library(devtools); document();'
+      - run: cd R/ && Rscript -e 'library(devtools); check()'
+      - run: cd R/ && Rscript -e 'library(devtools); build_manual(path="doc")'
+      - run: cd R/ && Rscript -e 'library(devtools); build_vignettes()'
+      - run: cd R/ && Rscript -e 'lint_package(linters = with_defaults(object_name_linter=NULL,object_usage_linter=NULL,cyclocomp_linter=NULL))'
+      - run: cd R/ && Rscript -e 'covr::coveralls()'
