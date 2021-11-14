@@ -38,7 +38,7 @@ jobs:
       - run: sudo apt -y install r-base
       - run: sudo apt-get -y install ghostscript
       - run: cd R/ && Rscript -e 'install.packages(c("igraph", "LICORS", "Matrix", "RSpectra", "covr", "knitr", "mclust", "rmarkdown", "testthat", "devtools", "spam", "roxygen2", "lintr"), lib="~/")'
-      - run: cd R/ && Rscript -e 'library(devtools); document();'
+      - run: cd R/ && Rscript -e 'document()'
       - run: cd R/ && Rscript -e 'library(devtools); check()'
       - run: cd R/ && Rscript -e 'library(devtools); build_manual(path="doc")'
       - run: cd R/ && Rscript -e 'library(devtools); build_vignettes()'
