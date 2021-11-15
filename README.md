@@ -1,4 +1,4 @@
-[![CI](https://github.com/WGUNDERWOOD/motifcluster/actions/workflows/python.yml/badge.svg)](https://github.com/WGUNDERWOOD/motifcluster/actions/workflows/python.yml)
+[![CI](https://github.com/WGUNDERWOOD/motifcluster/actions/workflows/CI.yml/badge.svg)](https://github.com/WGUNDERWOOD/motifcluster/actions/workflows/CI.yml)
 [![license: GPLv3](https://img.shields.io/badge/license-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![CRAN version](https://img.shields.io/cran/v/motifcluster?color=7733BB&label=CRAN)](https://cran.r-project.org/web/packages/motifcluster/index.html)
 [![PyPI version](https://img.shields.io/pypi/v/motifcluster?color=7733BB&label=PyPI)](https://pypi.org/project/motifcluster/)
@@ -112,10 +112,16 @@ The Python package can be installed from PyPI with:
 pip install motifcluster
 ```
 
+Alternatively it can be installed with conda with:
+
+```
+conda install -c conda-forge motifcluster
+```
+
+
 ### Dependencies
 
-The Python package has the following dependencies,
-available on PyPI:
+The Python package has the following dependencies:
 
 - Networkx
 - Numpy

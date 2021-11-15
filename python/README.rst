@@ -30,9 +30,18 @@ which is available at
 
 Installation
 ------------
+
+From PyPI:
+
 .. code-block:: bash
 
   pip install motifcluster
+
+With conda:
+
+.. code-block:: bash
+
+  conda install -c conda-forge motifcluster
 
 Dependencies
 ------------
