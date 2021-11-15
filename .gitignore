@@ -15,6 +15,7 @@ R/.gitignore
 R/prof/prof.html
 motifcluster.Rcheck
 motifcluster*.tar.gz
+cobertura.xml
 
 # python package
 __pycache__
