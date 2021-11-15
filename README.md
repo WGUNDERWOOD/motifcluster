@@ -112,7 +112,7 @@ The Python package can be installed from PyPI with:
 pip install motifcluster
 ```
 
-Alternatively it can be installed with conda with:
+Alternatively it can be installed with conda using:
 
 ```
 conda install -c conda-forge motifcluster
