@@ -15,7 +15,7 @@ R/.gitignore
 R/prof/prof.html
 motifcluster.Rcheck
 motifcluster*.tar.gz
-cobertura.xml
+R/cobertura.xml
 
 # python package
 __pycache__
@@ -28,6 +28,7 @@ python/prof/
 python/motifcluster.egg-info/
 python/tutorial/
 python/.coverage
+python/coverage.xml
 
 # performance
 *.csv
