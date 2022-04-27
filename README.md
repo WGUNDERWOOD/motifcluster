@@ -79,8 +79,8 @@ install.packages("motifcluster")
 
 The R package has the following dependencies, available on CRAN:
 
+- ClusterR
 - igraph
-- LICORS
 - Matrix
 - RSpectra
 

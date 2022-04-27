@@ -7,14 +7,15 @@
 #' @param num_clusts The number of clusters to find.
 #' @return A length-nrow(spectrum$vects) vector of integers
 #' from 1 to num_clusts, representing cluster assignments.
-#' @importFrom LICORS kmeanspp
+#' @importFrom ClusterR KMeans_rcpp
 #' @keywords internal
 
 cluster_spectrum <- function(spectrum, num_clusts) {
 
-  vects <- spectrum$vects[, -1]
-  kmeans_plus_plus <- kmeanspp(vects, k = num_clusts)
-  cluster_assigns <- kmeans_plus_plus$cluster
+  vects <- spectrum$vects[, -1, drop = FALSE]
+  kmeans_plus_plus <- KMeans_rcpp(vects, clusters = num_clusts,
+                                  initializer = "kmeans++", num_init = 10)
+  cluster_assigns <- kmeans_plus_plus$clusters
 
   return(cluster_assigns)
 }
@@ -62,7 +63,7 @@ cluster_spectrum <- function(spectrum, num_clusts) {
 #'     cluster assignment of each vertex in the (restricted) graph.
 #' }
 #' @examples
-#' adj_mat <- matrix(c(1:9), nrow = 3)
+#' adj_mat <- matrix(c(1:16), nrow = 4)
 #' run_motif_clustering(adj_mat, "M1", "func")
 #' @export
 

@@ -1,3 +1,9 @@
+# motifcluster 0.2.0
+
+Replacing LICORS dependency with ClusterR as LICORS is unmaintained
+
+
+
 # motifcluster 0.1.2
 
 Moving from Travis CI to Github Actions

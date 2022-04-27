@@ -1,6 +1,6 @@
 Package: motifcluster
 Title: Motif-Based Spectral Clustering of Weighted Directed Networks
-Version: 0.1.2
+Version: 0.2.0
 Authors@R:
     person(given = "William George",
         family = "Underwood",
@@ -18,11 +18,11 @@ BugReports: https://github.com/wgunderwood/motifcluster/issues
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
 Depends: R (>= 3.6.0)
 Imports:
+    ClusterR (>= 1.2.6),
     igraph (>= 1.2.5),
-    LICORS (>= 0.2.0),
     Matrix (>= 1.2),
     RSpectra (>= 0.16.0)
 Suggests:

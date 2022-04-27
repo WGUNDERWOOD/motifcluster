@@ -1,3 +1,7 @@
+# motifcluster 0.2.0 (2022-04-27)
+
+- Replacing LICORS dependency with ClusterR
+
 # motifcluster 0.1.2 (2021-11-14)
 
 - Moving from Travis CI to Github Actions

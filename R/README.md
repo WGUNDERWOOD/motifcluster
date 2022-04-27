@@ -29,8 +29,8 @@ install.packages("motifcluster")
 
 ## Dependencies
 
+- ClusterR
 - igraph
-- LICORS
 - Matrix
 - RSpectra
 
