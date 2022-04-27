@@ -23,11 +23,12 @@ jobs:
       - run: cd python/ && pytest --cov=motifcluster tests/
       - run: cd python/ && pylint --rcfile=.pylintrc motifcluster
       - run: cd python/doc/ && make html
-      - run: cd python/ && coverage-lcov
-      - uses: coverallsapp/github-action@master
+      - run: cd python/ && coverage xml
+      - uses: codecov/codecov-action@v2
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          path-to-lcov: python/lcov.info
+          files: ./python/coverage.xml
+          fail_ci_if_error: true
+          verbose: true
 
   R:
     runs-on: ubuntu-latest

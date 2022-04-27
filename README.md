@@ -2,8 +2,7 @@
 [![license: GPLv3](https://img.shields.io/badge/license-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![CRAN version](https://img.shields.io/cran/v/motifcluster?color=7733BB&label=CRAN)](https://cran.r-project.org/web/packages/motifcluster/index.html)
 [![PyPI version](https://img.shields.io/pypi/v/motifcluster?color=7733BB&label=PyPI)](https://pypi.org/project/motifcluster/)
-[![R coverage status](https://img.shields.io/codecov/c/github/wgunderwood/motifcluster?label=R%20cov)](https://codecov.io/gh/WGUNDERWOOD/motifcluster)
-[![python coverage status](https://img.shields.io/coveralls/github/WGUNDERWOOD/motifcluster?label=python%20cov)](https://coveralls.io/github/WGUNDERWOOD/motifcluster)
+[![codecov](https://codecov.io/gh/WGUNDERWOOD/motifcluster/branch/master/graph/badge.svg?token=DbGSOsocw6)](https://codecov.io/gh/WGUNDERWOOD/motifcluster)
 [![python docs status](https://img.shields.io/readthedocs/motifcluster?label=python%20docs)](https://motifcluster.readthedocs.io/en/latest/)
 
 
