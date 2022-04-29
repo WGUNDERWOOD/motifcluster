@@ -38,14 +38,14 @@ install.packages("motifcluster")
 
 Documentation for the **motifcluster** package
 is available in the
-[doc](https://github.com/WGUNDERWOOD/motifcluster/tree/master/R/doc)
+[doc](https://github.com/WGUNDERWOOD/motifcluster/tree/main/R/doc)
 directory.
 
 ## Vignette
 
 An instructional vignette for the **motifcluster** package
 is available in the
-[vignettes](https://github.com/WGUNDERWOOD/motifcluster/tree/master/R/vignettes)
+[vignettes](https://github.com/WGUNDERWOOD/motifcluster/tree/main/R/vignettes)
 directory.
 
 ## Author

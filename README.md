@@ -2,7 +2,7 @@
 [![license: GPLv3](https://img.shields.io/badge/license-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![CRAN version](https://img.shields.io/cran/v/motifcluster?color=7733BB&label=CRAN)](https://cran.r-project.org/web/packages/motifcluster/index.html)
 [![PyPI version](https://img.shields.io/pypi/v/motifcluster?color=7733BB&label=PyPI)](https://pypi.org/project/motifcluster/)
-[![codecov](https://codecov.io/gh/WGUNDERWOOD/motifcluster/branch/master/graph/badge.svg?token=DbGSOsocw6)](https://codecov.io/gh/WGUNDERWOOD/motifcluster)
+[![codecov](https://codecov.io/gh/WGUNDERWOOD/motifcluster/branch/main/graph/badge.svg?token=DbGSOsocw6)](https://codecov.io/gh/WGUNDERWOOD/motifcluster)
 [![python docs status](https://img.shields.io/readthedocs/motifcluster?label=python%20docs)](https://motifcluster.readthedocs.io/en/latest/)
 
 
@@ -36,7 +36,7 @@ and are easy to install and use.
 
 ### Branches
 
-The master branch contains stable versions.
+The main branch contains stable versions.
 The develop branch may be unstable,
 and is for development purposes only.
 
@@ -63,7 +63,7 @@ are all licensed under
 ## R package
 
 The **motifcluster** R package is in the
-[R](https://github.com/WGUNDERWOOD/motifcluster/tree/master/R)
+[R](https://github.com/WGUNDERWOOD/motifcluster/tree/main/R)
 directory.
 
 ### Installation
@@ -86,12 +86,12 @@ The R package has the following dependencies, available on CRAN:
 ### Documentation
 
 The package's manual is in the
-[R/doc](https://github.com/WGUNDERWOOD/motifcluster/tree/master/R/doc)
+[R/doc](https://github.com/WGUNDERWOOD/motifcluster/tree/main/R/doc)
 directory.
 R documentation files are provided for each function
 available in the package.
 An instructional vignette is in the
-[R/vignettes](https://github.com/WGUNDERWOOD/motifcluster/tree/master/R/vignettes)
+[R/vignettes](https://github.com/WGUNDERWOOD/motifcluster/tree/main/R/vignettes)
 directory.
 
 
@@ -100,7 +100,7 @@ directory.
 ## Python package
 
 The **motifcluster** Python package is in the
-[python](https://github.com/WGUNDERWOOD/motifcluster/tree/master/python)
+[python](https://github.com/WGUNDERWOOD/motifcluster/tree/main/python)
 directory.
 
 ### Installation
@@ -137,7 +137,7 @@ Full documentation is available at
 ## Performance
 
 The
-[performance](https://github.com/WGUNDERWOOD/motifcluster/tree/master/performance)
+[performance](https://github.com/WGUNDERWOOD/motifcluster/tree/main/performance)
 directory contains scripts and plots relating to timing
 the construction of motif adjacency matrices,
 in both R and Python.
@@ -145,5 +145,5 @@ in both R and Python.
 ## Sticker
 
 A high-resolution hexagonal sticker is available in the
-[sticker](https://github.com/WGUNDERWOOD/motifcluster/tree/master/sticker)
+[sticker](https://github.com/WGUNDERWOOD/motifcluster/tree/main/sticker)
 directory.
