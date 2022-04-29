@@ -1,4 +1,4 @@
-# motifcluster 0.2.0 (2022-04-27)
+# motifcluster 0.2.0 (2022-04-28)
 
 - Replacing LICORS dependency with ClusterR
 
