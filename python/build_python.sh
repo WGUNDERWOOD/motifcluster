@@ -29,7 +29,6 @@ python -m twine check dist/*
 # python install local
 #pip install --user dist/motifcluster-0.1.2.tar.gz
 
-
 # python upload to PyPI
 #python -m twine upload --repository testpypi dist/*
 #python -m twine upload dist/*

@@ -1,3 +1,7 @@
+# motifcluster 0.2.0 (2022-04-28)
+
+- Bump version to keep track with R
+
 # motifcluster 0.1.2 (2021-11-11)
 
 - Adding license file to PyPI distribution

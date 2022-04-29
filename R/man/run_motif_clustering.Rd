@@ -71,6 +71,6 @@ using a specified motif, motif type, weighting scheme,
 embedding dimension, number of clusters and Laplacian type.
 }
 \examples{
-adj_mat <- matrix(c(1:9), nrow = 3)
+adj_mat <- matrix(c(1:16), nrow = 4)
 run_motif_clustering(adj_mat, "M1", "func")
 }
