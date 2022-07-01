@@ -53,7 +53,7 @@ cov: .setup.R
 
 lint: .setup.R
 	@cat .setup.R > .temp.R
-	@echo "lint_package(linters = with_defaults( \
+	@echo "lint_package(linters = linters_with_defaults( \
 		object_name_linter = NULL, \
 		object_usage_linter = NULL, \
 		cyclocomp_linter = NULL))" >> .temp.R

@@ -24,6 +24,7 @@ set.seed(200401293)
 old_options <- options()
 options(digits = 2)
 library(mclust)
+# nolint start: line_length_linter
 ```
 
 
@@ -35,8 +36,10 @@ library(mclust)
 This vignette demonstrates how to use the R package `motifcluster`.
 These methods are detailed in the paper
 *Motif-Based Spectral Clustering of Weighted Directed Networks*,
-which is available at [`arXiv:2004.01293`](arxivpaper) [@UnderwoodElliottCucuringu_2020_Motifs].
-The functionality of the `motifcluster` package falls into a few main categories:
+which is available at [`arXiv:2004.01293`](arxivpaper)
+[@UnderwoodElliottCucuringu_2020_Motifs].
+The functionality of the `motifcluster` package
+falls into a few main categories:
 
 - Building motif adjacency matrices
 - Sampling random weighted directed networks
@@ -245,8 +248,8 @@ always be zero,
 since we only consider networks without self-loops.
 
 ```{r}
-block_sizes = c(5, 3)
-connection_matrix = matrix(c(
+block_sizes <- c(5, 3)
+connection_matrix <- matrix(c(
   0.9, 0.2,
   0.2, 0.9
 ), nrow = 2, byrow = TRUE)
@@ -269,7 +272,7 @@ where we simply multiply each block of the adjacency matrix by a constant.
 
 
 ```{r}
-weight_matrix = matrix(c(
+weight_matrix <- matrix(c(
   5, 2,
   2, 5
 ), nrow = 2, byrow = TRUE)
@@ -287,7 +290,8 @@ Note that in this scheme it is possible for the weight to be zero,
 removing an edge which might have otherwise been present.
 
 ```{r}
-sample_dsbm(block_sizes, connection_matrix, weight_matrix, sample_weight_type = "poisson")
+sample_dsbm(block_sizes, connection_matrix, weight_matrix,
+  sample_weight_type = "poisson")
 ```
 
 ## Bipartite stochastic block models
@@ -306,9 +310,9 @@ destination vertices,
 and a weaker connection probability of 0.2 to the second.
 
 ```{r}
-source_block_sizes = c(2)
-destination_block_sizes = c(3, 2)
-bipartite_connection_matrix = matrix(c(0.9, 0.2), nrow = 1)
+source_block_sizes <- c(2)
+destination_block_sizes <- c(3, 2)
+bipartite_connection_matrix <- matrix(c(0.9, 0.2), nrow = 1)
 sample_bsbm(source_block_sizes, destination_block_sizes, bipartite_connection_matrix)
 ```
 
@@ -319,10 +323,9 @@ we can also use constant-weighted or Poisson-weighted edges for bipartite
 stochastic block models.
 
 ```{r}
-bipartite_weight_matrix = matrix(c(7, 2), nrow = 1)
-sample_bsbm(source_block_sizes, destination_block_sizes,
-  bipartite_connection_matrix, bipartite_weight_matrix,
-  sample_weight_type = "poisson")
+bipartite_weight_matrix <- matrix(c(7, 2), nrow = 1)
+sample_bsbm(source_block_sizes, destination_block_sizes, bipartite_connection_matrix,
+  bipartite_weight_matrix, sample_weight_type = "poisson")
 ```
 
 
@@ -384,7 +387,7 @@ Below we use the random-walk Laplacian,
 and embedding dimension $l=2$:
 
 ```{r}
-spectrum = run_laplace_embedding(G2, num_eigs = 2, type_lap = "rw")
+spectrum <- run_laplace_embedding(G2, num_eigs = 2, type_lap = "rw")
 spectrum$vals
 spectrum$vects
 ```
@@ -418,7 +421,7 @@ We observe this with the network $\mathcal{G}_3$,
 in which only three of the four vertices are embedded.
 
 ```{r}
-spectrum = run_motif_embedding(G3, motif_name = "M1", motif_type = "func",
+spectrum <- run_motif_embedding(G3, motif_name = "M1", motif_type = "func",
   mam_weight_type = "unweighted", mam_method = "sparse", num_eigs = 2,
   restrict = TRUE, type_lap = "rw")
 spectrum$vals
@@ -441,14 +444,14 @@ demonstrating all of the methods outlined in this vignette.
 Let's use a DSBM with three blocks of 10 nodes each.
 
 ```{r}
-block_sizes = rep(10, 3)
+block_sizes <- rep(10, 3)
 ```
 
 We use strong connections of 0.8 within the blocks,
 and weaker connections of 0.3 between the blocks.
 
 ```{r}
-connection_matrix = matrix(c(
+connection_matrix <- matrix(c(
   0.8, 0.2, 0.2,
   0.2, 0.8, 0.2,
   0.2, 0.2, 0.8
@@ -461,13 +464,13 @@ and the between-block edges to be Poisson-weighted with smaller
 mean 10.
 
 ```{r}
-weight_matrix = matrix(c(
+weight_matrix <- matrix(c(
   20, 10, 10,
   10, 20, 10,
   10, 10, 20
 ), nrow = 3)
 
-G4 = sample_dsbm(block_sizes, connection_matrix, weight_matrix,
+G4 <- sample_dsbm(block_sizes, connection_matrix, weight_matrix,
   sample_weight_type = "poisson")
 ```
 
@@ -482,9 +485,9 @@ first four eigenvalues and eigenvectors.
 Finally we extract three clusters.
 
 ```{r}
-motif_cluster = run_motif_clustering(G4, motif_name = "M1", motif_type = "func",
-  mam_weight_type = "mean", mam_method = "sparse", type_lap = "rw", num_eigs = 4,
-  num_clusts = 3
+motif_cluster <- run_motif_clustering(G4, motif_name = "M1", motif_type = "func",
+  mam_weight_type = "mean", mam_method = "sparse", type_lap = "rw",
+  num_eigs = 4, num_clusts = 3
 )
 ```
 
@@ -493,7 +496,7 @@ labels using the adjusted Rand index
 from the `mclust` package:
 
 ```{r}
-truth = c(rep(1, 10), rep(2, 10), rep(3, 10))
+truth <- c(rep(1, 10), rep(2, 10), rep(3, 10))
 mclust::adjustedRandIndex(motif_cluster$clusts, truth)
 ```
 
@@ -510,4 +513,5 @@ with a value of one indicating perfect agreement.
 
 ```{r, include = FALSE}
 options(old_options)
+#nolint end
 ```
