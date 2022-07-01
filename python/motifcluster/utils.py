@@ -152,7 +152,7 @@ def get_largest_component(adj_mat, gr_method):
 
   else:
 
-    if isinstance(adj_mat, np.ndarray):
+    if isinstance(adj_mat, np.ndarray): # pylint: disable=else-if-used
       gr = nx.from_numpy_array(1 * np.array(adj_mat > 0))
 
     else:
@@ -199,8 +199,10 @@ def _random_sparse_matrix(m, n, p, sample_weight_type="constant", w=1):
 
   Parameters
   ----------
-  m, n : int
-    Dimension of matrix to build is `(m, n)`.
+  m : int
+    Size of first dimension of matrix.
+  n : int
+    Size of second dimension of matrix.
   p : float
     Probability that each entry is non-zero (before weighting).
   sample_weight_type : str

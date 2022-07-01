@@ -226,6 +226,8 @@ def mam_M1(adj_mat, motif_type, mam_weight_type, mam_method):
     Type of motif adjacency matrix to build.
   mam_weight_type : str
     The weighting scheme to use. One of `"unweighted"`, `"mean"` or `"product"`.
+  mam_method : str
+    Which formulation to use. One of `"dense"` or `"sparse"`.
 
   Returns
   -------
@@ -312,7 +314,7 @@ def mam_M1(adj_mat, motif_type, mam_weight_type, mam_method):
   return motif_adj_mat
 
 
-def mam_M2(adj_mat, motif_type, mam_weight_type, mam_method):
+def mam_M2(adj_mat, motif_type, mam_weight_type, mam_method): # pylint: disable=too-many-statements
 
   """
   Perform the motif adjacency matrix calculations for motif M2.
@@ -325,6 +327,8 @@ def mam_M2(adj_mat, motif_type, mam_weight_type, mam_method):
     Type of motif adjacency matrix to build.
   mam_weight_type : str
     The weighting scheme to use. One of `"unweighted"`, `"mean"` or `"product"`.
+  mam_method : str
+    Which formulation to use. One of `"dense"` or `"sparse"`.
 
   Returns
   -------
@@ -460,6 +464,8 @@ def mam_M3(adj_mat, motif_type, mam_weight_type, mam_method):
     Type of motif adjacency matrix to build.
   mam_weight_type : str
     The weighting scheme to use. One of `"unweighted"`, `"mean"` or `"product"`.
+  mam_method : str
+    Which formulation to use. One of `"dense"` or `"sparse"`.
 
   Returns
   -------
@@ -577,6 +583,8 @@ def mam_M4(adj_mat, mam_weight_type, mam_method):
     Adjacency matrix from which to build the motif adjacency matrix.
   mam_weight_type : str
     The weighting scheme to use. One of `"unweighted"`, `"mean"` or `"product"`.
+  mam_method : str
+    Which formulation to use. One of `"dense"` or `"sparse"`.
 
   Returns
   -------
@@ -628,6 +636,8 @@ def mam_M5(adj_mat, motif_type, mam_weight_type, mam_method):
     Type of motif adjacency matrix to build.
   mam_weight_type : str
     The weighting scheme to use. One of `"unweighted"`, `"mean"` or `"product"`.
+  mam_method : str
+    Which formulation to use. One of `"dense"` or `"sparse"`.
 
   Returns
   -------
@@ -745,6 +755,8 @@ def mam_M6(adj_mat, motif_type, mam_weight_type, mam_method):
     Type of motif adjacency matrix to build.
   mam_weight_type : str
     The weighting scheme to use. One of `"unweighted"`, `"mean"` or `"product"`.
+  mam_method : str
+    Which formulation to use. One of `"dense"` or `"sparse"`.
 
   Returns
   -------
@@ -872,6 +884,8 @@ def mam_M7(adj_mat, motif_type, mam_weight_type, mam_method):
     Type of motif adjacency matrix to build.
   mam_weight_type : str
     The weighting scheme to use. One of `"unweighted"`, `"mean"` or `"product"`.
+  mam_method : str
+    Which formulation to use. One of `"dense"` or `"sparse"`.
 
   Returns
   -------
@@ -1364,7 +1378,7 @@ def mam_M10(adj_mat, motif_type, mam_weight_type, mam_method):
   return motif_adj_mat
 
 
-def mam_M11(adj_mat, motif_type, mam_weight_type, mam_method):
+def mam_M11(adj_mat, motif_type, mam_weight_type, mam_method): # pylint: disable=too-many-statements
 
   """
   Perform the motif adjacency matrix calculations for motif M11.
@@ -1507,7 +1521,7 @@ def mam_M11(adj_mat, motif_type, mam_weight_type, mam_method):
   return motif_adj_mat
 
 
-def mam_M12(adj_mat, motif_type, mam_weight_type, mam_method):
+def mam_M12(adj_mat, motif_type, mam_weight_type, mam_method): # pylint: disable=too-many-statements
 
   """
   Perform the motif adjacency matrix calculations for motif M12.

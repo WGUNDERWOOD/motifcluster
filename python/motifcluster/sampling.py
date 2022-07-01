@@ -123,13 +123,13 @@ def sample_bsbm(source_block_sizes, dest_block_sizes,
   bipartite_connection_matrix : matrix
     A matrix containing the source block to destination block
     connection probabilities.
-  sample_weight_type : str
-    The type of weighting scheme.
-    One of `"unweighted"`, `"constant"` or `"poisson"`.
-  weight_matrix : matrix
+  bipartite_weight_matrix : matrix
     A matrix containing the source block to destination block weight
     parameters. Unused for `sample_weight_type = "constant"`.
     Defaults to `None`.
+  sample_weight_type : str
+    The type of weighting scheme.
+    One of `"unweighted"`, `"constant"` or `"poisson"`.
 
   Returns
   -------
