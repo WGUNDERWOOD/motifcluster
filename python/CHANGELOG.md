@@ -1,3 +1,10 @@
+# motifcluster 0.2.1 (2022-06-01)
+
+- Update pylintrc
+- Added makefiles
+- Fixed Sphinx HTML warning
+- Added missing documentation
+
 # motifcluster 0.2.0 (2022-04-28)
 
 - Bump version to keep track with R

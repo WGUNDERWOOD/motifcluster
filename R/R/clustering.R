@@ -14,7 +14,7 @@
 #' \itemize{
 #'   \item \code{cluster}: A vector of integers from 1:k indicating the
 #'     cluster to which each point is allocated.
-#'   \item \code{centers}: A matrix of cluster centres.
+#'   \item \code{centers}: A matrix of cluster centers.
 #'   \item \code{totss}: The total sum of squares.
 #'   \item \code{withinss}: Vector of within-cluster sum of squares,
 #'     one component per cluster.
