@@ -15,6 +15,9 @@ R/prof/prof.html
 motifcluster.Rcheck
 motifcluster*.tar.gz
 R/cobertura.xml
+R/.setup.R
+R/.temp.R
+R/man/
 
 # python package
 __pycache__
