@@ -27,8 +27,11 @@ check: setup
 
 man: setup
 	@cat .setup.R > .temp.R
+	@mkdir -p doc/
 	@echo "build_manual(path = './doc')" >> .temp.R
 	@Rscript .temp.R
+	@echo
+	@for f in doc/motifcluster_0.2.0.pdf ; do optpdf $$f; optpdf $$f ; done
 	@rm .setup.R .temp.R
 
 vignette: setup
@@ -36,6 +39,8 @@ vignette: setup
 	@echo "build_vignettes()" >> .temp.R
 	@Rscript .temp.R
 	@rm doc/motifcluster_vignette.R doc/motifcluster_vignette.Rmd
+	@optpdf doc/motifcluster_vignette.pdf
+	@optpdf doc/motifcluster_vignette.pdf
 	@mv doc/motifcluster_vignette.pdf vignettes/
 	@rm .gitignore
 	@rm .setup.R .temp.R

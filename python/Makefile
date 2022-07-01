@@ -17,6 +17,8 @@ tutorial:
 	@cd tutorial && latexmk -pdf -quiet -rc-report- motifcluster_tutorial.tex
 	@cd tutorial && pythontex motifcluster_tutorial.tex
 	@cd tutorial && latexmk -pdf -quiet -rc-report- motifcluster_tutorial.tex
+	@optpdf tutorial/motifcluster_tutorial.pdf
+	@optpdf tutorial/motifcluster_tutorial.pdf
 
 dist:
 	@python setup.py sdist bdist_wheel
