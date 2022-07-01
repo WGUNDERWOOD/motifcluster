@@ -38,7 +38,7 @@ man: .setup.R doc
 	@echo "build_manual(path = './doc')" >> .temp.R
 	@Rscript .temp.R
 	@echo
-	@for f in doc/motifcluster_0.2.0.pdf ; do optpdf $$f; optpdf $$f ; done
+	@for f in doc/motifcluster_*.pdf ; do optpdf $$f; optpdf $$f ; done
 
 vignette: .setup.R
 	@echo -e "\e[0;35m\033[1mMaking R vignette...\e[0;30m\033[0m"
