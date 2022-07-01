@@ -2,6 +2,10 @@ from motifcluster import indicators as mcin
 
 import numpy as np
 from scipy import sparse
+import warnings
+import pytest
+
+@pytest.mark.filterwarnings("ignore:.*Comparing a sparse matrix with 0 using == is inefficient.*")
 
 def test_indicators():
 
