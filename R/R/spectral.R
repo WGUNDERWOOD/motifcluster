@@ -22,8 +22,7 @@ get_first_eigs <- function(some_mat, num_eigs) {
   # get spectrum for large num_eigs
   if (num_eigs >= nrow(some_mat) - 1) {
     spectrum_eigs <- eigen(some_mat)
-  }
-  else {
+  } else {
     spectrum_eigs <- eigs(some_mat, num_eigs, which = "SM")
   }
 
@@ -78,7 +77,7 @@ build_laplacian <- function(adj_mat, type_lap = c("comb", "rw")) {
   }
 
   # random-walk Laplacian
-  else if (type_lap == "rw") {
+  if (type_lap == "rw") {
 
     if (!all(degs_adj_mat != 0)) {
       stop("row sums of adj_mat must be non-zero")
@@ -201,9 +200,7 @@ run_motif_embedding <- function(adj_mat, motif_name,
 
     # Laplace embedding restricted
     spect <- run_laplace_embedding(motif_adj_mat_comps, num_eigs, type_lap)
-  }
-
-  else {
+  } else {
     comps <- NULL
     adj_mat_comps <- NULL
     motif_adj_mat_comps <- NULL

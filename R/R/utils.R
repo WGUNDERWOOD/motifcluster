@@ -136,26 +136,20 @@ random_sparse_matrix <- function(m, n, p, sample_weight_type = "constant",
   # values to go in matrix
   if (sample_weight_type == "constant") {
     vals <- rep(w, k)
-  }
-
-  else if (sample_weight_type == "poisson") {
+  } else if (sample_weight_type == "poisson") {
     vals <- rpois(k, w)
-  }
-
-  else {
+  } else {
     vals <- rep(1, k)
   }
 
-  # create small matrix
   if (mn <= 1e4) {
+    # create small matrix
     ans <- rep(0, mn)
     ans[inds] <- vals
     ans <- matrix(ans, nrow = m, ncol = n)
     ans <- drop0(ans)
-  }
-
-  # create large matrix
-  else {
+  } else {
+    # create large matrix
     ans <- Matrix::sparseMatrix(inds, zs, x = vals, dims = c(mn, 1))
     dim(ans) <- c(m, n)
   }

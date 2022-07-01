@@ -61,8 +61,7 @@ sample_dsbm <- function(block_sizes, connection_matrix,
       # generate block
       if (sample_weight_type == "unweighted") {
         w <- 1
-      }
-      else {
+      } else {
         w <- weight_matrix[i, j]
       }
 
@@ -146,8 +145,7 @@ sample_bsbm <- function(source_block_sizes, dest_block_sizes,
   if (!is.null(bipartite_weight_matrix)) {
     weight_matrix <- cbind(zeros_ss, bipartite_weight_matrix)
     weight_matrix <- rbind(weight_matrix, zeros_d)
-  }
-  else{
+  } else {
     weight_matrix <- NULL
   }
 

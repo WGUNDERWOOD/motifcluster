@@ -21,7 +21,7 @@ knitr::opts_chunk$set(
   comment = "#> "
 )
 set.seed(200401293)
-old_options = options()
+old_options <- options()
 options(digits = 2)
 library(mclust)
 ```
