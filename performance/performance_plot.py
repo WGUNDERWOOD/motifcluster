@@ -15,8 +15,6 @@ rc('font', **{'family': 'serif', 'serif': ['CMU Serif']})
 rc('font', **{'family': 'serif', 'serif': ['Computer Modern']})
 ###########################################
 
-# TODO add for R code too
-
 ks = [10, 100]
 langs = ["python", "r"]
 graph_types = ["erdos_renyi", "barabasi_albert"]
@@ -61,9 +59,9 @@ for graph_type in graph_types:
       if lang == "python":
         if graph_type == "erdos_renyi":
           if k == 10:
-            pylab.title('Python timing results for the sparser regime $\mathrm{ER}(n,\\frac{' + str(k) + '}{n})$',fontsize=18)
+            pylab.title('Python timing results for the sparser regime $\mathrm{ER}(n,' + str(k) + '/n)$',fontsize=18)
           elif k == 100:
-            pylab.title('Python timing results for the less sparse regime $\mathrm{ER}(n,\\frac{' + str(k) + '}{n})$',fontsize=18)
+            pylab.title('Python timing results for the less sparse regime $\mathrm{ER}(n,' + str(k) + '/n)$',fontsize=18)
         elif graph_type == "barabasi_albert":
           if k == 10:
             pylab.title('Python timing results for the sparser regime $\mathrm{BA}(n,' + str(k) + ')$',fontsize=18)
@@ -73,9 +71,9 @@ for graph_type in graph_types:
       if lang == "r":
         if graph_type == "erdos_renyi":
           if k == 10:
-            pylab.title('R timing results for the sparser regime $\mathrm{ER}(n,\\frac{' + str(k) + '}{n})$',fontsize=18)
+            pylab.title('R timing results for the sparser regime $\mathrm{ER}(n,' + str(k) + '/n)$',fontsize=18)
           elif k == 100:
-            pylab.title('R timing results for the less sparse regime $\mathrm{ER}(n,\\frac{' + str(k) + '}{n})$',fontsize=18)
+            pylab.title('R timing results for the less sparse regime $\mathrm{ER}(n,' + str(k) + '/n)$',fontsize=18)
         elif graph_type == "barabasi_albert":
           if k == 10:
             pylab.title('R timing results for the sparser regime $\mathrm{BA}(n,' + str(k) + ')$',fontsize=18)

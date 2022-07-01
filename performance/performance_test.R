@@ -68,7 +68,7 @@ performance_trial = function(ns, k, motifs, method, nreps, graph_type){
 #######################################################################
 
 motifs = c('M1','M8','M11')
-nreps = 2
+nreps = 10
 
 ns= c(101, 200, 500, 1000)
 performance_trial(ns, 100, motifs, "dense", nreps, "barabasi_albert")

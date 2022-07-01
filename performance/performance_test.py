@@ -29,7 +29,7 @@ def performance_trial(ns, k, motifs, method, nreps, graph_type):
           adj_mat = mcsa.sample_dsbm(block_sizes, connection_matrix)
         elif graph_type == "barabasi_albert":
           sample_graph = nx.barabasi_albert_graph(n, k)
-          adj_mat = nx.to_scipy_sparse_matrix(sample_graph)
+          adj_mat = nx.to_scipy_sparse_array(sample_graph)
 
         if method == "dense":
           adj_mat = adj_mat.toarray()
@@ -41,14 +41,18 @@ def performance_trial(ns, k, motifs, method, nreps, graph_type):
         dt = t1 - t0
 
         # add results
-        results_dict = {"n":n, "k":k, "motif":motif, "method": method, "rep":rep, "time":dt}
-        results = results.append(results_dict, ignore_index=True)
+        results_dict = {"n":n, "k":k, "motif":motif, "method": method,
+                        "rep":rep, "time":dt}
+        results_frame = pd.Series(results_dict).to_frame().T
+        results = pd.concat([results, results_frame], ignore_index=True)
 
         print("n = ",n, ", k = ",k, ", ", motif, ", method = ", method,
-              ", rep = ", rep, ", graph type = ", graph_type, ", time = {:.3f}".format(dt), sep="")
+              ", rep = ", rep, ", graph type = ", graph_type,
+              ", time = {:.3f}".format(dt), sep="")
 
   # save results
-  results.to_csv("results/python_k" + str(k) + "_" + method + "_" + graph_type + ".csv", index=False)
+  results.to_csv("results/python_k" + str(k) + "_" + method +
+                 "_" + graph_type + ".csv", index=False)
 
   return None
 
@@ -58,7 +62,7 @@ def performance_trial(ns, k, motifs, method, nreps, graph_type):
 #######################################################################
 
 motifs = ['M1','M8','M11']
-nreps = 2
+nreps = 10
 
 ns= [101, 200, 500, 1000]
 performance_trial(ns, 100, motifs, "dense", nreps, "barabasi_albert")
