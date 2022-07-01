@@ -1,3 +1,10 @@
+# motifcluster 0.2.1
+
+Removing ClusterR dependency as gtools package is orphaned
+Fixing code style in vignette
+
+
+
 # motifcluster 0.2.0
 
 Replacing LICORS dependency with ClusterR as LICORS is unmaintained
