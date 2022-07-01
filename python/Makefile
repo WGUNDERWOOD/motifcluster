@@ -36,13 +36,12 @@ upload_pypi:
 
 clean:
 	@rm -f .coverage
-	@rm -f dist/motifcluster-*.tar.gz
-	@rm -f dist/motifcluster-*.whl
+	@rm -rf dist/
+	@rm -rf build
 	@rm -rf motifcluster.egg-info/
 	@rm -rf doc/_build/
 	@rm -rf motifcluster/__pycache__/
 	@rm -rf tests/__pycache__/
 	@rm -rf prof/
 	@rm -rf .pytest_cache/
-	@cd tutorial && texclean && rm -f motifcluster_tutorial.pdf
-	@cd tutorial && rm -rf pythontex-files-motifcluster_tutorial/
+	@cd tutorial && texclean && rm -rf pythontex-files-motifcluster_tutorial/
