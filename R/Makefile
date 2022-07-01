@@ -14,21 +14,25 @@ all: doc test check man vignette cov lint
 	@echo "library(filesstrings);" >> .setup.R
 
 doc: .setup.R
+	@echo -e "\e[0;35m\033[1mMaking R documentation...\e[0;30m\033[0m"
 	@cat .setup.R > .temp.R
 	@echo "document()" >> .temp.R
 	@Rscript .temp.R
 
 check: .setup.R
+	@echo -e "\e[0;35m\033[1mChecking R package...\e[0;30m\033[0m"
 	@cat .setup.R > .temp.R
 	@echo "check()" >> .temp.R
 	@Rscript .temp.R
 
 test: .setup.R
+	@echo -e "\e[0;35m\033[1mTesting R package...\e[0;30m\033[0m"
 	@cat .setup.R > .temp.R
 	@echo "test()" >> .temp.R
 	@Rscript .temp.R
 
 man: .setup.R doc
+	@echo -e "\e[0;35m\033[1mMaking R manual...\e[0;30m\033[0m"
 	@cat .setup.R > .temp.R
 	@mkdir -p doc/
 	@echo "build_manual(path = './doc')" >> .temp.R
@@ -37,6 +41,7 @@ man: .setup.R doc
 	@for f in doc/motifcluster_0.2.0.pdf ; do optpdf $$f; optpdf $$f ; done
 
 vignette: .setup.R
+	@echo -e "\e[0;35m\033[1mMaking R vignette...\e[0;30m\033[0m"
 	@cat .setup.R > .temp.R
 	@echo "build_vignettes()" >> .temp.R
 	@Rscript .temp.R
@@ -47,11 +52,13 @@ vignette: .setup.R
 	@rm .gitignore
 
 cov: .setup.R
+	@echo -e "\e[0;35m\033[1mChecking R coverage...\e[0;30m\033[0m"
 	@cat .setup.R > .temp.R
 	@echo "cov <- package_coverage(); zero_coverage(cov)" >> .temp.R
 	@Rscript .temp.R
 
 lint: .setup.R
+	@echo -e "\e[0;35m\033[1mLinting R package...\e[0;30m\033[0m"
 	@cat .setup.R > .temp.R
 	@echo "lint_package(linters = linters_with_defaults( \
 		object_name_linter = NULL, \
@@ -60,16 +67,19 @@ lint: .setup.R
 	@Rscript .temp.R
 
 install: .setup.R
+	@echo -e "\e[0;35m\033[1mInstalling R package...\e[0;30m\033[0m"
 	@cat .setup.R > .temp.R
 	@echo "install()" >> .temp.R
 	@Rscript .temp.R
 
 release: .setup.R
+	@echo -e "\e[0;35m\033[1mReleasing R package...\e[0;30m\033[0m"
 	@cat .setup.R > .temp.R
 	@echo "release()" >> .temp.R
 	@R -f .temp.R
 
 clean:
+	@echo -e "\e[0;35m\033[1mCleaning up R package...\e[0;30m\033[0m"
 	@rm -f .setup.R .temp.R
 	@rm -f .gitignore
 	@rm -rf doc/
