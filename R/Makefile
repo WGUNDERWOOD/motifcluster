@@ -13,8 +13,8 @@ all: doc test check man vignette cov lint
 	@echo "library(covr);" >> .setup.R
 	@echo "library(filesstrings);" >> .setup.R
 
-doc: .setup.R
-	@echo -e "\e[0;35m\033[1mMaking R documentation...\e[0;30m\033[0m"
+man: .setup.R
+	@echo -e "\e[0;35m\033[1mMaking R man pages...\e[0;30m\033[0m"
 	@cat .setup.R > .temp.R
 	@echo "document()" >> .temp.R
 	@Rscript .temp.R
@@ -31,8 +31,8 @@ test: .setup.R
 	@echo "test()" >> .temp.R
 	@Rscript .temp.R
 
-man: .setup.R doc
-	@echo -e "\e[0;35m\033[1mMaking R manual...\e[0;30m\033[0m"
+doc: .setup.R man
+	@echo -e "\e[0;35m\033[1mMaking R documentation...\e[0;30m\033[0m"
 	@cat .setup.R > .temp.R
 	@mkdir -p doc/
 	@echo "build_manual(path = './doc')" >> .temp.R
@@ -82,6 +82,5 @@ clean:
 	@echo -e "\e[0;35m\033[1mCleaning up R package...\e[0;30m\033[0m"
 	@rm -f .setup.R .temp.R
 	@rm -f .gitignore
-	@rm -rf doc/
 	@rm -rf man/
 	@rm -rf Meta/

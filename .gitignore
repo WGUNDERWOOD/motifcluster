@@ -5,7 +5,6 @@ auto/
 
 # r package
 R/inst
-R/doc/
 R.Rcheck/
 R/Meta/
 R/.gitignore
