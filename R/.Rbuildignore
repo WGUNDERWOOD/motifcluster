@@ -1,8 +1,10 @@
 ^motifcluster.*\.pdf$
 ^doc$
 ^Meta$
-^build_R.R$
+^.setup.R$
 ^perf$
 ^prof$
 ^cran-comments.md$
 ^LICENSE$
+^Makefile$
+^.temp.R$
