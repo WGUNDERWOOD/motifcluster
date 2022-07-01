@@ -1,3 +1,98 @@
+#' kmeans++ clustering
+#'
+#' Use the kmeans++ algorithm to cluster points
+#' into \code{k} clusters, as implemented in the
+#' deprecated LICORS package, using the
+#' built-in function \link[stats]{kmeans}.
+#' @param data An \eqn{N \times d} matrix, where there are \eqn{N} samples
+#' in dimension \eqn{d}.
+#' @param k The number of clusters.
+#' @param iter.max The maximum number of iterations.
+#' @param nstart The number of restarts.
+#' @param ... Additional arguments passed to \code{\link[stats]{kmeans}}.
+#' @return A list with 9 entries:
+#' \itemize{
+#'   \item \code{cluster}: A vector of integers from 1:k indicating the
+#'     cluster to which each point is allocated.
+#'   \item \code{centers}: A matrix of cluster centres.
+#'   \item \code{totss}: The total sum of squares.
+#'   \item \code{withinss}: Vector of within-cluster sum of squares,
+#'     one component per cluster.
+#'   \item \code{tot.withinss}: Total within-cluster sum of squares,
+#'     i.e.sum(withinss).
+#'   \item \code{betweenss}: The between-cluster sum of squares,
+#'     i.e.totss-tot.withinss.
+#'   \item \code{size}: The number of points in each cluster.
+#'   \item \code{iter}: The number of (outer) iterations.
+#'   \item \code{ifault}: An integer indicator of a possible algorithm problem.
+#'   \item \code{initial.centers}: The initial centers used.
+#' }
+#' @importFrom stats kmeans cov
+#' @examples
+#' set.seed(1984)
+#' n <- 100
+#' X = matrix(rnorm(n), ncol = 2)
+#' Y = matrix(runif(length(X)*2, -1, 1), ncol = ncol(X))
+#' Z = rbind(X, Y)
+#' cluster_Z = kmeanspp(Z, k = 5)
+#' @seealso \code{\link[stats]{kmeans}}
+#' @references
+#' Arthur, D. and S. Vassilvitskii (2007).
+#' ``k-means++: The advantages of careful seeding.''
+#' In H. Gabow (Ed.), Proceedings of the 18th Annual ACM-SIAM
+#' Symposium on Discrete Algorithms
+#' [SODA07], Philadelphia, pp. 1027-1035.
+#' Society for Industrial and Applied Mathematics.
+#' @export
+
+kmeanspp <- function(data, k = 2, iter.max = 100, nstart = 10, ...) {
+
+  kk <- k
+
+  if (length(dim(data)) == 0) {
+    data <- matrix(data, ncol = 1)
+  } else {
+    data <- cbind(data)
+  }
+
+  num.samples <- nrow(data)
+  ndim <- ncol(data)
+
+  data.avg <- colMeans(data)
+  data.cov <- cov(data)
+
+  out <- list()
+  out$tot.withinss <- Inf
+  for (restart in seq_len(nstart)) {
+    center_ids <- rep(0, length = kk)
+    center_ids[1:2] <- sample.int(num.samples, 1)
+    for (ii in 2:kk) { # the plus-plus step in kmeans
+      if (ndim == 1) {
+        dists <- apply(cbind(data[center_ids, ]), 1,
+                       function(center) {
+                         rowSums((data - center)^2)
+                       })
+      } else {
+        dists <- apply(data[center_ids, ], 1,
+                       function(center) {
+                         rowSums((data - center)^2)
+                       })
+      }
+      probs <- apply(dists, 1, min)
+      probs[center_ids] <- 0
+      center_ids[ii] <- sample.int(num.samples, 1, prob = probs)
+    }
+
+    tmp.out <- kmeans(data, centers = data[center_ids, ],
+                      iter.max = iter.max, ...)
+    tmp.out$initial.centers <- data[center_ids, ]
+    if (tmp.out$tot.withinss < out$tot.withinss) {
+      out <- tmp.out
+    }
+  }
+  invisible(out)
+}
+
 #' Get cluster assignments from spectrum using k-means++
 #'
 #' Get a vector of cluster assignments from a spectrum,
@@ -7,15 +102,13 @@
 #' @param num_clusts The number of clusters to find.
 #' @return A length-nrow(spectrum$vects) vector of integers
 #' from 1 to num_clusts, representing cluster assignments.
-#' @importFrom ClusterR KMeans_rcpp
 #' @keywords internal
 
 cluster_spectrum <- function(spectrum, num_clusts) {
 
   vects <- spectrum$vects[, -1, drop = FALSE]
-  kmeans_plus_plus <- KMeans_rcpp(vects, clusters = num_clusts,
-                                  initializer = "kmeans++", num_init = 10)
-  cluster_assigns <- kmeans_plus_plus$clusters
+  kmeans_plus_plus <- kmeanspp(vects, k = num_clusts)
+  cluster_assigns <- kmeans_plus_plus$cluster
 
   return(cluster_assigns)
 }

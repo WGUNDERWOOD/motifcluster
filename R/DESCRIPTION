@@ -21,7 +21,6 @@ LazyData: true
 RoxygenNote: 7.1.2
 Depends: R (>= 3.6.0)
 Imports:
-    ClusterR (>= 1.2.6),
     igraph (>= 1.2.5),
     Matrix (>= 1.2),
     RSpectra (>= 0.16.0)

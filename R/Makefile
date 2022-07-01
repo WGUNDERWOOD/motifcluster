@@ -1,8 +1,8 @@
 # Makefile: R
 
-all: doc check man vignette cov lint
+all: doc test check man vignette cov lint
 
-.PHONY: doc check man vignette cov lint install release clean
+.PHONY: doc test check man vignette cov lint install release clean
 
 .setup.R:
 	@echo ".libPaths('~/R_packages');" > .setup.R
@@ -23,7 +23,12 @@ check: .setup.R
 	@echo "check()" >> .temp.R
 	@Rscript .temp.R
 
-man: .setup.R
+test: .setup.R
+	@cat .setup.R > .temp.R
+	@echo "test()" >> .temp.R
+	@Rscript .temp.R
+
+man: .setup.R doc
 	@cat .setup.R > .temp.R
 	@mkdir -p doc/
 	@echo "build_manual(path = './doc')" >> .temp.R
