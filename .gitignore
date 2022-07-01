@@ -1,5 +1,4 @@
 # private files
-todo.org
 
 # editor files
 auto/
@@ -36,7 +35,8 @@ profile.png
 performance/plots/
 
 # sticker
-sticker/
+sticker/sticker.pdf
+sticker/sticker.png
 
 # logs
 build.log
