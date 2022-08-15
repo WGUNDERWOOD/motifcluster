@@ -1,4 +1,4 @@
-# motifcluster 0.2.2 (TODO)
+# motifcluster 0.2.2 (2022-08-15)
 
 - Bump version to keep track with R
 

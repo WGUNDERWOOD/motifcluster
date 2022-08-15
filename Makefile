@@ -32,7 +32,7 @@ sticker:
 
 todo:
 	@echo -e "\e[0;35m\033[1mLooking for todo items...\e[0;30m\033[0m"
-	@rg -g "!Makefile" TODO
+	@! rg -g "!Makefile" TODO
 
 clean:
 	@echo -e "\e[0;35m\033[1mCleaning up...\e[0;30m\033[0m"
