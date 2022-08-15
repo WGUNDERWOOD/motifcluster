@@ -1,6 +1,6 @@
-all: python R performance sticker
+all: python R performance sticker todo
 
-.PHONY: python R performance sticker clean
+.PHONY: python R performance sticker todo clean
 
 python:
 	@echo -e "\e[0;35m\033[1mMaking python package...\e[0;30m\033[0m"
@@ -29,6 +29,10 @@ sticker:
 	@cd sticker && convert hex_sticker.png -resize 150 hex_sticker_small.png
 	@cd sticker && optipng -o3 hex_sticker.png
 	@cd sticker && optipng -o3 hex_sticker_small.png
+
+todo:
+	@echo -e "\e[0;35m\033[1mLooking for todo items...\e[0;30m\033[0m"
+	@rg -g "!Makefile" TODO
 
 clean:
 	@echo -e "\e[0;35m\033[1mCleaning up...\e[0;30m\033[0m"
