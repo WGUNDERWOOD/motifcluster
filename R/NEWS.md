@@ -1,3 +1,7 @@
+# motifcluster 0.2.2 (TODO)
+
+- Updating tests for compatability with forthcoming Matrix 1.4-2 package
+
 # motifcluster 0.2.1 (2022-07-01)
 
 - Removing ClusterR dependency

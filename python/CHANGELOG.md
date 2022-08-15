@@ -1,3 +1,7 @@
+# motifcluster 0.2.2 (TODO)
+
+- Bump version to keep track with R
+
 # motifcluster 0.2.1 (2022-06-01)
 
 - Update pylintrc
