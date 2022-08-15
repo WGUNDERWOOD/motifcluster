@@ -278,10 +278,10 @@ test_that("build_motif_adjacency_matrix returns correct
     mam_sparsematrix_sparsemethod <- build_motif_adjacency_matrix(
       adj_mat_sparse, motifs[i], "func", "unweighted", "sparse")
 
-    expect_equal(mam_densematrix_densemethod, ans[[motifs[i]]])
-    expect_equal(mam_sparsematrix_densemethod, ans[[motifs[i]]])
-    expect_equal(mam_densematrix_sparsemethod, ans[[motifs[i]]])
-    expect_equal(mam_sparsematrix_sparsemethod, ans[[motifs[i]]])
+    expect_true(all(mam_densematrix_densemethod - ans[[motifs[i]]] == 0))
+    expect_true(all(mam_sparsematrix_densemethod - ans[[motifs[i]]] == 0))
+    expect_true(all(mam_densematrix_sparsemethod - ans[[motifs[i]]] == 0))
+    expect_true(all(mam_sparsematrix_sparsemethod - ans[[motifs[i]]] == 0))
   }
 
 })
@@ -564,10 +564,10 @@ test_that("build_motif_adjacency_matrix returns correct
     mam_sparsematrix_sparsemethod <- build_motif_adjacency_matrix(
       adj_mat_sparse, motifs[i], "struc", "unweighted", "sparse")
 
-    expect_equal(mam_densematrix_densemethod, ans[[motifs[i]]])
-    expect_equal(mam_sparsematrix_densemethod, ans[[motifs[i]]])
-    expect_equal(mam_densematrix_sparsemethod, ans[[motifs[i]]])
-    expect_equal(mam_sparsematrix_sparsemethod, ans[[motifs[i]]])
+    expect_true(all(mam_densematrix_densemethod - ans[[motifs[i]]] == 0))
+    expect_true(all(mam_sparsematrix_densemethod - ans[[motifs[i]]] == 0))
+    expect_true(all(mam_densematrix_sparsemethod - ans[[motifs[i]]] == 0))
+    expect_true(all(mam_sparsematrix_sparsemethod - ans[[motifs[i]]] == 0))
   }
 
 })
@@ -850,10 +850,10 @@ test_that("build_motif_adjacency_matrix returns correct
     mam_sparsematrix_sparsemethod <- build_motif_adjacency_matrix(
       adj_mat_sparse, motifs[i], "func", "mean", "sparse")
 
-    expect_equal(mam_densematrix_densemethod, ans[[motifs[i]]])
-    expect_equal(mam_sparsematrix_densemethod, ans[[motifs[i]]])
-    expect_equal(mam_densematrix_sparsemethod, ans[[motifs[i]]])
-    expect_equal(mam_sparsematrix_sparsemethod, ans[[motifs[i]]])
+    expect_true(all(mam_densematrix_densemethod - ans[[motifs[i]]] == 0))
+    expect_true(all(mam_sparsematrix_densemethod - ans[[motifs[i]]] == 0))
+    expect_true(all(mam_densematrix_sparsemethod - ans[[motifs[i]]] == 0))
+    expect_true(all(mam_sparsematrix_sparsemethod - ans[[motifs[i]]] == 0))
   }
 
 })
@@ -1136,10 +1136,10 @@ test_that("build_motif_adjacency_matrix returns correct
     mam_sparsematrix_sparsemethod <- build_motif_adjacency_matrix(
       adj_mat_sparse, motifs[i], "struc", "mean", "sparse")
 
-    expect_equal(mam_densematrix_densemethod, ans[[motifs[i]]])
-    expect_equal(mam_sparsematrix_densemethod, ans[[motifs[i]]])
-    expect_equal(mam_densematrix_sparsemethod, ans[[motifs[i]]])
-    expect_equal(mam_sparsematrix_sparsemethod, ans[[motifs[i]]])
+    expect_true(all(mam_densematrix_densemethod - ans[[motifs[i]]] == 0))
+    expect_true(all(mam_sparsematrix_densemethod - ans[[motifs[i]]] == 0))
+    expect_true(all(mam_densematrix_sparsemethod - ans[[motifs[i]]] == 0))
+    expect_true(all(mam_sparsematrix_sparsemethod - ans[[motifs[i]]] == 0))
   }
 
 })
@@ -1422,11 +1422,10 @@ test_that("build_motif_adjacency_matrix returns correct
     mam_sparsematrix_sparsemethod <- build_motif_adjacency_matrix(
       adj_mat_sparse, motifs[i], "func", "product", "sparse")
 
-    expect_equal(mam_densematrix_densemethod, ans[[motifs[i]]])
-    expect_equal(mam_sparsematrix_densemethod, ans[[motifs[i]]])
-    expect_equal(mam_densematrix_sparsemethod, ans[[motifs[i]]])
-    expect_equal(mam_sparsematrix_sparsemethod, ans[[motifs[i]]])
-
+    expect_true(all(mam_densematrix_densemethod - ans[[motifs[i]]] == 0))
+    expect_true(all(mam_sparsematrix_densemethod - ans[[motifs[i]]] == 0))
+    expect_true(all(mam_densematrix_sparsemethod - ans[[motifs[i]]] == 0))
+    expect_true(all(mam_sparsematrix_sparsemethod - ans[[motifs[i]]] == 0))
   }
 
 })
@@ -1709,11 +1708,10 @@ test_that("build_motif_adjacency_matrix returns correct
     mam_sparsematrix_sparsemethod <- build_motif_adjacency_matrix(
       adj_mat_sparse, motifs[i], "struc", "product", "sparse")
 
-    expect_equal(mam_densematrix_densemethod, ans[[motifs[i]]])
-    expect_equal(mam_sparsematrix_densemethod, ans[[motifs[i]]])
-    expect_equal(mam_densematrix_sparsemethod, ans[[motifs[i]]])
-    expect_equal(mam_sparsematrix_sparsemethod, ans[[motifs[i]]])
-
+    expect_true(all(mam_densematrix_densemethod - ans[[motifs[i]]] == 0))
+    expect_true(all(mam_sparsematrix_densemethod - ans[[motifs[i]]] == 0))
+    expect_true(all(mam_densematrix_sparsemethod - ans[[motifs[i]]] == 0))
+    expect_true(all(mam_sparsematrix_sparsemethod - ans[[motifs[i]]] == 0))
   }
 
 })

@@ -235,10 +235,10 @@ test_that("run_motif_embedding correct on dense matrix with restrict", {
   }
 
   expect_equal(ans_adj_mat, emb_list$adj_mat)
-  expect_equal(ans_motif_adj_mat, emb_list$motif_adj_mat)
+  expect_true(all(ans_motif_adj_mat - emb_list$motif_adj_mat) == 0)
   expect_equal(ans_comps, emb_list$comps)
   expect_equal(ans_adj_mat_comps, emb_list$adj_mat_comps)
-  expect_equal(ans_motif_adj_mat_comps, emb_list$motif_adj_mat_comps)
+  expect_true(all(ans_motif_adj_mat_comps - emb_list$motif_adj_mat_comps) == 0)
   expect_equal(ans_vals, emb_list$vals, tolerance = 0.01)
   expect_equal(ans_vects, emb_list$vects, tolerance = 0.01)
 })
@@ -303,10 +303,10 @@ test_that("run_motif_embedding correct on sparse matrix with restrict", {
   }
 
   expect_equal(ans_adj_mat, emb_list$adj_mat)
-  expect_equal(ans_motif_adj_mat, emb_list$motif_adj_mat)
+  expect_true(all(ans_motif_adj_mat - emb_list$motif_adj_mat) == 0)
   expect_equal(ans_comps, emb_list$comps)
   expect_equal(ans_adj_mat_comps, emb_list$adj_mat_comps)
-  expect_equal(ans_motif_adj_mat_comps, emb_list$motif_adj_mat_comps)
+  expect_true(all(ans_motif_adj_mat_comps - emb_list$motif_adj_mat_comps) == 0)
   expect_equal(ans_vals, emb_list$vals, tolerance = 0.01)
   expect_equal(ans_vects, emb_list$vects, tolerance = 0.01)
 })
@@ -354,7 +354,7 @@ test_that("run_motif_embedding correct on dense matrix without restrict", {
   }
 
   expect_equal(ans_adj_mat, emb_list$adj_mat)
-  expect_equal(ans_motif_adj_mat, emb_list$motif_adj_mat)
+  expect_true(all(ans_motif_adj_mat - emb_list$motif_adj_mat) == 0)
   expect_equal(ans_vals, emb_list$vals, tolerance = 0.01)
   expect_equal(ans_vects, emb_list$vects, tolerance = 0.01)
 })
@@ -402,7 +402,7 @@ test_that("run_motif_embedding correct on sparse matrix without restrict", {
   }
 
   expect_equal(ans_adj_mat, emb_list$adj_mat)
-  expect_equal(ans_motif_adj_mat, emb_list$motif_adj_mat)
+  expect_true(all(ans_motif_adj_mat - emb_list$motif_adj_mat) == 0)
   expect_equal(ans_vals, emb_list$vals, tolerance = 0.01)
   expect_equal(ans_vects, emb_list$vects, tolerance = 0.01)
 })

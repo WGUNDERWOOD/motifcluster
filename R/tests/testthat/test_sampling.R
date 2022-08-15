@@ -155,7 +155,7 @@ test_that("sample_bsbm returns correct unweighted adjacency matrix", {
                          0, 0, 0,   0,   0,   0
                        ), nrow = 6, byrow = TRUE))
 
-  expect_equal(G, ans, tolerance = 0.05)
+  expect_true(all(abs(G - ans) <= 0.1 * ans))
 })
 
 test_that("sample_bsbm returns correct constant weighted
@@ -196,7 +196,7 @@ test_that("sample_bsbm returns correct constant weighted
                          0, 0, 0,  0,  0,  0
                        ), nrow = 6, byrow = TRUE))
 
-  expect_equal(G, ans, tolerance = 0.05)
+  expect_true(all(abs(G - ans) <= 0.1 * ans))
 })
 
 test_that("sample_bsbm returns correct poisson weighted adjacency matrix", {
@@ -208,7 +208,7 @@ test_that("sample_bsbm returns correct poisson weighted adjacency matrix", {
   dest_block_sizes <- c(1, 1, 1)
   bipartite_connection_matrix <- matrix(c(0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
                                         nrow = 2, byrow = TRUE)
-  n_reps <- 200
+  n_reps <- 400
   bipartite_weight_matrix <- matrix(c(10, 20, 30, 40, 50, 60),
                                     nrow = 2, byrow = TRUE)
 
@@ -235,5 +235,5 @@ test_that("sample_bsbm returns correct poisson weighted adjacency matrix", {
                          0, 0, 0,  0,  0,  0
                        ), nrow = 6, byrow = TRUE))
 
-  expect_equal(G, ans, tolerance = 0.05)
+  expect_true(all(abs(G - ans) <= 0.1 * ans))
 })
