@@ -97,7 +97,7 @@ def sample_dsbm(block_sizes, connection_matrix,
   else:
     adj_mat = sparse.bmat(block_list)
 
-  adj_mat = sparse.csr_matrix(adj_mat)
+  adj_mat = sparse.csr_matrix(adj_mat) # pylint: disable=redefined-variable-type
   adj_mat = mcut._drop0_killdiag(adj_mat)
 
   return adj_mat
