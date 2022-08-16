@@ -36,8 +36,7 @@ todo:
 
 act:
 	@echo -e "\e[0;35m\033[1mRunning act...\e[0;30m\033[0m"
-	@act --reuse -j R
-	@echo "TODO python too"
+	@act --reuse
 
 clean:
 	@echo -e "\e[0;35m\033[1mCleaning up...\e[0;30m\033[0m"
