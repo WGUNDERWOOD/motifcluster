@@ -5,11 +5,11 @@ test_that("kmeanspp returns correct clusters for vector", {
 
   set.seed(3582)
   n <- 10
-  clust_ans <- c(rep(1,n), rep(2,n))
+  clust_ans <- c(rep(1, n), rep(2, n))
   data <- clust_ans + rnorm(2 * n, mean = 0, sd = 0.01)
   clust <- kmeanspp(data, k = 2)$cluster
 
-  if(clust[1] == 2){
+  if (clust[1] == 2) {
     clust <- 3 - clust
   }
 
@@ -20,14 +20,14 @@ test_that("kmeanspp returns correct clusters for matrix", {
 
   set.seed(2359)
   n <- 10
-  clust_ans <- c(rep(1,n), rep(2,n))
+  clust_ans <- c(rep(1, n), rep(2, n))
   data <- cbind(
     clust_ans + rnorm(2 * n, mean = 0, sd = 0.01),
     clust_ans + rnorm(2 * n, mean = 0, sd = 0.01) - 1
   )
   clust <- kmeanspp(data, k = 2)$cluster
 
-  if(clust[1] == 2){
+  if (clust[1] == 2) {
     clust <- 3 - clust
   }
 
