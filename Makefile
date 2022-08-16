@@ -1,6 +1,6 @@
 all: python R performance sticker todo
 
-.PHONY: python R performance sticker todo clean
+.PHONY: python R performance sticker todo act clean
 
 python:
 	@echo -e "\e[0;35m\033[1mMaking python package...\e[0;30m\033[0m"
@@ -33,6 +33,11 @@ sticker:
 todo:
 	@echo -e "\e[0;35m\033[1mLooking for todo items...\e[0;30m\033[0m"
 	@! rg -g "!Makefile" TODO
+
+act:
+	@echo -e "\e[0;35m\033[1mRunning act...\e[0;30m\033[0m"
+	@act --reuse -j R
+	@echo "TODO python too"
 
 clean:
 	@echo -e "\e[0;35m\033[1mCleaning up...\e[0;30m\033[0m"

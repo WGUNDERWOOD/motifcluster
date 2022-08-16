@@ -38,28 +38,23 @@ jobs:
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
           working-directory: "R/"
-          #extra-packages: |
-            #any::ggplot2
-            #any::rcmdcheck
-          #needs: |
-            #website
-            #coverage
+          extra-packages: |
+            devtools
       - run: sudo apt-get update
-      - run: sudo apt -y install libcurl4-openssl-dev
-      - run: sudo apt -y install pandoc
-      #- run: sudo apt -y install texlive-latex-base texlive-latex-extra texlive-fonts-extra
-      - uses: teatimeguest/setup-texlive-action@v2
+      - uses: awalsh128/cache-apt-pkgs-action@latest
         with:
           packages: >-
-            scheme-basic
-            hyperref
-      - run: sudo apt-get -y install ghostscript
-      #- run: mkdir R_packages/
-      #- run: Rscript -e 'install.packages(c("igraph", "Matrix", "RSpectra", "covr", "knitr", "mclust", "rmarkdown", "testthat", "devtools", "spam", "roxygen2", "lintr", "qpdf"), lib="./R_packages/")'
-      - run: cd R/ && Rscript -e 'library(devtools); document()'
-      - run: cd R/ && Rscript -e 'library(devtools); test()'
-      - run: cd R/ && Rscript -e 'library(lintr); lint_package(linters = with_defaults(object_name_linter=NULL,object_usage_linter=NULL,cyclocomp_linter=NULL))'
-      - run: cd R/ && Rscript -e 'library(covr); cov = package_coverage(); to_cobertura(cov)'
+            pandoc
+            libcurl4-openssl-dev
+            texlive-latex-base
+            texlive-latex-extra
+            texlive-fonts-extra
+            ghostscript
+          version: 1.0
+      - run: cd R/ && Rscript -e "library(devtools); document()"
+      - run: cd R/ && Rscript -e "library(devtools); test()"
+      - run: cd R/ && Rscript -e "library(lintr); lint_package(linters = with_defaults(object_name_linter=NULL,object_usage_linter=NULL,cyclocomp_linter=NULL))"
+      - run: cd R/ && Rscript -e "library(covr); cov = package_coverage(); to_cobertura(cov)"
       - uses: codecov/codecov-action@v2
         with:
           files: ./R/cobertura.xml
