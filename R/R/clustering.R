@@ -67,17 +67,18 @@ kmeanspp <- function(data, k = 2, iter.max = 100, nstart = 10, ...) {
     center_ids <- rep(0, length = kk)
     center_ids[1:2] <- sample.int(num.samples, 1)
     for (ii in 2:kk) { # the plus-plus step in kmeans
-       if (ndim == 1) {
-            dists <- apply(cbind(data[center_ids, ]), 1, 
-              function(center) {
-                rowSums((data - rep(center,each=nrow(data) ) )^2) # fixed
-              })
-        }
-        else {
-            dists <- apply(data[center_ids, ], 1, function(center) {
-              rowSums((data - rep(center,each=nrow(data) ) )^2) # fixed
-            })
-        }      probs <- apply(dists, 1, min)
+      if (ndim == 1) {
+        dists <- apply(cbind(data[center_ids, ]), 1,
+                       function(center) {
+                         rowSums((data - rep(center, each = nrow(data)))^2)
+                       })
+      } else {
+        dists <- apply(data[center_ids, ], 1,
+                       function(center) {
+                         rowSums((data - rep(center, each = nrow(data)))^2)
+                       })
+      }
+      probs <- apply(dists, 1, min)
       probs[center_ids] <- 0
       center_ids[ii] <- sample.int(num.samples, 1, prob = probs)
     }
