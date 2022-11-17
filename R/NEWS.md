@@ -1,3 +1,8 @@
+# motifcluster 0.2.3 (2022-11-17)
+
+- Fixed bug in kmeans++ implementation inherited from the
+  deprecated LICORS package.
+
 # motifcluster 0.2.2 (2022-08-15)
 
 - Updating tests for compatability with forthcoming Matrix 1.4-2 package

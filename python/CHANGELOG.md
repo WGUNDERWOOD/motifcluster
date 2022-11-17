@@ -1,3 +1,7 @@
+# motifcluster 0.2.3 (2022-11-17)
+
+- Bump version to keep track with R
+
 # motifcluster 0.2.2 (2022-08-15)
 
 - Bump version to keep track with R
