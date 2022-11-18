@@ -70,12 +70,12 @@ kmeanspp <- function(data, k = 2, iter.max = 100, nstart = 10, ...) {
       if (ndim == 1) {
         dists <- apply(cbind(data[center_ids, ]), 1,
                        function(center) {
-                         rowSums((data - center)^2)
+                         rowSums((data - rep(center, each = nrow(data)))^2)
                        })
       } else {
         dists <- apply(data[center_ids, ], 1,
                        function(center) {
-                         rowSums((data - center)^2)
+                         rowSums((data - rep(center, each = nrow(data)))^2)
                        })
       }
       probs <- apply(dists, 1, min)
