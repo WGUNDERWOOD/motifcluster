@@ -1,7 +1,7 @@
 # motifcluster 0.2.3
 
 Fixed bug in kmeans++ implementation inherited from the
-deprecated LICORS package.
+deprecated LICORS package
 
 
 # motifcluster 0.2.2
