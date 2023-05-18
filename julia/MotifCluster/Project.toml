@@ -1,0 +1,10 @@
+name = "MotifCluster"
+uuid = "daa9fd3b-41af-4965-b715-a21506bae1e4"
+authors = ["William G Underwood <42812654+WGUNDERWOOD@users.noreply.github.com>"]
+version = "0.1.0"
+
+[deps]
+Clustering = "aaaa29a8-35af-508c-8bc3-b662a17a0fe5"
+Distributions = "31c24e10-a181-5473-b8eb-7969acd0382f"
+Random = "9a3f8284-a2c9-5f02-9a11-845980a1fd5c"
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"

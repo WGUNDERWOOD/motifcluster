@@ -1,4 +1,5 @@
 # private files
+notes.org
 
 # editor files
 auto/
@@ -28,6 +29,9 @@ python/motifcluster.egg-info/
 python/tutorial/
 python/.coverage
 python/coverage.xml
+
+# julia package
+Manifest.toml
 
 # performance
 *.csv
