@@ -7,8 +7,9 @@
         vects_1 = rand(Normal(), (n, 3))
         vects_2 = hcat(rand(Normal(), (n, 1)), rand(Normal(4), (n, 2)))
 
+        vals = Int[]
         vects =  vcat(vects_1, vects_2)
-        spectrum = MotifCluster.Spectrum(vects)
+        spectrum = MotifCluster.Spectrum(vals, vects)
 
         clust_ans = [[1 for _ in 1:n]; [2 for _ in 1:n]]
         clust = MotifCluster.cluster_spectrum(spectrum, 2)
@@ -16,9 +17,6 @@
         if clust[1] == 2
             clust .= 3 .- clust
         end
-
-        println(clust)
-        println(clust_ans)
 
         @test clust == clust_ans
     end
