@@ -1,7 +1,5 @@
 @testset verbose = true "Indicators" begin
-
-    adj_mat = [0 2 0; 3 0 4; 0 0 0]
-
+    adj_mat = sparse([0 2 0; 3 0 4; 0 0 0])
     G  = sparse([0 2 0; 3 0 4; 0 0 0])
     J  = sparse([0 1 0; 1 0 1; 0 0 0])
     Gs = sparse([0 0 0; 0 0 4; 0 0 0])
@@ -13,7 +11,6 @@
     Id = sparse([1 0 0; 0 1 0; 0 0 1])
     Je = sparse([1 1 0; 1 1 1; 0 1 1])
     Gp = sparse([0 6 0; 6 0 0; 0 0 0])
-
     @test MotifCluster.build_G(adj_mat) == G
     @test MotifCluster.build_J(adj_mat) == J
     @test MotifCluster.build_Gs(adj_mat) == Gs

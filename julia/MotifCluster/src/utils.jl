@@ -133,29 +133,18 @@ def get_largest_component(adj_mat, gr_method):
 
   return verts_to_keep
 
-
-def get_motif_names():
-
-  """
-  Get common motif names.
-
-  Get the names of some common motifs as strings.
-
-  Returns
-  -------
-  motif_names : list
-    A list of names (strings) of common motifs.
-  """
-
-  motif_names = ["Ms", "Md"]
-
-  for i in range(1, 14):
-    motif_name = "M" + str(i)
-    motif_names = motif_names + [motif_name]
-
-  motif_names = motif_names + ["Mcoll"] + ["Mexpa"]
-
-  return motif_names
-
-
   =#
+
+"""
+Get the names of some common motifs as strings.
+"""
+function get_motif_names()
+    motif_names = ["Ms", "Md"]
+    for i in 1:14
+        motif_name = "M" * string(i)
+        push!(motif_names, motif_name)
+    end
+    push!(motif_names, "Mcoll")
+    push!(motif_names, "Mexpa")
+    return motif_names
+end

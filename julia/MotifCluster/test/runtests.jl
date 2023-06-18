@@ -7,4 +7,5 @@ using LinearAlgebra
 
 #include("test_clustering.jl")
 #include("test_indicators.jl")
-include("test_spectral.jl")
+#include("test_spectral.jl")
+include("test_motifadjacency.jl")

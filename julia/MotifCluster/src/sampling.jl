@@ -174,44 +174,25 @@ function sample_bsbm(source_block_sizes, dest_block_sizes,
 
   return adj_mat
 
-
-def demonstration_graph():
-
-  """
-  Generate a small graph for demonstrations.
-
-  Generate the sparse and dense adjacency matrices of a small weighted
-  directed graph, for demonstrating methods and running tests.
-
-  Returns
-  -------
-  adj_mat_dense : matrix
-    the adjacency matrix in dense form.
-  adj_mat_sparse : sparse matrix
-    the adjacency matrix in sparse form.
-  """
-
-  adj_mat_dense = np.array([
-    0, 0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 0,
-    2, 0,  3,  0,  6,  8,  0,  0,  0,  0,  0, 0,
-    0, 0,  0,  0,  0, 10,  0,  0,  0,  0,  0, 0,
-    0, 0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 0,
-    4, 5,  0,  0,  0, 14,  0,  0, 18, 19,  0, 0,
-    0, 7,  9,  0, 13,  0,  0,  0,  0,  0, 21, 0,
-    0, 0, 11, 12,  0, 15,  0, 17,  0,  0,  0, 0,
-    0, 0,  0,  0,  0,  0, 16,  0,  0,  0,  0, 0,
-    0, 0,  0,  0,  0,  0,  0,  0,  0, 24,  0, 0,
-    0, 0,  0,  0,  0, 20,  0,  0,  0,  0,  0, 0,
-    0, 0,  0,  0,  0,  0, 22,  0,  0,  0,  0, 0,
-    0, 0,  0,  0,  0,  0, 23,  0,  0,  0,  0, 0
-  ]).reshape((12, 12))
-
-  adj_mat_sparse = sparse.csr_matrix(adj_mat_dense)
-
-  ans = {
-    "adj_mat_dense": adj_mat_dense,
-    "adj_mat_sparse": adj_mat_sparse,
-  }
-
-  return ans
   =#
+
+"""
+Generate a small graph for demonstrations.
+"""
+function demonstration_graph()
+
+    adj_mat = sparse([0 0  0  0  0  0  0  0  0  0  0 0;
+                      2 0  3  0  6  8  0  0  0  0  0 0;
+                      0 0  0  0  0 10  0  0  0  0  0 0;
+                      0 0  0  0  0  0  0  0  0  0  0 0;
+                      4 5  0  0  0 14  0  0 18 19  0 0;
+                      0 7  9  0 13  0  0  0  0  0 21 0;
+                      0 0 11 12  0 15  0 17  0  0  0 0;
+                      0 0  0  0  0  0 16  0  0  0  0 0;
+                      0 0  0  0  0  0  0  0  0 24  0 0;
+                      0 0  0  0  0 20  0  0  0  0  0 0;
+                      0 0  0  0  0  0 22  0  0  0  0 0;
+                      0 0  0  0  0  0 23  0  0  0  0 0])
+
+    return adj_mat
+  end
