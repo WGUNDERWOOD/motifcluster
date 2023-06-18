@@ -1,11 +1,15 @@
 module MotifCluster
 
+using Clustering
+using LinearAlgebra
+using SparseArrays
+
+# exports
+
+# includes
+include("utils.jl")
+include("indicators.jl")
 include("spectral.jl")
-
-export Spectrum
-
 include("clustering.jl")
-
-export cluster_spectrum
 
 end

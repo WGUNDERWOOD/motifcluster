@@ -1,6 +1,3 @@
-using Distributions
-using Random
-
 @testset verbose = true "Clustering" begin
 
     @testset verbose = true "cluster_spectrum" begin
@@ -11,10 +8,10 @@ using Random
         vects_2 = hcat(rand(Normal(), (n, 1)), rand(Normal(4), (n, 2)))
 
         vects =  vcat(vects_1, vects_2)
-        spectrum = Spectrum(vects)
+        spectrum = MotifCluster.Spectrum(vects)
 
         clust_ans = [[1 for _ in 1:n]; [2 for _ in 1:n]]
-        clust = cluster_spectrum(spectrum, 2)
+        clust = MotifCluster.cluster_spectrum(spectrum, 2)
 
         if clust[1] == 2
             clust .= 3 .- clust

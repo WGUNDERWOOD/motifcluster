@@ -1,5 +1,3 @@
-using Clustering
-
 """
 Get cluster assignments from a spectrum using k-means++.
 """
