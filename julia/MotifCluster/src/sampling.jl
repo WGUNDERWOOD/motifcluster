@@ -6,9 +6,10 @@ Poisson-weighted.
 function random_sparse_matrix(m::Int, n::Int, p::Float64,
         sample_weight_type::String, w::Int)
     if sample_weight_type == "constant"
-        return w * (sprand(m, n, p) .> 0)
+        return w * sprand(Bool, m, n, p)
     elseif sample_weight_type == "poisson"
-        return sprandn(Distributions.Poisson(w), m, n, p)
+        d = Distributions.Poisson(w)
+        return quantile.(d, sprand(m, n, p))
     else
         return sprand(Bool, m, n, p)
     end
@@ -18,8 +19,8 @@ end
 Sample the (weighted) adjacency matrix of a (weighted) directed stochastic
 block model (DSBM) with specified parameters.
 """
-function sample_dsbm(block_sizes::Vector{Int}, connection_matrix::Matrix{Float64},
-        weight_matrix::Union{Matrix{Float64}, Nothing}, sample_weight_type::String)
+function sample_dsbm(block_sizes::Vector{Int}, connection_matrix::Matrix{<:Real},
+        weight_matrix::Union{Matrix{<:Real}, Nothing}, sample_weight_type::String)
 
     # check args
     @assert all(block_sizes .> 0)

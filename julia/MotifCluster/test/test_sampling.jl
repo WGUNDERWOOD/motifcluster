@@ -9,10 +9,8 @@
         weight_matrix = nothing
         G = MotifCluster.sample_dsbm(block_sizes, connection_matrix,
                                      weight_matrix, sample_weight_type)
-
         G_vals = [0, 1]
         @test all(g in G_vals for g in G)
-
         G = zeros(5, 5)
         for rep in 1:n_reps
             G += MotifCluster.sample_dsbm(block_sizes, connection_matrix,
@@ -24,88 +22,61 @@
                       0.6 0.6   0 0.7 0.7;
                       0.6 0.6 0.7   0 0.7;
                       0.6 0.6 0.7 0.7   0])
-        display(G)
-        display(ans)
         @test isapprox(G, ans, atol = 0.05)
     end
 
-  #=
+    @testset verbose = true "sample_dsbm_constant_weighted" begin
+        Random.seed!(2839)
+        sample_weight_type = "constant"
+        block_sizes = [2, 3]
+        connection_matrix = [0.4 0.5; 0.6 0.7]
+        n_reps = 2000
+        weight_matrix = [20 30; 40 50]
+        G = MotifCluster.sample_dsbm(block_sizes, connection_matrix,
+                                     weight_matrix,sample_weight_type)
+        G_vals = [0, 20, 30, 40, 50]
+        @test all(g in G_vals for g in G)
 
-@testset verbose = true "sample_dsbm_constant_weighted" begin
-
-  rd.seed(seed = 2839)
-  random.seed(2839)
-
-  sample_weight_type = "constant"
-  block_sizes = [2, 3]
-  connection_matrix = np.array([0.4, 0.5, 0.6, 0.7]).reshape((2, 2))
-  n_reps = 300
-  weight_matrix = np.array([20, 30, 40, 50]).reshape((2, 2))
-
-  G = MotifCluster.sample_dsbm(block_sizes, connection_matrix, weight_matrix,
-                   sample_weight_type)
-
-  G_vals = [0, 20, 30, 40, 50]
-  assert (np.isin(G.toarray(), G_vals)).all()
-
-  G = np.zeros((5, 5))
-
-  for rep in range(n_reps):
-    G += MotifCluster.sample_dsbm(block_sizes, connection_matrix, weight_matrix,
-                          sample_weight_type)
-
-  G = np.array(G) / n_reps
-
-  ans = np.array([
-                          0,  8, 15, 15, 15,
-                          8,  0, 15, 15, 15,
-                         24, 24,  0, 35, 35,
-                         24, 24, 35,  0, 35,
-                         24, 24, 35, 35,  0
-       ]).reshape((5, 5))
-
-  assert np.allclose(G, ans, atol = 3)
-
-  return
-
+        G = zeros(5, 5)
+        for rep in 1:n_reps
+            G += MotifCluster.sample_dsbm(block_sizes, connection_matrix,
+                                          weight_matrix, sample_weight_type)
+        end
+        G /= n_reps
+        ans = sparse([ 0  8 15 15 15;
+                       8  0 15 15 15;
+                      24 24  0 35 35;
+                      24 24 35  0 35;
+                      24 24 35 35  0])
+        @test isapprox(G, ans, atol = 3)
   end
 
-@testset verbose = true "sample_dsbm_poisson_weighted" begin
+  @testset verbose = true "sample_dsbm_poisson_weighted" begin
+      Random.seed!(2838)
+      sample_weight_type = "poisson"
+      block_sizes = [2, 3]
+      connection_matrix = [0.4 0.5; 0.6 0.7]
+      n_reps = 2000
+      weight_matrix = [20 30; 40 50]
+      G = MotifCluster.sample_dsbm(block_sizes, connection_matrix,
+                                   weight_matrix, sample_weight_type)
+      @test all(G .== floor.(G))
+      @test all(G .>= 0)
+      G = zeros(5, 5)
+      for rep in 1:n_reps
+          G += MotifCluster.sample_dsbm(block_sizes, connection_matrix,
+                                        weight_matrix, sample_weight_type)
+      end
+      G /= n_reps
+      ans = sparse([ 0  8 15 15 15;
+                     8  0 15 15 15;
+                    24 24  0 35 35;
+                    24 24 35  0 35;
+                    24 24 35 35  0])
+      @test isapprox(G, ans, atol = 3)
+  end
 
-  rd.seed(seed = 2838)
-  random.seed(2838)
-
-  sample_weight_type = "poisson"
-  block_sizes = [2, 3]
-  connection_matrix = np.array([0.4, 0.5, 0.6, 0.7]).reshape((2, 2))
-  n_reps = 300
-  weight_matrix = np.array([20, 30, 40, 50]).reshape((2, 2))
-
-  G = MotifCluster.sample_dsbm(block_sizes, connection_matrix, weight_matrix,
-                   sample_weight_type)
-
-  assert (G.toarray() == np.floor(G.toarray())).all()
-  assert (G.toarray() >= 0).all()
-
-  G = np.zeros((5, 5))
-
-  for rep in range(n_reps):
-    G += MotifCluster.sample_dsbm(block_sizes, connection_matrix, weight_matrix,
-                          sample_weight_type)
-
-  G = np.array(G) / n_reps
-
-  ans = np.array([
-                          0,  8, 15, 15, 15,
-                          8,  0, 15, 15, 15,
-                         24, 24,  0, 35, 35,
-                         24, 24, 35,  0, 35,
-                         24, 24, 35, 35,  0
-       ]).reshape((5, 5))
-
-  assert np.allclose(G, ans, atol = 3)
-
-  return
+  #=
 
 @testset verbose = true "sample_dsbm_large" begin
 
@@ -143,7 +114,7 @@
 
   G = np.zeros((6, 6))
 
-  for rep in range(n_reps):
+  for rep in 1:n_reps
     G += MotifCluster.sample_bsbm(source_block_sizes, dest_block_sizes, bipartite_connection_matrix,
                        bipartite_weight_matrix, sample_weight_type)
 
@@ -185,7 +156,7 @@
 
   G = np.zeros((6, 6))
 
-  for rep in range(n_reps):
+  for rep in 1:n_reps
     G += MotifCluster.sample_bsbm(source_block_sizes, dest_block_sizes, bipartite_connection_matrix,
                        bipartite_weight_matrix, sample_weight_type)
 
@@ -227,7 +198,7 @@
 
   G = np.zeros((6, 6))
 
-  for rep in range(n_reps):
+  for rep in 1:n_reps
     G += MotifCluster.sample_bsbm(source_block_sizes, dest_block_sizes, bipartite_connection_matrix,
                        bipartite_weight_matrix, sample_weight_type)
 
