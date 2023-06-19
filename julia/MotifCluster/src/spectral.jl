@@ -1,8 +1,3 @@
-struct Spectrum
-    vals::Vector{Float64}
-    vects::Matrix{Float64}
-end
-
 """
 Compute the first few eigenvalues by magnitude and
 associated eigenvectors of a matrix.
@@ -12,7 +7,7 @@ function get_first_eigs(some_mat::SparseMatrixCSC{<:Real, Int}, num_eigs::Int)
     spectrum = eigen(Matrix(some_mat))
     vals = spectrum.values[1:num_eigs]
     vects = spectrum.vectors[:, 1:num_eigs]
-    return Spectrum(vals, vects)
+    return Dict("vals" => vals, "vects" => vects)
 end
 
 """
@@ -49,9 +44,8 @@ optionally restrict it to its largest connected component,
 and then run Laplace embedding with specified Laplacian type and
 number of eigenvalues and eigenvectors.
 """
-function run_motif_embedding(adj_mat::AbstractArray{<:Real}, motif_name::String,
-        motif_type::String, mam_weight_type::String,
-        num_eigs::Int, type_lap::String, restrict::Bool)
+function run_motif_embedding(adj_mat::AbstractArray{<:Real}, motif_name::String, motif_type::String,
+        mam_weight_type::String, num_eigs::Int, type_lap::String, restrict::Bool)
     @assert num_eigs >= 1
     motif_adj_mat = build_motif_adjacency_matrix(adj_mat, motif_name, motif_type, mam_weight_type)
     if restrict
@@ -65,7 +59,13 @@ function run_motif_embedding(adj_mat::AbstractArray{<:Real}, motif_name::String,
         motif_adj_mat_comps = nothing
         spect = run_laplace_embedding(motif_adj_mat, num_eigs, type_lap)
     end
-    embedding = MotifEmbedding(adj_mat, motif_adj_mat, comps, adj_mat_comps,
-                               motif_adj_mat_comps, spect.vals, spect.vects)
+    embedding = Dict("adj_mat" => adj_mat,
+                     "motif_adj_mat" => motif_adj_mat,
+                     "comps" => comps,
+                     "adj_mat_comps" => adj_mat_comps,
+                     "motif_adj_mat_comps" => motif_adj_mat_comps,
+                     "vals" => spect["vals"],
+                     "vects" => spect["vects"]
+                    )
     return embedding
 end
