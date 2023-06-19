@@ -3,6 +3,7 @@ module MotifCluster
 using Clustering
 using LinearAlgebra
 using SparseArrays
+using Graphs
 
 # exports
 
