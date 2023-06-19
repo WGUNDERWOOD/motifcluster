@@ -1,78 +1,32 @@
-#=
-def _a_b_one(a_mat, b_mat):
+"""
+Compute `a * (b @ ones)` where `a`, `b`,
+`ones` are square matrices of the same size,
+and `ones` contains all entries equal to one.
+The product `*` is an entry-wise (Hadamard) product,
+while `@` represents matrix multiplication.
+This method is more efficient than the naive approach
+when `a` or `b` are sparse.
+"""
+function a_b_one(a::AbstractMatrix{<:Real}, b::AbstractMatrix{<:Real})
+    ones_vec = ones(size(a, 1), 1)
+    ans = (a .* (b * ones_vec))
+    return ans
+end
 
-  """
-  Compute a right-multiplication with the ones matrix.
-
-  Compute `a * (b @ one_mat)` where `a`, `b`,
-  `ones_mat` are square matrices of the same size,
-  and `ones_mat` contains all entries equal to one.
-  The product `*` is an entry-wise (Hadamard) product,
-  while `@` represents matrix multiplication.
-  This method is more efficient than the naive approach
-  when `a` or `b` are sparse.
-
-  Parameters
-  ----------
-  a, b : matrix
-    Square matrices of the same size.
-
-  Returns
-  -------
-  sparse matrix
-    The sparse square matrix `a * (b @ one_mat)`.
-  """
-
-  if not sparse.issparse(a_mat):
-    a_mat = sparse.csr_matrix(a_mat)
-
-  if not sparse.issparse(b_mat):
-    b_mat = sparse.csr_matrix(b_mat)
-
-  n = a_mat.shape[0]
-  ones_vec = np.ones(n)
-  ans = (a_mat.T.multiply(b_mat @ ones_vec)).T
-
-  return ans
-
-
-def _a_one_b(a_mat, b_mat):
-
-  """
-  Compute a left-multiplication with the ones matrix.
-
-  Compute `a * (one_mat @ b)` where `a`, `b`,
-  `ones_mat` are square matrices of the same size,
-  and `ones_mat` contains all entries equal to one.
-  The product `*` is an entry-wise (Hadamard) product,
-  while `@` represents matrix multiplication.
-  This method is more efficient than the naive approach
-  when `a` or `b` are sparse.
-
-  Parameters
-  ----------
-  a, b : matrix
-    Square matrices of the same size.
-
-  Returns
-  -------
-  sparse matrix
-    The sparse square matrix `a * (one_mat @ b)`.
-  """
-
-  if not sparse.issparse(a_mat):
-    a_mat = sparse.csr_matrix(a_mat)
-
-  if not sparse.issparse(b_mat):
-    b_mat = sparse.csr_matrix(b_mat)
-
-  n = a_mat.shape[0]
-  ones_vec = np.ones(n)
-  ans = (a_mat.multiply(ones_vec @ b_mat))
-
-  return ans
-  =#
-
+"""
+Compute `a * (ones @ b)` where `a`, `b`,
+`ones` are square matrices of the same size,
+and `ones` contains all entries equal to one.
+The product `*` is an entry-wise (Hadamard) product,
+while `@` represents matrix multiplication.
+This method is more efficient than the naive approach
+when `a` or `b` are sparse.
+"""
+function a_one_b(a::AbstractMatrix{<:Real}, b::AbstractMatrix{<:Real})
+    ones_vec = ones(size(a, 1), 1)
+    ans = (a .* (ones_vec' * b))
+    return ans
+end
 
 """
 Set diagonal entries to zero and sparsify.
