@@ -1,6 +1,6 @@
 @testset verbose = true "Motif Adjacency" begin
 
-    @testset verbose = true "test_mam_unweighted_func" begin
+    @testset verbose = true "mam_unweighted_func" begin
 
         adj_mat = MotifCluster.demonstration_graph()
         ans = Dict()
@@ -234,7 +234,7 @@
         end
     end
 
-    @testset verbose = true "test_mam_unweighted_struc" begin
+    @testset verbose = true "mam_unweighted_struc" begin
 
         adj_mat = MotifCluster.demonstration_graph()
         ans = Dict()
@@ -468,7 +468,7 @@
         end
     end
 
-    @testset verbose = true "test_mam_mean_weighted_func" begin
+    @testset verbose = true "mam_mean_weighted_func" begin
 
         adj_mat = MotifCluster.demonstration_graph()
         ans = Dict()
@@ -702,7 +702,7 @@
         end
     end
 
-    @testset verbose = true "test_mam_mean_weighted_struc" begin
+    @testset verbose = true "mam_mean_weighted_struc" begin
 
         adj_mat = MotifCluster.demonstration_graph()
         ans = Dict()
@@ -936,7 +936,7 @@
         end
     end
 
-    @testset verbose = true "test_mam_product_weighted_func" begin
+    @testset verbose = true "mam_product_weighted_func" begin
 
         adj_mat = MotifCluster.demonstration_graph()
         ans = Dict()
@@ -1170,7 +1170,7 @@
         end
     end
 
-    @testset verbose = true "test_mam_product_weighted_struc" begin
+    @testset verbose = true "mam_product_weighted_struc" begin
 
         adj_mat = MotifCluster.demonstration_graph()
         ans = Dict()

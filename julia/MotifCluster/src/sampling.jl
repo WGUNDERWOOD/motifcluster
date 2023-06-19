@@ -3,8 +3,7 @@ Build a sparse matrix of size `m, n` with non-zero probability `p`.
 Edge weights can be unweighted, constant-weighted or
 Poisson-weighted.
 """
-function random_sparse_matrix(m::Int, n::Int, p::Float64,
-        sample_weight_type::String, w::Int)
+function random_sparse_matrix(m::Int, n::Int, p::Float64, sample_weight_type::String, w::Real)
     if sample_weight_type == "constant"
         return w * sprand(Bool, m, n, p)
     elseif sample_weight_type == "poisson"
@@ -61,93 +60,51 @@ function sample_dsbm(block_sizes::Vector{Int}, connection_matrix::Matrix{<:Real}
     return adj_mat
 end
 
-#=
-function sample_bsbm(source_block_sizes, dest_block_sizes,
-                bipartite_connection_matrix,
-                bipartite_weight_matrix=None,
-                sample_weight_type="unweighted")
+"""
+Sample the (weighted) adjacency matrix of a (weighted) bipartite stochastic block model (BSBM).
+"""
+function sample_bsbm(source_block_sizes::Vector{Int}, dest_block_sizes::Vector{Int},
+        bipartite_connection_matrix::Matrix{<:Real},
+        bipartite_weight_matrix::Union{Matrix{<:Real}, Nothing}, sample_weight_type::String)
 
-  """
-  Sample a bipartite stochastic block model (BSBM).
+    # check args
+    @assert all(source_block_sizes .> 0)
+    @assert all(dest_block_sizes .> 0)
+    @assert length(source_block_sizes) == size(bipartite_connection_matrix, 1)
+    @assert length(dest_block_sizes) == size(bipartite_connection_matrix, 2)
+    @assert all(0 .<= bipartite_connection_matrix .<= 1)
 
-  Sample the (weighted) adjacency matrix of a (weighted) bipartite stochastic
-  block model (BSBM) with specified parameters.
+    if sample_weight_type != "unweighted"
+        @assert !isnothing(bipartite_weight_matrix)
+        @assert length(source_block_sizes) == size(bipartite_weight_matrix, 1)
+        @assert length(dest_block_sizes) == size(bipartite_weight_matrix, 2)
+        @assert all(bipartite_weight_matrix .>= 0)
+    end
 
-  Parameters
-  ----------
-  source_block_sizes : list of int
-    A list containing the size of each block of source vertices.
-  dest_block_sizes : list of int
-    A list containing the size of each block of destination vertices.
-  bipartite_connection_matrix : matrix
-    A matrix containing the source block to destination block
-    connection probabilities.
-  bipartite_weight_matrix : matrix
-    A matrix containing the source block to destination block weight
-    parameters. Unused for `sample_weight_type = "constant"`.
-    Defaults to `None`.
-  sample_weight_type : str
-    The type of weighting scheme.
-    One of `"unweighted"`, `"constant"` or `"poisson"`.
+    # initialize parameters
+    ks = length(source_block_sizes)
+    kd = length(dest_block_sizes)
+    zeros_ss = zeros(ks, ks)
+    zeros_d = zeros(kd, ks + kd)
 
-  Returns
-  -------
-  adj_mat : sparse matrix
-    A randomly sampled (weighted) adjacency matrix of a BSBM.
+    # build block sizes vector
+    block_sizes = [source_block_sizes; dest_block_sizes]
 
-  Examples
-  --------
-  >>> source_block_sizes = [10, 10]
-  >>> dest_block_sizes = [10, 10, 10]
-  >>> bipartite_connection_matrix = np.array([0.8, 0.5, 0.1, 0.1, 0.5, 0.8]).reshape((2, 3))
-  >>> bipartite_weight_matrix = np.array([20, 10, 2, 2, 10, 20]).reshape((2, 3))
-  >>> sample_bsbm(block_sizes, bipartite_connection_matrix,
-  ...   bipartite_weight_matrix, "poisson")
-  """
+    # build connection matrix
+    connection_matrix = hvcat((2, 1), zeros_ss, bipartite_connection_matrix, zeros_d)
 
-  # check args
-  assert source_block_sizes == [int(x) for x in source_block_sizes]
-  assert dest_block_sizes == [int(x) for x in dest_block_sizes]
-  assert all(x > 0 for x in source_block_sizes)
-  assert all(x > 0 for x in dest_block_sizes)
-  assert len(source_block_sizes) == bipartite_connection_matrix.shape[0]
-  assert len(dest_block_sizes) == bipartite_connection_matrix.shape[1]
-  assert (bipartite_connection_matrix >= 0).all()
-  assert (bipartite_connection_matrix <= 1).all()
-  assert sample_weight_type in ["unweighted", "constant", "poisson"]
+    # build weight matrix
+    if !isnothing(bipartite_weight_matrix)
+        weight_matrix = hvcat((2, 1), zeros_ss, bipartite_weight_matrix, zeros_d)
+    else
+        weight_matrix = nothing
+    end
 
-  if sample_weight_type != "unweighted":
-    assert bipartite_weight_matrix is not None
-    assert len(source_block_sizes) == bipartite_weight_matrix.shape[0]
-    assert len(dest_block_sizes) == bipartite_weight_matrix.shape[1]
-    assert (bipartite_weight_matrix >= 0).all()
+    # sample BSBM
+    adj_mat = sample_dsbm(block_sizes, connection_matrix, weight_matrix, sample_weight_type)
+    return adj_mat
+end
 
-  # initialize parameters
-  ks = len(source_block_sizes)
-  kd = len(dest_block_sizes)
-  zeros_ss = np.zeros((ks, ks))
-  zeros_d = np.zeros((kd, ks + kd))
-
-  # build block sizes vector
-  block_sizes = source_block_sizes + dest_block_sizes
-
-  # build connection matrix
-  connection_matrix = np.block([[zeros_ss, bipartite_connection_matrix], [zeros_d]])
-
-  # build weight matrix
-  if bipartite_weight_matrix is not None:
-    weight_matrix = np.block([[zeros_ss, bipartite_weight_matrix], [zeros_d]])
-
-  else:
-    weight_matrix = None
-
-  # sample BSBM
-  adj_mat = sample_dsbm(block_sizes, connection_matrix,
-                        weight_matrix, sample_weight_type)
-
-  return adj_mat
-
-  =#
 
 """
 Generate a small graph for demonstrations.
@@ -168,4 +125,4 @@ function demonstration_graph()
                       0 0  0  0  0  0 23  0  0  0  0 0])
 
     return adj_mat
-  end
+end
