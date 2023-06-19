@@ -5,39 +5,13 @@ Poisson-weighted.
 """
 function random_sparse_matrix(m::Int, n::Int, p::Float64,
         sample_weight_type::String, w::Int)
-
-    mn = m * n
-
-    # number of nonzero entries
-    k = sample(Binomial(mn, p))
-
-    # indices of nonzero entries
-    zs = [0 for _ in 1:k]
-    inds = sample(1:mn, k)
-
-    # values to go in matrix
-    if sample_weight_type == constant
-        vals = np.full(k, w)
-
-    elseif sample_weight_type == poisson
-        vals = rd.poisson(w, size=k)
-
+    if sample_weight_type == "constant"
+        return w * (sprand(m, n, p) .> 0)
+    elseif sample_weight_type == "poisson"
+        return sprandn(Distributions.Poisson(w), m, n, p)
     else
-        vals = np.ones(k)
+        return sprand(Bool, m, n, p)
     end
-
-    # create small matrix
-    #if mn <= 1e4
-    #ans = np.zeros(mn)
-    #ans[np.array(inds, dtype=int)] = np.array(vals, dtype=int)
-    #ans = ans.reshape((m, n))
-
-    # create large matrix
-    #else
-    ans = sparse.csc_matrix((vals, (inds, zs)), shape=(mn, 1))
-    ans = ans.reshape((m, n))
-
-    return ans
 end
 
 """
@@ -49,21 +23,20 @@ function sample_dsbm(block_sizes::Vector{Int}, connection_matrix::Matrix{Float64
 
     # check args
     @assert all(block_sizes .> 0)
-    @assert length(block_sizes) == size(connection_matrix, 0) == size(connection_matrix, 1)
+    @assert length(block_sizes) == size(connection_matrix, 1) == size(connection_matrix, 2)
     @assert all(0 .<= connection_matrix .<= 1)
 
-    if sample_weight_type != unweighted
+    if sample_weight_type != "unweighted"
         @assert weight_matrix != nothing
-        @assert length(block_sizes) == size(weight_matrix, 0) == size(weight_matrix, 1)
+        @assert length(block_sizes) == size(weight_matrix, 1) == size(weight_matrix, 2)
         @assert all(weight_matrix .>= 0)
     end
 
     # initialize variables
     k = length(block_sizes)
-    block_list = []
+    block_list = SparseMatrixCSC{<:Real, Int}[]
 
     for i in 1:k
-        row_list = []
         for j in 1:k
 
             # block parameters
@@ -72,19 +45,18 @@ function sample_dsbm(block_sizes::Vector{Int}, connection_matrix::Matrix{Float64
             p = connection_matrix[i, j]
 
             # generate block
-            if sample_weight_type == unweighted
+            if sample_weight_type == "unweighted"
                 w = 1
             else
                 w = weight_matrix[i, j]
             end
 
             block = random_sparse_matrix(ni, nj, p, sample_weight_type, w)
-            push!(row_list, block)
+            push!(block_list, block)
         end
-        push!(block_list, row_list)
     end
-
-    adj_mat = dropzero_killdiag(bmat(block_list))
+    adj_mat = hvcat(size(connection_matrix, 2), block_list...)
+    adj_mat = dropzeros_killdiag(adj_mat)
     return adj_mat
 end
 

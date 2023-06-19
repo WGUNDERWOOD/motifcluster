@@ -4,6 +4,7 @@ using Clustering
 using LinearAlgebra
 using SparseArrays
 using Graphs
+using Distributions
 
 # exports
 

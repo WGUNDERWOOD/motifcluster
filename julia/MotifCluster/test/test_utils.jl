@@ -23,7 +23,6 @@
     @testset verbose = true "get_largest_component" begin
         adj_mat = sparse([0 0 0 0 0; 0 0 1 0 0; 0 0 0 0 2; 3 0 0 0 0; 0 4 0 0 0])
         ans = [2, 3, 5]
-        display(MotifCluster.get_largest_component(adj_mat))
         @test MotifCluster.get_largest_component(adj_mat) == ans
     end
 end
