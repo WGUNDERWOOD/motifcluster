@@ -131,14 +131,14 @@ for graph_type in graph_types:
         pylab.title('Julia timing results for the sparser regime $\mathrm{ER}(n,' + str(k) + '/n)$',fontsize=18)
       elif k == 100:
         pylab.title('Julia timing results for the less sparse regime $\mathrm{ER}(n,' + str(k) + '/n)$',fontsize=18)
-      elif graph_type == "barabasi_albert":
-        if k == 10:
-          pylab.title('Julia timing results for the sparser regime $\mathrm{BA}(n,' + str(k) + ')$',fontsize=18)
-        elif k == 100:
-          pylab.title('Julia timing results for the less sparse regime $\mathrm{BA}(n,' + str(k) + ')$',fontsize=18)
+    elif graph_type == "barabasi_albert":
+      if k == 10:
+        pylab.title('Julia timing results for the sparser regime $\mathrm{BA}(n,' + str(k) + ')$',fontsize=18)
+      elif k == 100:
+        pylab.title('Julia timing results for the less sparse regime $\mathrm{BA}(n,' + str(k) + ')$',fontsize=18)
 
-      pylab.xticks(fontsize=16)
-      pylab.yticks(fontsize=16)
-      plot_filename = "plots/julia_k" + str(k) + "_" + graph_type + ".pdf"
-      pylab.savefig(plot_filename, bbox_inches="tight")
-      pylab.close('all')
+    pylab.xticks(fontsize=16)
+    pylab.yticks(fontsize=16)
+    plot_filename = "plots/julia_k" + str(k) + "_" + graph_type + ".pdf"
+    pylab.savefig(plot_filename, bbox_inches="tight")
+    pylab.close('all')
