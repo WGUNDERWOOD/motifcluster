@@ -7,6 +7,32 @@ function cluster_spectrum(vects::Matrix{<:Real}, num_clusts::Int)
     return cluster_assigns
 end
 
+"""
+Compute the adjusted Rand index between two clusterings.
+"""
+function adjusted_rand_index(xs::Vector{Int}, ys::Vector{Int})
+    @assert length(xs) == length(ys)
+    x_vals = sort(unique(xs))
+    y_vals = sort(unique(xs))
+    n_x_vals = length(x_vals)
+    n_y_vals = length(x_vals)
+    contingency = zeros(Int, n_x_vals, n_y_vals)
+    for i in 1:length(x_vals)
+        for j in 1:length(y_vals)
+            contingency[i, j] = sum(xs .== x_vals[i] .&& ys .== y_vals[j])
+        end
+    end
+    contingency
+    row_sums = sum(contingency, dims=2)
+    col_sums = sum(contingency, dims=1)
+    a = sum(binomial.(contingency, 2))
+    b = sum(binomial.(row_sums, 2)) - a
+    c = sum(binomial.(col_sums, 2)) - a
+    d = binomial(sum(contingency), 2) - a - b - c
+    ari = a - (a + b) * (a + c) / (a + b + c + d)
+    ari /= (a + b + a + c) / 2 - (a + b) * (a + c) / (a + b + c + d)
+    return ari
+end
 
 """
 Run motif-based spectral clustering on the adjacency matrix of a

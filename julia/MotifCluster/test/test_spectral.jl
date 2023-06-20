@@ -30,7 +30,7 @@
 
     @testset verbose = true "run_laplace_embedding" begin
         Random.seed!(9235)
-        G = sparse(reshape(collect(0:8), (3, 3)))
+        G = sparse(reshape(collect(0:8) (3 3)))
         G = G .+ G'
         ans_vals_comb = [0, 17.07]
         ans_vects_comb = [0.577 0.789; 0.577 -0.577; 0.577 -0.211]
@@ -56,233 +56,47 @@
         @test isapprox(vects_rw, ans_vects_rw, atol=0.01)
     end
 
-    #=
+    @testset verbose = true "run_mot_embedding_restrict" begin
+        Random.seed!(9235)
+        adj_mat = sparse([0 2 0 0; 0 0 3 0; 4 0 0 0; 0 0 0 0])
+        ans_adj_mat = sparse([0 2 0 0; 0 0 3 0; 4 0 0 0; 0 0 0 0])
+        ans_motif_adj_mat = sparse([0 2 4 0; 2 0 3 0; 4 3 0 0; 0 0 0 0])
+        ans_comps = [0, 1, 2]
+        ans_adj_mat_comps = sparse([0 2 0; 0 0 3; 4 0 0])
+        ans_motif_adj_mat_comps = sparse([0 2 4; 2 0 3; 4 3 0])
+        ans_vals = [0, 1.354]
+        ans_vects = sparse([0.577 -0.544 0.577; 0.830 0.577 -0.126])
+        embedding = MotifCluster.run_motif_embedding(adj_mat, "Ms", "func", "mean", 2, "rw", true)
+        for i in 1:length(ans_vals)
+            if sign(embedding["vects"][1, i]) != sign(ans_vects[1, i])
+                embedding["vects"][:, i] = -embedding["vects"][:, i]
+            end
+        end
+        @test isapprox(ans_adj_mat, embedding["adj_mat"])
+        @test isapprox(ans_motif_adj_mat, embedding["motif_adj_mat"])
+        @test isapprox(ans_comps, embedding["comps"])
+        @test isapprox(ans_adj_mat_comps, embedding["adj_mat_comps"])
+        @test isapprox(ans_motif_adj_mat_comps, embedding["motif_adj_mat_comps"])
+        @test isapprox(ans_vals, embedding["vals"], atol=0.01)
+        @test isapprox(ans_vects, embedding["vects"], atol=0.01)
+    end
 
-    # run_motif_embedding
-
-    def test_run_mot_embedding_dense_restrict():
-
-    np.random.seed(9235)
-
-    adj_mat = np.array([
-    0, 2, 0, 0,
-    0, 0, 3, 0,
-    4, 0, 0, 0,
-    0, 0, 0, 0
-    ]).reshape((4, 4))
-
-    # answers
-    ans_adj_mat = np.array([
-    0, 2, 0, 0,
-    0, 0, 3, 0,
-    4, 0, 0, 0,
-    0, 0, 0, 0
-    ]).reshape((4, 4))
-
-    ans_motif_adj_mat = np.array([
-    0, 2, 4, 0,
-    2, 0, 3, 0,
-    4, 3, 0, 0,
-    0, 0, 0, 0
-    ]).reshape((4, 4))
-
-    ans_comps = [0, 1, 2]
-
-    ans_adj_mat_comps = np.array([
-    0, 2, 0,
-    0, 0, 3,
-    4, 0, 0
-    ]).reshape((3, 3))
-
-    ans_motif_adj_mat_comps = np.array([
-    0, 2, 4,
-    2, 0, 3,
-    4, 3, 0
-    ]).reshape((3, 3))
-
-    ans_vals = [0, 1.354]
-
-    ans_vects = np.array([
-    0.577, -0.544,
-    0.577, 0.830,
-    0.577, -0.126
-    ]).reshape((3, 2))
-
-    # run motif embedding
-    emb_list = mcsp.run_motif_embedding(adj_mat, "Ms", "func", "mean", "dense", 2,
-    "rw", restrict=True)
-
-    # flip eigenvector signs if necessary
-    for i in range(len(ans_vals)):
-    if np.sign(emb_list["vects"][0, i]) != np.sign(ans_vects[0, i]):
-    emb_list["vects"][:, i] = -emb_list["vects"][:, i]
-
-    assert np.allclose(ans_adj_mat, emb_list["adj_mat"].toarray())
-    assert np.allclose(ans_motif_adj_mat, emb_list["motif_adj_mat"].toarray())
-    assert np.allclose(ans_comps, emb_list["comps"])
-    assert np.allclose(ans_adj_mat_comps, emb_list["adj_mat_comps"].toarray())
-    assert np.allclose(ans_motif_adj_mat_comps, emb_list["motif_adj_mat_comps"].toarray())
-    assert np.allclose(ans_vals, emb_list["vals"], atol=0.01)
-    assert np.allclose(ans_vects, emb_list["vects"], atol=0.01)
-
-
-    def test_run_mot_embedding_sparse_restrict():
-
-    np.random.seed(9235)
-
-    adj_mat = sparse.csr_matrix(np.array([
-    0, 2, 0, 0,
-    0, 0, 3, 0,
-    4, 0, 0, 0,
-    0, 0, 0, 0
-    ]).reshape((4, 4)))
-
-    # answers
-    ans_adj_mat = np.array([
-    0, 2, 0, 0,
-    0, 0, 3, 0,
-    4, 0, 0, 0,
-    0, 0, 0, 0
-    ]).reshape((4, 4))
-
-    ans_motif_adj_mat = np.array([
-    0, 2, 4, 0,
-    2, 0, 3, 0,
-    4, 3, 0, 0,
-    0, 0, 0, 0
-    ]).reshape((4, 4))
-
-    ans_comps = [0, 1, 2]
-
-    ans_adj_mat_comps = np.array([
-    0, 2, 0,
-    0, 0, 3,
-    4, 0, 0
-    ]).reshape((3, 3))
-
-    ans_motif_adj_mat_comps = np.array([
-    0, 2, 4,
-    2, 0, 3,
-    4, 3, 0
-    ]).reshape((3, 3))
-
-    ans_vals = [0, 1.354]
-
-    ans_vects = np.array([
-    0.577, -0.544,
-    0.577, 0.830,
-    0.577, -0.126
-    ]).reshape((3, 2))
-
-    # run motif embedding
-    emb_list = mcsp.run_motif_embedding(adj_mat, "Ms", "func", "mean", "dense", 2,
-    "rw", restrict=True)
-
-    # flip eigenvector signs if necessary
-    for i in range(len(ans_vals)):
-    if np.sign(emb_list["vects"][0, i]) != np.sign(ans_vects[0, i]):
-    emb_list["vects"][:, i] = -emb_list["vects"][:, i]
-
-    assert np.allclose(ans_adj_mat, emb_list["adj_mat"].toarray())
-    assert np.allclose(ans_motif_adj_mat, emb_list["motif_adj_mat"].toarray())
-    assert np.allclose(ans_comps, emb_list["comps"])
-    assert np.allclose(ans_adj_mat_comps, emb_list["adj_mat_comps"].toarray())
-    assert np.allclose(ans_motif_adj_mat_comps, emb_list["motif_adj_mat_comps"].toarray())
-    assert np.allclose(ans_vals, emb_list["vals"], atol=0.01)
-    assert np.allclose(ans_vects, emb_list["vects"], atol=0.01)
-
-
-    def test_run_mot_embedding_dense_no_restrict():
-
-    np.random.seed(9235)
-
-    adj_mat = np.array([
-    0, 2, 0,
-    0, 0, 3,
-    4, 0, 0
-    ]).reshape((3, 3))
-
-    # answers
-    ans_adj_mat = np.array([
-    0, 2, 0,
-    0, 0, 3,
-    4, 0, 0
-    ]).reshape((3, 3))
-
-    ans_motif_adj_mat = np.array([
-    0, 2, 4,
-    2, 0, 3,
-    4, 3, 0
-    ]).reshape((3, 3))
-
-    ans_vals = [0, 1.354]
-
-    ans_vects = np.array([
-    0.577, -0.544,
-    0.577, 0.830,
-    0.577, -0.126
-    ]).reshape((3, 2))
-
-    # run motif embedding
-    emb_list = mcsp.run_motif_embedding(adj_mat, "Ms", "func", "mean", "dense", 2,
-    "rw", restrict=False)
-
-    # flip eigenvector signs if necessary
-    for i in range(len(ans_vals)):
-    if np.sign(emb_list["vects"][0, i]) != np.sign(ans_vects[0, i]):
-    emb_list["vects"][:, i] = -emb_list["vects"][:, i]
-
-    assert np.allclose(ans_adj_mat, emb_list["adj_mat"].toarray())
-    assert np.allclose(ans_motif_adj_mat, emb_list["motif_adj_mat"].toarray())
-    assert np.allclose(ans_vals, emb_list["vals"], atol=0.01)
-    assert np.allclose(ans_vects, emb_list["vects"], atol=0.01)
-
-
-    def test_run_mot_embedding_sparse_no_restrict():
-
-    np.random.seed(9235)
-
-    adj_mat = sparse.csr_matrix(np.array([
-    0, 2, 0,
-    0, 0, 3,
-    4, 0, 0
-    ]).reshape((3, 3)))
-
-    # answers
-    ans_adj_mat = np.array([
-    0, 2, 0,
-    0, 0, 3,
-    4, 0, 0
-    ]).reshape((3, 3))
-
-    ans_motif_adj_mat = np.array([
-    0, 2, 4,
-    2, 0, 3,
-    4, 3, 0
-    ]).reshape((3, 3))
-
-    ans_vals = [0, 1.354]
-
-    ans_vects = np.array([
-    0.577, -0.544,
-    0.577, 0.830,
-    0.577, -0.126
-    ]).reshape((3, 2))
-
-    # run motif embedding
-    emb_list = mcsp.run_motif_embedding(adj_mat, "Ms", "func", "mean", "dense", 2,
-    "rw", restrict=False)
-
-    # flip eigenvector signs if necessary
-    for i in range(len(ans_vals)):
-    if np.sign(emb_list["vects"][0, i]) != np.sign(ans_vects[0, i]):
-    emb_list["vects"][:, i] = -emb_list["vects"][:, i]
-
-    assert np.allclose(ans_adj_mat, emb_list["adj_mat"].toarray())
-    assert np.allclose(ans_motif_adj_mat, emb_list["motif_adj_mat"].toarray())
-    assert np.allclose(ans_vals, emb_list["vals"], atol=0.01)
-    assert np.allclose(ans_vects, emb_list["vects"], atol=0.01)
-
-    =#
-
+    @testset verbose = true "run_mot_embedding_no_restrict" begin
+        Random.seed!(9235)
+        adj_mat = sparse([0 2 0; 0 0 3; 4 0 0])
+        ans_adj_mat = sparse([0 2 0; 0 0 3; 4 0 0])
+        ans_motif_adj_mat = sparse([0 2 4; 2 0 3; 4 3 0])
+        ans_vals = [0, 1.354]
+        ans_vects = sparse([0.577 -0.544 0.577; 0.830 0.577 -0.126])
+        embedding = MotifCluster.run_motif_embedding(adj_mat, "Ms", "func", "mean", 2, "rw", false)
+        for i in 1:length(ans_vals)
+            if sign(embedding["vects"][1, i]) != sign(ans_vects[1, i])
+                embedding["vects"][:, i] = -embedding["vects"][:, i]
+            end
+        end
+        @test isapprox(ans_adj_mat, embedding["adj_mat"])
+        @test isapprox(ans_motif_adj_mat, embedding["motif_adj_mat"])
+        @test isapprox(ans_vals, embedding["vals"], atol=0.01)
+        @test isapprox(ans_vects, embedding["vects"], atol=0.01)
+    end
 end

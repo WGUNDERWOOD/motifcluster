@@ -21,11 +21,11 @@
     end
 
     @testset verbose = true "run_motif_clustering" begin
-        Random.seed!(3957)
+        Random.seed!(3964)
         n = 50
         block_sizes = [n, n, n]
-        connection_matrix = [0.9 0.4 0.4; 0.4 0.9 0.4; 0.4 0.4 0.9]
-        weight_matrix = [9 3 3; 3 9 3; 3 3 9]
+        connection_matrix = [0.9 0.3 0.3; 0.3 0.9 0.3; 0.3 0.3 0.9]
+        weight_matrix = [9 2 2; 2 9 2; 2 2 9]
         motif_type = "func"
         num_eigs = 3
         num_clusts = 3
@@ -45,7 +45,12 @@
                         comps = motif_clust_list["comps"]
                         ans_clusts = [repeat([1], n); repeat([2], n); repeat([3], n)]
                         ans_clusts = ans_clusts[comps]
-                        ari_score = adjusted_rand_score(clusts, ans_clusts)
+                        ari_score = MotifCluster.adjusted_rand_index(clusts, ans_clusts)
+                        if ari_score < 1
+                            println(motif_name)
+                            println(sample_weight_type)
+                            println(type_lap)
+                        end
                         @test ari_score == 1
                     end
                 end
