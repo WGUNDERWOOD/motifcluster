@@ -5,8 +5,8 @@
         ans_vals = [-9, 18, 27]
         ans_vects = [-2 -1 2 0; -2 2 -1 0; -1 -2 -2 0]' ./ 3
         spect = MotifCluster.get_first_eigs(G, 3)
-        vects = spect.vects
-        vals = spect.vals
+        vects = spect["vects"]
+        vals = spect["vals"]
         for i in 1:length(vals)
             if sign(vects[1, i]) != sign(ans_vects[1, i])
                 vects[:, i] = -vects[:, i]
@@ -30,7 +30,7 @@
 
     @testset verbose = true "run_laplace_embedding" begin
         Random.seed!(9235)
-        G = sparse(reshape(collect(0:8) (3 3)))
+        G = sparse(reshape(collect(0:8), (3, 3)))
         G = G .+ G'
         ans_vals_comb = [0, 17.07]
         ans_vects_comb = [0.577 0.789; 0.577 -0.577; 0.577 -0.211]
@@ -38,10 +38,10 @@
         ans_vects_rw = [0.577 0.408; 0.577 -0.816; 0.577 0.408]
         spectrum_comb = MotifCluster.run_laplace_embedding(G, 2, "comb")
         spectrum_rw = MotifCluster.run_laplace_embedding(G, 2, "rw")
-        vals_comb = spectrum_comb.vals
-        vects_comb = spectrum_comb.vects
-        vals_rw = spectrum_rw.vals
-        vects_rw = spectrum_rw.vects
+        vals_comb = spectrum_comb["vals"]
+        vects_comb = spectrum_comb["vects"]
+        vals_rw = spectrum_rw["vals"]
+        vects_rw = spectrum_rw["vects"]
         for i in 1:length(vals_comb)
             if sign(vects_comb[1, i]) != sign(ans_vects_comb[1, i])
                 vects_comb[:, i] = -vects_comb[:, i]
@@ -61,11 +61,11 @@
         adj_mat = sparse([0 2 0 0; 0 0 3 0; 4 0 0 0; 0 0 0 0])
         ans_adj_mat = sparse([0 2 0 0; 0 0 3 0; 4 0 0 0; 0 0 0 0])
         ans_motif_adj_mat = sparse([0 2 4 0; 2 0 3 0; 4 3 0 0; 0 0 0 0])
-        ans_comps = [0, 1, 2]
+        ans_comps = [1, 2, 3]
         ans_adj_mat_comps = sparse([0 2 0; 0 0 3; 4 0 0])
         ans_motif_adj_mat_comps = sparse([0 2 4; 2 0 3; 4 3 0])
         ans_vals = [0, 1.354]
-        ans_vects = sparse([0.577 -0.544 0.577; 0.830 0.577 -0.126])
+        ans_vects = sparse([0.577 -0.544; 0.577 0.830; 0.577 -0.126])
         embedding = MotifCluster.run_motif_embedding(adj_mat, "Ms", "func", "mean", 2, "rw", true)
         for i in 1:length(ans_vals)
             if sign(embedding["vects"][1, i]) != sign(ans_vects[1, i])
@@ -87,7 +87,7 @@
         ans_adj_mat = sparse([0 2 0; 0 0 3; 4 0 0])
         ans_motif_adj_mat = sparse([0 2 4; 2 0 3; 4 3 0])
         ans_vals = [0, 1.354]
-        ans_vects = sparse([0.577 -0.544 0.577; 0.830 0.577 -0.126])
+        ans_vects = sparse([0.577 -0.544; 0.577 0.830; 0.577 -0.126])
         embedding = MotifCluster.run_motif_embedding(adj_mat, "Ms", "func", "mean", 2, "rw", false)
         for i in 1:length(ans_vals)
             if sign(embedding["vects"][1, i]) != sign(ans_vects[1, i])
