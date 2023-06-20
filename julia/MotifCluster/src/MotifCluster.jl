@@ -7,6 +7,9 @@ using Graphs
 using Distributions
 
 # exports
+export build_motif_adjacency_matrix
+export sample_dsbm
+export sample_bsbm
 
 # includes
 include("motifadjacency.jl")
