@@ -17,6 +17,7 @@ performance:
 	@cd performance && gprof2dot -f pstats profile.pstats | dot -Tpng -o profile.png
 	@cd performance && rm profile.pstats
 	@cd performance && Rscript performance_test.R
+	@cd performance && julia performance_test.jl
 	@cd performance && python performance_plot.py
 	@cd performance && latexmk -pdf -quiet -rc-report- performance.tex
 

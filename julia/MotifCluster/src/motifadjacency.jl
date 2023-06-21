@@ -5,7 +5,7 @@ sum of the weights of all motifs containing both
 nodes `i` and `j`.
 """
 function build_motif_adjacency_matrix(adj_mat::AbstractArray{<:Real}, motif_name::String,
-        motif_type::String, mam_weight_type::String)
+        motif_type::String = "struc", mam_weight_type::String = "unweighted")
     if motif_name == "Ms"
         return mam_Ms(adj_mat, motif_type, mam_weight_type)
     elseif motif_name == "Md"

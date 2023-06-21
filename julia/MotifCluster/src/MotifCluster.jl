@@ -10,6 +10,7 @@ using Distributions
 export build_motif_adjacency_matrix
 export sample_dsbm
 export sample_bsbm
+export get_motif_names
 
 # includes
 include("motifadjacency.jl")
