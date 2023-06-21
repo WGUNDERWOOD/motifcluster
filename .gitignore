@@ -51,3 +51,7 @@ build.log
 *.fdb_latexmk
 *.fls
 *.synctex.gz
+*.out
+*.pytxcode
+*.toc
+pythontex-files-*/
