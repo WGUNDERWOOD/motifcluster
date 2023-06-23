@@ -256,276 +256,271 @@ since we only consider networks without self-loops.
 \begin{juliablock}
 block_sizes = [5, 3]
 connection_matrix = [0.9 0.2; 0.2 0.9]
+mam = sample_dsbm(block_sizes, connection_matrix)
+display(mam)
 \end{juliablock}
+\texttt{\obeylines\printpythontex}
 \end{tcolorbox}
 
-%\begin{tcolorbox}[colback=black!5!white,colframe=black!15!white]
-%\begin{juliablock}
-%mam = sample_dsbm(block_sizes, connection_matrix)
-%display(mam)
-%\end{juliablock}
-%\texttt{\obeylines\printpythontex}
-%\end{tcolorbox}
+\subsubsection{Constant-weighted directed stochastic block models}
 
-%\subsubsection{Constant-weighted directed stochastic block models}
-%
-%The matrix above has binary entries,
-%indicating that it is the adjacency matrix of an unweighted
-%directed network.
-%The \texttt{MotifCluster} package also allows sampling of weighted directed networks.
-%The simplest example of this is ``constant'' weighting,
-%where we simply multiply each block of the adjacency matrix by a constant.
-%
-%
-%\begin{pyconsole}
-%weight_matrix = np.array([
-%  5, 2,
-%  2, 5
-%]).reshape((2, 2))
-%mcsa.sample_dsbm(block_sizes, connection_matrix, weight_matrix,
-%  sample_weight_type="constant").todense()
-%\end{pyconsole}
-%
-%\subsubsection{Poisson-weighted directed stochastic block models}
-%
-%We can also use weights drawn randomly from a Poisson distribution,
-%where each block in the adjacency matrix has its own mean parameter.
-%This returns an adjacency matrix with weights which could be any natural
-%number, but is equal in expectation to the constant version.
-%Note that in this scheme it is possible for the weight to be zero,
-%removing an edge which might have otherwise been present.
-%
-%\begin{pyconsole}
-%mcsa.sample_dsbm(block_sizes, connection_matrix, weight_matrix,
-%  sample_weight_type="poisson").todense()
-%\end{pyconsole}
-%
-%\pagebreak
-%
-%\subsection{Bipartite stochastic block models}
-%
-%The \texttt{MotifCluster} package can also be used to sample
-%bipartite networks.
-%The vertices of a bipartite network are partitioned
-%into ``source'' and ``destination'' vertices,
-%and edges are only permitted to go from source vertices
-%to destination vertices.
-%Let's sample a DSBM with a single block of two source vertices
-%and two blocks of destination vertices, with
-%sizes of three and two respectively.
-%We can use a strong connection probability of 0.9 to the first block of
-%destination vertices,
-%and a weaker connection probability of 0.2 to the second.
-%
-%\begin{pyconsole}
-%source_block_sizes = [2]
-%destination_block_sizes = [3, 2]
-%bipartite_connection_matrix = np.array([0.9, 0.2]).reshape((1, 2))
-%mcsa.sample_bsbm(source_block_sizes, destination_block_sizes,
-%  bipartite_connection_matrix).todense()
-%\end{pyconsole}
-%
-%\subsubsection{Weighted bipartite stochastic block models}
-%
-%Similarly to the more general directed stochastic block models,
-%we can also use constant-weighted or Poisson-weighted edges for bipartite
-%stochastic block models.
-%
-%\begin{pyconsole}
-%bipartite_weight_matrix = np.array([7, 2]).reshape((1, 2))
-%mcsa.sample_bsbm(source_block_sizes, destination_block_sizes,
-%  bipartite_connection_matrix, bipartite_weight_matrix,
-%  sample_weight_type="poisson").todense()
-%\end{pyconsole}
-%
-%
-%
-%
-%\section{Spectral embedding with motif adjacency matrices}
-%
-%Spectral methods involve performing eigenvalue and
-%eigenvector operations on matrices related to networks.
-%We work here with weighted \emph{undirected} networks
-%(which have symmetric adjacency matrices),
-%because motif adjacency matrices are always symmetric.
-%
-%\subsection{Laplacian matrices}
-%
-%We can construct two types of Laplacian matrix for a network
-%using the \texttt{MotifCluster} package.
-%First we create an example of a weighted undirected network $\mathcal{G}_2$.
-%
-%\begin{pyconsole}
-%G2 = np.array([
-%  0, 2, 0, 0,
-%  2, 0, 4, 3,
-%  0, 4, 0, 5,
-%  0, 3, 5, 0
-%]).reshape((4, 4))
-%\end{pyconsole}
-%
-%\subsubsection{Combinatorial Laplacian}
-%
-%The combinatorial Laplacian of an adjacency matrix $G$ is
-%$L_\mathrm{c} = D - G$,
-%where $D$ is the diagonal matrix of weighted vertex degrees:
-%
-%\begin{pyconsole}
-%mcsp.build_laplacian(G2, type_lap="comb").todense()
-%\end{pyconsole}
-%
-%\subsubsection{Random-walk Laplacian}
-%
-%The random-walk Laplacian of an adjacency matrix $G$ is
-%$L_\mathrm{rw} = I - D^{-1}G$,
-%where $D$ is the diagonal matrix of weighted vertex degrees
-%and $I$ is the identity matrix:
-%
-%\begin{pyconsole}
-%mcsp.build_laplacian(G2, type_lap="rw").todense()
-%\end{pyconsole}
-%
-%\subsection{Laplace embedding}
-%
-%Once we have constructed the desired Laplacian matrix,
-%we use it to embed each vertex into $\mathbb{R}^l$
-%by finding the eigenvectors associated with
-%its first (smallest magnitude) few eigenvalues.
-%Below we use the random-walk Laplacian,
-%and embedding dimension $l=2$:
-%
-%\begin{pyconsole}
-%spectrum = mcsp.run_laplace_embedding(G2, num_eigs=2, type_lap="rw")
-%spectrum["vals"]
-%spectrum["vects"]
-%\end{pyconsole}
-%
-%For a random-walk Laplacian,
-%the first eigenvalue is always zero (up to machine precision)
-%and its corresponding eigenvector is constant.
-%
-%\subsection{Motif embedding}
-%
-%Motif embedding is simply the process of building an MAM
-%and performing Laplace embedding with it.
-%As an example we use the
-%\texttt{run\_motif\_embedding}
-%function on the network $\mathcal{G}_3$ below.
-%
-%\begin{pyconsole}
-%G3 = np.array([
-%  0, 0, 0, 0,
-%  0, 0, 2, 3,
-%  0, 4, 0, 0,
-%  4, 0, 5, 0
-%]).reshape((4, 4))
-%\end{pyconsole}
-%
-%An artifact of building MAMs is that although the original network may
-%be connected, there is no guarantee that the MAM is also connected.
-%Hence the MAM is restricted to its largest connected component
-%before the Laplacian is formed.
-%We observe this with the network $\mathcal{G}_3$,
-%in which only three of the four vertices are embedded.
-%
-%\begin{pyconsole}
-%spectrum = mcsp.run_motif_embedding(G3, motif_name="M1", motif_type="func",
-%  mam_weight_type="unweighted", mam_method="sparse", num_eigs=2,
-%  restrict = True, type_lap="rw")
-%spectrum["vals"]
-%spectrum["vects"]
-%\end{pyconsole}
-%
-%
-%\section{Motif-based spectral clustering}
-%
-%The overall aim of \texttt{MotifCluster} is to use motifs for spectral clustering,
-%so now we see how to extract clusters from the motif-based
-%eigenvector embeddings.
-%The \texttt{run\_motif\_clustering} function handles the entire process of
-%building an MAM, restricting it to its largest connected component,
-%performing eigenvector embedding, and extracting clusters.
-%We therefore take the opportunity to showcase the ability of
-%\texttt{MotifCluster} to recover the blocks of a DSBM,
-%demonstrating all of the methods outlined in this vignette.\\
-%
-%Let's use a DSBM with three blocks of 10 nodes each.
-%
-%\begin{pyconsole}
-%block_sizes = 3 * [10]
-%\end{pyconsole}
-%
-%We use strong connections of 0.8 within the blocks,
-%and weaker connections of 0.2 between the blocks.
-%
-%\begin{pyconsole}
-%connection_matrix = np.array([
-%  0.8, 0.2, 0.2,
-%  0.2, 0.8, 0.2,
-%  0.2, 0.2, 0.8
-%]).reshape((3, 3))
-%\end{pyconsole}
-%
-%We also set the within-block edges to be Poisson-weighted with
-%mean 20,
-%and the between-block edges to be Poisson-weighted with smaller
-%mean 10.
-%
-%\begin{pyconsole}
-%weight_matrix = np.array([
-%  20, 10, 10,
-%  10, 20, 10,
-%  10, 10, 20
-%]).reshape((3, 3))
-%
-%G4 = mcsa.sample_dsbm(block_sizes, connection_matrix, weight_matrix,
-%  sample_weight_type="poisson")
-%\end{pyconsole}
-%
-%Now we can run the motif-based spectral clustering algorithm
-%on this network with the 3-cycle motif $\mathcal{M}_1$.
-%We build a functional MAM,
-%weighting the instances by their mean edge weights,
-%using the sparse formulation.
-%We restrict this MAM to its largest connected component.
-%Then we construct a random-walk Laplacian and embed it using the
-%first four eigenvalues and eigenvectors.
-%Finally we extract three clusters.
-%
-%\begin{pyconsole}
-%motif_cluster = mccl.run_motif_clustering(G4, motif_name="M1", motif_type="func",
-%  mam_weight_type="mean", mam_method="sparse", type_lap="rw", num_eigs=4,
-%  restrict=True, num_clusts=3
-%)
-%\end{pyconsole}
-%
-%We can evaluate the performance by comparing it to the ground-truth
-%labels using the adjusted Rand index
-%from the \texttt{sklearn} package:
-%
-%\begin{pyconsole}
-%truth = 10 * [0] + 10 * [1] + 10 * [2]
-%sklearn.metrics.adjusted_rand_score(motif_cluster["clusts"], truth)
-%\end{pyconsole}
-%
-%A larger value indicates better recovery of the blocks,
-%with a value of one indicating perfect agreement.
-%
-%
-%
-%
-%\bibliographystyle{abbrv}
-%\bibliography{refs}
-
+The matrix above has binary entries,
+indicating that it is the adjacency matrix of an unweighted
+directed network.
+The \texttt{MotifCluster} package also allows sampling of weighted directed networks.
+The simplest example of this is ``constant'' weighting,
+where we simply multiply each block of the adjacency matrix by a constant.
 
 \begin{tcolorbox}[colback=black!5!white,colframe=black!15!white]
 \begin{juliablock}
-println("hi")
+weight_matrix = [5 2; 2 5]
+mam = sample_dsbm(block_sizes, connection_matrix, weight_matrix, "constant")
+display(mam)
+\end{juliablock}
+\texttt{\obeylines\printpythontex}
+\end{tcolorbox}
+
+\subsubsection{Poisson-weighted directed stochastic block models}
+
+We can also use weights drawn randomly from a Poisson distribution,
+where each block in the adjacency matrix has its own mean parameter.
+This returns an adjacency matrix with weights which could be any natural
+number, but is equal in expectation to the constant version.
+Note that in this scheme it is possible for the weight to be zero,
+removing an edge which might have otherwise been present.
+
+\begin{tcolorbox}[colback=black!5!white,colframe=black!15!white]
+\begin{juliablock}
+mam = sample_dsbm(block_sizes, connection_matrix, weight_matrix, "poisson")
+display(mam)
+\end{juliablock}
+\texttt{\obeylines\printpythontex}
+\end{tcolorbox}
+
+
+\subsection{Bipartite stochastic block models}
+
+The \texttt{MotifCluster} package can also be used to sample
+bipartite networks.
+The vertices of a bipartite network are partitioned
+into ``source'' and ``destination'' vertices,
+and edges are only permitted to go from source vertices
+to destination vertices.
+Let's sample a DSBM with a single block of two source vertices
+and two blocks of destination vertices, with
+sizes of three and two respectively.
+We can use a strong connection probability of 0.9 to the first block of
+destination vertices,
+and a weaker connection probability of 0.2 to the second.
+
+\begin{tcolorbox}[colback=black!5!white,colframe=black!15!white]
+\begin{juliablock}
+source_block_sizes = [2]
+destination_block_sizes = [3, 2]
+bipartite_connection_matrix = [0.9 0.2]
+mam = sample_bsbm(source_block_sizes, destination_block_sizes,
+                  bipartite_connection_matrix)
+display(mam)
+\end{juliablock}
+\texttt{\obeylines\printpythontex}
+\end{tcolorbox}
+
+\subsubsection{Weighted bipartite stochastic block models}
+
+Similarly to the more general directed stochastic block models,
+we can also use constant-weighted or Poisson-weighted edges for bipartite
+stochastic block models.
+
+\begin{tcolorbox}[colback=black!5!white,colframe=black!15!white]
+\begin{juliablock}
+bipartite_weight_matrix = [7 2]
+mam = sample_bsbm(source_block_sizes, destination_block_sizes,
+                  bipartite_connection_matrix, bipartite_weight_matrix, "poisson")
+display(mam)
 \end{juliablock}
 \texttt{\obeylines\printpythontex}
 \end{tcolorbox}
 
 
 
+
+\section{Spectral embedding with motif adjacency matrices}
+
+Spectral methods involve performing eigenvalue and
+eigenvector operations on matrices related to networks.
+We work here with weighted \emph{undirected} networks
+(which have symmetric adjacency matrices),
+because motif adjacency matrices are always symmetric.
+
+\subsection{Laplacian matrices}
+
+We can construct two types of Laplacian matrix for a network
+using the \texttt{MotifCluster} package.
+First we create an example of a weighted undirected network $\mathcal{G}_2$.
+
+\begin{tcolorbox}[colback=black!5!white,colframe=black!15!white]
+\begin{juliablock}
+G2 = sparse([0 2 0 0; 2 0 4 3; 0 4 0 5; 0 3 5 0])
+\end{juliablock}
+\end{tcolorbox}
+
+\subsubsection{Combinatorial Laplacian}
+
+The combinatorial Laplacian of an adjacency matrix $G$ is
+$L_\mathrm{c} = D - G$,
+where $D$ is the diagonal matrix of weighted vertex degrees:
+
+\begin{tcolorbox}[colback=black!5!white,colframe=black!15!white]
+\begin{juliablock}
+lap = MotifCluster.build_laplacian(G2, "comb")
+display(lap)
+\end{juliablock}
+\texttt{\obeylines\printpythontex}
+\end{tcolorbox}
+
+\subsubsection{Random-walk Laplacian}
+
+The random-walk Laplacian of an adjacency matrix $G$ is
+$L_\mathrm{rw} = I - D^{-1}G$,
+where $D$ is the diagonal matrix of weighted vertex degrees
+and $I$ is the identity matrix:
+
+\begin{tcolorbox}[colback=black!5!white,colframe=black!15!white]
+\begin{juliablock}
+lap = MotifCluster.build_laplacian(G2, "rw")
+display(lap)
+\end{juliablock}
+\texttt{\obeylines\printpythontex}
+\end{tcolorbox}
+
+\subsection{Laplace embedding}
+
+Once we have constructed the desired Laplacian matrix,
+we use it to embed each vertex into $\mathbb{R}^l$
+by finding the eigenvectors associated with
+its first (smallest magnitude) few eigenvalues.
+Below we use the random-walk Laplacian,
+and embedding dimension $l=2$:
+
+\begin{tcolorbox}[colback=black!5!white,colframe=black!15!white]
+\begin{juliablock}
+spectrum = MotifCluster.run_laplace_embedding(G2, 2, "rw")
+display(spectrum["vals"])
+display(spectrum["vects"])
+\end{juliablock}
+\texttt{\obeylines\printpythontex}
+\end{tcolorbox}
+
+For a random-walk Laplacian,
+the first eigenvalue is always zero (up to machine precision)
+and its corresponding eigenvector is constant.
+
+\subsection{Motif embedding}
+
+Motif embedding is simply the process of building an MAM
+and performing Laplace embedding with it.
+As an example we use the
+\texttt{run\_motif\_embedding}
+function on the network $\mathcal{G}_3$ below.
+
+\begin{tcolorbox}[colback=black!5!white,colframe=black!15!white]
+\begin{juliablock}
+G3 = sparse([0 0 0 0; 0 0 2 3; 0 4 0 0; 4 0 5 0])
+\end{juliablock}
+\end{tcolorbox}
+
+An artifact of building MAMs is that although the original network may
+be connected, there is no guarantee that the MAM is also connected.
+Hence the MAM is restricted to its largest connected component
+before the Laplacian is formed.
+We observe this with the network $\mathcal{G}_3$,
+in which only three of the four vertices are embedded.
+
+\begin{tcolorbox}[colback=black!5!white,colframe=black!15!white]
+\begin{juliablock}
+spectrum = MotifCluster.run_motif_embedding(G3, "M1", "func",
+                                            "unweighted", 2, "rw", true)
+display(spectrum["vals"])
+display(spectrum["vects"])
+\end{juliablock}
+\texttt{\obeylines\printpythontex}
+\end{tcolorbox}
+
+
+
+
+\section{Motif-based spectral clustering}
+
+The overall aim of \texttt{MotifCluster} is to use motifs for spectral clustering,
+so now we see how to extract clusters from the motif-based
+eigenvector embeddings.
+The \texttt{run\_motif\_clustering} function handles the entire process of
+building an MAM, restricting it to its largest connected component,
+performing eigenvector embedding, and extracting clusters.
+We therefore take the opportunity to showcase the ability of
+\texttt{MotifCluster} to recover the blocks of a DSBM,
+demonstrating all of the methods outlined in this vignette.\\
+
+Let's use a DSBM with three blocks of 10 nodes each.
+
+\begin{tcolorbox}[colback=black!5!white,colframe=black!15!white]
+\begin{juliablock}
+block_sizes = repeat([10], 3)
+\end{juliablock}
+\end{tcolorbox}
+
+We use strong connections of 0.8 within the blocks,
+and weaker connections of 0.2 between the blocks.
+
+\begin{tcolorbox}[colback=black!5!white,colframe=black!15!white]
+\begin{juliablock}
+connection_matrix = [0.8 0.2 0.2; 0.2 0.8 0.2; 0.2 0.2 0.8]
+\end{juliablock}
+\end{tcolorbox}
+
+We also set the within-block edges to be Poisson-weighted with
+mean 20,
+and the between-block edges to be Poisson-weighted with smaller
+mean 10.
+
+\begin{tcolorbox}[colback=black!5!white,colframe=black!15!white]
+\begin{juliablock}
+weight_matrix = [20 10 10; 10 20 10; 10 10 20]
+G4 = sample_dsbm(block_sizes, connection_matrix, weight_matrix, "poisson")
+\end{juliablock}
+\end{tcolorbox}
+
+Now we can run the motif-based spectral clustering algorithm
+on this network with the 3-cycle motif $\mathcal{M}_1$.
+We build a functional MAM,
+weighting the instances by their mean edge weights,
+using the sparse formulation.
+We restrict this MAM to its largest connected component.
+Then we construct a random-walk Laplacian and embed it using the
+first four eigenvalues and eigenvectors.
+Finally we extract three clusters.
+
+\begin{tcolorbox}[colback=black!5!white,colframe=black!15!white]
+\begin{juliablock}
+motif_cluster = run_motif_clustering(G4, "M1", "func",
+                                     "mean", 4, "rw", 3, true)
+\end{juliablock}
+\end{tcolorbox}
+
+We can evaluate the performance by comparing it to the ground-truth
+labels using the adjusted Rand index:
+
+\begin{tcolorbox}[colback=black!5!white,colframe=black!15!white]
+\begin{juliablock}
+truth = [repeat([1], 10); repeat([2], 10); repeat([2], 10)]
+adjusted_rand_index(motif_cluster["clusts"], truth)
+\end{juliablock}
+\end{tcolorbox}
+
+A larger value indicates better recovery of the blocks,
+with a value of one indicating perfect agreement.
+
+\bibliographystyle{abbrv}
+\bibliography{refs}
 
 \end{document}

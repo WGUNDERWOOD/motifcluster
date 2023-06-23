@@ -19,7 +19,8 @@ Sample the (weighted) adjacency matrix of a (weighted) directed stochastic
 block model (DSBM) with specified parameters.
 """
 function sample_dsbm(block_sizes::Vector{Int}, connection_matrix::Matrix{<:Real},
-        weight_matrix::Union{Matrix{<:Real}, Nothing}, sample_weight_type::String)
+        weight_matrix::Union{Matrix{<:Real}, Nothing}=nothing,
+        sample_weight_type::String="unweighted")
 
     # check args
     @assert all(block_sizes .> 0)
@@ -65,7 +66,8 @@ Sample the (weighted) adjacency matrix of a (weighted) bipartite stochastic bloc
 """
 function sample_bsbm(source_block_sizes::Vector{Int}, dest_block_sizes::Vector{Int},
         bipartite_connection_matrix::Matrix{<:Real},
-        bipartite_weight_matrix::Union{Matrix{<:Real}, Nothing}, sample_weight_type::String)
+        bipartite_weight_matrix::Union{Matrix{<:Real}, Nothing}=nothing,
+        sample_weight_type::String="unweighted")
 
     # check args
     @assert all(source_block_sizes .> 0)
