@@ -7,14 +7,16 @@
         connection_matrix = [0.4 0.5; 0.6 0.7]
         n_reps = 2000
         weight_matrix = nothing
-        G = MotifCluster.sample_dsbm(block_sizes, connection_matrix,
-                                     weight_matrix, sample_weight_type)
+        G = MotifCluster.sample_dsbm(block_sizes, connection_matrix;
+                                     weight_matrix = weight_matrix,
+                                     sample_weight_type = sample_weight_type)
         G_vals = [0, 1]
         @test all(g in G_vals for g in G)
         G = zeros(5, 5)
         for rep in 1:n_reps
-            G += MotifCluster.sample_dsbm(block_sizes, connection_matrix,
-                                          weight_matrix, sample_weight_type)
+            G += MotifCluster.sample_dsbm(block_sizes, connection_matrix;
+                                          weight_matrix = weight_matrix,
+                                          sample_weight_type = sample_weight_type)
         end
         G /= n_reps
         ans = sparse([0   0.4 0.5 0.5 0.5;
@@ -32,15 +34,17 @@
         connection_matrix = [0.4 0.5; 0.6 0.7]
         n_reps = 2000
         weight_matrix = [20 30; 40 50]
-        G = MotifCluster.sample_dsbm(block_sizes, connection_matrix,
-                                     weight_matrix,sample_weight_type)
+        G = MotifCluster.sample_dsbm(block_sizes, connection_matrix;
+                                     weight_matrix = weight_matrix,
+                                     sample_weight_type = sample_weight_type)
         G_vals = [0, 20, 30, 40, 50]
         @test all(g in G_vals for g in G)
 
         G = zeros(5, 5)
         for rep in 1:n_reps
-            G += MotifCluster.sample_dsbm(block_sizes, connection_matrix,
-                                          weight_matrix, sample_weight_type)
+            G += MotifCluster.sample_dsbm(block_sizes, connection_matrix;
+                                          weight_matrix = weight_matrix,
+                                          sample_weight_type = sample_weight_type)
         end
         G /= n_reps
         ans = sparse([ 0  8 15 15 15;
@@ -58,14 +62,16 @@
         connection_matrix = [0.4 0.5; 0.6 0.7]
         n_reps = 2000
         weight_matrix = [20 30; 40 50]
-        G = MotifCluster.sample_dsbm(block_sizes, connection_matrix,
-                                     weight_matrix, sample_weight_type)
+        G = MotifCluster.sample_dsbm(block_sizes, connection_matrix;
+                                     weight_matrix = weight_matrix,
+                                     sample_weight_type = sample_weight_type)
         @test all(G .== floor.(G))
         @test all(G .>= 0)
         G = zeros(5, 5)
         for rep in 1:n_reps
-            G += MotifCluster.sample_dsbm(block_sizes, connection_matrix,
-                                          weight_matrix, sample_weight_type)
+            G += MotifCluster.sample_dsbm(block_sizes, connection_matrix;
+                                          weight_matrix = weight_matrix,
+                                          sample_weight_type = sample_weight_type)
         end
         G /= n_reps
         ans = sparse([ 0  8 15 15 15;
@@ -81,7 +87,9 @@
         n = Int(1e5)
         block_sizes = [n]
         connection_matrix = reshape([10 / n], (1, 1))
-        G = MotifCluster.sample_dsbm(block_sizes, connection_matrix, nothing, "unweighted")
+        G = MotifCluster.sample_dsbm(block_sizes, connection_matrix;
+                                     weight_matrix = nothing,
+                                     sample_weight_type = "unweighted")
         @test size(G) == (n, n)
     end
 
@@ -94,15 +102,17 @@
         n_reps = 2000
         bipartite_weight_matrix = nothing
         G = MotifCluster.sample_bsbm(source_block_sizes, dest_block_sizes,
-                                     bipartite_connection_matrix, bipartite_weight_matrix,
-                                     sample_weight_type)
+                                     bipartite_connection_matrix;
+                                     bipartite_weight_matrix = bipartite_weight_matrix,
+                                     sample_weight_type = sample_weight_type)
         G_vals = [0, 1]
         @test all(g in G_vals for g in G)
         G = zeros(6, 6)
         for rep in 1:n_reps
             G += MotifCluster.sample_bsbm(source_block_sizes, dest_block_sizes,
-                                          bipartite_connection_matrix, bipartite_weight_matrix,
-                                          sample_weight_type)
+                                          bipartite_connection_matrix;
+                                          bipartite_weight_matrix = bipartite_weight_matrix,
+                                          sample_weight_type = sample_weight_type)
         end
         G /= n_reps
         ans = sparse([0 0 0 0.3 0.4 0.5;
@@ -123,15 +133,17 @@
         n_reps = 2000
         bipartite_weight_matrix = [10 20 30; 40 50 60]
         G = MotifCluster.sample_bsbm(source_block_sizes, dest_block_sizes,
-                                     bipartite_connection_matrix, bipartite_weight_matrix,
-                                     sample_weight_type)
+                                     bipartite_connection_matrix;
+                                     bipartite_weight_matrix = bipartite_weight_matrix,
+                                     sample_weight_type = sample_weight_type)
         G_vals = [0, 10, 20, 30, 40, 50, 60]
         @test all(g in G_vals for g in G)
         G = zeros(6, 6)
         for rep in 1:n_reps
             G += MotifCluster.sample_bsbm(source_block_sizes, dest_block_sizes,
-                                          bipartite_connection_matrix, bipartite_weight_matrix,
-                                          sample_weight_type)
+                                          bipartite_connection_matrix;
+                                          bipartite_weight_matrix = bipartite_weight_matrix,
+                                          sample_weight_type = sample_weight_type)
         end
         G /= n_reps
         ans = sparse([0 0 0  3  8 15;
@@ -152,15 +164,17 @@
         n_reps = 2000
         bipartite_weight_matrix = [10 20 30; 40 50 60]
         G = MotifCluster.sample_bsbm(source_block_sizes, dest_block_sizes,
-                                     bipartite_connection_matrix, bipartite_weight_matrix,
-                                     sample_weight_type)
+                                     bipartite_connection_matrix;
+                                     bipartite_weight_matrix = bipartite_weight_matrix,
+                                     sample_weight_type = sample_weight_type)
         @test all(G .== floor.(G))
         @test all(G .>= 0)
         G = zeros(6, 6)
         for rep in 1:n_reps
             G += MotifCluster.sample_bsbm(source_block_sizes, dest_block_sizes,
-                                          bipartite_connection_matrix, bipartite_weight_matrix,
-                                          sample_weight_type)
+                                          bipartite_connection_matrix;
+                                          bipartite_weight_matrix = bipartite_weight_matrix,
+                                          sample_weight_type = sample_weight_type)
         end
         G /= n_reps
         ans = sparse([0 0 0  3  8 15;

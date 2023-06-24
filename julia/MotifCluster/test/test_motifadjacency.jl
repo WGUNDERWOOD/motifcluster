@@ -228,7 +228,9 @@
 
         motifs = MotifCluster.get_motif_names()
         for motif in motifs
-            mam = MotifCluster.build_motif_adjacency_matrix(adj_mat, motif, "func", "unweighted")
+            mam = MotifCluster.build_motif_adjacency_matrix(adj_mat, motif;
+                                                            motif_type="func",
+                                                            mam_weight_type="unweighted")
             @test isapprox(mam, ans[motif])
         end
     end
@@ -461,7 +463,9 @@
 
         motifs = MotifCluster.get_motif_names()
         for motif in motifs
-            mam = MotifCluster.build_motif_adjacency_matrix(adj_mat, motif, "struc", "unweighted")
+            mam = MotifCluster.build_motif_adjacency_matrix(adj_mat, motif;
+                                                            motif_type="struc",
+                                                            mam_weight_type="unweighted")
             @test isapprox(mam, ans[motif])
         end
     end
@@ -694,7 +698,9 @@
 
         motifs = MotifCluster.get_motif_names()
         for motif in motifs
-            mam = MotifCluster.build_motif_adjacency_matrix(adj_mat, motif, "func", "mean")
+            mam = MotifCluster.build_motif_adjacency_matrix(adj_mat, motif;
+                                                            motif_type="func",
+                                                            mam_weight_type="mean")
             @test isapprox(mam, ans[motif])
         end
     end
@@ -927,7 +933,9 @@
 
         motifs = MotifCluster.get_motif_names()
         for motif in motifs
-            mam = MotifCluster.build_motif_adjacency_matrix(adj_mat, motif, "struc", "mean")
+            mam = MotifCluster.build_motif_adjacency_matrix(adj_mat, motif;
+                                                            motif_type="struc",
+                                                            mam_weight_type="mean")
             @test isapprox(mam, ans[motif])
         end
     end
@@ -1160,7 +1168,9 @@
 
         motifs = MotifCluster.get_motif_names()
         for motif in motifs
-            mam = MotifCluster.build_motif_adjacency_matrix(adj_mat, motif, "func", "product")
+            mam = MotifCluster.build_motif_adjacency_matrix(adj_mat, motif;
+                                                            motif_type="func",
+                                                            mam_weight_type="product")
             @test isapprox(mam, ans[motif])
         end
     end
@@ -1394,7 +1404,9 @@
         motifs = MotifCluster.get_motif_names()
 
         for motif in motifs
-            mam = MotifCluster.build_motif_adjacency_matrix(adj_mat, motif, "struc", "product")
+            mam = MotifCluster.build_motif_adjacency_matrix(adj_mat, motif;
+                                                            motif_type="struc",
+                                                            mam_weight_type="product")
             @test isapprox(mam, ans[motif])
         end
     end

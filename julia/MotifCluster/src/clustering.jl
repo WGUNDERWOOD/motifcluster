@@ -42,14 +42,19 @@ weighting scheme, embedding dimension, number of clusters and
 Laplacian type.
 Optionally restrict to the largest connected component before clustering.
 """
-function run_motif_clustering(adj_mat::AbstractMatrix{<:Real}, motif_name::String,
-                              motif_type::String, mam_weight_type::String, num_eigs::Int,
-                              type_lap::String, num_clusts::Int, restrict::Bool)
+function run_motif_clustering(adj_mat::AbstractMatrix{<:Real},
+                              motif_name::String;
+                              motif_type::String = "struc",
+                              mam_weight_type::String = "unweighted",
+                              num_eigs::Int = 2,
+                              type_lap::String = "comb",
+                              num_clusts::Int = 2,
+                              restrict::Bool = true)
     @assert motif_type in ["struc", "func"]
     @assert mam_weight_type in ["unweighted", "mean", "product"]
     @assert type_lap in ["comb", "rw"]
-    embedding = run_motif_embedding(adj_mat, motif_name, motif_type, mam_weight_type,
-                                    num_eigs, type_lap, restrict)
+    embedding = run_motif_embedding(sparse(adj_mat), motif_name, motif_type,
+                                    mam_weight_type, num_eigs, type_lap, restrict)
     cluster_assigns = cluster_spectrum(embedding["vects"], num_clusts)
     ans = Dict(
                "adj_mat" => adj_mat,

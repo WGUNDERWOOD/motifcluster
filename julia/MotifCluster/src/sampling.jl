@@ -18,9 +18,9 @@ end
 Sample the (weighted) adjacency matrix of a (weighted) directed stochastic
 block model (DSBM) with specified parameters.
 """
-function sample_dsbm(block_sizes::Vector{Int}, connection_matrix::Matrix{<:Real},
-        weight_matrix::Union{Matrix{<:Real}, Nothing}=nothing,
-        sample_weight_type::String="unweighted")
+function sample_dsbm(block_sizes::Vector{Int}, connection_matrix::Matrix{<:Real};
+        weight_matrix::Union{Matrix{<:Real}, Nothing} = nothing,
+        sample_weight_type::String = "unweighted")
 
     # check args
     @assert all(block_sizes .> 0)
@@ -65,9 +65,9 @@ end
 Sample the (weighted) adjacency matrix of a (weighted) bipartite stochastic block model (BSBM).
 """
 function sample_bsbm(source_block_sizes::Vector{Int}, dest_block_sizes::Vector{Int},
-        bipartite_connection_matrix::Matrix{<:Real},
-        bipartite_weight_matrix::Union{Matrix{<:Real}, Nothing}=nothing,
-        sample_weight_type::String="unweighted")
+        bipartite_connection_matrix::Matrix{<:Real};
+        bipartite_weight_matrix::Union{Matrix{<:Real}, Nothing} = nothing,
+        sample_weight_type::String = "unweighted")
 
     # check args
     @assert all(source_block_sizes .> 0)
@@ -103,7 +103,9 @@ function sample_bsbm(source_block_sizes::Vector{Int}, dest_block_sizes::Vector{I
     end
 
     # sample BSBM
-    adj_mat = sample_dsbm(block_sizes, connection_matrix, weight_matrix, sample_weight_type)
+    adj_mat = sample_dsbm(block_sizes, connection_matrix;
+                          weight_matrix = weight_matrix,
+                          sample_weight_type = sample_weight_type)
     return adj_mat
 end
 

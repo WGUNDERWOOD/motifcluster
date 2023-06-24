@@ -4,42 +4,43 @@ Entry (`i, j`) of a motif adjacency matrix is the
 sum of the weights of all motifs containing both
 nodes `i` and `j`.
 """
-function build_motif_adjacency_matrix(adj_mat::AbstractArray{<:Real}, motif_name::String,
+function build_motif_adjacency_matrix(adj_mat::AbstractArray{<:Real}, motif_name::String;
         motif_type::String = "struc", mam_weight_type::String = "unweighted")
+    adj_mat_sparse = sparse(adj_mat)
     if motif_name == "Ms"
-        return mam_Ms(adj_mat, motif_type, mam_weight_type)
+        return mam_Ms(adj_mat_sparse, motif_type, mam_weight_type)
     elseif motif_name == "Md"
-        return mam_Md(adj_mat, mam_weight_type)
+        return mam_Md(adj_mat_sparse, mam_weight_type)
     elseif motif_name == "M1"
-        return mam_M1(adj_mat, motif_type, mam_weight_type)
+        return mam_M1(adj_mat_sparse, motif_type, mam_weight_type)
     elseif motif_name == "M2"
-        return mam_M2(adj_mat, motif_type, mam_weight_type)
+        return mam_M2(adj_mat_sparse, motif_type, mam_weight_type)
     elseif motif_name == "M3"
-        return mam_M3(adj_mat, motif_type, mam_weight_type)
+        return mam_M3(adj_mat_sparse, motif_type, mam_weight_type)
     elseif motif_name == "M4"
-        return mam_M4(adj_mat, mam_weight_type)
+        return mam_M4(adj_mat_sparse, mam_weight_type)
     elseif motif_name == "M5"
-        return mam_M5(adj_mat, motif_type, mam_weight_type)
+        return mam_M5(adj_mat_sparse, motif_type, mam_weight_type)
     elseif motif_name == "M6"
-        return mam_M6(adj_mat, motif_type, mam_weight_type)
+        return mam_M6(adj_mat_sparse, motif_type, mam_weight_type)
     elseif motif_name == "M7"
-        return mam_M7(adj_mat, motif_type, mam_weight_type)
+        return mam_M7(adj_mat_sparse, motif_type, mam_weight_type)
     elseif motif_name == "M8"
-        return mam_M8(adj_mat, motif_type, mam_weight_type)
+        return mam_M8(adj_mat_sparse, motif_type, mam_weight_type)
     elseif motif_name == "M9"
-        return mam_M9(adj_mat, motif_type, mam_weight_type)
+        return mam_M9(adj_mat_sparse, motif_type, mam_weight_type)
     elseif motif_name == "M10"
-        return mam_M10(adj_mat, motif_type, mam_weight_type)
+        return mam_M10(adj_mat_sparse, motif_type, mam_weight_type)
     elseif motif_name == "M11"
-        return mam_M11(adj_mat, motif_type, mam_weight_type)
+        return mam_M11(adj_mat_sparse, motif_type, mam_weight_type)
     elseif motif_name == "M12"
-        return mam_M12(adj_mat, motif_type, mam_weight_type)
+        return mam_M12(adj_mat_sparse, motif_type, mam_weight_type)
     elseif motif_name == "M13"
-        return mam_M13(adj_mat, motif_type, mam_weight_type)
+        return mam_M13(adj_mat_sparse, motif_type, mam_weight_type)
     elseif motif_name == "Mcoll"
-        return mam_Mcoll(adj_mat, motif_type, mam_weight_type)
+        return mam_Mcoll(adj_mat_sparse, motif_type, mam_weight_type)
     elseif motif_name == "Mexpa"
-        return mam_Mexpa(adj_mat, motif_type, mam_weight_type)
+        return mam_Mexpa(adj_mat_sparse, motif_type, mam_weight_type)
     end
 end
 
