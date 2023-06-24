@@ -2,7 +2,8 @@
 Get cluster assignments from a spectrum using k-means++.
 """
 function cluster_spectrum(vects::Matrix{<:Real}, num_clusts::Int)
-    kmeans_plus_plus = kmeans(vects', num_clusts, init = :kmpp)
+    kmeans_plus_plus = kmeans(vects', num_clusts, init = :kmpp,
+                              maxiter = 1000, tol = 1e-8)
     cluster_assigns = assignments(kmeans_plus_plus)
     return cluster_assigns
 end

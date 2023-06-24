@@ -1,6 +1,6 @@
 \documentclass{article}
 \usepackage[usefamily=julia]{pythontex}
-\usepackage[margin=1in]{geometry}
+\usepackage[margin=0.92in]{geometry}
 \usepackage{microtype}
 \usepackage{amsmath}
 \usepackage{amssymb}
@@ -52,11 +52,13 @@ The package can be installed from the Julia General registry with
 \texttt{] add MotifCluster}
 \end{tcolorbox}
 
-We load some other helpful packages for this tutorial:
+We load some other helpful packages for this tutorial and set the random seed:
 
 \begin{tcolorbox}[colback=black!5!white,colframe=black!15!white]
 \begin{juliablock}
 using SparseArrays
+using Random
+Random.seed!(0)
 \end{juliablock}
 \end{tcolorbox}
 
@@ -469,23 +471,23 @@ block_sizes = repeat([10], 3)
 \end{juliablock}
 \end{tcolorbox}
 
-We use strong connections of 0.8 within the blocks,
+We use strong connections of 0.9 within the blocks,
 and weaker connections of 0.2 between the blocks.
 
 \begin{tcolorbox}[colback=black!5!white,colframe=black!15!white]
 \begin{juliablock}
-connection_matrix = [0.8 0.2 0.2; 0.2 0.8 0.2; 0.2 0.2 0.8]
+connection_matrix = [0.9 0.2 0.2; 0.2 0.9 0.2; 0.2 0.2 0.9]
 \end{juliablock}
 \end{tcolorbox}
 
 We also set the within-block edges to be Poisson-weighted with
-mean 20,
+mean 30,
 and the between-block edges to be Poisson-weighted with smaller
 mean 10.
 
 \begin{tcolorbox}[colback=black!5!white,colframe=black!15!white]
 \begin{juliablock}
-weight_matrix = [20 10 10; 10 20 10; 10 10 20]
+weight_matrix = [30 10 10; 10 30 10; 10 10 30]
 G4 = sample_dsbm(block_sizes, connection_matrix, weight_matrix, "poisson")
 \end{juliablock}
 \end{tcolorbox}
@@ -512,9 +514,11 @@ labels using the adjusted Rand index:
 
 \begin{tcolorbox}[colback=black!5!white,colframe=black!15!white]
 \begin{juliablock}
-truth = [repeat([1], 10); repeat([2], 10); repeat([2], 10)]
-adjusted_rand_index(motif_cluster["clusts"], truth)
+truth = [repeat([1], 10); repeat([2], 10); repeat([3], 10)]
+score = adjusted_rand_index(motif_cluster["clusts"], truth)
+println(score)
 \end{juliablock}
+\texttt{\obeylines\printpythontex}
 \end{tcolorbox}
 
 A larger value indicates better recovery of the blocks,
