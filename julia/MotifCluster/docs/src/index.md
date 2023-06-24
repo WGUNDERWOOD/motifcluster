@@ -1,12 +1,11 @@
 # MotifCluster
 
-<img style="float: right; width: 130"
-src="https://github.com/WGUNDERWOOD/motifcluster/raw/develop/sticker/hex_sticker_small.png">
+![motifcluster logo](https://github.com/WGUNDERWOOD/motifcluster/raw/develop/sticker/hex_sticker_small.png)
 
 A Julia package for motif-based spectral clustering of weighted directed networks.
 
 ## Introduction
-The **motifcluster** package provides
+The **MotifCluster** package provides
 implementations of motif-based spectral clustering
 of weighted directed networks in Julia.
 These provide the capability for:
@@ -38,11 +37,11 @@ From the Julia General registry:
 - Graphs
 
 ## Documentation
-Documentation for the **motifcluster** package is available on 
+Documentation for the **MotifCluster** package is available on 
 [the web](https://wgunderwood.github.io/MotifCluster.jl/stable/).
 
 ## Tutorial
-A tutorial for the **motifcluster** package
+A tutorial for the **MotifCluster** package
 is available on Github in the
 [tutorial directory](https://github.com/WGUNDERWOOD/motifcluster/blob/main/julia/MotifCluster/tutorial/motifcluster_tutorial.pdf).
 
@@ -55,8 +54,3 @@ is available on Github in the
   [GitHub](https://github.com/WGUNDERWOOD/motifcluster)
 - Documentation on
   [the web](https://wgunderwood.github.io/MotifCluster.jl/stable/).
-
-```@autodocs
-Modules = [MotifCluster]
-Pages   = ["motifadjacency.jl", "utils.jl", "indicators.jl", "spectral.jl", "clustering.jl", "sampling.jl"]
-```

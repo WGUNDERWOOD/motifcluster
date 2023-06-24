@@ -4,6 +4,11 @@
 [![PyPI version](https://img.shields.io/pypi/v/motifcluster?color=7733BB&label=PyPI)](https://pypi.org/project/motifcluster/)
 [![codecov](https://codecov.io/gh/WGUNDERWOOD/motifcluster/branch/main/graph/badge.svg?token=DbGSOsocw6)](https://codecov.io/gh/WGUNDERWOOD/motifcluster)
 [![python docs status](https://img.shields.io/readthedocs/motifcluster?label=python%20docs)](https://motifcluster.readthedocs.io/en/latest/)
+[![Julia build Status](https://github.com/WGUNDERWOOD/DyadicKDE.jl/actions/workflows/CI.yml/badge.svg?branch=main)](https://github.com/WGUNDERWOOD/DyadicKDE.jl/actions/workflows/CI.yml?query=branch%3Amain)
+[![Julia docs status](https://img.shields.io/badge/docs-stable-blue.svg)](https://WGUNDERWOOD.github.io/DyadicKDE.jl/stable)
+[![Julia Aqua QA](https://raw.githubusercontent.com/JuliaTesting/Aqua.jl/master/badge.svg)](https://github.com/JuliaTesting/Aqua.jl)
+
+TODO split badges by language
 
 
 
@@ -19,7 +24,7 @@ Motif-based spectral clustering of weighted directed networks
 ## Introduction
 
 This repository provides implementations of motif-based spectral clustering
-of weighted directed networks in R and in Python.
+of weighted directed networks in R, Python and Julia.
 This code is based on methods detailed in
 [Underwood, Elliott and Cucuringu, 2020],
 which is available at
@@ -44,7 +49,7 @@ and is for development purposes only.
 
   - [William George Underwood](https://wgunderwood.github.io/),
     Princeton University
-    (Python, R, maintainer)
+    (Python, R, Julia, maintainer)
   - [Andrew Elliott](https://www.turing.ac.uk/people/researchers/andrew-elliott),
     The Alan Turing Institute
     (Python)
@@ -52,7 +57,7 @@ and is for development purposes only.
 ### License
 
 This repository
-and its included R and Python packages
+and its included R, Python and Julia packages
 are all licensed under
 [GPLv3](http://gplv3.fsf.org/).
 
@@ -130,6 +135,37 @@ The Python package has the following dependencies:
 
 Full documentation is available at
 [motifcluster.readthedocs.io](https://motifcluster.readthedocs.io/).
+
+
+
+
+## Julia package
+
+The **MotifCluster** Julia package is in the
+[julia](https://github.com/WGUNDERWOOD/motifcluster/tree/main/julia)
+directory.
+
+### Installation
+
+From the Julia General registry:
+
+```
+] add MotifCluster
+```
+
+### Dependencies
+- Aqua
+- Clustering
+- Distributions
+- Graphs
+
+### Documentation
+Documentation for the **MotifCluster** package is available on 
+[the web](https://wgunderwood.github.io/MotifCluster.jl/stable/).
+
+
+
+
 
 
 
