@@ -70,7 +70,7 @@ jobs:
       fail-fast: false
       matrix:
         version:
-          - '1.7'
+          - '^1.7'
           - '1'
         os:
           - ubuntu-latest
@@ -84,8 +84,10 @@ jobs:
           arch: ${{ matrix.arch }}
       - uses: julia-actions/cache@v1
       - uses: julia-actions/julia-buildpkg@v1
-      - run: cd julia/MotifCluster && julia --color=yes --depwarn=yes --inline=yes --project -e 'using Pkg; Pkg.test()'
-      - uses: julia-actions/julia-processcoverage@v1
-      - uses: codecov/codecov-action@v3
-        with:
-          files: lcov.info
+      - run: cd julia/MotifCluster && julia --color=yes --depwarn=yes --inline=yes --project -e 'using Pkg; Pkg.test(coverage=true)'
+    - uses: julia-actions/julia-processcoverage@v1
+      with:
+        directories: julia/MotifCluster/src
+    - uses: codecov/codecov-action@v3
+      with:
+        files: lcov.info
