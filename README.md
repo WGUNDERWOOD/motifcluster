@@ -161,7 +161,7 @@ From the Julia General registry:
 
 ### Documentation
 Documentation for the **MotifCluster** package is available on 
-[the web](https://wgunderwood.github.io/MotifCluster.jl/stable/).
+[the web](https://wgunderwood.github.io/motifcluster/stable/).
 
 
 
