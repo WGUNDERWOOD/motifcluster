@@ -1,7 +1,7 @@
 name = "MotifCluster"
 uuid = "daa9fd3b-41af-4965-b715-a21506bae1e4"
 authors = ["William G Underwood <42812654+WGUNDERWOOD@users.noreply.github.com>"]
-version = "0.1.0"
+version = "0.2.3"
 
 [deps]
 Aqua = "4c88cf16-eb10-579e-8560-4a9242c79595"
