@@ -1,6 +1,6 @@
 all: python R performance sticker todo
 
-.PHONY: python R performance sticker todo act clean
+.PHONY: python R julia performance sticker todo act clean
 
 python:
 	@echo -e "\e[0;35m\033[1mMaking python package...\e[0;30m\033[0m"
@@ -9,6 +9,10 @@ python:
 R:
 	@echo -e "\e[0;35m\033[1mMaking R package...\e[0;30m\033[0m"
 	@cd R/ && make all
+
+julia:
+	@echo -e "\e[0;35m\033[1mMaking Julia package...\e[0;30m\033[0m"
+	@cd julia/ && make all
 
 performance:
 	@echo -e "\e[0;35m\033[1mMaking performance report...\e[0;30m\033[0m"

@@ -158,7 +158,7 @@ we must instead use functional motif instances:
 
 \begin{tcolorbox}[colback=black!5!white,colframe=black!15!white]
 \begin{juliablock}
-mam = build_motif_adjacency_matrix(G1, "M1"; motif_type = "func")
+mam = build_motif_adjacency_matrix(G1, "M1"; motif_type="func")
 display(mam)
 \end{juliablock}
 \texttt{\obeylines\printpythontex}
@@ -189,8 +189,8 @@ both vertices $i$ and $j$:
 
 \begin{tcolorbox}[colback=black!5!white,colframe=black!15!white]
 \begin{juliablock}
-mam = build_motif_adjacency_matrix(G1, "M1"; motif_type = "func",
-                                   mam_weight_type = "mean")
+mam = build_motif_adjacency_matrix(G1, "M1"; motif_type="func",
+                                   mam_weight_type="mean")
 display(mam)
 \end{juliablock}
 \texttt{\obeylines\printpythontex}
@@ -213,8 +213,8 @@ both vertices $i$ and $j$:
 
 \begin{tcolorbox}[colback=black!5!white,colframe=black!15!white]
 \begin{juliablock}
-mam = build_motif_adjacency_matrix(G1, "M1"; motif_type = "func",
-                                   mam_weight_type = "product")
+mam = build_motif_adjacency_matrix(G1, "M1"; motif_type="func",
+                                   mam_weight_type="product")
 display(mam)
 \end{juliablock}
 \texttt{\obeylines\printpythontex}
@@ -279,7 +279,7 @@ where we simply multiply each block of the adjacency matrix by a constant.
 \begin{juliablock}
 weight_matrix = [5 2; 2 5]
 mam = sample_dsbm(block_sizes, connection_matrix;
-                  weight_matrix = weight_matrix, sample_weight_type = "constant")
+                  weight_matrix=weight_matrix, sample_weight_type="constant")
 display(mam)
 \end{juliablock}
 \texttt{\obeylines\printpythontex}
@@ -297,8 +297,8 @@ removing an edge which might have otherwise been present.
 \begin{tcolorbox}[colback=black!5!white,colframe=black!15!white]
 \begin{juliablock}
 mam = sample_dsbm(block_sizes, connection_matrix;
-                  weight_matrix = weight_matrix,
-                  sample_weight_type = "poisson")
+                  weight_matrix=weight_matrix,
+                  sample_weight_type="poisson")
 display(mam)
 \end{juliablock}
 \texttt{\obeylines\printpythontex}
@@ -343,8 +343,8 @@ stochastic block models.
 bipartite_weight_matrix = [7 2]
 mam = sample_bsbm(source_block_sizes, destination_block_sizes,
                   bipartite_connection_matrix,
-                  bipartite_weight_matrix = bipartite_weight_matrix,
-                  sample_weight_type = "poisson")
+                  bipartite_weight_matrix=bipartite_weight_matrix,
+                  sample_weight_type="poisson")
 display(mam)
 \end{juliablock}
 \texttt{\obeylines\printpythontex}
@@ -496,7 +496,7 @@ mean 10.
 \begin{juliablock}
 weight_matrix = [30 10 10; 10 30 10; 10 10 30]
 G4 = sample_dsbm(block_sizes, connection_matrix;
-                 weight_matrix = weight_matrix, sample_weight_type = "poisson")
+                 weight_matrix=weight_matrix, sample_weight_type="poisson")
 \end{juliablock}
 \end{tcolorbox}
 
@@ -513,12 +513,12 @@ Finally we extract three clusters.
 \begin{tcolorbox}[colback=black!5!white,colframe=black!15!white]
 \begin{juliablock}
 motif_cluster = run_motif_clustering(G4, "M1";
-                                     motif_type = "func",
-                                     mam_weight_type = "mean",
-                                     num_eigs = 4,
-                                     type_lap = "rw",
-                                     num_clusts = 3,
-                                     restrict = true)
+                                     motif_type="func",
+                                     mam_weight_type="mean",
+                                     num_eigs=4,
+                                     type_lap="rw",
+                                     num_clusts=3,
+                                     restrict=true)
 \end{juliablock}
 \end{tcolorbox}
 

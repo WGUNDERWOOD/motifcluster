@@ -10,11 +10,11 @@ test:
 
 format:
 	@echo -e "\e[0;35m\033[1mFormatting Julia package...\e[0;30m\033[0m"
-	@cd MotifCluster && julia -e 'using JuliaFormatter; format(".")'
+	@cd MotifCluster && julia --project -e 'using JuliaFormatter; format(".")'
 
 doc:
 	@echo -e "\e[0;35m\033[1mMaking Julia documentation...\e[0;30m\033[0m"
-	@cd MotifCluster/docs && julia make.jl
+	@cd MotifCluster/docs && julia --project=".." make.jl
 
 tutorial:
 	@echo -e "\e[0;35m\033[1mMaking Julia tutorial...\e[0;30m\033[0m"

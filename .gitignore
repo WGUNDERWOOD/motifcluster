@@ -32,6 +32,7 @@ python/coverage.xml
 # julia package
 Manifest.toml
 julia/MotifCluster/docs/build/
+*.cov
 
 # performance
 *.csv
