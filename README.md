@@ -1,25 +1,15 @@
-[![CI](https://github.com/WGUNDERWOOD/motifcluster/actions/workflows/CI.yml/badge.svg)](https://github.com/WGUNDERWOOD/motifcluster/actions/workflows/CI.yml)
-[![license: GPLv3](https://img.shields.io/badge/license-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
-[![CRAN version](https://img.shields.io/cran/v/motifcluster?color=7733BB&label=CRAN)](https://cran.r-project.org/web/packages/motifcluster/index.html)
-[![PyPI version](https://img.shields.io/pypi/v/motifcluster?color=7733BB&label=PyPI)](https://pypi.org/project/motifcluster/)
-[![codecov](https://codecov.io/gh/WGUNDERWOOD/motifcluster/branch/main/graph/badge.svg?token=DbGSOsocw6)](https://codecov.io/gh/WGUNDERWOOD/motifcluster)
-[![python docs status](https://img.shields.io/readthedocs/motifcluster?label=python%20docs)](https://motifcluster.readthedocs.io/en/latest/)
-[![Julia build Status](https://github.com/WGUNDERWOOD/DyadicKDE.jl/actions/workflows/CI.yml/badge.svg?branch=main)](https://github.com/WGUNDERWOOD/DyadicKDE.jl/actions/workflows/CI.yml?query=branch%3Amain)
-[![Julia docs status](https://img.shields.io/badge/docs-stable-blue.svg)](https://WGUNDERWOOD.github.io/DyadicKDE.jl/stable)
-[![Julia Aqua QA](https://raw.githubusercontent.com/JuliaTesting/Aqua.jl/master/badge.svg)](https://github.com/JuliaTesting/Aqua.jl)
-
-TODO split badges by language
-
-
-
-
 
 
 # motifcluster <img src="https://github.com/WGUNDERWOOD/motifcluster/raw/main/sticker/hex_sticker_small.png" alt="motifcluster sticker" align="right" width=120 />
 
-
-
 Motif-based spectral clustering of weighted directed networks
+
+[![CI](https://github.com/WGUNDERWOOD/motifcluster/actions/workflows/CI.yml/badge.svg)](https://github.com/WGUNDERWOOD/motifcluster/actions/workflows/CI.yml)
+[![license: GPLv3](https://img.shields.io/badge/license-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+[![codecov](https://codecov.io/gh/WGUNDERWOOD/motifcluster/branch/main/graph/badge.svg?token=DbGSOsocw6)](https://codecov.io/gh/WGUNDERWOOD/motifcluster)
+[![python docs](https://img.shields.io/readthedocs/motifcluster?label=python%20docs)](https://motifcluster.readthedocs.io/en/latest/)
+[![R docs](https://img.shields.io/readthedocs/motifcluster?label=R%20docs)](https://github.com/WGUNDERWOOD/motifcluster/tree/main/R/doc)
+[![Julia docs](https://img.shields.io/readthedocs/motifcluster?label=Julia%20docs)](https://wgunderwood.github.io/motifcluster/stable/)
 
 ## Introduction
 
