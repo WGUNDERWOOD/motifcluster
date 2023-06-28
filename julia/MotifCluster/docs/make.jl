@@ -8,4 +8,4 @@ makedocs(sitename="MotifCluster.jl",
          pages=["Home" => "index.md",
                 "Documentation" => "documentation.md"])
 
-deploydocs(repo="github.com/WGUNDERWOOD/MotifCluster.jl.git")
+deploydocs(repo="github.com/WGUNDERWOOD/motifcluster.git")
