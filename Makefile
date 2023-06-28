@@ -1,4 +1,4 @@
-all: python R performance sticker todo
+all: python R julia performance sticker todo
 
 .PHONY: python R julia performance sticker todo act clean
 
