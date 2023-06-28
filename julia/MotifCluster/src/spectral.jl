@@ -2,7 +2,7 @@
 Compute the first few eigenvalues by magnitude and
 associated eigenvectors of a matrix.
 """
-function get_first_eigs(some_mat::SparseMatrixCSC{<:Real, Int}, num_eigs::Int)
+function get_first_eigs(some_mat::SparseMatrixCSC{<:Real,Int}, num_eigs::Int)
     @assert num_eigs >= 1
     spectrum = eigen(Matrix(some_mat))
     vals = spectrum.values[1:num_eigs]
@@ -46,11 +46,12 @@ and then run Laplace embedding with specified Laplacian type and
 number of eigenvalues and eigenvectors.
 """
 function run_motif_embedding(adj_mat::AbstractArray{<:Real}, motif_name::String, motif_type::String,
-        mam_weight_type::String, num_eigs::Int, type_lap::String, restrict::Bool)
+                             mam_weight_type::String, num_eigs::Int, type_lap::String,
+                             restrict::Bool)
     @assert num_eigs >= 1
     motif_adj_mat = build_motif_adjacency_matrix(adj_mat, motif_name;
-                                                 motif_type = motif_type,
-                                                 mam_weight_type = mam_weight_type)
+                                                 motif_type=motif_type,
+                                                 mam_weight_type=mam_weight_type)
     if restrict
         comps = get_largest_component(motif_adj_mat)
         adj_mat_comps = sparse(adj_mat[comps, comps])
@@ -68,7 +69,6 @@ function run_motif_embedding(adj_mat::AbstractArray{<:Real}, motif_name::String,
                      "adj_mat_comps" => adj_mat_comps,
                      "motif_adj_mat_comps" => motif_adj_mat_comps,
                      "vals" => spect["vals"],
-                     "vects" => spect["vects"]
-                    )
+                     "vects" => spect["vects"])
     return embedding
 end

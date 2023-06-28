@@ -19,8 +19,8 @@ Sample the (weighted) adjacency matrix of a (weighted) directed stochastic
 block model (DSBM) with specified parameters.
 """
 function sample_dsbm(block_sizes::Vector{Int}, connection_matrix::Matrix{<:Real};
-        weight_matrix::Union{Matrix{<:Real}, Nothing} = nothing,
-        sample_weight_type::String = "unweighted")
+                     weight_matrix::Union{Matrix{<:Real},Nothing}=nothing,
+                     sample_weight_type::String="unweighted")
 
     # check args
     @assert all(block_sizes .> 0)
@@ -35,7 +35,7 @@ function sample_dsbm(block_sizes::Vector{Int}, connection_matrix::Matrix{<:Real}
 
     # initialize variables
     k = length(block_sizes)
-    block_list = SparseMatrixCSC{<:Real, Int}[]
+    block_list = SparseMatrixCSC{<:Real,Int}[]
 
     for i in 1:k
         for j in 1:k
@@ -65,9 +65,9 @@ end
 Sample the (weighted) adjacency matrix of a (weighted) bipartite stochastic block model (BSBM).
 """
 function sample_bsbm(source_block_sizes::Vector{Int}, dest_block_sizes::Vector{Int},
-        bipartite_connection_matrix::Matrix{<:Real};
-        bipartite_weight_matrix::Union{Matrix{<:Real}, Nothing} = nothing,
-        sample_weight_type::String = "unweighted")
+                     bipartite_connection_matrix::Matrix{<:Real};
+                     bipartite_weight_matrix::Union{Matrix{<:Real},Nothing}=nothing,
+                     sample_weight_type::String="unweighted")
 
     # check args
     @assert all(source_block_sizes .> 0)
@@ -104,29 +104,27 @@ function sample_bsbm(source_block_sizes::Vector{Int}, dest_block_sizes::Vector{I
 
     # sample BSBM
     adj_mat = sample_dsbm(block_sizes, connection_matrix;
-                          weight_matrix = weight_matrix,
-                          sample_weight_type = sample_weight_type)
+                          weight_matrix=weight_matrix,
+                          sample_weight_type=sample_weight_type)
     return adj_mat
 end
-
 
 """
 Generate a small graph for demonstrations.
 """
 function demonstration_graph()
-
-    adj_mat = sparse([0 0  0  0  0  0  0  0  0  0  0 0;
-                      2 0  3  0  6  8  0  0  0  0  0 0;
-                      0 0  0  0  0 10  0  0  0  0  0 0;
-                      0 0  0  0  0  0  0  0  0  0  0 0;
-                      4 5  0  0  0 14  0  0 18 19  0 0;
-                      0 7  9  0 13  0  0  0  0  0 21 0;
-                      0 0 11 12  0 15  0 17  0  0  0 0;
-                      0 0  0  0  0  0 16  0  0  0  0 0;
-                      0 0  0  0  0  0  0  0  0 24  0 0;
-                      0 0  0  0  0 20  0  0  0  0  0 0;
-                      0 0  0  0  0  0 22  0  0  0  0 0;
-                      0 0  0  0  0  0 23  0  0  0  0 0])
+    adj_mat = sparse([0 0 0 0 0 0 0 0 0 0 0 0;
+                      2 0 3 0 6 8 0 0 0 0 0 0;
+                      0 0 0 0 0 10 0 0 0 0 0 0;
+                      0 0 0 0 0 0 0 0 0 0 0 0;
+                      4 5 0 0 0 14 0 0 18 19 0 0;
+                      0 7 9 0 13 0 0 0 0 0 21 0;
+                      0 0 11 12 0 15 0 17 0 0 0 0;
+                      0 0 0 0 0 0 16 0 0 0 0 0;
+                      0 0 0 0 0 0 0 0 0 24 0 0;
+                      0 0 0 0 0 20 0 0 0 0 0 0;
+                      0 0 0 0 0 0 22 0 0 0 0 0;
+                      0 0 0 0 0 0 23 0 0 0 0 0])
 
     return adj_mat
 end

@@ -1,5 +1,4 @@
 @testset verbose = true "Spectral" begin
-
     @testset verbose = true "get_first_eigs" begin
         G = sparse([7 -4 14 0; -4 19 10 0; 14 10 10 0; 0 0 0 100]')
         ans_vals = [-9, 18, 27]
@@ -74,7 +73,8 @@
             ans_motif_adj_mat_comps = sparse([0 2 4; 2 0 3; 4 3 0])
             ans_vals = [0, 1.354]
             ans_vects = sparse([0.577 -0.544; 0.577 0.830; 0.577 -0.126])
-            embedding = MotifCluster.run_motif_embedding(adj_mat, "Ms", "func", "mean", 2, "rw", true)
+            embedding = MotifCluster.run_motif_embedding(adj_mat, "Ms", "func", "mean", 2, "rw",
+                                                         true)
             for i in 1:length(ans_vals)
                 if sign(embedding["vects"][1, i]) != sign(ans_vects[1, i])
                     embedding["vects"][:, i] = -embedding["vects"][:, i]
@@ -99,7 +99,8 @@
             ans_motif_adj_mat = sparse([0 2 4; 2 0 3; 4 3 0])
             ans_vals = [0, 1.354]
             ans_vects = sparse([0.577 -0.544; 0.577 0.830; 0.577 -0.126])
-            embedding = MotifCluster.run_motif_embedding(adj_mat, "Ms", "func", "mean", 2, "rw", false)
+            embedding = MotifCluster.run_motif_embedding(adj_mat, "Ms", "func", "mean", 2, "rw",
+                                                         false)
             for i in 1:length(ans_vals)
                 if sign(embedding["vects"][1, i]) != sign(ans_vects[1, i])
                     embedding["vects"][:, i] = -embedding["vects"][:, i]

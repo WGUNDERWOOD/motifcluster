@@ -1,7 +1,7 @@
 @testset verbose = true "Indicators" begin
     adj_mat = sparse([0 2 0; 3 0 4; 0 0 0])
-    G  = sparse([0 2 0; 3 0 4; 0 0 0])
-    J  = sparse([0 1 0; 1 0 1; 0 0 0])
+    G = sparse([0 2 0; 3 0 4; 0 0 0])
+    J = sparse([0 1 0; 1 0 1; 0 0 0])
     Gs = sparse([0 0 0; 0 0 4; 0 0 0])
     Js = sparse([0 0 0; 0 0 1; 0 0 0])
     Gd = sparse([0 5 0; 5 0 0; 0 0 0])

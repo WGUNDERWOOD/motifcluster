@@ -1,5 +1,4 @@
 @testset verbose = true "Utils" begin
-
     @testset verbose = true "a_b_one" begin
         a = sparse(reshape(collect(-4:4), (3, 3)))'
         b = sparse(reshape(collect(-1:7), (3, 3)))'

@@ -2,8 +2,8 @@
 Get cluster assignments from a spectrum using k-means++.
 """
 function cluster_spectrum(vects::Matrix{<:Real}, num_clusts::Int)
-    kmeans_plus_plus = kmeans(vects', num_clusts, init = :kmpp,
-                              maxiter = 1000, tol = 1e-8)
+    kmeans_plus_plus = kmeans(vects', num_clusts, init=:kmpp,
+                              maxiter=1000, tol=1e-8)
     cluster_assigns = assignments(kmeans_plus_plus)
     return cluster_assigns
 end
@@ -44,27 +44,25 @@ Optionally restrict to the largest connected component before clustering.
 """
 function run_motif_clustering(adj_mat::AbstractMatrix{<:Real},
                               motif_name::String;
-                              motif_type::String = "struc",
-                              mam_weight_type::String = "unweighted",
-                              num_eigs::Int = 2,
-                              type_lap::String = "comb",
-                              num_clusts::Int = 2,
-                              restrict::Bool = true)
+                              motif_type::String="struc",
+                              mam_weight_type::String="unweighted",
+                              num_eigs::Int=2,
+                              type_lap::String="comb",
+                              num_clusts::Int=2,
+                              restrict::Bool=true)
     @assert motif_type in ["struc", "func"]
     @assert mam_weight_type in ["unweighted", "mean", "product"]
     @assert type_lap in ["comb", "rw"]
     embedding = run_motif_embedding(sparse(adj_mat), motif_name, motif_type,
                                     mam_weight_type, num_eigs, type_lap, restrict)
     cluster_assigns = cluster_spectrum(embedding["vects"], num_clusts)
-    ans = Dict(
-               "adj_mat" => adj_mat,
+    ans = Dict("adj_mat" => adj_mat,
                "motif_adj_mat" => embedding["motif_adj_mat"],
                "comps" => embedding["comps"],
                "adj_mat_comps" => embedding["adj_mat_comps"],
                "motif_adj_mat_comps" => embedding["motif_adj_mat_comps"],
                "vals" => embedding["vals"],
                "vects" => embedding["vects"],
-               "clusts" => cluster_assigns
-              )
+               "clusts" => cluster_assigns)
     return ans
 end

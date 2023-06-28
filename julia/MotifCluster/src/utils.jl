@@ -27,7 +27,7 @@ end
 """
 Set diagonal entries to zero and sparsify.
 """
-function dropzeros_killdiag(some_mat::AbstractArray{<:Real})::SparseMatrixCSC{Float64, Int}
+function dropzeros_killdiag(some_mat::AbstractArray{<:Real})::SparseMatrixCSC{Float64,Int}
     I = Diagonal(ones(size(some_mat, 1)))
     ans = dropzeros(sparse(some_mat .- some_mat .* I))
     return ans
