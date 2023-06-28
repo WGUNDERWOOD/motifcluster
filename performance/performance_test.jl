@@ -15,7 +15,8 @@ function performance_trial(ns::Vector{Int}, k::Int, motifs::Vector{String},
 
                 # sample graph
                 if graph_type == "erdos_renyi"
-                    adj_mat = sample_dsbm(block_sizes, connection_matrix, nothing, "unweighted")
+                    adj_mat = sample_dsbm(block_sizes, connection_matrix; weight_matrix=nothing,
+                                          sample_weight_type="unweighted")
                 elseif graph_type == "barabasi_albert"
                     sample_graph = barabasi_albert(n, k)
                     adj_mat = adjacency_matrix(sample_graph)
@@ -23,7 +24,8 @@ function performance_trial(ns::Vector{Int}, k::Int, motifs::Vector{String},
 
                 # time mam construction
                 t0 = time()
-                build_motif_adjacency_matrix(adj_mat, motif, "func", "mean")
+                build_motif_adjacency_matrix(adj_mat, motif; motif_type="func",
+                                             mam_weight_type="mean")
                 t1 = time()
                 dt = t1 - t0
 
@@ -56,13 +58,13 @@ end
 motifs = ["M1","M8","M11"]
 nreps = 10
 
-ns = [101, 200, 500, 1000, 2000]
+ns = [101, 200, 500, 1000]
 performance_trial(ns, 100, motifs, nreps, "barabasi_albert")
 performance_trial(ns, 10, motifs, nreps, "barabasi_albert")
 performance_trial(ns, 100, motifs, nreps, "erdos_renyi")
 performance_trial(ns, 10, motifs, nreps, "erdos_renyi")
 
-ns = [101, 200, 500, 1000, 2000]
+ns = [101, 200, 500, 1000]
 performance_trial(ns, 100, motifs, nreps, "barabasi_albert")
 performance_trial(ns, 10, motifs, nreps, "barabasi_albert")
 performance_trial(ns, 100, motifs, nreps, "erdos_renyi")

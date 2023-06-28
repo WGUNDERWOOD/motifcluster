@@ -15,9 +15,9 @@ performance:
 	@cd performance && mkdir -p results/ plots/
 	@cd performance && python -m cProfile -o profile.pstats performance_test.py
 	@cd performance && gprof2dot -f pstats profile.pstats | dot -Tpng -o profile.png
-	@cd performance && rm profile.pstats
+	@cd performance && rm -f profile.pstats
 	@cd performance && Rscript performance_test.R
-	@cd performance && julia performance_test.jl
+	@cd performance && julia --project="../julia/MotifCluster" performance_test.jl
 	@cd performance && python performance_plot.py
 	@cd performance && latexmk -pdf -quiet -rc-report- performance.tex
 
