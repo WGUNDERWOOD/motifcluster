@@ -1,4 +1,4 @@
-..  image:: https://github.com/WGUNDERWOOD/motifcluster/raw/develop/sticker/hex_sticker_small.png
+..  image:: https://github.com/WGUNDERWOOD/motifcluster/raw/main/sticker/hex_sticker_small.png
     :width: 130
     :alt: motifcluster sticker
     :align: right
@@ -60,7 +60,7 @@ Tutorial
 --------
 A tutorial for the **motifcluster** package
 is available on Github in the
-`tutorial directory <https://github.com/WGUNDERWOOD/motifcluster/blob/develop/python/tutorial/motifcluster_tutorial.pdf>`_.
+`tutorial directory <https://github.com/WGUNDERWOOD/motifcluster/blob/main/python/tutorial/motifcluster_tutorial.pdf>`_.
 
 Authors
 -------

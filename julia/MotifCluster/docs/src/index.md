@@ -1,6 +1,6 @@
 # MotifCluster
 
-![motifcluster logo](https://github.com/WGUNDERWOOD/motifcluster/raw/develop/sticker/hex_sticker_small.png)
+![motifcluster logo](https://github.com/WGUNDERWOOD/motifcluster/raw/main/sticker/hex_sticker_small.png)
 
 A Julia package for motif-based spectral clustering of weighted directed networks.
 

@@ -15,7 +15,7 @@ TODO split badges by language
 
 
 
-# motifcluster <img src="https://github.com/WGUNDERWOOD/motifcluster/raw/develop/sticker/hex_sticker_small.png" alt="motifcluster sticker" align="right" width=120 />
+# motifcluster <img src="https://github.com/WGUNDERWOOD/motifcluster/raw/main/sticker/hex_sticker_small.png" alt="motifcluster sticker" align="right" width=120 />
 
 
 
