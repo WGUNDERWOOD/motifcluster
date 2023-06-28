@@ -32,7 +32,7 @@ python/coverage.xml
 
 # julia package
 Manifest.toml
-julia/MotifCluster/docs/build/
+julia/MotifCluster.jl/docs/build/
 *.cov
 
 # performance

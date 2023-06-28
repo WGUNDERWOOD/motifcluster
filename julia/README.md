@@ -42,7 +42,7 @@ Documentation for the **MotifCluster** package is available on
 
 An instructional tutorial for the **MotifCluster** package
 is available in the
-[tutorial](https://github.com/WGUNDERWOOD/motifcluster/tree/main/julia/MotifCluster/tutorial)
+[tutorial](https://github.com/WGUNDERWOOD/motifcluster/tree/main/julia/MotifCluster.jl/tutorial)
 directory.
 
 ## Author

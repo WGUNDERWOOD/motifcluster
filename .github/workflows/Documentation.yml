@@ -17,9 +17,9 @@ jobs:
         with:
           version: '^1.7'
       - name: Install dependencies
-        run: cd julia/MotifCluster && julia --project=docs/ -e 'using Pkg; Pkg.develop(PackageSpec(path=pwd())); Pkg.instantiate()'
+        run: cd julia/MotifCluster.jl && julia --project=docs/ -e 'using Pkg; Pkg.develop(PackageSpec(path=pwd())); Pkg.instantiate()'
       - name: Build and deploy
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # If authenticating with GitHub Actions token
           DOCUMENTER_KEY: ${{ secrets.DOCUMENTER_KEY }} # If authenticating with SSH deploy key
-        run: cd julia/MotifCluster && julia --project=docs/ docs/make.jl
+        run: cd julia/MotifCluster.jl && julia --project=docs/ docs/make.jl

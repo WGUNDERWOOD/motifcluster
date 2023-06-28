@@ -43,7 +43,7 @@ Documentation for the **MotifCluster** package is available on
 ## Tutorial
 A tutorial for the **MotifCluster** package
 is available on Github in the
-[tutorial directory](https://github.com/WGUNDERWOOD/motifcluster/blob/main/julia/MotifCluster/tutorial/motifcluster_tutorial.pdf).
+[tutorial directory](https://github.com/WGUNDERWOOD/motifcluster/blob/main/julia/MotifCluster.jl/tutorial/motifcluster_tutorial.pdf).
 
 ## Authors
 - [William George Underwood](https://wgunderwood.github.io/), Princeton University (maintainer)

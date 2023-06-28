@@ -75,10 +75,10 @@ jobs:
           arch: x64
       - uses: julia-actions/cache@v1
       - uses: julia-actions/julia-buildpkg@v1
-      - run: cd julia/MotifCluster && julia --color=yes --depwarn=yes --inline=yes --project -e 'using Pkg; Pkg.test(coverage=true)'
+      - run: cd julia/MotifCluster.jl && julia --color=yes --depwarn=yes --inline=yes --project -e 'using Pkg; Pkg.test(coverage=true)'
       - uses: julia-actions/julia-processcoverage@v1
         with:
-          directories: julia/MotifCluster/src
+          directories: julia/MotifCluster.jl/src
       - uses: codecov/codecov-action@v3
         with:
           files: lcov.info
