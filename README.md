@@ -165,7 +165,7 @@ The
 [performance](https://github.com/WGUNDERWOOD/motifcluster/tree/main/performance)
 directory contains scripts and plots relating to timing
 the construction of motif adjacency matrices,
-in both R and Python.
+in R, Python and Julia.
 
 ## Sticker
 
