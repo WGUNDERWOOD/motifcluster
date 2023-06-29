@@ -45,9 +45,8 @@ A tutorial for the **MotifCluster** package
 is available on Github in the
 [tutorial directory](https://github.com/WGUNDERWOOD/motifcluster/blob/main/julia/MotifCluster.jl/tutorial/motifcluster_tutorial.pdf).
 
-## Authors
+## Author
 - [William George Underwood](https://wgunderwood.github.io/), Princeton University (maintainer)
-- [Andrew Elliott](https://www.turing.ac.uk/people/researchers/andrew-elliott), The Alan Turing Institute
 
 ## Links
 - Source code repository on
