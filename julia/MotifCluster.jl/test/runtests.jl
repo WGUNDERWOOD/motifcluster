@@ -13,7 +13,6 @@ using Aqua
     Aqua.test_project_extras(MotifCluster)
     Aqua.test_stale_deps(MotifCluster, ignore=[:Aqua])
     Aqua.test_deps_compat(MotifCluster)
-    Aqua.test_project_toml_formatting(MotifCluster)
     include("test_clustering.jl")
     include("test_indicators.jl")
     include("test_spectral.jl")
