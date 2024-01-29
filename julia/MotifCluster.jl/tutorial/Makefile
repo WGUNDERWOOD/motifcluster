@@ -1,13 +1,11 @@
 all: tutorial
 
-.PHONY: tutorial
+.PHONY: tutorial clean
 
 tutorial:
-	lualatex -pdf motifcluster_tutorial.tex
-	bibtex motifcluster_tutorial
+	latexmk -pdf -quiet motifcluster_tutorial.tex
 	pythontex motifcluster_tutorial.tex
-	lualatex -pdf motifcluster_tutorial.tex
-	lualatex -pdf motifcluster_tutorial.tex
+	latexmk -pdf -quiet motifcluster_tutorial.tex
 
 clean:
 	rm -rfv \

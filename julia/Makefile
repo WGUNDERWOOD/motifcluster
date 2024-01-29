@@ -6,15 +6,15 @@ all: test format doc tutorial
 
 test:
 	@echo -e "\e[0;35m\033[1mTesting Julia package...\e[0;30m\033[0m"
-	@cd MotifCluster.jl && julia --depwarn=yes --project -e 'using Pkg; Pkg.test(coverage=true)'
+	@cd MotifCluster.jl && julia --depwarn=yes --project --color=yes -e 'using Pkg; Pkg.test(coverage=true)'
 
 format:
 	@echo -e "\e[0;35m\033[1mFormatting Julia package...\e[0;30m\033[0m"
-	@cd MotifCluster.jl && julia --project -e 'using JuliaFormatter; format(".")'
+	@cd MotifCluster.jl && julia --project --color=yes -e 'using JuliaFormatter; format(".")'
 
 doc:
 	@echo -e "\e[0;35m\033[1mMaking Julia documentation...\e[0;30m\033[0m"
-	@cd MotifCluster.jl/docs && julia --project=".." make.jl
+	@cd MotifCluster.jl/docs && julia --project=".." --color=yes make.jl
 
 tutorial:
 	@echo -e "\e[0;35m\033[1mMaking Julia tutorial...\e[0;30m\033[0m"
