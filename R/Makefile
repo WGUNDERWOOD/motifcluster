@@ -38,7 +38,6 @@ doc: .setup.R man
 	@echo "build_manual(path = './doc')" >> .temp.R
 	@Rscript .temp.R
 	@echo
-	@for f in doc/motifcluster_*.pdf ; do optpdf $$f; optpdf $$f ; done
 
 vignette: .setup.R
 	@echo -e "\e[0;35m\033[1mMaking R vignette...\e[0;30m\033[0m"
@@ -46,8 +45,6 @@ vignette: .setup.R
 	@echo "build_vignettes()" >> .temp.R
 	@Rscript .temp.R
 	@rm doc/motifcluster_vignette.R doc/motifcluster_vignette.Rmd
-	@optpdf doc/motifcluster_vignette.pdf
-	@optpdf doc/motifcluster_vignette.pdf
 	@mv doc/motifcluster_vignette.pdf vignettes/
 	@rm .gitignore
 
@@ -63,6 +60,7 @@ lint: .setup.R
 	@echo "lint_package(linters = linters_with_defaults( \
 		object_name_linter = NULL, \
 		object_usage_linter = NULL, \
+		indentation_linter = NULL, \
 		cyclocomp_linter = NULL))" >> .temp.R
 	@Rscript .temp.R
 

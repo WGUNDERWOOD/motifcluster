@@ -6,7 +6,7 @@ all: test lint doc tutorial dist
 
 test:
 	@echo -e "\e[0;35m\033[1mTesting python package...\e[0;30m\033[0m"
-	@pytest --cov=motifcluster --profile-svg tests/
+	@pytest --cov=motifcluster tests/
 
 lint:
 	@echo -e "\e[0;35m\033[1mLinting python package...\e[0;30m\033[0m"
@@ -21,12 +21,10 @@ tutorial:
 	@cd tutorial && latexmk -pdf -quiet -rc-report- motifcluster_tutorial.tex
 	@cd tutorial && pythontex motifcluster_tutorial.tex
 	@cd tutorial && latexmk -pdf -quiet -rc-report- motifcluster_tutorial.tex
-	@optpdf tutorial/motifcluster_tutorial.pdf
-	@optpdf tutorial/motifcluster_tutorial.pdf
 
 dist:
 	@echo -e "\e[0;35m\033[1mMaking python distribution...\e[0;30m\033[0m"
-	@python setup.py sdist bdist_wheel
+	@python -m build
 	@python -m twine check dist/*
 
 uninstall:
@@ -56,4 +54,4 @@ clean:
 	@rm -rf tests/__pycache__/
 	@rm -rf prof/
 	@rm -rf .pytest_cache/
-	@cd tutorial && texclean && rm -rf pythontex-files-motifcluster_tutorial/
+	@cd tutorial && latexmk -c && rm -rf pythontex-files-motifcluster_tutorial/

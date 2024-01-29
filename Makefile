@@ -1,6 +1,6 @@
 all: python R julia performance sticker todo
 
-.PHONY: python R julia performance sticker todo act clean
+.PHONY: python R julia performance sticker todo clean
 
 python:
 	@echo -e "\e[0;35m\033[1mMaking python package...\e[0;30m\033[0m"
@@ -39,14 +39,10 @@ todo:
 	@echo -e "\e[0;35m\033[1mLooking for todo items...\e[0;30m\033[0m"
 	@! rg -g "!Makefile" TODO
 
-act:
-	@echo -e "\e[0;35m\033[1mRunning act...\e[0;30m\033[0m"
-	@act --reuse
-
 clean:
 	@echo -e "\e[0;35m\033[1mCleaning up...\e[0;30m\033[0m"
 	@cd python && make clean
 	@cd R && make clean
-	@cd performance && texclean && rm -rf plots/ results/ profile.png
+	@cd performance && latexmk -c && rm -rf plots/ results/ profile.png
 	@rm -rf .pytest_cache/
-	@cd sticker && texclean && rm -f sticker.pdf sticker.png
+	@cd sticker && latexmk -c && rm -f sticker.pdf sticker.png
