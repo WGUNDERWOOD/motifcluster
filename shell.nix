@@ -1,6 +1,25 @@
 let
 pkgs = import <nixpkgs> { };
 
+hexsticker = pkgs.python3Packages.buildPythonPackage rec {
+    pname = "hexsticker";
+    version = "1.2.0";
+    src = pkgs.python3Packages.fetchPypi {
+        inherit pname version;
+        sha256 = "sha256-HjKMjWUqBe2Cnmb1a33IqfIPqRoWxbD6kU9/QjaSaWs=";
+    };
+    postPatch = ''
+        echo "click" > requirements.txt
+        echo "pillow" >> requirements.txt
+        sed -i "s/ANTIALIAS/LANCZOS/g" hexsticker/create.py
+        '';
+    doCheck = false;
+    propagatedBuildInputs = [
+        pkgs.python3Packages.click
+        pkgs.python3Packages.pillow
+    ];
+};
+
 in pkgs.mkShell {
 
     buildInputs = with pkgs; [
@@ -36,10 +55,13 @@ in pkgs.mkShell {
         # julia
         julia
 
-       # other
-       graphviz
-       gprof2dot
-       texlive.combined.scheme-full
-       # TODO hexsticker
+        # other
+        graphviz
+        gprof2dot
+        texlive.combined.scheme-full
+        imagemagick
+        ghostscript
+        hexsticker
+        optipng
     ];
-}
+}#
