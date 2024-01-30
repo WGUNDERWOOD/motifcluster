@@ -11,7 +11,7 @@ using Aqua
     Aqua.test_unbound_args(MotifCluster)
     Aqua.test_undefined_exports(MotifCluster)
     Aqua.test_project_extras(MotifCluster)
-    Aqua.test_stale_deps(MotifCluster, ignore=[:Aqua, :Documenter])
+    Aqua.test_stale_deps(MotifCluster, ignore=[:Aqua, :Documenter, :Test])
     Aqua.test_deps_compat(MotifCluster)
     include("test_clustering.jl")
     include("test_indicators.jl")
