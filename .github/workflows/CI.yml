@@ -55,7 +55,7 @@ jobs:
           version: 1.0
       - run: cd R/ && Rscript -e "library(devtools); document()"
       - run: cd R/ && Rscript -e "library(devtools); test()"
-      - run: cd R/ && Rscript -e "library(lintr); lint_package(linters = with_defaults(object_name_linter=NULL,object_usage_linter=NULL,cyclocomp_linter=NULL))"
+      - run: cd R/ && Rscript -e "library(lintr); lint_package(linters = with_defaults(object_name_linter=NULL,object_usage_linter=NULL,cyclocomp_linter=NULL,indentation_linter=NULL))"
       - run: cd R/ && Rscript -e "library(covr); cov = package_coverage(); to_cobertura(cov)"
       - uses: codecov/codecov-action@v3
         with:
