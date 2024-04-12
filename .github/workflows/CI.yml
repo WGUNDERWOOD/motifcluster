@@ -31,6 +31,7 @@ jobs:
           files: ./python/coverage.xml
           fail_ci_if_error: true
           verbose: true
+          token: ${{ secrets.CODECOV_TOKEN }}
 
   R:
     runs-on: ubuntu-latest
@@ -62,6 +63,7 @@ jobs:
           files: ./R/cobertura.xml
           fail_ci_if_error: true
           verbose: true
+          token: ${{ secrets.CODECOV_TOKEN }}
 
   julia:
     runs-on: ubuntu-latest
@@ -84,3 +86,4 @@ jobs:
           files: lcov.info
           fail_ci_if_error: true
           verbose: true
+          token: ${{ secrets.CODECOV_TOKEN }}
