@@ -108,6 +108,7 @@ disable=
     fixme,
     use-set-for-membership,
     used-before-assignment,
+    possibly-used-before-assignment,
 
 
 [REPORTS]
