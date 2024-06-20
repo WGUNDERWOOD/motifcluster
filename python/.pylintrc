@@ -107,6 +107,7 @@ disable=
     # We anticipate #3512 where it will become optional
     fixme,
     use-set-for-membership,
+    used-before-assignment,
 
 
 [REPORTS]
