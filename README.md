@@ -38,7 +38,7 @@ and is for development purposes only.
 ### Authors
 
   - [William George Underwood](https://wgunderwood.github.io/),
-    Princeton University
+    University of Warwick
     (Python, R, Julia, maintainer)
   - [Andrew Elliott](https://www.turing.ac.uk/people/researchers/andrew-elliott),
     The Alan Turing Institute

@@ -46,7 +46,7 @@ is available on Github in the
 [tutorial directory](https://github.com/WGUNDERWOOD/motifcluster/blob/main/julia/MotifCluster.jl/tutorial/motifcluster_tutorial.pdf).
 
 ## Author
-- [William George Underwood](https://wgunderwood.github.io/), Princeton University (maintainer)
+- [William George Underwood](https://wgunderwood.github.io/), University of Warwick (maintainer)
 
 ## Links
 - Source code repository on

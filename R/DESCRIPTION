@@ -5,7 +5,7 @@ Authors@R:
     person(given = "William George",
         family = "Underwood",
         role = c("aut", "cre"),
-        email = "wgu2@princeton.edu")
+        email = "william.underwood@warwick.ac.uk")
 Description:
     Tools for spectral clustering of weighted directed networks using motif
     adjacency matrices. Methods perform well on large and sparse networks, and

@@ -65,7 +65,7 @@ is available on Github in the
 Authors
 -------
 - `William George Underwood <https://wgunderwood.github.io/>`_,
-  Princeton University (maintainer)
+  University of Warwick (maintainer)
 - `Andrew Elliott <https://www.turing.ac.uk/people/researchers/andrew-elliott>`_,
   The Alan Turing Institute
 

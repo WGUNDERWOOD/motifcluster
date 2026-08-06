@@ -48,4 +48,4 @@ directory.
 ## Author
 
 - [William George Underwood](https://wgunderwood.github.io/),
-    Princeton University
+    University of Warwick
