@@ -1,7 +1,7 @@
 {
   description = "motifcluster";
   inputs = {
-    nixpkgs.url = github:NixOS/nixpkgs/nixos-24.05;
+    nixpkgs.url = github:NixOS/nixpkgs/nixpkgs-unstable;
     flake-utils.url = github:numtide/flake-utils;
   };
   outputs = {
@@ -40,24 +40,26 @@
             RSpectra
           ];
         };
-        julia = pkgs.julia_19.withPackages [
+        julia = pkgs.julia_112.withPackages [
           "Aqua"
-          "Colors"
-          "Coverage"
-          "CSV"
-          "DataFrames"
-          "Dates"
-          "Distributions"
-          "Documenter"
-          "JuliaFormatter"
-          "Plots"
-          "PyPlot"
-          "Random"
-          "Suppressor"
-          "Test"
+          #"Colors"
+          #"Coverage"
+          #"CSV"
+          #"DataFrames"
+          #"Dates"
+          #"Distributions"
+          #"Documenter"
+          #"JuliaFormatter"
+          #"Plots"
+          #"PyPlot"
+          #"Random"
+          #"Suppressor"
+          #"Test"
         ];
         hexsticker = pkgs.python3Packages.buildPythonPackage rec {
           pname = "hexsticker";
+          pyproject = true;
+          build-system = [ pkgs.python3Packages.setuptools ];
           version = "1.2.0";
           src = pkgs.python3Packages.fetchPypi {
             inherit pname version;
