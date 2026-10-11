@@ -36,7 +36,8 @@ library(mclust)
 This vignette demonstrates how to use the R package `motifcluster`.
 These methods are detailed in the paper
 *Motif-Based Spectral Clustering of Weighted Directed Networks*,
-which is available at [`arXiv:2004.01293`](arxivpaper)
+which is available at
+[`arXiv:2004.01293`](https://arxiv.org/abs/2004.01293)
 [@UnderwoodElliottCucuringu_2020_Motifs].
 The functionality of the `motifcluster` package
 falls into a few main categories:
@@ -503,8 +504,6 @@ mclust::adjustedRandIndex(motif_cluster$clusts, truth)
 A larger value indicates better recovery of the blocks,
 with a value of one indicating perfect agreement.
 
-
-[arxivpaper]: https://arxiv.org/abs/2004.01293
 
 
 # References
