@@ -172,6 +172,7 @@ def run_laplace_embedding(adj_mat, num_eigs, type_lap="rw"):
   return spectrum
 
 
+# pylint: disable=too-many-positional-arguments
 def run_motif_embedding(adj_mat, motif_name,
                         motif_type="struc",
                         mam_weight_type="unweighted",

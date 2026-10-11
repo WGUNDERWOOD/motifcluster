@@ -37,6 +37,7 @@ def cluster_spectrum(spectrum, num_clusts):
   return cluster_assigns
 
 
+# pylint: disable=too-many-positional-arguments
 def run_motif_clustering(adj_mat, motif_name,
                          motif_type="struc",
                          mam_weight_type="unweighted",

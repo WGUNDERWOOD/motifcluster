@@ -24,13 +24,13 @@ def _a_b_one(a_mat, b_mat):
 
   Parameters
   ----------
-  a, b : matrix
+  a_mat, b_mat : matrix
     Square matrices of the same size.
 
   Returns
   -------
   sparse matrix
-    The sparse square matrix `a * (b @ one_mat)`.
+    The sparse square matrix `a_mat * (b_mat @ one_mat)`.
   """
 
   if not sparse.issparse(a_mat):
@@ -61,13 +61,13 @@ def _a_one_b(a_mat, b_mat):
 
   Parameters
   ----------
-  a, b : matrix
+  a_mat, b_mat : matrix
     Square matrices of the same size.
 
   Returns
   -------
   sparse matrix
-    The sparse square matrix `a * (one_mat @ b)`.
+    The sparse square matrix `a_mat * (one_mat @ b_mat)`.
   """
 
   if not sparse.issparse(a_mat):
