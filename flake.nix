@@ -42,19 +42,9 @@
         };
         julia = pkgs.julia_112.withPackages [
           "Aqua"
-          #"Colors"
-          #"Coverage"
-          #"CSV"
-          #"DataFrames"
-          #"Dates"
-          #"Distributions"
-          #"Documenter"
-          #"JuliaFormatter"
-          #"Plots"
-          #"PyPlot"
-          #"Random"
-          #"Suppressor"
-          #"Test"
+          "Distributions"
+          "Documenter"
+          "JuliaFormatter"
         ];
         hexsticker = pkgs.python3Packages.buildPythonPackage rec {
           pname = "hexsticker";
@@ -79,17 +69,18 @@
       in {
         devShells.default = pkgs.mkShell {
           buildInputs = [
+            hexsticker
             julia
             python
             R
-            hexsticker
-            pkgs.qpdf
-            pkgs.graphviz
-            pkgs.gprof2dot
-            pkgs.texlive.combined.scheme-full
-            pkgs.imagemagick
             pkgs.ghostscript
+            pkgs.git
+            pkgs.gprof2dot
+            pkgs.graphviz
+            pkgs.imagemagick
             pkgs.optipng
+            pkgs.qpdf
+            pkgs.texlive.combined.scheme-full
           ];
         };
       });
