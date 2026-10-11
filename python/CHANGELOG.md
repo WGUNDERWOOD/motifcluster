@@ -1,3 +1,7 @@
+# motifcluster 0.2.4 (2026-10-11)
+
+- Update maintainer email address
+
 # motifcluster 0.2.3 (2022-11-17)
 
 - Bump version to keep track with R

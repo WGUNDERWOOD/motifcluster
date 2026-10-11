@@ -1,3 +1,7 @@
+# motifcluster 0.2.4
+
+Update maintainer email address
+
 # motifcluster 0.2.3
 
 Fixed bug in kmeans++ implementation inherited from the
