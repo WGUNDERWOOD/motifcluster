@@ -110,7 +110,7 @@ cluster_spectrum <- function(spectrum, num_clusts) {
   kmeans_plus_plus <- kmeanspp(vects, k = num_clusts)
   cluster_assigns <- kmeans_plus_plus$cluster
 
-  return(cluster_assigns)
+  cluster_assigns
 }
 
 #' Run motif-based clustering
@@ -191,5 +191,5 @@ run_motif_clustering <- function(adj_mat, motif_name,
   ans$vects <- spectrum$vects
   ans$clusts <- cluster_assigns
 
-  return(ans)
+  ans
 }

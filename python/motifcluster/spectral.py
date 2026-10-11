@@ -113,7 +113,7 @@ def build_laplacian(adj_mat, type_lap="rw"):
 
   # combinatorial Laplacian
   if type_lap == "comb":
-    degs_matrix = sparse.diags(degs_adj_mat, offsets=[0], shape=(n, n))
+    degs_matrix = sparse.diags(degs_adj_mat, offsets=[0], shape=(n, n), dtype=None)
     L = degs_matrix - adj_mat
 
   # random-walk Laplacian

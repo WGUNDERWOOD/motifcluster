@@ -14,7 +14,7 @@ test_that("get_first_eigs returns correct values on dense matrix", {
   vals <- spect$vals
   vects <- spect$vects
 
-  for (i in seq_len(length(vals))) {
+  for (i in seq_along(vals)) {
     if (sign(vects[1, i]) != sign(ans_vects[1, i])) {
       vects[, i] <- -vects[, i]
     }
@@ -36,7 +36,7 @@ test_that("get_first_eigs returns correct values on sparse matrix", {
   vals <- spect$vals
   vects <- spect$vects
 
-  for (i in seq_len(length(vals))) {
+  for (i in seq_along(vals)) {
     if (sign(vects[1, i]) != sign(ans_vects[1, i])) {
       vects[, i] <- -vects[, i]
     }
@@ -112,7 +112,7 @@ test_that("run_laplace_embedding returns correct spectrum on dense matrix", {
   vals_rw <- spectrum_rw$vals
   vects_rw <- spectrum_rw$vects
 
-  for (i in seq_len(length(vals_comb))) {
+  for (i in seq_along(vals_comb)) {
     if (sign(vects_comb[1, i]) != sign(ans_vects_comb[1, i])) {
       vects_comb[, i] <- -vects_comb[, i]
     }
@@ -157,7 +157,7 @@ test_that("run_laplace_embedding returns correct spectrum on sparse matrix", {
   vals_rw <- spectrum_rw$vals
   vects_rw <- spectrum_rw$vects
 
-  for (i in seq_len(length(vals_comb))) {
+  for (i in seq_along(vals_comb)) {
     if (sign(vects_comb[1, i]) != sign(ans_vects_comb[1, i])) {
       vects_comb[, i] <- -vects_comb[, i]
     }
@@ -228,17 +228,17 @@ test_that("run_motif_embedding correct on dense matrix with restrict", {
                                  "rw", restrict = TRUE)
 
   # flip eigenvector signs if necessary
-  for (i in seq_len(length(ans_vals))) {
+  for (i in seq_along(ans_vals)) {
     if (sign(emb_list$vects[1, i]) != sign(ans_vects[1, i])) {
       emb_list$vects[, i] <- -emb_list$vects[, i]
     }
   }
 
   expect_equal(ans_adj_mat, emb_list$adj_mat)
-  expect_true(all(ans_motif_adj_mat - emb_list$motif_adj_mat) == 0)
+  expect_true(all(ans_motif_adj_mat - emb_list$motif_adj_mat == 0))
   expect_equal(ans_comps, emb_list$comps)
   expect_equal(ans_adj_mat_comps, emb_list$adj_mat_comps)
-  expect_true(all(ans_motif_adj_mat_comps - emb_list$motif_adj_mat_comps) == 0)
+  expect_true(all(ans_motif_adj_mat_comps - emb_list$motif_adj_mat_comps == 0))
   expect_equal(ans_vals, emb_list$vals, tolerance = 0.01)
   expect_equal(ans_vects, emb_list$vects, tolerance = 0.01)
 })
@@ -296,17 +296,17 @@ test_that("run_motif_embedding correct on sparse matrix with restrict", {
                                   "rw", restrict = TRUE)
 
   # flip eigenvector signs if necessary
-  for (i in seq_len(length(ans_vals))) {
+  for (i in seq_along(ans_vals)) {
     if (sign(emb_list$vects[1, i]) != sign(ans_vects[1, i])) {
       emb_list$vects[, i] <- -emb_list$vects[, i]
     }
   }
 
   expect_equal(ans_adj_mat, emb_list$adj_mat)
-  expect_true(all(ans_motif_adj_mat - emb_list$motif_adj_mat) == 0)
+  expect_true(all(ans_motif_adj_mat - emb_list$motif_adj_mat == 0))
   expect_equal(ans_comps, emb_list$comps)
   expect_equal(ans_adj_mat_comps, emb_list$adj_mat_comps)
-  expect_true(all(ans_motif_adj_mat_comps - emb_list$motif_adj_mat_comps) == 0)
+  expect_true(all(ans_motif_adj_mat_comps - emb_list$motif_adj_mat_comps == 0))
   expect_equal(ans_vals, emb_list$vals, tolerance = 0.01)
   expect_equal(ans_vects, emb_list$vects, tolerance = 0.01)
 })
@@ -347,14 +347,14 @@ test_that("run_motif_embedding correct on dense matrix without restrict", {
                                   "rw", restrict = FALSE)
 
   # flip eigenvector signs if necessary
-  for (i in seq_len(length(ans_vals))) {
+  for (i in seq_along(ans_vals)) {
     if (sign(emb_list$vects[1, i]) != sign(ans_vects[1, i])) {
       emb_list$vects[, i] <- -emb_list$vects[, i]
     }
   }
 
   expect_equal(ans_adj_mat, emb_list$adj_mat)
-  expect_true(all(ans_motif_adj_mat - emb_list$motif_adj_mat) == 0)
+  expect_true(all(ans_motif_adj_mat - emb_list$motif_adj_mat == 0))
   expect_equal(ans_vals, emb_list$vals, tolerance = 0.01)
   expect_equal(ans_vects, emb_list$vects, tolerance = 0.01)
 })
@@ -395,14 +395,14 @@ test_that("run_motif_embedding correct on sparse matrix without restrict", {
                                   "rw", restrict = FALSE)
 
   # flip eigenvector signs if necessary
-  for (i in seq_len(length(ans_vals))) {
+  for (i in seq_along(ans_vals)) {
     if (sign(emb_list$vects[1, i]) != sign(ans_vects[1, i])) {
       emb_list$vects[, i] <- -emb_list$vects[, i]
     }
   }
 
   expect_equal(ans_adj_mat, emb_list$adj_mat)
-  expect_true(all(ans_motif_adj_mat - emb_list$motif_adj_mat) == 0)
+  expect_true(all(ans_motif_adj_mat - emb_list$motif_adj_mat == 0))
   expect_equal(ans_vals, emb_list$vals, tolerance = 0.01)
   expect_equal(ans_vects, emb_list$vects, tolerance = 0.01)
 })

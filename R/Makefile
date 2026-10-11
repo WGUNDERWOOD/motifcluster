@@ -42,11 +42,9 @@ doc: .setup.R man
 vignette: .setup.R
 	@echo -e "\e[0;35m\033[1mMaking R vignette...\e[0;30m\033[0m"
 	@cat .setup.R > .temp.R
-	@echo "build_vignettes()" >> .temp.R
+	@echo 'pkgload::load_all(".")' >> .temp.R
+	@echo "rmarkdown::render('vignettes/motifcluster_vignette.Rmd', output_format = 'pdf_document')" >> .temp.R
 	@Rscript .temp.R
-	@rm doc/motifcluster_vignette.R doc/motifcluster_vignette.Rmd
-	@mv doc/motifcluster_vignette.pdf vignettes/
-	@rm .gitignore
 
 cov: .setup.R
 	@echo -e "\e[0;35m\033[1mChecking R coverage...\e[0;30m\033[0m"
@@ -60,8 +58,7 @@ lint: .setup.R
 	@echo "lint_package(linters = linters_with_defaults( \
 		object_name_linter = NULL, \
 		object_usage_linter = NULL, \
-		indentation_linter = NULL, \
-		cyclocomp_linter = NULL))" >> .temp.R
+		indentation_linter = NULL))" >> .temp.R
 	@Rscript .temp.R
 
 install: .setup.R

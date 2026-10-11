@@ -112,7 +112,7 @@ build_motif_adjacency_matrix <- function(adj_mat, motif_name,
   }
 
   if (motif_name == "Mexpa") {
-    return(mam_Mexpa(adj_mat, motif_type, mam_weight_type, mam_method))
+    mam_Mexpa(adj_mat, motif_type, mam_weight_type, mam_method)
   }
 }
 
@@ -161,7 +161,7 @@ mam_Ms <- function(adj_mat, motif_type, mam_weight_type) {
 
     if (motif_type == "struc") {
       Gs <- build_Gs(adj_mat)
-      return(Gs + t(Gs))
+      Gs + t(Gs)
     }
   }
 }
@@ -190,7 +190,7 @@ mam_Md <- function(adj_mat, mam_weight_type) {
 
   if (mam_weight_type == "product") {
     Gp <- build_Gp(adj_mat)
-    return(Gp)
+    Gp
   }
 }
 
@@ -247,7 +247,7 @@ mam_M1 <- function(adj_mat, motif_type, mam_weight_type) {
     if (motif_type == "struc") {
       Gs <- build_Gs(adj_mat)
       C <- t(Gs) * (Gs %*% Gs)
-      return(C + t(C))
+      C + t(C)
     }
   }
 }
@@ -317,7 +317,7 @@ mam_M2 <- function(adj_mat, motif_type, mam_weight_type) {
       Gs <- build_Gs(adj_mat)
       Gp <- build_Gp(adj_mat)
       C <- t(Gs) * (Gp %*% Gs) + t(Gs) * (Gs %*% Gp) + Gp * (Gs %*% Gs)
-      return(C + t(C))
+      C + t(C)
     }
   }
 }
@@ -387,7 +387,7 @@ mam_M3 <- function(adj_mat, motif_type, mam_weight_type) {
       Gs <- build_Gs(adj_mat)
       Gp <- build_Gp(adj_mat)
       C <- Gs * (Gp %*% Gp) + Gp * (Gp %*% Gs) + Gp * (Gs %*% Gp)
-      return(C + t(C))
+      C + t(C)
     }
   }
 }
@@ -417,7 +417,7 @@ mam_M4 <- function(adj_mat, mam_weight_type) {
 
   if (mam_weight_type == "product") {
     Gp <- build_Gp(adj_mat)
-    return(Gp * (Gp %*% Gp))
+    Gp * (Gp %*% Gp)
   }
 }
 
@@ -478,7 +478,7 @@ mam_M5 <- function(adj_mat, motif_type, mam_weight_type) {
     if (motif_type == "struc") {
       Gs <- build_Gs(adj_mat)
       C <- Gs * (Gs %*% Gs) + Gs * (Gs %*% t(Gs)) + Gs * (t(Gs) %*% Gs)
-      return(C + t(C))
+      C + t(C)
     }
   }
 }
@@ -550,7 +550,7 @@ mam_M6 <- function(adj_mat, motif_type, mam_weight_type) {
       Gp <- build_Gp(adj_mat)
       C <- Gs * (Gs %*% Gp)
       Cprime <- Gp * (t(Gs) %*% Gs)
-      return(C + t(C) + Cprime)
+      C + t(C) + Cprime
     }
   }
 }
@@ -622,7 +622,7 @@ mam_M7 <- function(adj_mat, motif_type, mam_weight_type) {
       Gp <- build_Gp(adj_mat)
       C <- Gs * (Gp %*% Gs)
       Cprime <- Gp * (Gs %*% t(Gs))
-      return(C + t(C) + Cprime)
+      C + t(C) + Cprime
     }
   }
 }
@@ -756,7 +756,7 @@ mam_M8 <- function(adj_mat, motif_type, mam_weight_type, mam_method) {
         Je <- build_Je(adj_mat)
         C <- a_b_one(Gs, Gs) - Gs * (Gs %*% Je)
         Cprime <- t(Gs) %*% Gs - Je * (t(Gs) %*% Gs)
-        return(drop0(C + t(C) + Cprime))
+        drop0(C + t(C) + Cprime)
       }
     }
   }
@@ -894,7 +894,7 @@ mam_M9 <- function(adj_mat, motif_type, mam_weight_type, mam_method) {
         C <- a_one_b(Gs, t(Gs)) - Gs * (Je %*% t(Gs))
         C <- C + Gs %*% Gs - Je * (Gs %*% Gs)
         C <- C + a_b_one(Gs, t(Gs)) - Gs * (t(Gs) %*% Je)
-        return(drop0(C + t(C)))
+        drop0(C + t(C))
       }
     }
   }
@@ -1029,7 +1029,7 @@ mam_M10 <- function(adj_mat, motif_type, mam_weight_type, mam_method) {
         Je <- build_Je(adj_mat)
         C <- a_one_b(Gs, Gs) - Gs * (Je %*% Gs)
         Cprime <- Gs %*% t(Gs) - Je * (Gs %*% t(Gs))
-        return(drop0(C + t(C) + Cprime))
+        drop0(C + t(C) + Cprime)
       }
     }
   }
@@ -1183,7 +1183,7 @@ mam_M11 <- function(adj_mat, motif_type, mam_weight_type, mam_method) {
         C <- a_b_one(Gp, Gs) - Gp * (Gs %*% Je)
         C <- C + Gp %*% Gs - Je * (Gp %*% Gs)
         C <- C + a_b_one(Gs, Gp) - Gs * (Gp %*% Je)
-        return(drop0(C + t(C)))
+        drop0(C + t(C))
       }
     }
   }
@@ -1337,7 +1337,7 @@ mam_M12 <- function(adj_mat, motif_type, mam_weight_type, mam_method) {
         C <- a_one_b(Gp, Gs) - Gp * (Je %*% Gs)
         C <- C + Gs %*% Gp - Je * (Gs %*% Gp)
         C <- C + a_one_b(Gs, Gp) - Gs * (Je %*% Gp)
-        return(drop0(C + t(C)))
+        drop0(C + t(C))
       }
     }
   }
@@ -1468,7 +1468,7 @@ mam_M13 <- function(adj_mat, motif_type, mam_weight_type, mam_method) {
         Je <- build_Je(adj_mat)
         C <- a_b_one(Gp, Gp) - Gp * (Gp %*% Je)
         Cprime <- Gp %*% Gp - Je * (Gp %*% Gp)
-        return(drop0(C + t(C) + Cprime))
+        drop0(C + t(C) + Cprime)
       }
     }
   }
@@ -1590,7 +1590,7 @@ mam_Mcoll <- function(adj_mat, motif_type, mam_weight_type, mam_method) {
         Gs <- build_Gs(adj_mat)
         Je <- build_Je(adj_mat)
         C <- Gs %*% t(Gs) - Je * (Gs %*% t(Gs))
-        return(drop0(C))
+        drop0(C)
       }
     }
   }
@@ -1712,7 +1712,7 @@ mam_Mexpa <- function(adj_mat, motif_type, mam_weight_type, mam_method) {
         Gs <- build_Gs(adj_mat)
         Je <- build_Je(adj_mat)
         C <- t(Gs) %*% Gs - Je * (t(Gs) %*% Gs)
-        return(drop0(C))
+        drop0(C)
       }
     }
   }

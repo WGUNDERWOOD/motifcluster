@@ -76,7 +76,7 @@ sample_dsbm <- function(block_sizes, connection_matrix,
   adj_mat <- do.call(rbind, block_list)
   adj_mat <- drop0_killdiag(adj_mat)
 
-  return(adj_mat)
+  adj_mat
 }
 
 #' Sample a bipartite stochastic block model (BSBM)
@@ -153,7 +153,7 @@ sample_bsbm <- function(source_block_sizes, dest_block_sizes,
   adj_mat <- sample_dsbm(block_sizes, connection_matrix,
                          weight_matrix, sample_weight_type)
 
-  return(adj_mat)
+  adj_mat
 }
 
 #' Generate a small graph for demonstrations
@@ -186,5 +186,5 @@ demonstration_graph <- function() {
 
   ans <- list(adj_mat_dense = adj_mat_dense, adj_mat_sparse = adj_mat_sparse)
 
-  return(ans)
+  ans
 }

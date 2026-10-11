@@ -267,7 +267,7 @@ test_that("build_motif_adjacency_matrix returns correct
 
   # compare calculations with answers
   motifs <- get_motif_names()
-  for (i in seq_len(length(motifs))) {
+  for (i in seq_along(motifs)) {
 
     mam_densematrix_densemethod <- build_motif_adjacency_matrix(
       adj_mat_dense, motifs[i], "func", "unweighted", "dense")
@@ -553,7 +553,7 @@ test_that("build_motif_adjacency_matrix returns correct
 
   # compare calculations with answers
   motifs <- get_motif_names()
-  for (i in seq_len(length(motifs))) {
+  for (i in seq_along(motifs)) {
 
     mam_densematrix_densemethod <- build_motif_adjacency_matrix(
       adj_mat_dense, motifs[i], "struc", "unweighted", "dense")
@@ -839,7 +839,7 @@ test_that("build_motif_adjacency_matrix returns correct
 
   # compare calculations with answers
   motifs <- get_motif_names()
-  for (i in seq_len(length(motifs))) {
+  for (i in seq_along(motifs)) {
 
     mam_densematrix_densemethod <- build_motif_adjacency_matrix(
       adj_mat_dense, motifs[i], "func", "mean", "dense")
@@ -1125,7 +1125,7 @@ test_that("build_motif_adjacency_matrix returns correct
 
   # compare calculations with answers
   motifs <- get_motif_names()
-  for (i in seq_len(length(motifs))) {
+  for (i in seq_along(motifs)) {
 
     mam_densematrix_densemethod <- build_motif_adjacency_matrix(
       adj_mat_dense, motifs[i], "struc", "mean", "dense")
@@ -1411,7 +1411,7 @@ test_that("build_motif_adjacency_matrix returns correct
 
   # compare calculations with answers
   motifs <- get_motif_names()
-  for (i in seq_len(length(motifs))) {
+  for (i in seq_along(motifs)) {
 
     mam_densematrix_densemethod <- build_motif_adjacency_matrix(
       adj_mat_dense, motifs[i], "func", "product", "dense")
@@ -1697,7 +1697,7 @@ test_that("build_motif_adjacency_matrix returns correct
 
   # compare calculations with answers
   motifs <- get_motif_names()
-  for (i in seq_len(length(motifs))) {
+  for (i in seq_along(motifs)) {
 
     mam_densematrix_densemethod <- build_motif_adjacency_matrix(
       adj_mat_dense, motifs[i], "struc", "product", "dense")

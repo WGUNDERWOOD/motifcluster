@@ -44,7 +44,7 @@ get_first_eigs <- function(some_mat, num_eigs) {
   spectrum[["vects"]] <- vects
   spectrum[["vals"]] <- vals
 
-  return(spectrum)
+  spectrum
 }
 
 #' Build a Laplacian matrix
@@ -89,7 +89,7 @@ build_laplacian <- function(adj_mat, type_lap = c("comb", "rw")) {
 
   L <- drop0(L)
 
-  return(L)
+  L
 }
 
 #' Run Laplace embedding
@@ -122,7 +122,7 @@ run_laplace_embedding <- function(adj_mat, num_eigs,
   laplacian <- build_laplacian(adj_mat, type_lap)
   spectrum <- get_first_eigs(laplacian, num_eigs)
 
-  return(spectrum)
+  spectrum
 }
 
 #' Run motif embedding
@@ -219,5 +219,5 @@ run_motif_embedding <- function(adj_mat, motif_name,
   embedding$vals <- spect$vals
   embedding$vects <- spect$vects
 
-  return(embedding)
+  embedding
 }

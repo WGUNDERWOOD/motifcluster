@@ -7,7 +7,7 @@
 
 build_G <- function(adj_mat) {
   G <- drop0(adj_mat)
-  return(G)
+  G
 }
 
 #' Build directed indicator matrix
@@ -20,7 +20,7 @@ build_G <- function(adj_mat) {
 
 build_J <- function(adj_mat) {
   J <- drop0_killdiag(1 * (adj_mat > 0))
-  return(J)
+  J
 }
 
 #' Build single-edge adjacency matrix
@@ -34,7 +34,7 @@ build_J <- function(adj_mat) {
 build_Gs <- function(adj_mat) {
   J <- build_J(adj_mat)
   Gs <- drop0_killdiag(adj_mat - adj_mat * t(J))
-  return(Gs)
+  Gs
 }
 
 #' Build single-edge indicator matrix
@@ -48,7 +48,7 @@ build_Gs <- function(adj_mat) {
 build_Js <- function(adj_mat) {
   Gs <- build_Gs(adj_mat)
   Js <- drop0_killdiag(1 * (Gs > 0))
-  return(Js)
+  Js
 }
 
 #' Build double-edge adjacency matrix
@@ -62,7 +62,7 @@ build_Js <- function(adj_mat) {
 build_Gd <- function(adj_mat) {
   J <- build_J(adj_mat)
   Gd <- drop0_killdiag((adj_mat + t(adj_mat)) * J * t(J))
-  return(Gd)
+  Gd
 }
 
 #' Build double-edge indicator matrix
@@ -76,7 +76,7 @@ build_Gd <- function(adj_mat) {
 build_Jd <- function(adj_mat) {
   Gd <- build_Gd(adj_mat)
   Jd <- drop0_killdiag(1 * (Gd > 0))
-  return(Jd)
+  Jd
 }
 
 #' Build missing-edge indicator matrix
@@ -89,7 +89,7 @@ build_Jd <- function(adj_mat) {
 
 build_J0 <- function(adj_mat) {
   J0 <- drop0_killdiag(1 * ((adj_mat + t(adj_mat)) == 0))
-  return(J0)
+  J0
 }
 
 #' Build vertex-distinct indicator matrix
@@ -102,7 +102,7 @@ build_J0 <- function(adj_mat) {
 
 build_Jn <- function(adj_mat) {
   Jn <- drop0_killdiag(1 + 0 * adj_mat)
-  return(Jn)
+  Jn
 }
 
 #' Build identity matrix
@@ -115,7 +115,7 @@ build_Jn <- function(adj_mat) {
 
 build_Id <- function(adj_mat) {
   Id <- Diagonal(nrow(adj_mat))
-  return(Id)
+  Id
 }
 
 #' Build edge-and-diagonal indicator matrix
@@ -129,7 +129,7 @@ build_Id <- function(adj_mat) {
 build_Je <- function(adj_mat) {
   Id <- build_Id(adj_mat)
   Je <- drop0(1 * (Id + ((adj_mat + t(adj_mat)) > 0)))
-  return(Je)
+  Je
 }
 
 #' Build product adjacency matrix
@@ -142,5 +142,5 @@ build_Je <- function(adj_mat) {
 
 build_Gp <- function(adj_mat) {
   Gp <- drop0_killdiag(adj_mat * t(adj_mat))
-  return(Gp)
+  Gp
 }

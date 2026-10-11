@@ -18,7 +18,7 @@ a_b_one <- function(a, b) {
   ones_vec <- rep(1, n)
   ans <- Diagonal(n, as.numeric(b %*% ones_vec)) %*% a
 
-  return(drop0(ans))
+  drop0(ans)
 }
 
 #' Compute a left-multiplication with the ones matrix
@@ -41,7 +41,7 @@ a_one_b <- function(a, b) {
   ones_vec <- rep(1, n)
   ans <- a %*% Diagonal(n, as.numeric(ones_vec %*% b))
 
-  return(drop0(ans))
+  drop0(ans)
 }
 
 #' Set diagonal entries to zero and sparsify
@@ -60,7 +60,7 @@ drop0_killdiag <- function(some_mat) {
   diag(ans) <- 0
   ans <- drop0(ans)
 
-  return(ans)
+  ans
 }
 
 #' Get largest connected component
@@ -84,7 +84,7 @@ get_largest_component <- function(adj_mat) {
   comps <- components(gr)
   verts_to_keep <- (1:n)[comps$membership == which.max(comps$csize)]
 
-  return(verts_to_keep)
+  verts_to_keep
 }
 
 #' Get common motif names
@@ -104,7 +104,7 @@ get_motif_names <- function() {
 
   motif_names <- c(motif_names, "Mcoll", "Mexpa")
 
-  return(motif_names)
+  motif_names
 }
 
 #' Build a random sparse matrix
@@ -154,5 +154,5 @@ random_sparse_matrix <- function(m, n, p, sample_weight_type = "constant",
     dim(ans) <- c(m, n)
   }
 
-  return(ans)
+  ans
 }
